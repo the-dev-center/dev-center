@@ -1,0 +1,18 @@
+= Component Specifications
+
+This section contains technical specifications for Dev Center components and features.
+
+== Components
+
+* xref:components/dependency-modeler.adoc[Dependency Modeler] - Dependency modeling system
+* xref:components/project-recognizer.adoc[Project Recognizer] - Project technology stack recognition
+* xref:components/repository-provider-registry.adoc[Repository Provider Registry] - Version control system provider registry
+* xref:components/text-editor-link-system.adoc[Text Editor Link System] - Text editor with visual link system
+* xref:components/code-execution-recording.adoc[Code Execution Recording] - Code block execution and output recording
+* xref:components/git-repository-manager.adoc[Git Repository Manager] - Repository relocation and renaming
+
+== Features
+
+* xref:features/opening-web-content-from-docs.adoc[Opening Web Content from Docs] - Native WebView integration
+* xref:features/text-editor-separate-process.adoc[Text Editor Separate Process] - Separate process text editor design
+

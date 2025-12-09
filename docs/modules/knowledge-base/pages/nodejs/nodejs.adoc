@@ -1,0 +1,19 @@
+= Node.js Environment, Tools, and Management
+
+Node's libraries/packages can be managed using different package managers. By default, it uses `npm`.
+
+`pnpm` is a fast alternative to `npm` that saves on disk space by linking a project to globally-installed files on the machine.
+
+Node.js projects often contain configuration files for package managers:
+
+[cols="1,1"]
+|===
+| common:
+| `package.json` defines the project’s basic dependencies and configuration.
+
+| `npm`
+| `package-lock.json` locks down the entire dependency tree to specific versions, ensuring consistent and reproducible builds.
+
+| `pnpm`
+| `pnpm-lock.yaml` locks down the entire dependency tree to specific versions, ensuring consistent and reproducible builds for `pnpm`.
+|===

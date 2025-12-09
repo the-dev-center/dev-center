@@ -1,0 +1,10 @@
+* xref:index.adoc[Specifications]
+* xref:components/dependency-modeler.adoc[Dependency Modeler]
+* xref:components/project-recognizer.adoc[Project Recognizer]
+* xref:components/repository-provider-registry.adoc[Repository Provider Registry]
+* xref:components/text-editor-link-system.adoc[Text Editor Link System]
+* xref:components/code-execution-recording.adoc[Code Execution Recording]
+* xref:components/git-repository-manager.adoc[Git Repository Manager]
+* xref:features/opening-web-content-from-docs.adoc[Opening Web Content from Docs]
+* xref:features/text-editor-separate-process.adoc[Text Editor Separate Process]
+

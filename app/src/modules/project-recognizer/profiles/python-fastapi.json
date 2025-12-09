@@ -1,0 +1,29 @@
+{
+  "name": "FastAPI",
+  "parent": "Python",
+  "description": "Python web framework for building APIs with type hints.",
+  "anyOfFiles": [
+    "**/requirements.txt",
+    "**/pyproject.toml"
+  ],
+  "keywords": [
+    "from fastapi import",
+    "import fastapi"
+  ],
+  "manifests": [
+    {
+      "pathPattern": "**/requirements.txt",
+      "format": "text",
+      "anyOf": [
+        "fastapi"
+      ]
+    },
+    {
+      "pathPattern": "**/pyproject.toml",
+      "format": "text",
+      "anyOf": [
+        "fastapi"
+      ]
+    }
+  ]
+}

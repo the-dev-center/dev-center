@@ -1,0 +1,12 @@
+= Text Editor as Separate Process
+
+I have this design philosophy idea wherein we simplify text and code editors down to just a text editor with a sort of live "link" to a calling app that stays active so the calling app can update its view but the text editor is technically a separate app runtime from the calling app which could itself be a code project manager, providing the facilities for building and analyzing code projects, while the text editing happens entirely in a separate app that handles only text editing, linting, etc.
+
+This would simplify code editors down to just the actual text rendering. we could even get rid of tabs and allow the code editors to self-assemble according to custom window manager math (like tessellating the code windows to predetermined sizes in a grid, or auto-arranging them into a stack with each successive window overlapping the previous one with an offset down and to the left of the previous window, with the window locations being calculated based on the average location of the largest cluster of windows' top left corner (snapping to the monitor's screen space if the average is off-screen).
+
+The links would not just be a form of inter-process communication, they would be literally linked on screen with a line connecting the child process to the parent process. This link/connection UI metaphor would be implemented in a GUI library.
+
+Can you fork a D lang GUI library and update it to have this new mechanism? And then can you make a sample app that has the main interface with a few cards that correspond to text files, and then when I double click a file card, connect the new editor window to it. The link anchor node should be under the filename within the card and that space should be empty at first and populated with the link node after opening the editor. The editor's link node should be behind the window, attached at an offset below the editor window's title bar. The editor windows' title bar should show the file name.
+
+Please put this in a new module. Obviously if we're forking a D GUI to hack it, maybe we should clone that repository into a separate project folder and include that project into this repo's workspace. `Z:\code\amdphreak\[library-name]`
+

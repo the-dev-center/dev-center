@@ -1,0 +1,181 @@
+= Dart SDK Setup
+
+In this document, we will explore how to set up the Dart SDK on your system, focusing on the benefits of using a Flutter Version Manager (FVM) and detailing different installation methods.
+
+== Why Use Flutter Version Manager (FVM)?
+
+FVM is a powerful tool that allows you to manage multiple versions of Flutter and Dart SDKs on your development machine. Here's why it's highly recommended:
+
+*   **Project-Specific Versions**: Different projects might require different Flutter or Dart versions. FVM enables you to easily switch between these versions on a per-project basis, preventing conflicts and ensuring compatibility.
+*   **Collaboration**: When working in teams, FVM helps standardize the Flutter/Dart version across all developers, leading to a more consistent development environment.
+*   **Testing and Experimentation**: You can easily test your applications with upcoming Flutter/Dart versions or older versions without affecting your main development environment.
+*   **Stability**: Isolate stable versions for production projects while experimenting with beta or dev channels for new features.
+
+== Installation Methods
+
+There are several ways to install the Dart SDK and FVM. We'll cover common scenarios and how to transition between them.
+
+=== Method 1: Chocolatey (Dart SDK) + FVM as a Module
+
+This method involves installing the Dart SDK via Chocolatey and then integrating FVM.
+
+==== Prerequisites
+
+*   Chocolatey: Ensure Chocolatey is installed on your Windows system. If not, follow the instructions on https://chocolatey.org/install.
+
+==== Steps
+
+1.  **Install Dart SDK via Chocolatey**:
+    Open an administrative PowerShell or Command Prompt and run:
+    ```/dev/null/install_dart_chocolatey.sh#L1-1
+    choco install dart-sdk
+    ```
+    This will install the Dart SDK globally on your system.
+
+2.  **Install FVM Globally**:
+    You can install FVM globally using `dart pub global activate`.
+    ```/dev/null/install_fvm_global.sh#L1-1
+    dart pub global activate fvm
+    ```
+    Ensure that your Dart `pub` cache is in your system's PATH. You can typically find it in `%APPDATA%\Pub\Cache\bin`.
+
+3.  **Initialize FVM for your project**:
+    Navigate to your Flutter project directory and run:
+    ```/dev/null/fvm_init.sh#L1-2
+    fvm install stable
+    fvm use stable
+    ```
+    This will download the stable Flutter SDK (which includes Dart) into your project's `.fvm` directory and configure your project to use it. FVM will now manage the Flutter SDK for this specific project, overriding the globally installed Dart SDK from Chocolatey for Flutter-related commands.
+
+==== Converting from Chocolatey Dart SDK to FVM
+
+If you've been using the Chocolatey-installed Dart SDK globally for Flutter development and want to switch to FVM:
+
+1.  Follow the FVM installation steps above (Step 2 and 3).
+2.  Once FVM is set up for your project, you can effectively ignore the global Chocolatey Dart SDK for that project. FVM will ensure the correct SDK is used. If you no longer need the global Dart SDK for any other purpose, you could uninstall it:
+    ```/dev/null/uninstall_dart_chocolatey.sh#L1-1
+    choco uninstall dart-sdk
+    ```
+
+=== Method 2: Winget (Dart SDK) + FVM as a Module
+
+This method is similar to using Chocolatey but leverages Winget, the Windows Package Manager.
+
+==== Prerequisites
+
+*   Winget: Winget is typically pre-installed on modern Windows versions. You can check its availability by opening a Command Prompt and typing `winget`.
+
+==== Steps
+
+1.  **Install Dart SDK via Winget**:
+    Open a Command Prompt or PowerShell and run:
+    ```/dev/null/install_dart_winget.sh#L1-1
+    winget install Dart.DartSDK
+    ```
+    This will install the Dart SDK globally.
+
+2.  **Install FVM Globally**:
+    ```/dev/null/install_fvm_global.sh#L1-1
+    dart pub global activate fvm
+    ```
+    Again, ensure your Dart `pub` cache is in your system's PATH.
+
+3.  **Initialize FVM for your project**:
+    Navigate to your Flutter project directory and run:
+    ```/dev/null/fvm_init.sh#L1-2
+    fvm install stable
+    fvm use stable
+    ```
+    Similar to the Chocolatey method, FVM will manage the Flutter SDK for this project.
+
+==== Converting from Winget Dart SDK to FVM
+
+If you've been using the Winget-installed Dart SDK globally for Flutter development and want to switch to FVM:
+
+1.  Follow the FVM installation steps above (Step 2 and 3).
+2.  For your Flutter projects, FVM will take precedence. If you wish to remove the global Winget Dart SDK:
+    ```/dev/null/uninstall_dart_winget.sh#L1-1
+    winget uninstall Dart.DartSDK
+    ```
+
+=== Method 3: FVM managing Flutter SDK entirely
+
+This is the recommended approach for most Flutter developers, where FVM manages the entire Flutter SDK (which includes the Dart SDK). In this setup, you typically *do not* install the Dart SDK globally via Chocolatey or Winget.
+
+==== Steps
+
+1.  **Install FVM Globally (without a global Dart SDK)**:
+    If you don't have Dart installed, you'll need to install it temporarily or use the standalone FVM installer (if available for your OS) or compile from source. For Windows, a common approach is to get a minimal Dart SDK or use Chocolatey/Winget just for FVM if you prefer. However, the most straightforward is to use `scoop` or simply download the FVM executable directly.
+
+    *   **Using `scoop` (Windows recommended for FVM global installation)**:
+        If you don't have Scoop, install it first:
+        ```/dev/null/install_scoop.sh#L1-1
+        Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Only if you haven't already
+        irm get.scoop.sh | iex
+        ```
+        Then install FVM:
+        ```/dev/null/install_fvm_scoop.sh#L1-1
+        scoop install fvm
+        ```
+
+    *   **Manual Global FVM Installation (Cross-platform)**:
+        Download the FVM executable from the official FVM GitHub releases page (https://github.com/fluttertools/fvm/releases) and add its directory to your system's PATH.
+
+2.  **Initialize FVM for your project and install a Flutter version**:
+    Navigate to your Flutter project directory and run:
+    ```/dev/null/fvm_install_flutter.sh#L1-2
+    fvm install stable --skip-setup
+    fvm use stable
+    ```
+    The `--skip-setup` flag can be useful if you're installing FVM itself for the first time or encountering issues with the automatic setup. This will download the *entire* Flutter SDK (including its bundled Dart SDK) into your project's `.fvm` directory or a global FVM cache, and configure your project to use it.
+
+==== Advantages of this approach
+
+*   **Self-contained**: Each Flutter version is completely managed by FVM, including its bundled Dart SDK. No external global Dart SDK installations are needed for your Flutter projects.
+*   **Simplicity**: Avoids potential conflicts between globally installed Dart SDKs and those bundled with Flutter.
+
+== Visual Model of SDK Setups
+
+```/dev/null/sdk_setup_diagram.mermaid#L1-25
+graph TD
+    subgraph Global System
+        A[User] --> B(Command Line/IDE)
+        B --> C{PATH Environment Variable}
+    end
+
+    subgraph "Method 1: Choco Dart + FVM Module"
+        C --> D[choco install dart-sdk]
+        D -- "Global Dart SDK" --> E(Dart SDK Installation Directory)
+        B --> F[dart pub global activate fvm]
+        F -- "Global FVM Executable" --> G(FVM Global Cache)
+        G --> H{Project .fvm directory}
+        H -- "Project-specific Flutter/Dart SDK" --> I(FVM Managed SDK)
+        H --> J(Project)
+    end
+
+    subgraph "Method 2: Winget Dart + FVM Module"
+        C --> K[winget install Dart.DartSDK]
+        K -- "Global Dart SDK" --> L(Dart SDK Installation Directory)
+        B --> F
+        F -- "Global FVM Executable" --> G
+        G --> H
+        H -- "Project-specific Flutter/Dart SDK" --> I
+        H --> J
+    end
+
+    subgraph "Method 3: FVM Full Management"
+        C --> M[scoop install fvm OR Manual FVM Install]
+        M -- "Global FVM Executable" --> G
+        G --> H
+        H -- "Project-specific Flutter/Dart SDK (includes Dart)" --> I
+        H --> J
+    end
+```
+
+Explanation of the diagram:
+
+*   **Global System**: Represents your operating system and how commands are executed.
+*   **Method 1 & 2**: Show that a global Dart SDK is installed first (via Chocolatey or Winget). Then FVM is installed globally. For individual projects, FVM downloads its own version of the Flutter SDK (which includes Dart) and uses that, effectively bypassing the globally installed Dart SDK for that specific project.
+*   **Method 3**: Demonstrates the cleaner approach where only FVM is installed globally. FVM then handles downloading and managing *all* Flutter SDKs (and their bundled Dart SDKs) on a per-project or globally cached basis. This avoids conflicts with separate global Dart SDK installations.
+
+This comprehensive guide should help you understand and implement the Dart SDK setup, with a strong emphasis on leveraging FVM for a more robust and flexible development workflow.

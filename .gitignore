@@ -1,0 +1,19 @@
+# Antora generated site
+docs-site/site/
+
+# Node.js dependencies
+**/node_modules/
+**/.pnpm-store/
+
+# Build artifacts
+**/dist/
+**/build/
+**/.git/
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+**/venv/
+**/.venv/
+**/target/
+**/.cargo/
+

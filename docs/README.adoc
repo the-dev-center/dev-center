@@ -1,0 +1,25 @@
+= Docs
+
+Docs site uses Antora Docs. Docs are stored in .adoc (AsciiDoc) format in the `modules` directory.
+
+In order to build the Antora site, see the instructions in link:../docs-site/README.adoc[].
+
+== Module Organization
+
+* **knowledge-base** - General reference material and best practices (not specific to dev-center)
+* **specifications** - Dev-center app component and feature specifications
+* **ROOT** - Project overview and vision
+
+== Future Work
+
+=== Knowledge Base: Git Documentation
+
+The following Git documentation pages are placeholders and need content:
+
+* [ ] `git/git-branching-strategies.adoc` - Git Flow, GitHub Flow, trunk-based development
+* [ ] `git/git-hooks.adoc` - Pre-commit hooks, Husky, automation
+* [ ] `git/git-large-files.adoc` - Git LFS setup and binary file handling
+* [ ] `git/git-submodules.adoc` - Submodules, monorepo patterns, sparse checkouts
+* [ ] `git/git-recovery.adoc` - Reflog, reset, recovering from mistakes
+
+Each placeholder contains a checklist of topics to cover.

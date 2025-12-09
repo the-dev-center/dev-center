@@ -1,0 +1,29 @@
+{
+  "name": "Flask",
+  "parent": "Python",
+  "description": "Lightweight Python web microframework based on Werkzeug and Jinja2.",
+  "anyOfFiles": [
+    "**/requirements.txt",
+    "**/pyproject.toml"
+  ],
+  "keywords": [
+    "from flask import",
+    "import flask"
+  ],
+  "manifests": [
+    {
+      "pathPattern": "**/requirements.txt",
+      "format": "text",
+      "anyOf": [
+        "flask"
+      ]
+    },
+    {
+      "pathPattern": "**/pyproject.toml",
+      "format": "text",
+      "anyOf": [
+        "flask"
+      ]
+    }
+  ]
+}

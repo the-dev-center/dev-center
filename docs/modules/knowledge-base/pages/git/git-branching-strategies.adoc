@@ -1,0 +1,21 @@
+= Git Branching Strategies
+
+// TODO: Document common branching strategies
+
+== Overview
+
+This document will cover common Git branching strategies and when to use each.
+
+== Topics to Cover
+
+* [ ] Git Flow - Feature branches, develop, release, hotfix
+* [ ] GitHub Flow - Simplified branch-per-feature workflow
+* [ ] Trunk-Based Development - Short-lived branches, continuous integration
+* [ ] Release branching patterns
+* [ ] Branch naming conventions
+* [ ] Branch protection rules
+
+== See Also
+
+* xref:git-repo-management.adoc[Git Repository Management]
+

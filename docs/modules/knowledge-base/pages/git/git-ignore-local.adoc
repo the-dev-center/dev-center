@@ -1,0 +1,24 @@
+= .gitignore.local
+
+Normally, when you fork another person's project, you make your own files and notes that are personal to you and should not be shared with others. Conventionally, you would add these files to .gitignore, but this is a problem, because you don't want to commit your personal preferences to the upstream repository.
+
+It would be really great to be able to exclude items from git without editing the .gitignore file. I propose an update to the .gitignore convention to allow extending the gitignore file with a separate file called .gitignore.local, and then ignoring that file in the main .gitignore file. This follows a principle of expecting the unexpected.
+
+First, add the file to `.gitignore`:
+
+```
+.gitignore.local
+```
+
+Example .gitignore.local:
+
+```
+# Example .gitignore.local
+Ryan's-note-file.txt
+Gemini-analysis.md
+README-for-dummies.adoc
+```
+
+Additionally, I think the .gitignore file should have been just "gitignore". It's simpler and doesn't confuse people about its true purpose. Dot-files are conventionally designed to be ignored by the user, but gitignore is a very hands-on file in practice.
+
+If we're being honest, we probably should be using YAML for gitignore, because YAML allows including other YAML files, which is a really useful feature that should be supported in gitignore for the purposes of using template ignore files provided by communities for each programming language and framework.

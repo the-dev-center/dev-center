@@ -1,0 +1,49 @@
+= Native WebViews for In-App Browsing
+
+**Link:** https://gemini.google.com/app/7eb64f085b69ffd8  
+**Exported:** 11/4/2025 14:40:22
+
+== Prompt
+
+in my dev center app (mentioned previously) I want to be able to have help messages on screen or elements of documentation like markdown files that can open up a URL inside the app. can this be accomplished without shipping a full browser in the app? like, can I have a native webview open up a preview of the git repository or some kind of web resource in a new window that can lock the previous view so their exploration is modeled recursively on screen?
+
+== Response
+
+Yes, this can be accomplished without shipping a full, independent browser.
+
+The required functionality relies on Native WebViews and proper handling of window creation events:
+
+=== Native WebViews
+
+All major desktop application frameworks (e.g., UWP/WinUI, WPF, macOS/iOS, Qt, Electron/Chromium Embedded Framework (CEF)) provide a mechanism to embed a native, slimmed-down web engine instance. This avoids shipping a complete browser application stack.
+
+**Examples:**
+
+* Windows: WebView2 (Chromium-based)
+* macOS/iOS: WKWebView
+* Cross-platform (e.g., Electron): WebView tag using Chromium
+
+=== Opening a URL in a New Window
+
+The key is to intercept the web content's request to open a new window or tab (e.g., an HTML link with `target="_blank"` or a `window.open()` JavaScript call).
+
+The native control provides an event, like `NewWindowRequested` (Windows WebView2) or `webView:createWebViewWithConfiguration:forNavigationAction:windowFeatures:` (macOS WKWebView), that the native application handles.
+
+The application's event handler receives the target URL and configuration. You must set a property on the event argument (e.g., `e.Handled = true` or returning a new view) to prevent the system's default browser from launching.
+
+**Action:** The handler must then programmatically create a new native window in your application and embed a new WebView instance in it, loading the requested URL. This keeps the exploration inside your application.
+
+=== Recursive View Modeling and Locking the Previous View
+
+**Locking/Modeling:** When you create the new window/WebView, it will naturally stack on top of the previous view. To "lock" the previous view and model a recursive exploration:
+
+* **Modal Window:** Create the new window as a modal dialog relative to the original application window. This prevents the user from interacting with the previous view until the new one is closed.
+* **Breadcrumb/Stack Management:** Implement a native mechanism to track the sequence of opened WebViews. Each new WebView window represents a step deeper into the documentation/resource stack, mimicking a recursive call stack.
+
+This pattern uses the native platform's embedded browser component, which is less resource-intensive and more integrated than shipping a full browser, while giving you control over windowing and user experience flow.
+
+Use a recursive approach to the application's windowing logic to manage the depth of the WebViews.
+
+----
+Powered by link:https://www.geminiexporter.com[Gemini Exporter]
+

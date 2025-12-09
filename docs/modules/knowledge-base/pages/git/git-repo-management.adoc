@@ -1,0 +1,108 @@
+= Git Repository Management
+
+Git repository management encompasses the practices, configurations, and workflows needed to effectively maintain version-controlled projects. This document covers common configuration concerns and troubleshooting topics.
+
+For complex topics that warrant deeper coverage, see the related documents linked below.
+
+== Line Endings Configuration
+
+Git warns about line ending inconsistencies when files in your working directory use different line endings than what Git expects. Windows typically uses **CRLF** (Carriage Return, Line Feed) line endings, while Linux and macOS use **LF** (Line Feed).
+
+Git's `core.autocrlf` setting controls automatic conversion:
+
+* `true` (Windows default): Converts LF to CRLF on checkout, CRLF to LF on commit
+* `input`: Converts CRLF to LF on commit only (no conversion on checkout)
+* `false`: No conversion
+
+=== Resolution Options
+
+==== Option 1: Configure Git for Consistency (Recommended)
+
+Set Git to handle line endings for consistency across operating systems. This is best configured globally or per-repository.
+
+===== Step 1: Set `core.autocrlf` to `input`
+
+This tells Git to convert CRLF to LF on commit, but _not_ to convert LF to CRLF on checkout.
+
+.Global setting (affects all repositories):
+[source,bash]
+----
+git config --global core.autocrlf input
+----
+
+.Repository-specific setting:
+[source,bash]
+----
+git config core.autocrlf input
+----
+
+===== Step 2: Normalize the Repository
+
+After changing the setting, normalize the repository by running a reset. This ensures all files in the index use the standard LF ending.
+
+[source,bash]
+----
+git rm --cached -r .
+git reset --hard HEAD
+----
+
+This removes files from the staging area (`git rm --cached -r .`) and then restores the working directory to the last committed state (`git reset --hard HEAD`), applying the new `core.autocrlf` rule during the checkout.
+
+==== Option 2: Configure VS Code to Use LF
+
+If you want your files to _always_ use LF in your working directory, regardless of Git's setting, configure VS Code.
+
+. Open **VS Code Settings** (File > Preferences > Settings or `Ctrl+,`)
+. Search for **"files: eol"** or **"eol"**
+. Set the **`Files: Eol`** setting to **`\n`** (for LF)
+
+[NOTE]
+====
+This only affects new files or files saved in VS Code. For existing files, you may need to manually change their line endings in VS Code (check the status bar on the bottom right of the editor for line ending type, e.g., "CRLF" or "LF", and click it to change).
+====
+
+==== Option 3: Suppress the Warning (Not Recommended)
+
+If you understand the issue and accept the automatic conversion, you can suppress the warning by setting `core.safecrlf` to `false`.
+
+[WARNING]
+====
+This is **not recommended** as it masks a potential source of inconsistent commits.
+====
+
+[source,bash]
+----
+git config --global core.safecrlf false
+----
+
+=== Line Endings Summary
+
+[cols="1,2,2"]
+|===
+| Setting | Value | Effect
+
+| `core.autocrlf`
+| `true`
+| Convert LF→CRLF on checkout, CRLF→LF on commit (Windows default)
+
+| `core.autocrlf`
+| `input`
+| Convert CRLF→LF on commit only (recommended for cross-platform)
+
+| `core.autocrlf`
+| `false`
+| No automatic conversion
+
+| `core.safecrlf`
+| `false`
+| Suppress line ending warnings (not recommended)
+|===
+
+== Related Topics
+
+* xref:git-ignore-local.adoc[.gitignore.local Convention] - Local ignore files
+* xref:git-branching-strategies.adoc[Branching Strategies] - Git flow, trunk-based development
+* xref:git-hooks.adoc[Git Hooks] - Automation via commit hooks
+* xref:git-large-files.adoc[Large Files & LFS] - Handling binary assets
+* xref:git-submodules.adoc[Submodules & Monorepos] - Multi-repository patterns
+* xref:git-recovery.adoc[Recovery & Troubleshooting] - Reflog, reset, and fixing mistakes

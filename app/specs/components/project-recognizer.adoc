@@ -1,0 +1,16 @@
+= Project Recognizer
+
+In project-recognizer, create a module that scans a code project directory to recognize what software stacks are used within the project.
+
+This module should load its recognition patterns from some kind of file storing a template or set of recognition criteria (be it syntaxes to look for, file existence, dependencies, etc). These fields should be passed into the recognizer and used in various functions to perform the recognition.
+
+This recognition module shall be loaded in a main program (not yet created) called "dev-center" that lets users browse a library of projects and open the projects to look at their architecture and browse the files, grouped into their respective tech stacks.
+
+The tech stacks will be presented on screen in a dependency chart represented by cards with the name of the tech in it, with support for parent/child relationships (for example React underneath Node.js, or FastAPI underneath Python). Clicking on any tech should highlight the files relevant to that tech while leaving the file tree in its normal alphanumeric order; files that are not relevant should remain visible but can be shown in an inactive style.
+
+The recognizer needs to model the project's architecture as json, yaml, or toml (pick the best) and save this into its cache to be read by the renderer in another module.
+
+Tech profiles should be authored at the finest useful granularity (e.g. Python, FastAPI, and Flask are distinct profiles even if they share evidence). Multiple techs may claim the same files; surface those overlaps so the UI can highlight them appropriately.
+
+Do not create the dev-center app. Do not create the renderer. Create the expected module in D lang. Good luck.
+

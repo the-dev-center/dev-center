@@ -1,0 +1,169 @@
+= Text Editor Link System - GUI Library Selection and Implementation Plan
+
+== Overview
+
+This document outlines the selection of a D GUI library for implementing the text editor as separate process design, and provides a roadmap for implementation.
+
+== GUI Library Selection: dlangui
+
+=== Why dlangui?
+
+After evaluating several D GUI libraries (GtkD, DUI, bindbc-sdl, dfltk), we selected **dlangui** for the following reasons:
+
+==== Native D Implementation
+* dlangui is written entirely in D, making it significantly easier to modify and extend
+* No C/C++ bindings to work around when adding custom features
+* Direct access to the rendering pipeline for implementing visual link rendering
+
+==== Cross-Platform Support
+* Supports Windows, Linux, macOS, and Android
+* Uses OpenGL for hardware acceleration with fallback to native APIs
+* Aligns with our Windows 11 development environment
+
+==== Widget-Based Architecture
+* Retained mode GUI paradigm (widgets maintain state)
+* Android-inspired API (layouts, styles, two-phase layout)
+* Highly customizable themes and styles
+* Well-suited for building complex UIs like our project manager interface
+
+==== Active Development
+* Maintained by the D community
+* Good documentation and examples
+* Multiple example applications demonstrating various features
+
+==== Custom Rendering Capabilities
+* OpenGL-based rendering allows for custom drawing operations
+* Can draw lines and shapes across windows (needed for visual links)
+* Flexible enough to support our novel link rendering requirements
+
+=== Library Location
+
+The dlangui library has been cloned to:
+`Z:\code\amdphreak\dlangui`
+
+This is a separate project folder that has been added to the workspace for easy access during development.
+
+== Implementation Plan
+
+=== Phase 1: Foundation (Current)
+* [x] Select GUI library
+* [x] Clone dlangui repository
+* [x] Add to workspace
+* [x] Document selection rationale
+
+=== Phase 2: Proof of Concept (Current)
+* [x] Create standalone POC project: `src/projects/text-editor-link-system-poc/`
+* [x] Set up dub.json with dlangui dependency
+* [x] Create basic project structure
+* [ ] Implement basic IPC mechanism (named pipes or sockets)
+* [ ] Create process spawning utilities for editor windows
+* [ ] Basic window management (create/destroy editor windows)
+* [ ] Implement file card widget
+* [ ] Implement visual link rendering
+
+=== Phase 3: Visual Link System (dlangui modifications)
+* [ ] Fork dlangui modifications into a branch
+* [ ] Add link anchor widget/component to dlangui
+* [ ] Implement cross-window line rendering
+* [ ] Add link connection tracking system
+* [ ] Implement link anchor positioning and tracking
+
+=== Phase 4: Module Refactoring
+* [ ] Refactor working POC code into module structure: `src/modules/text-editor-link-system/`
+* [ ] Extract reusable components
+* [ ] Set up proper module dependencies
+
+=== Phase 5: Window Management
+* [ ] Implement tessellation algorithm for grid arrangement
+* [ ] Implement stacking algorithm with offset positioning
+* [ ] Monitor boundary detection and snapping
+* [ ] Window clustering calculation
+* [ ] Auto-arrangement based on window positions
+
+=== Phase 6: Sample Application
+* [ ] Create main window with file card UI
+* [ ] Implement file card component (showing filename)
+* [ ] Add link anchor space under filename in card
+* [ ] Double-click handler to spawn editor window
+* [ ] Editor window with title bar showing filename
+* [ ] Link node behind editor window, attached below title bar
+* [ ] Real-time link rendering between card and editor
+
+=== Phase 7: Integration
+* [ ] IPC for file content synchronization
+* [ ] Editor process file loading/saving
+* [ ] Parent process view updates based on editor changes
+* [ ] Error handling and process lifecycle management
+
+== Technical Considerations
+
+=== Inter-Process Communication
+* **Option 1: Named Pipes** - Simple, Windows-native, good for local IPC
+* **Option 2: Sockets** - More flexible, cross-platform, allows remote connections later
+* **Option 3: Shared Memory** - Fastest, but more complex synchronization
+
+**Recommendation:** Start with named pipes for Windows, can extend to sockets later for cross-platform support.
+
+=== Visual Link Rendering
+The visual links need to be drawn across window boundaries. Options:
+
+* **Overlay Window:** Create a transparent overlay window that draws lines between windows
+* **Parent Window Drawing:** Parent window draws lines to child windows (requires child window position tracking)
+* **Modified GUI Library:** Extend dlangui's rendering system to support cross-window drawing
+
+**Recommendation:** Modify dlangui to support cross-window link rendering as a first-class feature.
+
+=== Window Positioning Algorithms
+
+==== Tessellation
+* Divide screen space into grid cells
+* Place windows in predetermined grid positions
+* Resize windows to fit grid cells
+
+==== Stacking with Offset
+* Calculate average position of largest window cluster
+* Place new window offset down and to the right
+* Snap to monitor boundaries if average is off-screen
+* Overlap windows with visual offset
+
+**Recommendation:** Implement both algorithms, allow user preference or auto-select based on window count.
+
+== Module Structure
+
+The text editor link system will be organized as follows:
+
+----
+src/modules/text-editor-link-system/
+├── ipc/
+│   ├── pipe.d          # Named pipe IPC implementation
+│   └── protocol.d      # IPC message protocol
+├── windows/
+│   ├── manager.d       # Window lifecycle management
+│   ├── positioning.d   # Window positioning algorithms
+│   └── monitor.d       # Monitor detection and boundaries
+├── links/
+│   ├── renderer.d      # Visual link rendering
+│   ├── anchor.d        # Link anchor widget/component
+│   └── connection.d    # Link connection tracking
+├── editor/
+│   ├── process.d       # Editor process spawning
+│   └── window.d        # Editor window implementation
+└── sample/
+    ├── main.d          # Sample application entry point
+    ├── file_card.d     # File card widget
+    └── app.d           # Main application logic
+----
+
+== Next Steps
+
+1. Set up dub project configuration
+2. Create module directory structure
+3. Implement basic IPC mechanism
+4. Create minimal proof-of-concept with one editor window
+5. Begin dlangui modifications for link rendering
+
+== References
+
+* dlangui GitHub: https://github.com/buggins/dlangui
+* dlangui Documentation: http://buggins.github.io/dlangui/ddox
+* dlangui Getting Started: https://github.com/buggins/dlangui/wiki/Getting-Started

@@ -1,0 +1,73 @@
+To: git@vger.kernel.org
+Subject: [PATCH 0/1] Improve SSH authentication failure diagnostics
+
+When Git fails SSH authentication, the error message provides no indication
+that Git may be using a different SSH client than the user expects.
+
+PROBLEM
+
+Multiple SSH implementations commonly coexist on a single system:
+
+  Windows:
+    - Windows OpenSSH: C:\Windows\System32\OpenSSH\ssh.exe
+    - Git's bundled SSH: C:\Program Files\Git\usr\bin\ssh.exe
+
+  macOS:
+    - System SSH: /usr/bin/ssh
+    - Homebrew SSH: /opt/homebrew/bin/ssh
+
+  Linux:
+    - System SSH: /usr/bin/ssh
+    - Snap/Flatpak-packaged Git may bundle its own SSH
+    - Alternative installations: /usr/local/bin/ssh
+
+These may use separate key stores and agents. On Windows, the system
+ssh-agent service is inaccessible to Git's bundled MSYS2 SSH.
+
+A user who runs:
+
+  ssh -T git@github.com    # Works - uses one SSH binary
+  git push                 # Fails - uses different SSH binary
+
+receives only:
+
+  git@github.com: Permission denied (publickey).
+  fatal: Could not read from remote repository.
+
+This error gives no indication that Git is using a different SSH binary than
+the one the user just tested. The user has no reason to suspect this is the
+cause. Debugging this issue typically costs hours of research.
+
+PROPOSED SOLUTION
+
+When SSH authentication fails, Git should:
+
+1. Print which SSH command it invoked:
+
+     Using SSH: /opt/homebrew/bin/ssh
+
+2. Detect if multiple ssh binaries exist in PATH or common locations. If so:
+
+     Note: Multiple SSH clients detected on this system.
+     Git is using: C:\Program Files\Git\usr\bin\ssh.exe
+     Also found:   C:\Windows\System32\OpenSSH\ssh.exe
+     
+     To use a different SSH client:
+       git config --global core.sshCommand "/path/to/preferred/ssh"
+
+This diagnostic should only appear on authentication failure, not on success.
+
+RATIONALE
+
+Git for Windows bundles MSYS2 tools for cross-platform consistency. Homebrew
+and Snap/Flatpak may install SSH binaries that shadow or conflict with system
+SSH. These are reasonable packaging decisions, but the resulting SSH client
+mismatch is a known, common failure mode that produces no actionable
+diagnostic information.
+
+The fix is a one-line config change. The problem is that users have no way
+to discover this without external research. Surfacing this information at
+the point of failure would eliminate significant onboarding friction.
+
+--
+

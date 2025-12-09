@@ -1,0 +1,6 @@
+name: knowledge-base
+version: master
+title: Knowledge Base
+nav:
+- modules/knowledge-base/nav.adoc
+

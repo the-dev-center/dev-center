@@ -1,0 +1,14 @@
+{
+  "name": "dev-center",
+  "version": "0.1.0",
+  "description": "Dev Center - Developer tooling and project management application",
+  "scripts": {
+    "docs:build": "antora antora.yml",
+    "docs:preview": "antora --fetch antora.yml"
+  },
+  "devDependencies": {
+    "@antora/cli": "^3.1",
+    "@antora/site-generator": "^3.1"
+  }
+}
+

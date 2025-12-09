@@ -1,0 +1,68 @@
+= Development Tools
+
+We recommend these tools to improve your dev workflow:
+
+* link:https://www.marticliment.com/unigetui/[UniGetUI] - A software package manager for Windows. It is a GUI for Microsoft's `winget` and other CLI package managers. Install subsequent apps with it, if possible.
+* link:https://murmele.github.io/Gittyup/[Gittyup] - better Git UX than GitHub Desktop and VSCode source control. Alternatives: | link:https://rela.dev/[Rela.dev] | link:https://sourcegit-scm.github.io/[Sourcegit] | link:https://git-scm.com/downloads/guis[List of GitHub UI alternatives]
+* link:https://cli.github.com/[GitHub CLI] - Official GitHub command-line interface. Lets you (or your AI) interact with GitHub from your terminal. Useful for initializing repositories locally then initializing them on github then syncing.
+
+* link:https://github.com/masahide/OmniSSHAgent[OmniSSHAgent] - manages SSH agents on Windows. Having an SSH agent will allow you to commit to GitHub frequently without re-entering your SSH Key password for every commit. Windows's SSH agent sometimes doesn't play nice with VSCode.
+* link:https://apps.microsoft.com/detail/9N0DX20HK701?hl=en-us&gl=US&ocid=pdpshare[Windows Terminal] - Official Terminal rewrite from Microsoft. Load various shells in it, in a tabbed interface.
+* link:https://www.warp.dev/[Warp] - A nice terminal with AI integrated. Even if you don't use the AI features, it provides a UX/UI upgrade over the traditional Terminal.
+* link:https://apps.microsoft.com/detail/9mz1snwt0n5d?hl=en-US&gl=US[Powershell] (v7) - The modern Microsoft shell for Windows, Mac, and Linux. It is the de-facto standard in VSCode (if installed).
+* link:https://learn.microsoft.com/en-us/windows/advanced-settings/sudo/?wt.mc_id=windows_inproduct_sudo[`sudo` for Windows] - command line app to run elevated commands without memorizing Windows's stupid commands.
+* VSCode alternatives - If you find a better editor, like IntelliJ, Lapce, or Zed, contact me, @AMDphreak, and let's see if we can get it added to the tutorial.
+
+[cols="4"]
+|===
+| link:https://lap.dev/lapce/[Lapce]
+| link:https://zed.dev/[Zed]
+| link:https://graviton.netlify.app/[Graviton]
+| link:https://alternativeto.net/software/lapce/[More alternatives]
+|===
+
+* link:https://chromewebstore.google.com/detail/visbug/cdockenadnadldjbbgcallicgledbeoc[VisBug] - Lets you edit a web design in your browser using drag and drop while the page is live.
+* link:https://jam.dev[Jam.dev] - A bug reporting tool for web apps. It records video and saves logs automatically and generates a bug report for developers. Chrome plugin.
+
+== Web Apps
+
+* link:https://graphite.dev[Graphite.dev] - Code quality and review tool for GitHub
+* link:https://embrace.io/[Embrace.io] - Adds Telemetry reporting to our code. Built on OpenTelemetry, Embrace provides real user monitoring (RUM) across mobile and web to help teams understand exactly what users experience and why it matters.
+* link:https://docs.devin.ai/work-with-devin/deepwiki[DeepWiki] from Devin.ai - Automated Documentation for GitHub repositories (we already have this set up for our repos)
+* `shadcn/ui` Theme builders: These are a dime a dozen... The official one: link:https://ui.shadcn.com/themes#themes[ui.shadcn.com]
+
+[cols="7"]
+|===
+| link:https://themeshadcn.com/[themeshadcn]
+| link:https://shadcn-ui-theme.vercel.app/[shadcn-ui-theme]
+| link:https://shadcnstudio.com/theme-generator[shadcnstudio]
+| link:https://themecn.dev/[themecn]
+| link:https://tweakcn.com/[tweakcn]
+| link:https://tweakcn.com/[tweakcn]
+| link:https://www.readyjs.dev/tools/shadcn-ui-theme-generator[readyjs]
+|===
+
+* Free `shadcn` components...
+
+[cols="1"]
+|===
+| link:https://www.shadcn.io/components/data/gantt[shadcn.io]
+|===
+
+== Future tools
+
+* link:https://github.com/jj-vcs/jj[`jj` (Jujutsu)] - Experimental version control system from Google that replaces Git entirely, but uses Git internally.
+
+== Educational resources
+
+* link:https://www.youtube.com/watch?v=fxplz32rgEQ[Chrome Dev Tools 101: Beginner's Guide]
+* link:https://www.youtube.com/watch?v=HosPml1qkrg[Guide to Git Merge Conflicts]
+* link:https://stevebennett.me/2012/02/24/10-things-i-hate-about-git/[10 things I hate about Git | Steve Bennett]
+* link:https://www.youtube.com/@t3dotgg[Theo (t3 chat)] - Web developer (former back-end dev). Learn Next.js, Convex, AI, etc.
+* link:https://www.youtube.com/@TsodingDaily[Tsoding Daily] - Dev philosophy, raw, unfiltered
+* link:https://youtu.be/mN--sGH97dY?si=9CMn4EZUIZi6Qncb[Understanding SVGs] - Learn how to write SVGs and animate the web using better format than html/css. link:https://www.joshwcomeau.com/svg/friendly-introduction-to-svg/[Article version].
+
+== Philosophy
+
+* link:https://www.youtube.com/watch?v=f5gsdg9-JTw[The Divided Brain] - How lateralization of the brain contributes to system engineering and design. We aim to use more of the right hemisphere in our engineering and UI designs.
+

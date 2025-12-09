@@ -1,0 +1,21 @@
+= Git Hooks
+
+// TODO: Document Git hooks setup and common use cases
+
+== Overview
+
+This document will cover Git hooks for automating tasks during the Git workflow.
+
+== Topics to Cover
+
+* [ ] Hook types (pre-commit, post-commit, pre-push, etc.)
+* [ ] Setting up hooks manually
+* [ ] Husky for Node.js projects
+* [ ] pre-commit framework for Python projects
+* [ ] Common hook scripts (linting, formatting, commit message validation)
+* [ ] Sharing hooks across a team
+
+== See Also
+
+* xref:git-repo-management.adoc[Git Repository Management]
+

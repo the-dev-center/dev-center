@@ -1,0 +1,31 @@
+= Documentation Site Build
+
+This directory contains the Antora configuration and build tools for generating the Dev Center documentation site.
+
+== Building the Documentation
+
+Navigate to the docs-site folder
+
+[source,bash]
+----
+cd docs-site
+----
+
+Install the Antora package and build
+
+[source,bash]
+----
+pnpm install
+pnpm run docs:build
+----
+
+The generated site will be output to `docs-site/site/`.
+
+== Structure
+
+* `antora.yml` - Antora playbook configuration
+* `package.json` - Node.js dependencies and build scripts
+* `site/` - Generated documentation site (gitignored)
+
+The playbook points to `../docs/modules` for the source content.
+

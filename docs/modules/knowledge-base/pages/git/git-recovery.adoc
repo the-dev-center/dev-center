@@ -1,0 +1,23 @@
+= Git Recovery & Troubleshooting
+
+// TODO: Document Git recovery techniques and common troubleshooting
+
+== Overview
+
+This document will cover recovering from mistakes and troubleshooting common Git issues.
+
+== Topics to Cover
+
+* [ ] Understanding the reflog
+* [ ] Recovering deleted branches
+* [ ] Recovering lost commits
+* [ ] Undoing commits (reset, revert, amend)
+* [ ] Fixing detached HEAD state
+* [ ] Resolving merge conflicts
+* [ ] Cleaning up a messy history (interactive rebase)
+* [ ] Recovering from force push disasters
+
+== See Also
+
+* xref:git-repo-management.adoc[Git Repository Management]
+

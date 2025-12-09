@@ -1,0 +1,14 @@
+= Code Sync
+
+Developers commonly like to work on code using multiple computers. While git can technically synchronize code between machines, it is not a good solution. First, you have to handle conflicts by inspecting the code, which can take time. Second, the code that you commit to your repository should not be unfinished or incomplete, as it can lead to confusion in a team and more complex git history to look at when you need to roll back changes.
+
+Many AI tools suggest using Syncthing. This tool is great on Linux and macOS, while Windows requires a specific 3rd party GUI. While the core Syncthing CLI tool works on Windows, most GUIs lack good support. No self-respecting Windows user will ever use a command line tool to sync files. File sync is something that should be automated with a background service or shown in a GUI, or both. The correct GUI to use on Windows is SyncTrayzor from GermanCoding on GitHub: link:https://github.com/GermanCoding/SyncTrayzor[SyncTrayzor].
+
+`Syncthing Windows Setup` is a recommended project, but its installation process can be confusing, requiring hand-hacking the registry to enable obscure features that are typically disabled for security reasons.
+
+In the future, I would like to see Syncthing attempt to port their web GUI to Yew and Tauri. Yew is a Rust-based web framework that is gaining popularity for its performance and ease of use, while Tauri is a Rust-based framework for building native desktop applications. Both of these use HTML and CSS to code the user interface.
+
+== Sync Caveats
+
+When syncing files between two machines, avoid using absolute paths in your code and config files and any non-code files. Instead, use relative paths or environment variables to store file paths.
+

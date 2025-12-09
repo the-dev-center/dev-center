@@ -1,0 +1,16 @@
+= Repository Provider Registry
+
+App submits any new version control system providers (git providers, mercurial, etc) to an online registry when encountered for the first time.
+
+The URL is only submitted when a successful connection is established.
+
+Sometimes, providers may change their URLs. In order to track providers, changes in provider URLs can be detected when several consecutive requests from users fail after verifying internet connectivity, and when a critical mass of users change the URL to a new valid URL. So, let's say 4 users change the URL in the app from https://gitlab.videolan.org to https://git.videolan.org for a given repository. If that is the case, and the new connections are successful, the app will update the registry with the new URL.
+
+Context: User has git repository. Repository has outdated remote URL.
+1. App tries to connect to remote code base URL.
+2. Connection fails.
+3. App checks internet connectivity. If no connectivity, defer to user.
+4. If internet connectivity is available, try to connect to registry.
+5. If registry connection is successful, recursively request any URL changes for the requested URL from the url-change-requests table. Make sure to inspect the dates to avoid cyclic dependencies. If any results are ambiguous, inform the user of the conflict, search the registry's GitHub issues for an issue that has the same conflict, and show it to the user. If there is no ticket with the same subject, provide the user with a copyable markdown summary of the conflict and let the user click a button to open a browser with a ticket prepared for the issue on GitHub with the summary included.
+6. If no URL changes have been reported, send a request to the registry to test the remote code base URL to confirm that the remote code base is down.
+7. If the remote code base is down, send a request to the registry API to add a URL update request to a `url-change-requests` table containing the old URL and new URL and public ip-address of the user (you must log the ip address to identify unique users). If this table receives 4 identical requests from different users, update the registry with the new URL, log the event in a separate table in the registry database, and clear the URL change requests table rows for that old URL.

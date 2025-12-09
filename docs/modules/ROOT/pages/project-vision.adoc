@@ -1,0 +1,65 @@
+= Dev Center Project Vision
+
+== Overview
+
+I want to make a Dev Center app that provides developer tooling setup, workflow management, software project management, and environment management.
+
+It should help new developers and experienced developers set up a new machine for development purposes and provide in depth information about any actions it performs, the environmental changes it makes, and the purposes of the tools it installs.
+
+The app should be diagrammatic in nature, providing a visual representation of the development environment and its components. Diagram nodes should be interactive and allow users to drill down into the details of each component. If a component is sufficiently complex, open the component in a new window in the diagram renderer (not a new native window).
+
+== Essential Functions
+
+=== Project Management
+
+* Manage local software projects
+* Connect to arbitrary code repositories
+* Connect to major repository services' user accounts and discover projects, including the following:
+** GitHub
+** GitLab
+** GitLab self-hosted instances
+** Gitea
+** AWS code-commit
+** Bitbucket
+** other git repos
+** SourceForge accounts
+** other mercurial repos
+** SVN
+** Perforce (if possible)
+** TFVC
+** Azure DevOps accounts
+** CVS repos
+
+It needs to store each of these services' functions in definition files that can be updated and extended instead of hard-coding the functionality. I also know that these account services do not conform to a standard API definition for discovery of account assets, so please propose a standard for these version control services to conform to in a new asciidoc file that includes methods for user assets, organization assets, repository assets, CI/CD assets, and anything else that seems relevant. Also create an openAPI specification and link to it or its sections where relevant in the asciidoc files. The app will need to be able to identify and download a universal configuration file in an appropriate format from each repository that tells it how the project is configured (in TOML or YAML).
+
+Look at the `Repository provider registry.adoc` file for a specification for how to keep track of repository providers.
+
+=== Virtual Environments
+
+needs to support recognizing virtual environments and virtual machines. mounting, managing, and viewing them in the project management interface. user should be able to mount and manage them from the diagram. if the tool is missing to do so, offer to install it. If the tool's management capabilities are significantly complicated, outsource the management of complex settings to the application.
+
+the project viewer must show various types of models/diagrams of the project architecture. Dependency tree/graph is required. Control tree/graph is required. For cases like Next.js, which relies on React but controls React's usage, dependency doesn't communicate the whole picture. The control tree will differ from the dependency tree in cases like this.
+
+For ecosystems that support version managers, require the user to install those before working with the ecosystem. Let them choose which one they want to use, then install that one. For any new project, allow them to choose again. support the 3 most popular version managers for each ecosystem.
+
+ecosystems to target:
+
+* Web
+* System languages
+
+=== SSH Key Management
+
+Include a SSH key and config manager with helpful dialogs to onboard the user, explain the purpose of SSH keys (and explain why they need to use ed25519) and how to name and store them (name the key after the service and username or email address), recommend using a new key for each service and explain why, assist with setting up ssh config entries for SSH keys and explain the file and let the user edit it in the config dialog, run, show, and return results of the ssh-keygen command during creation of ssh keys, set up ssh-agent for the user while being explicit about it, set up the user's shell profiles to load the user-agent on launch.
+
+=== Tool Integration
+
+The main project management UI will be able to launch specialized tools and other 3rd party tools like VScode, Cursor, etc.
+
+GUI modules that interact with services should pull each service configuration information from a service definition file. User specific information is separate from the service definition.
+
+User configuration information gets stored in `%USERPROFILE%\Dev Center`
+
+=== Environment Navigator
+
+The app needs an environment navigator that models the environment hierarchy/nesting/containment (for example these levels would be discovered: Hardware -> Hypervisor (or Bare Metal OS) -> Virtual Machine OS -> Container / App Environment) using cpuid instruction checks and an environment browser that opens up when the user selects an environment from the main environment navigator. The nested environment hierarchy needs to be modeled. The environment browser helps with identifying where settings files are stored and explains the various locations and environment variables of the system. System and user environment variables need to be browsable and editable, with a special interface for editing the PATH variables. Individual app environment variables
+

@@ -1,0 +1,33 @@
+= Component Specifications
+
+This directory contains specifications for Dev Center components and features.
+
+== Structure
+
+* `components/` - Specifications for individual components/modules
+* `features/` - Feature descriptions and design documents
+
+== Components
+
+=== Core Components
+
+* `dependency-modeler.adoc` - Dependency modeling system for intra-project and external dependencies
+* `project-recognizer.adoc` - Project technology stack recognition module
+* `repository-provider-registry.adoc` - Version control system provider registry
+* `text-editor-link-system.adoc` - Text editor with visual link system design
+* `code-execution-recording.adoc` - Code block execution and output recording system
+
+== Features
+
+* `opening-web-content-from-docs.adoc` - Native WebView integration for in-app browsing
+* `text-editor-separate-process.adoc` - Separate process text editor design philosophy
+
+== Specification Format
+
+All specifications are written in AsciiDoc format and should follow these conventions:
+
+* Use descriptive titles
+* Include clear sections and subsections
+* Document requirements, design decisions, and implementation notes
+* Link to related specifications where appropriate
+

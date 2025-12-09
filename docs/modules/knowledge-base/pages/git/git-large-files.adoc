@@ -1,0 +1,21 @@
+= Large Files & Git LFS
+
+// TODO: Document Git LFS and large file handling strategies
+
+== Overview
+
+This document will cover handling large files and binary assets in Git repositories.
+
+== Topics to Cover
+
+* [ ] Why Git struggles with large files
+* [ ] Git LFS (Large File Storage) setup and usage
+* [ ] `.gitattributes` configuration for LFS
+* [ ] Migrating existing repos to use LFS
+* [ ] Alternatives to LFS (git-annex, DVC)
+* [ ] Cost considerations for LFS hosting
+
+== See Also
+
+* xref:git-repo-management.adoc[Git Repository Management]
+

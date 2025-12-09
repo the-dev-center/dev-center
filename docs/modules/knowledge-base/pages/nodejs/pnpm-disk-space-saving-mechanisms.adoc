@@ -1,0 +1,21 @@
+= pnpm Disk Space Saving Mechanisms
+
+pnpm primarily uses **hard links** and **symbolic links** (symlinks) to save disk space.
+
+== Disk Space Optimization Mechanics
+
+=== Hard Links
+
+pnpm uses **hard links** for packages in the content-addressable store.
+
+* When you install a package, its files are physically saved in a single location on disk: the pnpm content-addressable store (usually located in `~/.pnpm-store` or equivalent).
+* For each project that depends on this package, pnpm creates **hard links** from the project's `node_modules` directory back to the files in the store.
+* A hard link is a directory entry that associates a name with a file on a file system. Multiple hard links can point to the same physical file data. This means the file data is stored only once, saving significant space.
+
+=== Symbolic Links (Symlinks)
+
+pnpm uses **symbolic links** for the structure of the `node_modules` directory.
+
+* The project's root `node_modules` folder contains symbolic links (symlinks) to the direct dependencies required by the project.
+* The actual dependencies are nested under a `.pnpm` directory in a flattened structure, where the hard-linked files reside. The symlinks create a flat view for Node.js resolution while maintaining the strict, non-flat structure that prevents phantom dependencies.
+

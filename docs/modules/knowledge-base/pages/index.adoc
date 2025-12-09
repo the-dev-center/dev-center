@@ -1,0 +1,16 @@
+= Knowledge Base
+
+This knowledge base contains best practices and technical knowledge that will be enforced and presented in the Dev Center application.
+
+include::ROOT:partial$tooling-knowledge-gap.adoc[]
+
+== Topics
+
+* xref:development-tools/index.adoc[Development Tools] - Recommended development tools
+* xref:asciidoc/asciidoc-tools.adoc[AsciiDoc Tools] - AsciiDoc tooling
+* xref:git/git-ignore-local.adoc[Git] - Git best practices and workflows
+* xref:nodejs/nodejs.adoc[Node.js] - Node.js ecosystem knowledge
+* xref:ssh-keys/ssh-keys.adoc[SSH Keys] - SSH key management
+* xref:flutter/dartSDK-setup.adoc[Flutter] - Flutter development setup
+* xref:file-sync/sync.adoc[File Sync] - File synchronization strategies
+

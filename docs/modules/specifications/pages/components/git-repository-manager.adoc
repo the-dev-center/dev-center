@@ -1,0 +1,22 @@
+= Git Repository Manager
+
+This component provides a git repository management tool that makes it easy to move projects on disk and rename the repository locally and online.
+
+== Dependencies
+
+While the app uses the APIs for different providers, the following tools are useful for running playbooks that perform the same functions and will be installed to teach the user and assist in DIY workflows:
+
+* Git CLI (git)
+* GitHub CLI (gh)
+* GitLab CLI (glab)
+
+== Features
+
+* Repository relocation (move projects on disk with automatic remote updates)
+* Repository renaming (local and remote synchronization)
+* Multi-provider support (GitHub, GitLab, Bitbucket, etc.)
+
+== Related
+
+* xref:repository-provider-registry.adoc[Repository Provider Registry] - Provider abstraction layer
+

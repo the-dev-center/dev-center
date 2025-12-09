@@ -1,0 +1,148 @@
+= Executing Code Blocks and Recording Output
+
+**Exported:** 12/1/2025 22:51:09  
+**Link:** https://gemini.google.com/app/d74b8b585b43a74e
+
+== Prompt
+
+if i were to make a tool or plugin to interpret markdown or asciidoc or mdx and display a runnable terminal where any shell or pwsh or powershell code block is shown, how would I record the output into a file and notate which code block it belongs to?
+
+== Response
+
+The process requires **parsing** the document, **executing** the code blocks, and **mapping** the output to the source block using a metadata scheme.
+
+== Code Block Execution and Output Mapping
+
+=== Parsing and Extraction
+
+First, use a robust parser for the document type (Markdown, AsciiDoc, MDX) to extract all code blocks.
+
+* **Identify Language:** Extract the code block's content and its language identifier (e.g., `bash`, `powershell`, `pwsh`).
+* **Assign Unique ID:** During parsing, assign a **unique, persistent identifier (UID)** to each code block. This could be a simple counter (`id-001`, `id-002`) or a hash of its content/location. This UID is the **key** for mapping.
+
+=== Execution and Redirection
+
+Execute the code blocks one by one. The key is to redirect the standard output (`stdout`) and standard error (`stderr`) of the executed command into a temporary file.
+
+* **Process Spawning:** Use the appropriate runtime function in your plugin's language (e.g., `child_process.spawn` in Node.js, `subprocess.run` in Python) to execute the shell command (`sh`, `bash`, `powershell.exe`).
+* **Redirection:** Instead of capturing the output directly in memory, redirect the output stream to a file. The filename should incorporate the unique ID assigned in Step 1.
+** _Example (Bash/Generic Shell):_ For code block `id-001`, the command might be executed as:
+
+[source,powershell]
+----
+echo "hello world" > /tmp/outputs/output-id-001.txt 2>&1
+----
+
+(The `2>&1` ensures `stderr` is also captured in the file.)
+
+** _Example (PowerShell):_ For code block `id-002`, the command might be executed as:
+
+[source,powershell]
+----
+"Get-Date" | Out-File -FilePath C:\temp\outputs\output-id-002.txt -Encoding utf8
+----
+
+=== Notation and Indexing
+
+After all executions are complete, you will have a directory of output files (e.g., `output-id-001.txt`, `output-id-002.txt`). Create a **Manifest or Index File** to formally link the output file path back to the source code block's UID.
+
+* **Manifest Structure:** Use a structured format like **JSON** or **YAML** for the index file.
+* **Manifest Example (JSON):**
+
+[source,json]
+----
+{
+  "manifestVersion": "1.0",
+  "documentId": "source_doc_filename.md",
+  "outputs": [
+    {
+      "blockId": "id-001",
+      "language": "bash",
+      "sourceCode": "echo \"hello world\"",
+      "outputFile": "output-id-001.txt",
+      "executionTime": 1678886400,
+      "exitCode": 0
+    },
+    {
+      "blockId": "id-002",
+      "language": "pwsh",
+      "sourceCode": "Get-Process -Name 'NonExistent'",
+      "outputFile": "output-id-002.txt",
+      "executionTime": 1678886401,
+      "exitCode": 1
+    }
+  ]
+}
+----
+
+When displaying the runnable terminal, the plugin first uses the **blockId** from the current code block to look up the corresponding **outputFile** path in the manifest. It then reads the content of the specified file and displays it immediately after the source code block.
+
+== Prompt: Unique ID Persistence
+
+the unique id process...how can I persist the identity across edits of the markup files, including in the event of insertion of new code blocks and edits of the existing code blocks? does asciidoc support an explicit unique id system?
+
+== Response: Unique ID Persistence Across Edits
+
+Persisting the unique identity of a code block across edits, insertions, and deletions requires a **stable, content-addressable ID** or an **explicit ID system** within the markup. Simple counters (e.g., `id-001`, `id-002`) fail when a block is inserted or deleted, as all subsequent IDs shift.
+
+=== Content-Based Hashing (Recommended for Stability)
+
+The most robust method for maintaining identity across non-semantic edits is to use a **hash of the code block's content**.
+
+* **Hash Generation:** Compute a cryptographic hash (e.g., SHA-256) of the **normalized content** of the code block.
+** **Normalization:** Before hashing, strip minor differences that should not change the ID, such as leading/trailing whitespace, and normalize line endings.
+* **Stability:** If a user only reformats the code or changes the surrounding prose, the ID remains the same.
+* **Change Detection:** If the user changes a single command, the hash **immediately changes**, signaling that the corresponding output is now stale and requires re-execution.
+* **Insertion/Deletion Resilience:** Inserting or deleting blocks has **no effect** on the IDs of other, unchanged blocks. The ID is intrinsic to the code block itself.
+
+**UID Formula:** `SHA256(Normalized_Code_Content)`
+
+=== AsciiDoc's Explicit Unique ID System
+
+**Yes, AsciiDoc explicitly supports a unique ID system** via its standard **Anchor/ID** attribute. This is the recommended approach if you want the ID to be user-defined and resistant to _code edits_.
+
+==== AsciiDoc ID Syntax
+
+You can assign an ID to any block, including a code block, using a standard block attribute:
+
+[source,markdown]
+----
+[#my-block-id-123,role="example"]
+----
+echo "This is Block 1"
+----
+----
+
+* **Syntax:** `[#<id>]` is placed immediately above the code block delimiters (`----`).
+* **Persistence:** The ID (`my-block-id-123`) is part of the source file. It persists across edits of the code block's content, making it useful for tracking execution history tied to a specific documentation point.
+* **Execution Mapping:** Your parser must check for this attribute. If present, use the explicit ID (`my-block-id-123`) as the **blockId** in your execution manifest.
+* **Drawback:** If the code inside the block changes, the ID does not change. You would need a **secondary mechanism** (like content hashing) to detect if the code has been edited and needs re-running, even if the explicit ID remains the same.
+
+[cols="2,2,2"]
+|===
+| Scenario
+| Hash-Based ID
+| AsciiDoc Explicit ID
+
+| **New Block Inserted**
+| Existing IDs remain stable.
+| Existing IDs remain stable.
+
+| **Code Block Content Edited**
+| **ID changes.** Output marked stale.
+| **ID remains the same.** Must use hash or timestamp to detect edit.
+
+| **Code Block Deleted**
+| No effect on other IDs.
+| No effect on other IDs.
+
+| **Simple Formatting/Whitespace Change**
+| ID remains stable (if normalized).
+| ID remains stable.
+|===
+
+A robust tool would likely use the **AsciiDoc Explicit ID** if available, and then use a **Content Hash** as a _secondary ID_ or a _checksum_ to ensure the output is current relative to the code.
+
+----
+Powered by link:https://www.gem-chat-exporter.com[Gem Chat Exporter]
+

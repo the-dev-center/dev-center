@@ -1,0 +1,301 @@
+= Dev Center Repository Organization Plan
+
+== Overview
+
+This document outlines the plan to organize the Dev Center repository structure, establish an Antora documentation site, and properly categorize all project artifacts.
+
+== Current State Analysis
+
+=== Repository Structure
+
+[source]
+----
+dev-center/
+├── app/
+│   ├── components/          # Informal feature/component descriptions
+│   │   ├── dependency-modeler.adoc
+│   │   ├── Gemini-Executing Code Blocks and Recording Output.md
+│   │   ├── opening-up-web-content-from-docs.md
+│   │   ├── project-recognizer.txt
+│   │   ├── Repository provider registry.adoc
+│   │   ├── text-editor-as-separate-process.txt
+│   │   └── text-editor-link-system-plan.adoc
+│   └── src/                 # Application source code (D language)
+│       ├── modules/
+│       │   ├── project-recognizer/
+│       │   └── text-editor-link-system/
+│       └── projects/
+├── docs/
+│   ├── knowledge-base/       # Best practices and knowledge to enforce
+│   │   ├── ## Development Tools.md
+│   │   ├── asciidoc/
+│   │   ├── flutter/
+│   │   ├── git/
+│   │   ├── Node.js/
+│   │   ├── SSH-keys/
+│   │   └── WIP file sync/
+│   └── site/                # Empty - needs Antora setup
+├── informal-description.txt # Initial project vision/idea
+└── dev-center.code-workspace
+----
+
+=== Content Categories
+
+. **Application Source Code** (`app/src/`)
+**Purpose:** D language implementation of Dev Center modules
+**Status:** Active development
+**Action:** Keep as-is, ensure proper module organization
+
+. **Component Specifications** (`app/components/`)
+**Purpose:** Informal conversations and feature descriptions
+**Status:** Mixed formats (.adoc, .md, .txt), needs organization
+**Action:** Reorganize into structured specifications
+
+. **Knowledge Base** (`docs/knowledge-base/`)
+**Purpose:** Best practices and technical knowledge to be enforced in app
+**Status:** Mixed formats, needs Antora integration
+**Action:** Convert to Antora component structure
+
+. **Project Vision** (`informal-description.txt`)
+**Purpose:** Initial project idea/requirements
+**Status:** Historical reference
+**Action:** Move to appropriate location
+
+== Proposed Structure
+
+=== Target Structure
+
+[source]
+----
+dev-center/
+├── app/                     # Application source code
+│   ├── src/
+│   │   ├── modules/         # Core modules
+│   │   │   ├── project-recognizer/
+│   │   │   └── text-editor-link-system/
+│   │   └── projects/        # Project-specific code
+│   └── specs/               # Component specifications (renamed from components)
+│       ├── components/      # Individual component specs
+│       │   ├── dependency-modeler.adoc
+│       │   ├── project-recognizer.adoc
+│       │   ├── repository-provider-registry.adoc
+│       │   ├── text-editor-link-system.adoc
+│       │   └── code-execution-recording.adoc
+│       ├── features/        # Feature descriptions
+│       │   ├── opening-web-content-from-docs.adoc
+│       │   └── text-editor-separate-process.adoc
+│       └── README.adoc      # Overview of specifications
+├── docs/
+│   ├── antora.yml           # Antora playbook
+│   ├── site/                # Generated Antora site (gitignored)
+│   └── modules/
+│       ├── ROOT/            # Root navigation module
+│       │   ├── nav.adoc
+│       │   ├── index.adoc
+│       │   └── project-vision.adoc
+│       ├── knowledge-base/  # Knowledge base component
+│       │   ├── antora.yml
+│       │   ├── nav.adoc
+│       │   └── pages/
+│       │       ├── development-tools/
+│       │       ├── asciidoc/
+│       │       ├── flutter/
+│       │       ├── git/
+│       │       ├── nodejs/
+│       │       ├── ssh-keys/
+│       │       └── file-sync/
+│       └── specifications/  # Component specs component
+│           ├── antora.yml
+│           ├── nav.adoc
+│           └── pages/
+│               ├── components/
+│               └── features/
+└── informal-description.txt # Keep at root for now, reference in docs
+----
+
+== Implementation Plan
+
+=== Phase 1: Organize Component Specifications
+
+==== Step 1.1: Create New Structure
+
+* Create `app/specs/` directory
+* Create `app/specs/components/` for component specifications
+* Create `app/specs/features/` for feature descriptions
+
+==== Step 1.2: Migrate and Convert Files
+
+* **dependency-modeler.adoc** → `app/specs/components/dependency-modeler.adoc`
+**Action:** Already in AsciiDoc, move as-is
+
+* **project-recognizer.txt** → `app/specs/components/project-recognizer.adoc`
+**Action:** Convert to AsciiDoc format, expand with proper structure
+
+* **Repository provider registry.adoc** → `app/specs/components/repository-provider-registry.adoc`
+**Action:** Rename to kebab-case, move as-is
+
+* **text-editor-link-system-plan.adoc** → `app/specs/components/text-editor-link-system.adoc`
+**Action:** Move as-is (already well-structured)
+
+* **Gemini-Executing Code Blocks and Recording Output.md** → `app/specs/components/code-execution-recording.adoc`
+**Action:** Convert Markdown to AsciiDoc, rename to descriptive name
+
+* **opening-up-web-content-from-docs.md** → `app/specs/features/opening-web-content-from-docs.adoc`
+**Action:** Convert Markdown to AsciiDoc
+
+* **text-editor-as-separate-process.txt** → `app/specs/features/text-editor-separate-process.adoc`
+**Action:** Convert to AsciiDoc
+
+==== Step 1.3: Create Specifications Index
+
+* Create `app/specs/README.adoc` with overview of all specifications
+* Include links to components and features
+* Document the specification format and conventions
+
+=== Phase 2: Set Up Antora Documentation Site
+
+==== Step 2.1: Create Antora Playbook
+
+* Create `docs/antora.yml` playbook file
+* Configure site title, URL, and start page
+* Define component sources
+
+==== Step 2.2: Organize Knowledge Base as Antora Component
+
+* Create `docs/modules/knowledge-base/` directory
+* Create `docs/modules/knowledge-base/antora.yml` component descriptor
+* Create `docs/modules/knowledge-base/nav.adoc` navigation file
+* Organize existing knowledge-base content into `pages/` subdirectories:
+** `development-tools/` - for "## Development Tools.md"
+** `asciidoc/` - existing asciidoc content
+** `flutter/` - existing flutter content
+** `git/` - existing git content
+** `nodejs/` - existing Node.js content (rename from "Node.js")
+** `ssh-keys/` - existing SSH-keys content
+** `file-sync/` - existing WIP file sync content
+
+==== Step 2.3: Create Specifications Component
+
+* Create `docs/modules/specifications/` directory
+* Create `docs/modules/specifications/antora.yml` component descriptor
+* Create `docs/modules/specifications/nav.adoc` navigation file
+* Link to specifications in `app/specs/` (or copy to `pages/` if preferred)
+
+==== Step 2.4: Create Root Module
+
+* Create `docs/modules/ROOT/` directory
+* Create `docs/modules/ROOT/antora.yml` (or use implicit ROOT)
+* Create `docs/modules/ROOT/nav.adoc` with main navigation
+* Create `docs/modules/ROOT/index.adoc` as landing page
+* Convert `informal-description.txt` → `docs/modules/ROOT/pages/project-vision.adoc`
+
+==== Step 2.5: Standardize File Formats
+
+* Convert all Markdown files to AsciiDoc
+* Ensure consistent AsciiDoc formatting
+* Fix common AsciiDoc pitfalls:
+** Checklist items use `* [ ]` format
+** Bold text followed by blank line before next block
+** List continuations before list items' continued blocks
+
+=== Phase 3: File Format Conversions
+
+==== Step 3.1: Markdown to AsciiDoc Conversion Rules
+
+* Headers: `#` → `=`, `##` → `==`, etc.
+* Code blocks: Keep language tags
+* Lists: Convert to AsciiDoc list syntax
+* Links: Convert to AsciiDoc xref syntax where appropriate
+* Bold/Italic: `**text**` → `*text*`, `*text*` → `_text_`
+
+==== Step 3.2: Text Files to AsciiDoc
+
+* Add proper AsciiDoc structure
+* Add title and metadata
+* Format content with appropriate sections
+
+=== Phase 4: Update Workspace Configuration
+
+* Update `dev-center.code-workspace` if needed
+* Ensure search excludes for `docs/site/` (generated content)
+* Update file associations if needed
+
+== Detailed File Migration Map
+
+=== Component Specifications
+
+|Source|Destination|Action
+|`app/components/dependency-modeler.adoc`|`app/specs/components/dependency-modeler.adoc`|Move
+|`app/components/project-recognizer.txt`|`app/specs/components/project-recognizer.adoc`|Convert & move
+|`app/components/Repository provider registry.adoc`|`app/specs/components/repository-provider-registry.adoc`|Rename & move
+|`app/components/text-editor-link-system-plan.adoc`|`app/specs/components/text-editor-link-system.adoc`|Move
+|`app/components/Gemini-Executing Code Blocks and Recording Output.md`|`app/specs/components/code-execution-recording.adoc`|Convert & move
+
+=== Feature Descriptions
+
+|Source|Destination|Action
+|`app/components/opening-up-web-content-from-docs.md`|`app/specs/features/opening-web-content-from-docs.adoc`|Convert & move
+|`app/components/text-editor-as-separate-process.txt`|`app/specs/features/text-editor-separate-process.adoc`|Convert & move
+
+=== Knowledge Base Content
+
+|Source|Destination|Action
+|`docs/knowledge-base/## Development Tools.md`|`docs/modules/knowledge-base/pages/development-tools/index.adoc`|Convert & move
+|`docs/knowledge-base/asciidoc/`|`docs/modules/knowledge-base/pages/asciidoc/`|Move directory
+|`docs/knowledge-base/flutter/`|`docs/modules/knowledge-base/pages/flutter/`|Move directory
+|`docs/knowledge-base/git/`|`docs/modules/knowledge-base/pages/git/`|Move directory
+|`docs/knowledge-base/Node.js/`|`docs/modules/knowledge-base/pages/nodejs/`|Rename & move
+|`docs/knowledge-base/SSH-keys/`|`docs/modules/knowledge-base/pages/ssh-keys/`|Rename & move
+|`docs/knowledge-base/WIP file sync/`|`docs/modules/knowledge-base/pages/file-sync/`|Rename & move
+
+=== Project Vision
+
+|Source|Destination|Action
+|`informal-description.txt`|`docs/modules/ROOT/pages/project-vision.adoc`|Convert & move
+
+== Antora Configuration Details
+
+=== Playbook Structure
+
+The `docs/antora.yml` playbook will define:
+
+* Site configuration (title, URL)
+* Component sources pointing to local directories
+* UI bundle (default or custom)
+* Output directory: `docs/site/`
+
+=== Component Descriptors
+
+Each component will have an `antora.yml` with:
+
+* Component name
+* Version (use `master` or `main` for now)
+* Display name
+* Navigation file reference
+
+=== Navigation Structure
+
+Navigation will be organized hierarchically:
+
+* Root module: Overview, Project Vision, links to other components
+* Knowledge Base: Organized by topic (Development Tools, Git, Node.js, etc.)
+* Specifications: Organized by type (Components, Features)
+
+== Next Steps
+
+. Review and approve this plan
+. Execute Phase 1: Organize Component Specifications
+. Execute Phase 2: Set Up Antora Documentation Site
+. Execute Phase 3: File Format Conversions
+. Test Antora site generation
+. Update `.gitignore` to exclude `docs/site/`
+. Document build process for the documentation site
+
+== Notes
+
+* All AsciiDoc files should follow the user's preferred conventions
+* The `docs/site/` directory should be gitignored (generated content)
+* Consider creating a build script for generating the Antora site
+* Component specifications may be referenced from both `app/specs/` and the documentation site
+* Consider symlinks or copying specs to docs if Antora needs them in the docs tree
+

@@ -1,0 +1,58 @@
+// Insertable snippet: The Developer Tooling Knowledge Gap
+// Include with: include::ROOT:partial$tooling-knowledge-gap.adoc[]
+
+[discrete]
+== Why Does This Documentation Exist?
+
+[quote, A frustrated developer]
+____
+How much does the typical programmer know about the overall tooling they use — from Git's intricacies and configuration, to GitHub CI/CD, to GitLab CI/CD, to package manager implementation details? I feel like I'm constantly learning and relearning all of these config settings in an effort to master it.
+____
+
+The honest answer: **most programmers operate on a "good enough to unblock myself" level** with most of their tooling.
+
+=== The Knowledge Distribution
+
+[cols="1,1,3"]
+|===
+| Level | ~% of Devs | What it looks like
+
+| Copy-paste survivor
+| 40%
+| Googles error messages, copies Stack Overflow answers, doesn't know _why_ it works
+
+| Functional user
+| 40%
+| Knows common commands, has a mental model that's 60% accurate, can troubleshoot basics
+
+| Confident practitioner
+| 15%
+| Understands the underlying model, can configure from scratch, teaches others
+
+| Deep expert
+| 5%
+| Reads source code, knows edge cases, writes the Stack Overflow answers
+|===
+
+=== Why This Happens
+
+. **The surface area is insane.** Git alone has 150+ commands. Then there's GitHub Actions, GitLab CI, Docker, Kubernetes, npm/pnpm/yarn, pip/uv/poetry, cargo, webpack/vite/esbuild, ESLint, Prettier, TypeScript config, shell scripting, SSH, GPG... Nobody masters all of it.
+
+. **The docs assume prior knowledge.** Git's man pages are famously written for people who already understand Git. Most tooling docs explain _what_ without explaining _why_ or _when_.
+
+. **Tribal knowledge dominates.** Teams pass down incantations. "Just run this script." "Copy this CI file." The _why_ gets lost.
+
+. **It's not rewarded.** Shipping features gets you promoted. Understanding `core.autocrlf` doesn't. So people rationally optimize for output, not depth.
+
+. **Teachers often don't know either.** Academia lags industry by 5-10 years. Many CS professors have never used CI/CD professionally.
+
+=== The Uncomfortable Truth
+
+Most production software runs on configurations that _someone_ copy-pasted from a blog post years ago, nobody fully understands anymore, and everyone's afraid to touch. It works, so nobody questions it.
+
+=== The Purpose of This Knowledge Base
+
+This documentation exists to bridge the gap — to provide the reference material that _should_ exist but doesn't, because the people who understand tooling deeply rarely document it, and the people who document it rarely understand it deeply.
+
+If you're bothered by not understanding your tools — if you want to _master_ your tooling rather than just survive it — you're in the right place.
+

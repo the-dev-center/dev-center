@@ -1,0 +1,21 @@
+= Submodules & Monorepos
+
+// TODO: Document Git submodules and monorepo patterns
+
+== Overview
+
+This document will cover multi-repository patterns including submodules and monorepo strategies.
+
+== Topics to Cover
+
+* [ ] Git submodules basics
+* [ ] Adding, updating, and removing submodules
+* [ ] Submodule pitfalls and common issues
+* [ ] Monorepo vs polyrepo tradeoffs
+* [ ] Monorepo tooling (Nx, Turborepo, Lerna)
+* [ ] Sparse checkouts for large monorepos
+
+== See Also
+
+* xref:git-repo-management.adoc[Git Repository Management]
+

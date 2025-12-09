@@ -1,0 +1,5 @@
+= Dependency Modeler
+
+Dev Center needs a dependency modeler that looks into a project's source code and makes
+1. an intra-project dependency graph to model modules.
+2. an external dependency graph for external libraries, and dependencies on other projects.

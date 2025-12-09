@@ -1,0 +1,19 @@
+= Dev Center
+
+Welcome to the Dev Center documentation.
+
+Dev Center is a developer tooling application that provides:
+
+* Developer tooling setup
+* Workflow management
+* Software project management
+* Environment management
+
+include::partial$tooling-knowledge-gap.adoc[]
+
+== Quick Links
+
+* xref:project-vision.adoc[Project Vision] - Learn about the project's goals and design philosophy
+* xref:knowledge-base:index.adoc[Knowledge Base] - Best practices and technical knowledge
+* xref:specifications:index.adoc[Component Specifications] - Technical specifications for components and features
+

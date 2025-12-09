@@ -1,0 +1,19 @@
+site:
+  title: Dev Center Documentation
+  start_page: ROOT:index.adoc
+content:
+  sources:
+    - url: ..
+      branches: HEAD
+      start_path: docs
+      worktrees: true
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files: []
+asciidoc:
+  attributes:
+    experimental: ''
+    page-pagination: ''
+
