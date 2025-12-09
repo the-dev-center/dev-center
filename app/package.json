@@ -1,0 +1,8 @@
+{
+	"name": "dev-center-app",
+	"version": "0.1.0",
+	"dependencies": {
+		"simple-icons": "^16.1.0"
+	}
+}
+

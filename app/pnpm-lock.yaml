@@ -1,0 +1,23 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      simple-icons:
+        specifier: ^16.1.0
+        version: 16.1.0
+
+packages:
+
+  simple-icons@16.1.0:
+    resolution: {integrity: sha512-fL95b22MWTn3y+zQ/QC9oKqJ6mXXNwm35oy5XMVPdvJZGfGNWDMMb33kfqm50OuRKNcdjbk7HQ73NdWcvaBXIQ==}
+    engines: {node: '>=0.12.18'}
+
+snapshots:
+
+  simple-icons@16.1.0: {}
