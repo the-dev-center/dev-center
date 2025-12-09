@@ -2,7 +2,16 @@
 
 Docs site uses Antora Docs. Docs are stored in .adoc (AsciiDoc) format in the `modules` directory.
 
-In order to build the Antora site, see the instructions in link:../docs-site/README.adoc[].
+In order to build the Antora site, see the instructions in link:site/README.adoc[].
+
+== Structure
+
+This directory contains two Antora configuration files with similar names but different purposes:
+
+* `antora.yml` - Component descriptor (defines the component name, version, title, and navigation)
+* `site/antora-playbook.yml` - Playbook (defines how to build the site, content sources, and output location)
+
+The component descriptor (`antora.yml`) is used by Antora to understand the component structure, while the playbook (`site/antora-playbook.yml`) is used to build the documentation site.
 
 == Module Organization
 

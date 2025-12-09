@@ -6,7 +6,36 @@ I want to make a Dev Center app that provides developer tooling setup, workflow 
 
 It should help new developers and experienced developers set up a new machine for development purposes and provide in depth information about any actions it performs, the environmental changes it makes, and the purposes of the tools it installs.
 
-The app should be diagrammatic in nature, providing a visual representation of the development environment and its components. Diagram nodes should be interactive and allow users to drill down into the details of each component. If a component is sufficiently complex, open the component in a new window in the diagram renderer (not a new native window).
+The app should contain models or diagrams of the different facets of software project management:
+
+* User (machine) environment
+** PATH variables
+** shells
+** Container apps available (Docker, podman)
+** Container images available (with icon from common logo api)
+* Project paths (with button to add a new path to the manager). This would be a path to a folder containing project folders, not to the individual projects.
+** Projects
+
+These diagrams should be 2-dimensional and pannable using middle-click-drag or touch pad. The elements should be iconified with label to the right, organized hierarchically, with the environment to the left of the projects it contains, and with its properties (PATHs, shells, etc) in report format in a box under the user environment label, with a "PATH vars" section and "user" and "system" buttons to edit the PATH variables. The Project Path nodes should be icon + label to the right, with a list of project folders indented to denote child-parent relationship. The list of project folders should be in its own block on screen. Each project should have an icon + label to the right. The icon will be a generic project icon, optionally replaced by a specific technology icon depending on if that project is exclusively one type of project.
+
+Double-clicking a project in the diagram
+
+Each project should be modeled/diagrammed:
+
+* Environments
+** Default environment if none are defined (labeled "default blank")
+** Dependency isolation mechanisms:
+*** Virtual environments using common environment configs (`venv`, `pyenv`, `virtualenv`, `pipenv`, `Poetry`, `conda`)
+*** Node.js modules specification (not treated as an environment but as 'inside' an environment, such as a blank environment)
+** `.env` variables as semi-environments (`.env*` pattern, excluding `.env*.example` pattern)
+** Documented build environments, such as dev, 
+* Internals of the software project
+** Project structure
+*** Technologies used
+*** Paths
+** Virtual environments
+* CI/CD configuration
+* Diagram nodes should be interactive and allow users to drill down into the details of each component. If a component is sufficiently complex, open the component in a new window in the diagram renderer (not a new native window).
 
 == Essential Functions
 
