@@ -1,0 +1,4 @@
+[source,sh]
+----
+npm install tailwindcss @tailwindcss/cli
+----

@@ -1,0 +1,9 @@
+{
+	"name": "dev-center",
+	"targetType": "executable",
+	"sourcePaths": ["src"],
+	"preBuildCommands": [
+		"pnpm install"
+	]
+}
+

@@ -1,6 +1,6 @@
 = Executing Code Blocks and Recording Output
 
-**Exported:** 12/1/2025 22:51:09  
+**Exported:** 12/1/2025 22:51:09
 **Link:** https://gemini.google.com/app/d74b8b585b43a74e
 
 == Prompt
@@ -105,13 +105,13 @@ The most robust method for maintaining identity across non-semantic edits is to 
 
 You can assign an ID to any block, including a code block, using a standard block attribute:
 
-[source,markdown]
-----
+[source,asciidoc]
+-----
 [#my-block-id-123,role="example"]
 ----
 echo "This is Block 1"
 ----
-----
+-----
 
 * **Syntax:** `[#<id>]` is placed immediately above the code block delimiters (`----`).
 * **Persistence:** The ID (`my-block-id-123`) is part of the source file. It persists across edits of the code block's content, making it useful for tracking execution history tied to a specific documentation point.
@@ -143,6 +143,4 @@ echo "This is Block 1"
 
 A robust tool would likely use the **AsciiDoc Explicit ID** if available, and then use a **Content Hash** as a _secondary ID_ or a _checksum_ to ensure the output is current relative to the code.
 
-----
 Powered by link:https://www.gem-chat-exporter.com[Gem Chat Exporter]
-

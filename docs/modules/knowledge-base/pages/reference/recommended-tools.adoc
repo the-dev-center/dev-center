@@ -1,0 +1,30 @@
+= Recommended Development Tools
+
+We recommend these tools to improve your dev workflow and maintain consistency across the team.
+
+== Platform & Shell
+
+* link:https://apps.microsoft.com/detail/9N0DX20HK701[Windows Terminal] - Official Terminal rewrite from Microsoft.
+* link:https://www.warp.dev/[Warp] - Modern terminal with integrated AI and superior UX.
+* link:https://apps.microsoft.com/detail/9mz1snwt0n5d[PowerShell 7] - The modern cross-platform shell.
+* link:https://learn.microsoft.com/en-us/windows/advanced-settings/sudo/[`sudo` for Windows] - Run elevated commands easily.
+
+== Package Management
+
+* link:https://www.marticliment.com/unigetui/[UniGetUI] - A GUI for `winget` and other package managers. Use this to install most of the apps below.
+* `pnpm` - Fast, disk-efficient package manager for Node.js.
+
+== Version Control
+
+* link:https://murmele.github.io/Gittyup/[Gittyup] - Clean Git UX for those who prefer GUIs over CLI.
+* link:https://cli.github.com/[GitHub CLI] - Official GitHub command-line interface.
+
+== Connectivity & Security
+
+* link:https://github.com/masahide/OmniSSHAgent[OmniSSHAgent] - Improved SSH agent management for Windows.
+* link:https://github.com/frequency403/OpenSSH-GUI[OpenSSH-GUI] - Graphical interface for managing SSH keys.
+
+== Productivity
+
+* link:https://jam.dev[Jam.dev] - One-click bug reporting with logs and video.
+* link:https://chromewebstore.google.com/detail/visbug/cdockenadnadldjbbgcallicgledbeoc[VisBug] - Live design debugging in the browser.

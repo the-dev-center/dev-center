@@ -1,6 +1,6 @@
 = SSH Keys Explanation
 
-SSH keys are a highly secure replacement for the use of passwords when communicating with a remote machine or service. In order to use them, you need to generate a key pair using a command line tool, such as `ssh-keygen`,and configure your local machine to use the private key, then copy the public key into the SSH settings of the service, such as GitHub, GitLab, or Bitbucket. When generating the keys, you can password-protect the private key to further enhance security, preventing unauthorized access even if the private key is compromised.
+SSH keys are a highly secure replacement for the use of passwords when communicating with a remote machine or service. In order to use them, you need to generate a key pair using a command line tool, such as `ssh-keygen`, and configure your local machine to use the private key, then copy the public key into the SSH settings of the service, such as GitHub, GitLab, or Bitbucket. When generating the keys, you can password-protect the private key to further enhance security, preventing unauthorized access even if the private key is compromised.
 
 == What are SSH Keys useful for?
 
@@ -94,7 +94,7 @@ Multiple keys only make sense if:
 * A key gets compromised and you want to limit blast radius
 * You're managing many identities and want organizational clarity
 
-For personal use across multiple services: One key is simpler and sufficient. The services don\'t care if you reuse the same key — they just verify you own the private key that matches the public key you uploaded.
+For personal use across multiple services: One key is simpler and sufficient. The services don't care if you reuse the same key — they just verify you own the private key that matches the public key you uploaded.
 
 === SSH Client Configuration (~/.ssh/config)
 
@@ -119,16 +119,19 @@ Here are some of the most frequently used directives in `~/.ssh/config`:
 *   `IdentitiesOnly yes`::
     When set to `yes`, `ssh` will only use the keys specified by `IdentityFile` directives (or the default keys if none are specified) and will not try other keys loaded in `ssh-agent`. This can speed up authentication and prevent accidentally offering the wrong key.
 *   `AddKeysToAgent yes`::
-    Automatically adds the private key specified by `IdentityFile` to `ssh-agent` if it\'s not already loaded. Requires `ssh-agent` to be running. Note: This automatically adds the key but still prompts for the passphrase if the key is encrypted.
+    Automatically adds the private key specified by `IdentityFile` to `ssh-agent` if it's not already loaded. Requires `ssh-agent` to be running. Note: This automatically adds the key but still prompts for the passphrase if the key is encrypted.
 *   `ForwardAgent yes`::
-    Enables `ssh-agent` forwarding. This allows your local `ssh-agent` to handle authentication for connections made *from* the remote server you\'ve connected to. Useful for bastion hosts or chaining SSH connections.
+    Enables `ssh-agent` forwarding. This allows your local `ssh-agent` to handle authentication for connections made *from* the remote server you've connected to. Useful for bastion hosts or chaining SSH connections.
 *   `ProxyJump <user@jumphost>`::
     Allows you to connect to a target host by first connecting to a jump host (bastion host) and then establishing a second SSH connection through it.
 
 ==== Example ~/.ssh/config
 
-Here\'s an example `~/.ssh/config` file demonstrating several common scenarios:\n\n[source,config]
-----\n# Global settings for all hosts unless overridden
+Here's an example `~/.ssh/config` file demonstrating several common scenarios:
+
+[source,config]
+----
+# Global settings for all hosts unless overridden
 Host *
   AddKeysToAgent yes
   IdentitiesOnly yes
@@ -158,7 +161,9 @@ Host work-project
 Host bastion.work.com
   User admin
   IdentityFile ~/.ssh/id_rsa_bastion
-----\n\nWith this setup, you can simply run `ssh github.com`, `ssh myserver`, or `ssh work-project`, and the `ssh` client will automatically apply the defined settings, including using the correct private key from `ssh-agent`.
+----
+
+With this setup, you can simply run `ssh github.com`, `ssh myserver`, or `ssh work-project`, and the `ssh` client will automatically apply the defined settings, including using the correct private key from `ssh-agent`.
 
 == SSH Agent
 
@@ -300,8 +305,8 @@ Instead of starting the agent manually each session, you can configure ssh-agent
 
 For easy automated installation and configuration, run the provided setup scripts:
 
-* Linux: link:ssh-agent-setup/setup-linux.sh[setup-linux.sh]
-* Windows: link:ssh-agent-setup/setup-windows.ps1[setup-windows.ps1]
+* Linux: xref:attachment$ssh-keys/setup-linux.sh[setup-linux.sh]
+* Windows: xref:attachment$ssh-keys/setup-windows.ps1[setup-windows.ps1]
 
 These scripts install dependencies if needed and configure automatic startup with key management. Note: No script for macOS, as it often starts automatically; use the manual instructions below if needed.
 
@@ -320,7 +325,7 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     ssh-add ~/.ssh/id_rsa  # Add your key(s); passphrase prompted once per boot
 fi
 ----
-
++
 2. Save and reload: `source ~/.bashrc`
 
 For more advanced persistent agent across reboots (using `keychain` tool, recommended for passphrase reuse):
@@ -332,7 +337,7 @@ For more advanced persistent agent across reboots (using `keychain` tool, recomm
 ----
 eval $(keychain --eval --agents ssh id_rsa)
 ----
-
++
 This starts the agent only if not running and reuses the passphrase across sessions.
 
 Alternatively, create a user systemd service for per-user automatic start:
@@ -353,7 +358,7 @@ ExecStop=/usr/bin/ssh-agent -k
 [Install]
 WantedBy=default.target
 ----
-
++
 2. Reload and enable:
 
 [source,sh]
@@ -362,7 +367,7 @@ systemctl --user daemon-reload
 systemctl --user enable ssh-agent.service
 systemctl --user start ssh-agent.service
 ----
-
++
 3. Add to `~/.bashrc` or `~/.profile`:
 
 [source,sh]
@@ -431,23 +436,22 @@ To create a launchd plist for automatic start:
 </dict>
 </plist>
 ----
-
++
 2. Load it: `launchctl load ~/Library/LaunchAgents/org.openbsd.ssh-agent.plist`
 
 ==== Windows
 
 After installing OpenSSH Client:
 
-1. Open PowerShell as Administrator.
-
-2. Set the service to automatic startup:
+. Open PowerShell as Administrator.
+. Set the service to automatic startup:
 
 [source,powershell]
 ----
 Set-Service -Name ssh-agent -StartupType Automatic
 ----
-
-3. Start the service:
++
+. Start the service:
 
 [source,powershell]
 ----
@@ -519,10 +523,10 @@ Add this configuration step to your Windows setup checklist. This single line of
 
 *Alternative Solutions:*
 
-1. **Use HTTPS instead of SSH:** Configure your remote to use `https://` URLs instead of `git@` SSH URLs. This uses Git's credential helper system instead of SSH keys.
+. **Use HTTPS instead of SSH:** Configure your remote to use `https://` URLs instead of `git@` SSH URLs. This uses Git's credential helper system instead of SSH keys.
 
-2. **Use Git Bash exclusively:** Git Bash can start its own ssh-agent that the bundled SSH can access. Add to `~/.bashrc`:
-+
+. **Use Git Bash exclusively:** Git Bash can start its own ssh-agent that the bundled SSH can access. Add to `~/.bashrc`:
+
 [source,sh]
 ----
 eval $(ssh-agent -s)
@@ -531,4 +535,4 @@ ssh-add ~/.ssh/id_ed25519
 +
 However, this means you need to use Git Bash for all Git operations, not PowerShell or other terminals.
 
-3. **Use a third-party SSH agent:** Tools like Pageant (from PuTTY) or 1Password's SSH agent can bridge this gap, but add complexity.
+. **Use a third-party SSH agent:** Tools like Pageant (from PuTTY) or 1Password's SSH agent can bridge this gap, but add complexity.

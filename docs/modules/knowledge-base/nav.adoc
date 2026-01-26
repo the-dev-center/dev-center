@@ -1,18 +1,30 @@
 * xref:index.adoc[Knowledge Base]
-* xref:development-tools/index.adoc[Development Tools]
-* xref:asciidoc/asciidoc-tools.adoc[AsciiDoc Tools]
-* xref:git/git-repo-management.adoc[Git Repository Management]
-** xref:git/git-ignore-local.adoc[.gitignore.local]
-** xref:git/git-branching-strategies.adoc[Branching Strategies]
-** xref:git/git-hooks.adoc[Git Hooks]
-** xref:git/git-large-files.adoc[Large Files & LFS]
-** xref:git/git-submodules.adoc[Submodules & Monorepos]
-** xref:git/git-recovery.adoc[Recovery & Troubleshooting]
-* xref:nodejs/nodejs.adoc[Node.js]
-* xref:nodejs/pnpm-disk-space-saving-mechanisms.adoc[pnpm Disk Space Saving]
-* xref:ssh-keys/ssh-keys.adoc[SSH Keys]
-* xref:ssh-keys/ssh-agent-setup/setup-windows.ps1[SSH Agent Setup: Windows]
-* xref:ssh-keys/ssh-agent-setup/setup-linux.sh[SSH Agent Setup: Linux]
-* xref:flutter/dartSDK-setup.adoc[Flutter: Dart SDK Setup]
-* xref:file-sync/sync.adoc[File Sync]
 
+.🎓 Tutorials
+* xref:tutorials/onboarding.adoc[Developer Onboarding]
+
+.🛠️ How-to Guides
+* xref:how-to/index.adoc[Overview]
+* xref:how-to/flutter-setup.adoc[Flutter Setup]
+* xref:how-to/tailwind-setup.adoc[Tailwind Setup]
+* xref:how-to/file-sync.adoc[File Sync]
+* xref:how-to/git-ignore-local.adoc[.gitignore.local]
+* xref:how-to/git-hooks.adoc[Git Hooks]
+* xref:how-to/git-lfs.adoc[Large Files & LFS]
+* xref:how-to/git-recovery.adoc[Git Recovery]
+
+.📚 Reference
+* xref:reference/index.adoc[Overview]
+* xref:reference/recommended-tools.adoc[Recommended Tools]
+* xref:reference/git-management.adoc[Git Management]
+* xref:reference/nodejs-env.adoc[Node.js Environment]
+* xref:reference/asciidoc-tools.adoc[AsciiDoc Tooling]
+
+.🧠 Explanation
+* xref:explanation/index.adoc[Overview]
+* xref:explanation/ssh-keys.adoc[SSH Keys]
+* xref:explanation/git-branching.adoc[Branching Strategies]
+* xref:explanation/git-submodules.adoc[Submodules & Monorepos]
+* xref:explanation/pnpm-mechanics.adoc[pnpm Mechanics]
+* xref:explanation/sync-by-gemini.adoc[Sync: Gemini]
+* xref:explanation/sync-grok4.adoc[Sync: Grok4]

@@ -80,7 +80,8 @@ dev-center/
 │       │   ├── project-recognizer.adoc
 │       │   ├── repository-provider-registry.adoc
 │       │   ├── text-editor-link-system.adoc
-│       │   └── code-execution-recording.adoc
+│       │   ├── code-execution-recording.adoc
+│       │   └── workspace-template-manager.adoc
 │       ├── features/        # Feature descriptions
 │       │   ├── opening-web-content-from-docs.adoc
 │       │   └── text-editor-separate-process.adoc
@@ -290,6 +291,7 @@ Navigation will be organized hierarchically:
 . Test Antora site generation
 . Update `.gitignore` to exclude `docs/site/`
 . Document build process for the documentation site
+. Implement Workspace Template Manager concept and sync logic
 
 == Notes
 

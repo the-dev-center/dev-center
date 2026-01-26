@@ -39,7 +39,7 @@ After evaluating several D GUI libraries (GtkD, DUI, bindbc-sdl, dfltk), we sele
 === Library Location
 
 The dlangui library has been cloned to:
-`Z:\code\amdphreak\dlangui`
+`Z:\code\the-dev-center\dlangui`
 
 This is a separate project folder that has been added to the workspace for easy access during development.
 

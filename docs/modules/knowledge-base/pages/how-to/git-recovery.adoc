@@ -19,5 +19,5 @@ This document will cover recovering from mistakes and troubleshooting common Git
 
 == See Also
 
-* xref:git-repo-management.adoc[Git Repository Management]
+* xref:reference/git-management.adoc[Git Repository Management]
 

@@ -1,0 +1,70 @@
+= Developer Onboarding: Zero to One
+
+This tutorial will guide you through setting up your development environment from scratch. Our goal is to get you from a fresh machine to your first successful code contribution.
+
+== 1. Platform Setup (First Contact)
+Before you can write code, you need a modern environment to work in.
+
+1. Install **Windows Terminal** and **PowerShell 7** from the Microsoft Store.
+2. Install **UniGetUI** to manage your software packages.
+3. Enable **sudo for Windows** in your system settings.
+
+== 2. Access (The Gate)
+To interact with our repositories, you need a secure identity.
+
+1. Generate a new SSH key using the recommended Ed25519 algorithm:
++
+include::partial$ssh-keygen-ed25519.adoc[]
+
+2. Start the SSH Agent service:
++
+include::partial$ssh-agent-windows-start.adoc[]
+
+3. Add your public key to your GitHub account settings.
+
+== 3. Workflow (The Process)
+With access granted, let's configure your local workflow.
+
+1. Configure Git to handle line endings correctly (crucial for Windows users):
++
+include::partial$git-autocrlf-input.adoc[]
+
+2. Install **pnpm** globally:
++
+[source,sh]
+----
+npm install -g pnpm
+----
+
+== 4. Runtimes (The Engine)
+Install the execution engines required for our projects.
+
+1. Install **Node.js (LTS)** via UniGetUI or the official installer.
+2. Verify the installation:
++
+[source,sh]
+----
+node --version
+pnpm --version
+----
+
+== 5. Frameworks (The Work)
+Most of our web projects use **Tailwind CSS** for styling.
+
+1. For a quick start in a static project, you can use the CDN:
++
+include::partial$tailwind-cdn.adoc[]
+
+2. For production projects, install it via the CLI:
++
+include::partial$tailwind-cli-install.adoc[]
+
+== 6. Sync (Persistence)
+To maintain consistency across multiple machines, we use **Syncthing**.
+
+1. Install **SyncTrayzor** (on Windows).
+2. Configure your project folders to sync between your primary and secondary dev machines.
+
+---
+
+**Congratulations!** Your environment is now fully configured. You are ready to clone your first repository and start building.

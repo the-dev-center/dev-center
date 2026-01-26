@@ -1,16 +1,45 @@
-= Knowledge Base
+= Knowledge Base Orientation
 
-This knowledge base contains best practices and technical knowledge that will be enforced and presented in the Dev Center application.
+Welcome to the Dev Center Knowledge Base. This is the central repository for technical intelligence, best practices, and the collective memory of our engineering team.
 
-include::ROOT:partial$tooling-knowledge-gap.adoc[]
+== App Purpose
+The **Dev Center** application is designed to be the single source of truth for our development ecosystem. It centralizes project metadata, automates repetitive setup tasks, and provides a unified interface for managing developer identities across the services we use every day.
 
-== Topics
+== How to Use This Documentation
+We follow the **Diátaxis** framework, which organizes documentation by the user's intent and cognitive state. Choose the path that matches your current goal:
 
-* xref:development-tools/index.adoc[Development Tools] - Recommended development tools
-* xref:asciidoc/asciidoc-tools.adoc[AsciiDoc Tools] - AsciiDoc tooling
-* xref:git/git-ignore-local.adoc[Git] - Git best practices and workflows
-* xref:nodejs/nodejs.adoc[Node.js] - Node.js ecosystem knowledge
-* xref:ssh-keys/ssh-keys.adoc[SSH Keys] - SSH key management
-* xref:flutter/dartSDK-setup.adoc[Flutter] - Flutter development setup
-* xref:file-sync/sync.adoc[File Sync] - File synchronization strategies
+[cols="1,1", frame=none, grid=none]
+|===
+| [.text-center]
+=== 🎓 Tutorials
+**Intent: Learning**
+Focused on acquisition. Follow our step-by-step guides to build basic competence in our systems.
 
+xref:tutorials/onboarding.adoc[🚀 Start Onboarding]
+
+| [.text-center]
+=== 🛠️ How-to Guides
+**Intent: Execution**
+Focused on application. "I have a goal, show me the recipe." Task-oriented guides for real-world problems.
+
+xref:how-to/index.adoc[📂 Browse How-tos]
+
+| [.text-center]
+=== 📚 Reference
+**Intent: Retrieval**
+Focused on facts. Technical specifications, API documentation, and checklists.
+
+xref:reference/index.adoc[📋 View Reference]
+
+| [.text-center]
+=== 🧠 Explanation
+**Intent: Comprehension**
+Focused on understanding. Discursive content that explains the "Why" behind our architecture and philosophy.
+
+xref:explanation/index.adoc[💡 Explore Concepts]
+|===
+
+[TIP]
+====
+**Quick Start:** If you are new to the team, start with the xref:tutorials/onboarding.adoc[Onboarding Tutorial]. It will guide you through setting up your machine using our xref:reference/recommended-tools.adoc[Recommended Tools].
+====

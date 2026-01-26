@@ -6,4 +6,4 @@ App is located in `/app`.
 
 Docs are located in '/docs/modules/'. This app uses Antora for its docs site.
 
-Docs site: <https://amdphreak.github.io/dev-center>
+Docs site: <https://the-dev-center.github.io/docs>

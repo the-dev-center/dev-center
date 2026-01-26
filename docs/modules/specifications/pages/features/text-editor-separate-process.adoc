@@ -8,5 +8,5 @@ The links would not just be a form of inter-process communication, they would be
 
 Can you fork a D lang GUI library and update it to have this new mechanism? And then can you make a sample app that has the main interface with a few cards that correspond to text files, and then when I double click a file card, connect the new editor window to it. The link anchor node should be under the filename within the card and that space should be empty at first and populated with the link node after opening the editor. The editor's link node should be behind the window, attached at an offset below the editor window's title bar. The editor windows' title bar should show the file name.
 
-Please put this in a new module. Obviously if we're forking a D GUI to hack it, maybe we should clone that repository into a separate project folder and include that project into this repo's workspace. `Z:\code\amdphreak\[library-name]`
+Please put this in a new module. Obviously if we're forking a D GUI to hack it, maybe we should clone that repository into a separate project folder and include that project into this repo's workspace. `Z:\code\the-dev-center\[library-name]`
 

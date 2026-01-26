@@ -1,0 +1,8 @@
+[source,powershell]
+----
+# Set the service to automatic startup
+Set-Service -Name ssh-agent -StartupType Automatic
+
+# Start the service
+Start-Service ssh-agent
+----

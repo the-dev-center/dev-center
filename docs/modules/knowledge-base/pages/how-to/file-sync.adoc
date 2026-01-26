@@ -10,5 +10,8 @@ In the future, I would like to see Syncthing attempt to port their web GUI to Ye
 
 == Sync Caveats
 
-When syncing files between two machines, avoid using absolute paths in your code and config files and any non-code files. Instead, use relative paths or environment variables to store file paths.
+== Related Topics
+
+* xref:explanation/sync-by-gemini.adoc[Sync by Gemini]
+* xref:explanation/sync-grok4.adoc[Sync Grok4]
 

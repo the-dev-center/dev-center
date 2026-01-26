@@ -1,0 +1,11 @@
+= How-to Guides
+
+Practical recipes for real-world tasks.
+
+* xref:how-to/flutter-setup.adoc[Flutter Setup]
+* xref:how-to/tailwind-setup.adoc[Tailwind Setup]
+* xref:how-to/file-sync.adoc[File Sync]
+* xref:how-to/git-ignore-local.adoc[.gitignore.local]
+* xref:how-to/git-hooks.adoc[Git Hooks]
+* xref:how-to/git-lfs.adoc[Large Files & LFS]
+* xref:how-to/git-recovery.adoc[Git Recovery & Troubleshooting]

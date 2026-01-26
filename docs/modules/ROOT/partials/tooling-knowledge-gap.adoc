@@ -1,7 +1,6 @@
 // Insertable snippet: The Developer Tooling Knowledge Gap
 // Include with: include::ROOT:partial$tooling-knowledge-gap.adoc[]
 
-[discrete]
 == Why Does This Documentation Exist?
 
 [quote, A frustrated developer]
@@ -55,4 +54,3 @@ Most production software runs on configurations that _someone_ copy-pasted from 
 This documentation exists to bridge the gap — to provide the reference material that _should_ exist but doesn't, because the people who understand tooling deeply rarely document it, and the people who document it rarely understand it deeply.
 
 If you're bothered by not understanding your tools — if you want to _master_ your tooling rather than just survive it — you're in the right place.
-

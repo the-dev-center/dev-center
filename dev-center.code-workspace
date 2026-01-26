@@ -51,10 +51,28 @@
 			"sectanchors": true,
 			"sectlinks": true,
 			"source-highlighter": "highlight.js"
+		},
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.formatOnSave": true,
+		"[json]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[jsonc]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[javascript]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[typescript]": {
+			"editor.defaultFormatter": "biomejs.biome"
+		},
+		"[css]": {
+			"editor.defaultFormatter": "biomejs.biome"
 		}
 	},
 	"extensions": {
 		"recommendations": [
+			"biomejs.biome",
 			"asciidoctor.asciidoctor-vscode",
 			"ms-vscode.vscode-json",
 			"redhat.vscode-yaml",

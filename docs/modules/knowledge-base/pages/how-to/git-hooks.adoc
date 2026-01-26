@@ -17,5 +17,5 @@ This document will cover Git hooks for automating tasks during the Git workflow.
 
 == See Also
 
-* xref:git-repo-management.adoc[Git Repository Management]
+* xref:reference/git-management.adoc[Git Repository Management]
 

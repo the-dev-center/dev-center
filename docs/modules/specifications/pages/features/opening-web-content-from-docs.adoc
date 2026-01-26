@@ -1,6 +1,6 @@
 = Native WebViews for In-App Browsing
 
-**Link:** https://gemini.google.com/app/7eb64f085b69ffd8  
+**Link:** https://gemini.google.com/app/7eb64f085b69ffd8
 **Exported:** 11/4/2025 14:40:22
 
 == Prompt
@@ -44,6 +44,4 @@ This pattern uses the native platform's embedded browser component, which is les
 
 Use a recursive approach to the application's windowing logic to manage the depth of the WebViews.
 
-----
 Powered by link:https://www.geminiexporter.com[Gemini Exporter]
-

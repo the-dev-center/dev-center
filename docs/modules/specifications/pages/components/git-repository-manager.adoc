@@ -18,5 +18,4 @@ While the app uses the APIs for different providers, the following tools are use
 
 == Related
 
-* xref:repository-provider-registry.adoc[Repository Provider Registry] - Provider abstraction layer
-
+* xref:components/repository-provider-registry.adoc[Repository Provider Registry] - Provider abstraction layer

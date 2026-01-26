@@ -17,3 +17,7 @@ Node.js projects often contain configuration files for package managers:
 | `pnpm`
 | `pnpm-lock.yaml` locks down the entire dependency tree to specific versions, ensuring consistent and reproducible builds for `pnpm`.
 |===
+
+== Related Topics
+
+* xref:explanation/pnpm-mechanics.adoc[pnpm Disk Space Saving Mechanisms]
