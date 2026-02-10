@@ -5,9 +5,6 @@
 		},
 		{
 			"path": "../dlangui"
-		},
-		{
-			"path": "../link-system-poc"
 		}
 	],
 	"settings": {
@@ -58,7 +55,7 @@
             "source.fixAll.markdownlint": "explicit"
         },
 
-		// IMPORTANT: Language-specific overrides are required to ensure workspace settings 
+		// IMPORTANT: Language-specific overrides are required to ensure workspace settings
 		// take precedence over any individual User-level language defaults (like Prettier).
 		"[javascript]": { "editor.defaultFormatter": "dprint.dprint" },
 		"[typescript]": { "editor.defaultFormatter": "dprint.dprint" },
