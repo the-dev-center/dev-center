@@ -28,7 +28,7 @@ Each project should be modeled/diagrammed:
 *** Virtual environments using common environment configs (`venv`, `pyenv`, `virtualenv`, `pipenv`, `Poetry`, `conda`)
 *** Node.js modules specification (not treated as an environment but as 'inside' an environment, such as a blank environment)
 ** `.env` variables as semi-environments (`.env*` pattern, excluding `.env*.example` pattern)
-** Documented build environments, such as dev, 
+** Documented build environments, such as dev,
 * Internals of the software project
 ** Project structure
 *** Technologies used
@@ -92,3 +92,17 @@ User configuration information gets stored in `%USERPROFILE%\Dev Center`
 
 The app needs an environment navigator that models the environment hierarchy/nesting/containment (for example these levels would be discovered: Hardware -> Hypervisor (or Bare Metal OS) -> Virtual Machine OS -> Container / App Environment) using cpuid instruction checks and an environment browser that opens up when the user selects an environment from the main environment navigator. The nested environment hierarchy needs to be modeled. The environment browser helps with identifying where settings files are stored and explains the various locations and environment variables of the system. System and user environment variables need to be browsable and editable, with a special interface for editing the PATH variables. Individual app environment variables
 
+== UI Specification & Roadmap
+
+=== Visual Paradigm
+The Dev-Center application prioritizes a premium, high-fidelity user interface.
+Current UI implementation uses the `dlangui` library.
+
+=== Logical vs Optical Pixels
+[IMPORTANT]
+====
+At present, the underlying UI library (`dlangui`) does not natively differentiate between logical and optical pixels for all widget measurements. All specifications in this document and the development roadmap assume a transition toward *logical pixel support*.
+====
+
+* *Tool Icons*: Every tool in the dashboard must be displayed with an icon against a fixed-size background of **200x200 logical pixels**.
+* *Roadmap*: Future versions of the Dev-Center app will implement a DPI-aware scaling layer to ensure consistent sizing across high-density displays (Retina/4K), standardizing all layout measurements to logical pixels.

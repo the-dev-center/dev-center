@@ -98,6 +98,36 @@ git config --global core.safecrlf false
 | Suppress line ending warnings (not recommended)
 |===
 
+== Default Branch Configuration
+
+Git has announced plans to change the default initial branch name from `master` to `main` in a future release. The `init.defaultBranch` configuration variable allows you to specify your preferred default branch name for new repositories.
+
+=== Setting the Default Branch Name
+
+To ensure consistency with modern conventions used by GitHub, GitLab, and other platforms, set your default branch to `main`:
+
+[source,bash]
+----
+git config --global init.defaultBranch main
+----
+
+=== Background and Timeline
+
+* **Introduced in:** Git 2.28.0 (July 2020)
+* **Current status:** The default remains `master`, but Git's documentation marks it as "subject to change in the future"
+* **Industry adoption:** GitHub, GitLab, and most major Git hosting platforms have already transitioned to using `main` as the default
+
+=== Why Configure This Now?
+
+1. **Future-proofing:** When Git eventually changes the default, your workflow will remain consistent
+2. **Collaboration consistency:** Most new repositories on GitHub and GitLab now use `main` — aligning your local defaults prevents confusion
+3. **Documentation alignment:** Modern tutorials and documentation increasingly assume `main` as the default branch
+
+[TIP]
+====
+This setting only affects *new* repositories created with `git init` after the configuration is applied. Existing repositories retain their current branch names.
+====
+
 == Related Topics
 
 * xref:how-to/git-ignore-local.adoc[.gitignore.local Convention] - Local ignore files

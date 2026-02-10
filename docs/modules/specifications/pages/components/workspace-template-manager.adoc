@@ -16,9 +16,9 @@ It provides a centralized suite for creating, maintaining, and syncing project c
 === Settings Synchronization
 * Sync settings from a central template repository to specific project repositories.
 * Support for partial or full synchronization of:
-** `.vscode/settings.json`
+** `*.code-workspace` files (Preferred for global standards to ensure precedence)
+** `.vscode/settings.json` (Local overrides)
 ** `.vscode/extensions.json`
-** `*.code-workspace` files
 ** Project-specific configuration files (e.g., `.prettierrc`, `.hintrc`)
 
 === Repository Integration
@@ -32,9 +32,15 @@ It provides a centralized suite for creating, maintaining, and syncing project c
 . **Global Standard Update:** A new "must-have" extension is added to the organization-wide standards. The Workspace Template Manager pushes this update to all relevant repositories' `.code-workspace` files.
 . **Tech Stack Migration:** Moving a project from one set of standards to another (e.g., updating formatting rules) is handled via a guided sync process.
 
-== Roadmap (Conceptual)
-
-* [ ] Define template schema for multi-stack support.
+* [x] Define template schema for multi-stack support.
 * [ ] Implement file copying and merging logic for JSON-based configurations.
-* [ ] Create a CLI or GUI interface within Dev Center for managing sync tasks.
+* [x] Create a CLI or GUI interface within Dev Center for managing sync tasks.
 * [ ] Integrate with GitHub API to automate template application during repo creation.
+
+== Implementation Details
+
+The manager is implemented as a set of D-language modules within the `dev_center` source tree:
+
+* **`modules.template_installer.installer`**: Handles the local cache of the `templates` repository, performing Git-based updates with a 24-hour freshness check.
+* **`modules.template_installer.project_manager`**: Bridges the template installer with the `ProjectRecognizer`. It enables stack-to-template mapping and the "Save as Template" functionality.
+* **`DevCenterApp` (DlangUI)**: Orchestrates the user interface for browsing the template library and managing project-specific workspace configurations.

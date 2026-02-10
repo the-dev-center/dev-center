@@ -29,7 +29,11 @@ With access granted, let's configure your local workflow.
 +
 include::partial$git-autocrlf-input.adoc[]
 
-2. Install **pnpm** globally:
+2. Set the default branch name for new repositories:
++
+include::partial$git-init-defaultbranch.adoc[]
+
+3. Install **pnpm** globally:
 +
 [source,sh]
 ----

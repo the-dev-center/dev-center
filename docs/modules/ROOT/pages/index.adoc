@@ -9,6 +9,14 @@ Dev Center is a developer tooling application that provides:
 * Software project management
 * Environment management
 
+== Templates & Standardization
+
+Dev Center integrates tightly with the link:https://the-dev-center.github.io/templates/[Standard Project Templates] library. It acts as the local engine for:
+
+* **Automatic Tech-Stack recognition**: Identifying the languages and frameworks used in your projects.
+* **Template Installation**: One-click setup for standardized `.vscode` settings and workspace configurations.
+* **Update Management**: Keeping your project configurations in sync with organization-wide standards.
+
 include::partial$tooling-knowledge-gap.adoc[]
 
 == Quick Links

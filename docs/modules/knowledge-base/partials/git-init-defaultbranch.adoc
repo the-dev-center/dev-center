@@ -1,0 +1,15 @@
+[source,bash]
+----
+git config --global init.defaultBranch main
+----
+
+[NOTE]
+====
+Git has announced that the default initial branch name will change from `master` to `main` in a future release. This configuration ensures your new repositories use `main` as the default branch name, aligning with modern conventions used by GitHub, GitLab, and other platforms.
+
+* **Introduced in:** Git 2.28.0 (July 2020)
+* **Current default:** `master` (but marked as "subject to change in the future")
+* **Recommended value:** `main` — consistent with GitHub, GitLab, and industry standards
+
+Setting this now prevents confusion when the change eventually occurs and ensures consistency when collaborating with others who may already be using `main` as their default branch.
+====

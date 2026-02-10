@@ -10,6 +10,7 @@ This section contains technical specifications for Dev Center components and fea
 * xref:components/text-editor-link-system.adoc[Text Editor Link System] - Text editor with visual link system design
 * xref:components/code-execution-recording.adoc[Code Execution Recording] - Code block execution and output recording system
 * xref:components/git-repository-manager.adoc[Git Repository Manager] - Repository relocation and renaming
+* xref:components/workspace-template-manager.adoc[Workspace Template Manager] - Template installer and synchronization module for standardized projects
 
 == Features
 
