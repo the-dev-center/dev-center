@@ -2,16 +2,17 @@ module modules.project_recognizer.recognizer;
 
 import std.algorithm.searching : all, any, canFind;
 import std.algorithm.sorting : sort;
-import std.array : array, byValue;
+import std.array : array, empty;
 import std.datetime : Clock, SysTime;
 import std.exception : enforce;
-import std.file : DirEntry, SpanMode, dirEntries, exists, getSize, isDir, mkdirRecurse, readText, write;
+import std.file;
 import std.json : JSONType, JSONValue, parseJSON;
 import std.path : absolutePath, baseName, buildPath, extension, globMatch, isAbsolute, relativePath;
 import std.string : indexOf, splitLines, strip, toLower;
 import std.typecons : Nullable, nullable;
 import std.digest.sha : sha1Of;
 import std.digest : toHexString;
+import std.conv : to;
 
 /// Maximum file size (in bytes) to scan when checking for keyword matches.
 immutable ulong maxKeywordScanBytes = 1_048_576; // 1 MiB
@@ -240,7 +241,7 @@ class ProjectRecognizer
                 continue;
             }
 
-            profileFiles ~= entry.path;
+            profileFiles ~= entry.name;
         }
 
         enforce(!profileFiles.empty, "No JSON profiles found in directory: " ~ profilesDir);
@@ -357,7 +358,7 @@ class ProjectRecognizer
         enforce(value.type == JSONType.object, "Recognition rule file must be a JSON object: " ~ sourceLabel);
 
         auto rulesField = jsonGetOptional(value, "rules");
-        if (rulesField.type != JSONType.null)
+        if (rulesField.type != JSONType.null_)
         {
             enforce(rulesField.type == JSONType.array, "JSON field `rules` must be an array in " ~ sourceLabel);
             RecognitionRule[] parsed;
@@ -592,7 +593,7 @@ class ProjectRecognizer
 
         string[string] hits;
 
-        string[] searchTargets = !relevantFiles.empty ? relevantFiles : allFiles;
+        string[] searchTargets = !relevantFiles.empty ? relevantFiles.dup : allFiles.dup;
         foreach (keyword; keywords)
         {
             auto hitFile = findKeywordInFiles(keyword, absoluteRoot, searchTargets);
@@ -713,7 +714,7 @@ class ProjectRecognizer
         {
             case "json":
                 return loadDependenciesFromJsonManifest(content, rule, dependencies);
-            default:
+            case "text":
                 dependencies = collectDependenciesFromText(content);
                 return true;
         }
@@ -737,7 +738,7 @@ class ProjectRecognizer
         }
 
         string[] fields = !rule.dependencyFields.empty
-            ? rule.dependencyFields
+            ? rule.dependencyFields.dup
             : ["dependencies", "devDependencies", "peerDependencies", "optionalDependencies"];
 
         string[string] collected;
@@ -857,7 +858,7 @@ class ProjectRecognizer
         {
             projectId = "project";
         }
-        return projectId ~ "-" ~ hex ~ ".json";
+        return projectId ~ "-" ~ to!string(hex) ~ ".json";
     }
 
     private static string[] collectProjectFiles(const string projectRoot)
@@ -870,7 +871,7 @@ class ProjectRecognizer
                 continue;
             }
 
-            auto relative = relativePath(entry.path, projectRoot);
+            auto relative = relativePath(entry.name, projectRoot);
             files ~= canonicalizePath(relative);
         }
         sort(files);
@@ -899,15 +900,15 @@ class ProjectRecognizer
 
     private static string canonicalizePath(string path)
     {
-        string result = path.dup;
-        foreach (ref c; result)
+        char[] result = path.dup;
+        foreach (ref char c; result)
         {
             if (c == '\\')
             {
                 c = '/';
             }
         }
-        return result;
+        return result.idup;
     }
 
     private static bool matchesPattern(const string path, const string pattern)
@@ -954,7 +955,7 @@ private JSONValue jsonGetOptional(const JSONValue value, const string key)
 private string jsonExpectString(const JSONValue value, const string key)
 {
     auto maybe = jsonGetOptional(value, key);
-    enforce(maybe.type != JSONType.null, "Missing required JSON field `" ~ key ~ "`.");
+    enforce(maybe.type != JSONType.null_, "Missing required JSON field `" ~ key ~ "`.");
     enforce(maybe.type == JSONType.string, "JSON field `" ~ key ~ "` must be a string.");
     return maybe.str;
 }
@@ -962,7 +963,7 @@ private string jsonExpectString(const JSONValue value, const string key)
 private string jsonGetStringOrDefault(const JSONValue value, const string key, const string defaultValue = "")
 {
     auto maybe = jsonGetOptional(value, key);
-    if (maybe.type == JSONType.null)
+    if (maybe.type == JSONType.null_)
     {
         return defaultValue;
     }
@@ -974,7 +975,7 @@ private string jsonGetStringOrDefault(const JSONValue value, const string key, c
 private string[] jsonGetStringArray(const JSONValue value, const string key)
 {
     auto maybe = jsonGetOptional(value, key);
-    if (maybe.type == JSONType.null)
+    if (maybe.type == JSONType.null_)
     {
         return [];
     }
@@ -992,7 +993,7 @@ private string[] jsonGetStringArray(const JSONValue value, const string key)
 private JSONValue[] jsonGetArray(const JSONValue value, const string key)
 {
     auto maybe = jsonGetOptional(value, key);
-    if (maybe.type == JSONType.null)
+    if (maybe.type == JSONType.null_)
     {
         return [];
     }
@@ -1013,7 +1014,7 @@ private JSONValue[string] jsonGetObjectField(const JSONValue value, const string
         auto refValue = *entry;
         if (refValue.type == JSONType.object)
         {
-            return refValue.object;
+            return cast(JSONValue[string])refValue.object;
         }
     }
     return empty;
