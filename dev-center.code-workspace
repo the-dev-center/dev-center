@@ -52,34 +52,34 @@
 			"sectlinks": true,
 			"source-highlighter": "highlight.js"
 		},
-		"editor.defaultFormatter": "biomejs.biome",
+		"editor.defaultFormatter": "dprint.dprint",
 		"editor.formatOnSave": true,
-		"[json]": {
-			"editor.defaultFormatter": "biomejs.biome"
-		},
-		"[jsonc]": {
-			"editor.defaultFormatter": "biomejs.biome"
-		},
-		"[javascript]": {
-			"editor.defaultFormatter": "biomejs.biome"
-		},
-		"[typescript]": {
-			"editor.defaultFormatter": "biomejs.biome"
-		},
-		"[css]": {
-			"editor.defaultFormatter": "biomejs.biome"
-		}
+        "editor.codeActionsOnSave": {
+            "source.fixAll.markdownlint": "explicit"
+        },
+
+		// IMPORTANT: Language-specific overrides are required to ensure workspace settings 
+		// take precedence over any individual User-level language defaults (like Prettier).
+		"[javascript]": { "editor.defaultFormatter": "dprint.dprint" },
+		"[typescript]": { "editor.defaultFormatter": "dprint.dprint" },
+		"[javascriptreact]": { "editor.defaultFormatter": "dprint.dprint" },
+		"[typescriptreact]": { "editor.defaultFormatter": "dprint.dprint" },
+		"[json]": { "editor.defaultFormatter": "dprint.dprint" },
+		"[jsonc]": { "editor.defaultFormatter": "dprint.dprint" },
+		"[code-workspace]": { "editor.defaultFormatter": "dprint.dprint" },
+		"[css]": { "editor.defaultFormatter": "dprint.dprint" },
+		"[graphql]": { "editor.defaultFormatter": "dprint.dprint" }
 	},
 	"extensions": {
 		"recommendations": [
+			"dprint.dprint",
 			"biomejs.biome",
 			"asciidoctor.asciidoctor-vscode",
 			"ms-vscode.vscode-json",
 			"redhat.vscode-yaml",
 			"rust-lang.rust-analyzer",
 			"tamasfe.even-better-toml",
-			"bradlc.vscode-tailwindcss",
-			"esbenp.prettier-vscode"
+			"bradlc.vscode-tailwindcss"
 		]
 	}
 }

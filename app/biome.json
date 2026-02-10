@@ -1,5 +1,11 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.3.11/schema.json",
+	"json": {
+		"parser": {
+			"allowComments": true,
+			"allowTrailingCommas": true
+		}
+	},
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
@@ -9,9 +15,7 @@
 		"ignoreUnknown": false
 	},
 	"formatter": {
-		"enabled": true,
-		"indentStyle": "space",
-		"indentWidth": 2
+		"enabled": false
 	},
 	"linter": {
 		"enabled": true,

@@ -17,3 +17,8 @@ docs/site/node_modules/
 **/.venv/
 **/target/
 **/.cargo/
+app/build_output.txt
+app/*.exe
+app/*.pdb
+app/*.dll
+app/dub.selections.json
