@@ -63,6 +63,55 @@ In this setup, everything lives inside `docs/`, including the playbook.
 
 It aligns with how CI systems view your repository (as a unit). The slight "clutter" of one file at the root is worth the stability in deployment pipelines.
 
+== Multi-Repository Handling
+
+Your question is: *Does this hold up when referencing other git repositories?*
+
+**Yes, and it actually makes local development easier.**
+
+In a multi-repo site (like the main Dev Center), you have two distinct needs:
+
+=== 1. The Production/CI Need (Remote URLs)
+In your main production playbook (e.g., `the-dev-center/docs/antora-playbook.yml`), you should use **Full GitHub URLs**. This is the only way for GitHub Actions to fetch all the pieces.
+
+[source,yaml]
+----
+content:
+  sources:
+    - url: https://github.com/the-dev-center/msi-generator.git
+      branches: HEAD
+      start_path: docs
+----
+
+=== 2. The Local Development Need (Relative Paths)
+When working locally, cloning is slow. You want to point to your sibling folders on your hard drive.
+
+*   **Root Strategy**: Siblings are at `../sibling-repo`.
+*   **Subfolder Strategy**: Siblings are at `../../sibling-repo`.
+
+By using the **Root Strategy**, your local dev references are cleaner and match the standard "folder per project" structure of most developers.
+
+=== The "Best of Both Worlds" Solution
+
+Do not manually toggle URLs in your main playbook. Instead, use a **Local Dev Playbook Extension**.
+
+1.  Create `local-antora-playbook.yml` (and Git-ignore it).
+2.  Define only the local overrides:
+
+[source,yaml]
+----
+extends: ./antora-playbook.yml
+content:
+  sources:
+    - url: ../msi-generator
+      branches: HEAD
+      start_path: docs
+----
+
+3.  Run locally with: `antora local-antora-playbook.yml`.
+
+This keeps your **Root Strategy** intact for the repo's specific CI, while allowing the global "hub" site to aggregate everything seamlessly.
+
 == GitHub Pages Configuration
 
 Regardless of strategy, deployment is the same:
@@ -70,3 +119,5 @@ Regardless of strategy, deployment is the same:
 1.  **Build**: Antora generates a static site (default: `build/site` or `public/`).
 2.  **Upload**: Upload this folder to the `gh-pages` branch.
 3.  **Configure**: Set GitHub Pages to deploy from `gh-pages` / `root`.
+
+
