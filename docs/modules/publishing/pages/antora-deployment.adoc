@@ -1,0 +1,72 @@
+= Antora Deployment Strategies: Root vs. Docs
+:navtitle: Antora Deployment
+
+When documenting a single repository, there are two common ways to structure your Antora project: the **Root Strategy** and the **Subfolder Strategy**.
+
+Both work, but they have different trade-offs for local development and CI/CD.
+
+== 1. The Root Strategy (Recommended)
+
+In this setup, the `antora-playbook.yml` lives at the **repository root**, even if the content is in `docs/`.
+
+*   **Structure**:
+    ```text
+    my-repo/
+    ├── antora-playbook.yml  <-- Root
+    ├── .github/workflows/docs.yml
+    └── docs/
+        └── antora.yml
+    ```
+*   **Playbook Config**:
+    ```yaml
+    content:
+      sources:
+        - url: .            # Points to the root (current dir)
+          start_path: docs  # Tells Antora to look inside docs/
+    ```
+*   **Pros**:
+    *   **CI Simplicity**: In GitHub Actions, the checkout root is `.` . The command `antora antora-playbook.yml` just works. No path overrides needed.
+    *   **Clarity**: The playbook clearly defines the site for the *entire repo*.
+*   **Cons**:
+    *   Adds one file to your root directory.
+
+== 2. The Subfolder Strategy (Legacy)
+
+In this setup, everything lives inside `docs/`, including the playbook.
+
+*   **Structure**:
+    ```text
+    my-repo/
+    └── docs/
+        ├── antora-playbook.yml  <-- Inside docs/
+        └── antora.yml
+    ```
+*   **Playbook Config**:
+    ```yaml
+    content:
+      sources:
+        - url: ..           # MUST point to parent (git root)
+          start_path: docs
+    ```
+*   **Pros**:
+    *   Keeps the repository root clean.
+*   **Cons**:
+    *   **CI Complexity**: When running in CI, you are usually at the repo root.
+        Running `antora docs/antora-playbook.yml` causes relative path resolution specific to where the command is *run* vs where the file *is*.
+        *   If `url: .`, Antora thinks the git root is `docs/` (Wrong).
+        *   If `url: ..`, Antora tries to resolve the parent of the checkout (Restricted).
+    *   **Fix**: You often have to force correct paths with `--url .` CLI flags.
+
+== Recommendation
+
+**Use the Root Strategy.**
+
+It aligns with how CI systems view your repository (as a unit). The slight "clutter" of one file at the root is worth the stability in deployment pipelines.
+
+== GitHub Pages Configuration
+
+Regardless of strategy, deployment is the same:
+
+1.  **Build**: Antora generates a static site (default: `build/site` or `public/`).
+2.  **Upload**: Upload this folder to the `gh-pages` branch.
+3.  **Configure**: Set GitHub Pages to deploy from `gh-pages` / `root`.
