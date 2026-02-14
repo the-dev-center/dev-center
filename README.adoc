@@ -1,6 +1,6 @@
 = Dev Center App
 
-Dev Center is an app to manage, model, and inspect software development projects on Windows, macOS, and Linux.
+Dev Center is an app to manage, model, and inspect software development projects on Windows, macOS, and Linux+GNU.
 
 App is located in `/app`.
 
