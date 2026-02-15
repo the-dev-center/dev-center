@@ -2,6 +2,7 @@
 
 Discursive and conceptual content to facilitate a deeper mental model.
 
+* xref:explanation/architectural-principles.adoc[Architectural Principles & Engineering Standards]
 * xref:explanation/ssh-keys.adoc[SSH Keys Explained]
 * xref:explanation/git-branching.adoc[Branching Strategies]
 * xref:explanation/git-submodules.adoc[Submodules & Monorepos]

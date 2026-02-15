@@ -23,6 +23,7 @@
 
 .🧠 Explanation
 * xref:explanation/index.adoc[Overview]
+* xref:explanation/architectural-principles.adoc[Architectural Principles]
 * xref:explanation/ssh-keys.adoc[SSH Keys]
 * xref:explanation/git-branching.adoc[Branching Strategies]
 * xref:explanation/git-submodules.adoc[Submodules & Monorepos]
