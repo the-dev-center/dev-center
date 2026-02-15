@@ -4,34 +4,19 @@
 			"path": "."
 		}
 	],
+	"extensions": {
+		"recommendations": [
+			"dprint.dprint",
+			"biomejs.biome",
+			"asciidoctor.asciidoctor-vscode",
+			"ms-vscode.vscode-json",
+			"redhat.vscode-yaml",
+			"rust-lang.rust-analyzer",
+			"tamasfe.even-better-toml",
+			"bradlc.vscode-tailwindcss"
+		]
+	},
 	"settings": {
-		"files.exclude": {
-
-		},
-		"search.exclude": {
-			"**/node_modules": true,
-			"**/dist": true,
-			"**/build": true,
-			"**/.git": true,
-			"**/__pycache__": true,
-			"**/*.pyc": true,
-			"**/.pytest_cache": true,
-			"**/venv": true,
-			"**/.venv": true,
-			"**/target": true,
-			"**/.cargo": true
-		},
-		"files.watcherExclude": {
-			"**/node_modules/**": true,
-			"**/dist/**": true,
-			"**/build/**": true,
-			"**/.git/**": true,
-			"**/__pycache__/**": true,
-			"**/venv/**": true,
-			"**/.venv/**": true,
-			"**/target/**": true,
-			"**/.cargo/**": true
-		},
 		"editor.tabSize": 2,
 		"editor.insertSpaces": true,
 		"editor.detectIndentation": true,
@@ -62,18 +47,35 @@
 		"[jsonc]": { "editor.defaultFormatter": "dprint.dprint" },
 		"[code-workspace]": { "editor.defaultFormatter": "dprint.dprint" },
 		"[css]": { "editor.defaultFormatter": "dprint.dprint" },
-		"[graphql]": { "editor.defaultFormatter": "dprint.dprint" }
+		"[graphql]": { "editor.defaultFormatter": "dprint.dprint" },
+
+    // File panel and search exclusions
+		"files.exclude": {
+
+		},
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/dist": true,
+			"**/build": true,
+			"**/.git": true,
+			"**/__pycache__": true,
+			"**/*.pyc": true,
+			"**/.pytest_cache": true,
+			"**/venv": true,
+			"**/.venv": true,
+			"**/target": true,
+			"**/.cargo": true
+		},
+		"files.watcherExclude": {
+			"**/node_modules/**": true,
+			"**/dist/**": true,
+			"**/build/**": true,
+			"**/.git/**": true,
+			"**/__pycache__/**": true,
+			"**/venv/**": true,
+			"**/.venv/**": true,
+			"**/target/**": true,
+			"**/.cargo/**": true
+		}
 	},
-	"extensions": {
-		"recommendations": [
-			"dprint.dprint",
-			"biomejs.biome",
-			"asciidoctor.asciidoctor-vscode",
-			"ms-vscode.vscode-json",
-			"redhat.vscode-yaml",
-			"rust-lang.rust-analyzer",
-			"tamasfe.even-better-toml",
-			"bradlc.vscode-tailwindcss"
-		]
-	}
 }
