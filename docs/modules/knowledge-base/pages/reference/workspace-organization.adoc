@@ -1,0 +1,66 @@
+= Workspace Organization Schema
+
+This document defines the standard structure for organizing local code repositories within the Dev Center ecosystem. This structure ensures a consistent, predictable environment for both developers and automated tools.
+
+== Folder Structure
+
+All repositories are cloned into a hierarchy under a common `$ROOT` directory (typically `Z:\code`).
+
+=== Core Pattern
+`$ROOT/<host>/<owner>/<repo>`
+
+Use this pattern for:
+* Repositories you own personally.
+* Repositories owned by organizations you are a member of.
+* Projects where you are not a fork and have direct access.
+
+.Example
+`Z:\code\github.com\amdphreak\my-project` +
+`Z:\code\github.com\the-dev-center\dev-center`
+
+=== Protected Forks
+`$ROOT/<host>/<owner>/.forks/<repo>`
+
+Use this pattern for personal or organizational forks of external repositories. This separates your modified versions from original upstream sources.
+
+.Example
+`Z:\code\github.com\AMDphreak\.forks\obs-studio` (Your fork of OBS)
+
+=== Pure Clones
+`$ROOT/<host>/.clones/<owner>/<repo>`
+
+Use this pattern for "pure clones"—repositories you do not own, are not a member of, and have not forked locally. These are used for reference or building from source without intent to contribute.
+
+.Example
+`Z:\code\github.com\.clones\obsproject\obs-studio` (Original OBS source)
+
+== Automation
+
+The `repo-organizer` tool (Julia) is used to maintain this structure. It automatically moves repositories to their correct locations based on their `origin` remote URL and your current organization memberships.
+
+== Organization Membership Checks
+
+The organization status is determined using provider-specific CLIs:
+
+* **GitHub**: `gh api user/memberships/orgs --jq '.[].organization.login'`
+* **GitLab**: `glab api "groups?min_access_level=10" --jq '.[].full_path'`
+
+== Global Environment Rules (`rules.txt`)
+
+To ensure consistency in AI interactions and development workflows across different workspaces, a central `rules.txt` file is used to define global standards.
+
+=== Purpose
+* **Environment Context**: Provides AI agents with static facts about the OS, Shell, and mandatory tooling.
+* **Standardization**: Enforces consistent behavior across disparate projects within the `$ROOT` hierarchy.
+* **Bootstrapping**: Serves as the source of truth for project-specific rules (`.cursorrules`, `.agent/rules`).
+
+=== Location & Synchronization
+The rules manifest is typically maintained at `$ROOT/rules.txt`.
+
+[TIP]
+====
+It is highly recommended to **hard-link** `$ROOT/rules.txt` into specific project roots or configuration repositories (like the `templates` repo). This creates a "single source of truth" where any update to the global manifest is immediately reflected across all linked projects.
+====
+
+=== Usage
+New projects should be bootstrapped by copying or linking the global rules into their project-specific AI configuration files.

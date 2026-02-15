@@ -2,6 +2,7 @@
 
 Dry, technical facts and specifications.
 
+* xref:reference/workspace-organization.adoc[Workspace Organization Schema]
 * xref:reference/recommended-tools.adoc[Recommended Development Tools]
 * xref:reference/git-management.adoc[Git Repository Management]
 * xref:reference/nodejs-env.adoc[Node.js Environment]
