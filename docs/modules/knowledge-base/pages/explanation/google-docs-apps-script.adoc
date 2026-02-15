@@ -1,0 +1,39 @@
+= Architectural Lessons: Google Docs Apps Script Optimization
+:author: Gemini 3 Flash
+:navtitle: Apps Script Optimization
+
+== The API Bridge Latency (The "Kix" Problem)
+Google Docs does not expose a raw source file (like HTML or Markdown). It exists as a live database object (Kix tree).
+
+* **Lesson:** Every call to `getAttributes()` or `setAttributes()` is a network round-trip to Google’s servers.
+* **Optimization:** Granular, character-by-character processing is inherently slow. Batching ranges or minimizing redundant calls is essential for performance in large documents.
+
+== Style Inheritance vs. Local Overrides
+Google Docs formatting operates in layers: Document Style Template -> Paragraph Style -> Local Character Overrides.
+
+* **The Glitch:** Copy-pasted text often carries "hardcoded" fonts (e.g., Arial) as local overrides. These block the text from responding to changes in the "Normal Text" style template.
+* **The Solution:** Setting `FONT_FAMILY` and `FONT_SIZE` to `null` programmatically deletes the local override. This restores the "Null state," forcing the text to inherit the Document's global style (e.g., Source Sans 3).
+
+== DOM Traversal and Logical Expansion
+Selections in Google Docs are unpredictable. Selecting a word returns a `TEXT` element; selecting a whole line returns a `LIST_ITEM` or `PARAGRAPH`.
+
+* **Structural Safety:** To ensure consistency, scripts should ascend the DOM using `.getParent()` to identify the block-level container.
+* **Auto-Selection:** If a user selects a fragment of text, the script should logically expand to process the entire parent container to prevent mismatched formatting within a single bullet or paragraph.
+
+== Asynchronous UI and V8 Bridge
+The Apps Script sidebar (HTML/JS) and the server-side script (`Code.gs`) communicate over a bridge that is not immediately active upon load.
+
+* **Race Conditions:** Running code on `window.onload` often fails because the bridge isn't ready.
+* **Solution:** Use a `setTimeout` or a "Ready" handshake before calling server-side functions.
+* **Listener Pattern:** Instead of refreshing the UI on every run, use a persistent sidebar with an activity log to allow for multiple sequential selection-based tasks.
+
+== Structural Preservation in Lists
+Bullets (`LIST_ITEM`) are sensitive containers. Applying global styles often strips their structural metadata.
+
+* **Metadata Whitelisting:** When resetting a section to "Normal Text," scripts must explicitly capture and re-apply `LIST_ID`, `NESTING_LEVEL`, and indentation metrics to prevent the bullet structure from collapsing.
+
+== The Dual-Log Strategy
+In automation scripts, "Processed" does not mean "Changed."
+
+* **Activity Log:** Tracks every element scanned for progress visualization.
+* **Update Log:** Filters for elements that actually possessed a local font override (`needsUpdate = true`). This provides the user with an audit trail of actual modifications versus mere verification.

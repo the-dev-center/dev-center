@@ -15,6 +15,7 @@
 
 .📚 Reference
 * xref:reference/index.adoc[Overview]
+* xref:reference/workspace-organization.adoc[Workspace Organization]
 * xref:reference/recommended-tools.adoc[Recommended Tools]
 * xref:reference/git-management.adoc[Git Management]
 * xref:reference/nodejs-env.adoc[Node.js Environment]
@@ -28,3 +29,4 @@
 * xref:explanation/pnpm-mechanics.adoc[pnpm Mechanics]
 * xref:explanation/sync-by-gemini.adoc[Sync: Gemini]
 * xref:explanation/sync-grok4.adoc[Sync: Grok4]
+* xref:explanation/google-docs-apps-script.adoc[Google Docs Apps Script]

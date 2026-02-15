@@ -8,3 +8,4 @@ Discursive and conceptual content to facilitate a deeper mental model.
 * xref:explanation/pnpm-mechanics.adoc[pnpm Disk Space Saving Mechanics]
 * xref:explanation/sync-by-gemini.adoc[Sync Strategy: Gemini]
 * xref:explanation/sync-grok4.adoc[Sync Strategy: Grok4]
+* xref:explanation/google-docs-apps-script.adoc[Google Docs Apps Script Optimization]
