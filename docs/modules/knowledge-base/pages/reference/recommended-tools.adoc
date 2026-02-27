@@ -60,6 +60,12 @@ The link:https://github.com/love-linger/sourcegit[SourceGit] project is a modern
 * link:https://cli.github.com/[GitHub CLI (`gh`)] - Official command-line interface for GitHub management.
 * link:https://gitea.com/gitea/tea[tea] - CLI for Gitea. Useful for managing self-hosted instances. See xref:explanation/infrastructure/self-hosting.adoc[Self-Hosting Infrastructure] for details.
 
+== Compilers & Toolchains
+
+* link:https://llvm.org/[LLVM / Clang] - High-performance compiler toolchain with native Windows compatibility.
+** **Usage:** `winget install LLVM.LLVM`
+** **Knowledge:** See xref:explanation/infrastructure/compilers-on-windows.adoc[Clang vs. GCC on Windows] for why we prefer Clang.
+
 == Connectivity & Security
 
 * link:https://github.com/masahide/OmniSSHAgent[OmniSSHAgent] - Improved SSH agent management for Windows.

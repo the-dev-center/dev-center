@@ -11,5 +11,6 @@ Discursive and conceptual content to facilitate a deeper mental model.
 * xref:explanation/infrastructure/git-branching.adoc[Branching Strategies]
 * xref:explanation/infrastructure/git-submodules.adoc[Submodules & Monorepos]
 * xref:explanation/infrastructure/pnpm-mechanics.adoc[pnpm Disk Space Saving Mechanics]
+* xref:explanation/infrastructure/compilers-on-windows.adoc[Compilers on Windows: Clang vs. GCC]
 * xref:explanation/infrastructure/sync-by-gemini.adoc[Sync Strategy: Gemini]
 * xref:explanation/infrastructure/sync-grok4.adoc[Sync Strategy: Grok4]
