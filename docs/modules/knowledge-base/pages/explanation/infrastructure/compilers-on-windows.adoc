@@ -28,6 +28,24 @@ The compiler is only half the story; the linker determines how your binary inter
 * **LLVM Linker (`lld-link`)**: LLVM's own linker is much faster than `link.exe` and is highly compatible with the MSVC ABI. It is included in the `LLVM.LLVM` package as `lld`.
 * **The MinGW `ld` Trap**: Some build systems (like those ported from Linux) may still insist on using the `ld` linker from MinGW. If you find yourself needing `ld`, you are often forced back into the MSYS2 ecosystem, which reintroduces the compatibility and complexity issues mentioned above. We recommend using `lld` as a modern, high-performance alternative whenever possible.
 
+== Why Clang may still ask for `link` or `ld`
+
+After installing `LLVM.LLVM` via winget, you might be surprised to see errors like `link.exe not found`. This happens due to a combination of **defaults, drivers, and missing dependencies**:
+
+*   **Default "System" Linker Search**: Clang is designed to be a "drop-in" replacement for a platform's standard compiler. On Windows, it tries to act like MSVC and looks for `link.exe`. In a MinGW environment, it acts like GCC and looks for `ld.exe`.
+*   **The "Secret" Dependency (System Libraries)**: While `LLVM.LLVM` provides the compiler and linker, it **does not** include the Windows System Headers or the C Runtime Libraries (e.g., `libcmt.lib`). To get these, you still need the **Windows SDK** or **Visual Studio Build Tools**.
+*   **Driver Choice (`clang-cl`)**: LLVM includes `clang-cl.exe`, which mimics Microsoft's `cl.exe`. While it is better at finding the Windows SDK automatically, it is hard-coded to prefer `link.exe` or `lld-link.exe`.
+
+=== Forcing LLVM's Linker
+
+To bypass the search for external linkers and use the high-performance `lld` included with your LLVM installation, use the `-fuse-ld` flag:
+
+[source,powershell]
+----
+# Force Clang to use its internal lld linker
+clang -fuse-ld=lld main.c
+----
+
 == Recommended Toolchain
 
 We recommend using the official LLVM distribution for Windows. It provides a clean, native experience without the overhead of a POSIX-emulation environment.
