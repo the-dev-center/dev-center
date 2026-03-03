@@ -133,6 +133,42 @@ git config --global init.defaultBranch main
 This setting only affects *new* repositories created with `git init` after the configuration is applied. Existing repositories retain their current branch names.
 ====
 
+== Remote Naming Conventions
+
+By default, Git uses the name `origin` for the remote from which a repository was cloned. This terminology is relative to the local machine (essentially meaning "the remote place I push to") rather than reflecting the actual structure of the project ecosystem. To improve clarity and standardize terminology across our workflow, we recommend using absolute terminology that reflects the fork structure.
+
+=== Standard Remote Names
+
+When working with forks, configure your remotes as follows:
+
+* `origin`: The absolute source of truth for the project (often traditionally called `upstream`). This is the main repository owned by the organization or project maintainers. Reassigning `origin` to mean the absolute origin of the codebase reduces cognitive load.
+* `personal` (or your username): Your personal fork of the repository. You push your feature branches here to validate changes (e.g., triggering personal Vercel deployments or running CI/CD pipelines) before opening a pull request to `origin`.
+
+=== Example Configuration
+
+When you clone your personal fork, Git automatically names it `origin`. You should immediately rename it and add the true `origin`:
+
+[source,bash]
+----
+# 1. Rename your personal fork from 'origin' to 'personal'
+git remote rename origin personal
+
+# 2. Add the main project repository as 'origin'
+git remote add origin git@github.com:Organization/project-name.git
+
+# 3. Verify your remotes
+git remote -v
+----
+
+Expected output:
+[source,text]
+----
+origin    git@github.com:Organization/project-name.git (fetch)
+origin    git@github.com:Organization/project-name.git (push)
+personal  git@github.com:YourUsername/project-name.git (fetch)
+personal  git@github.com:YourUsername/project-name.git (push)
+----
+
 == Related Topics
 
 * xref:how-to/git-ignore-local.adoc[.gitignore.local Convention] - Local ignore files
