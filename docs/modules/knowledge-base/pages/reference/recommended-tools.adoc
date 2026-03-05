@@ -63,7 +63,7 @@ The link:https://github.com/love-linger/sourcegit[SourceGit] project is a modern
 == Compilers & Toolchains
 
 * link:https://llvm.org/[LLVM / Clang] - High-performance compiler toolchain with native Windows compatibility.
-** **Usage:** `winget install LLVM.LLVM`
+** **Usage:** `winget install LLVM.LLVM -i` (Use `-i` for interactive mode to ensure Clang is added to PATH during installation)
 ** **Knowledge:** See xref:explanation/infrastructure/compilers-on-windows.adoc[Clang vs. GCC on Windows] for why we prefer Clang.
 
 == Connectivity & Security

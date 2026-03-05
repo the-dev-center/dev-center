@@ -1,6 +1,6 @@
-name: devcntr
+name: DevCentr
 version: ~
-title: DevCntr
+title: DevCentr
 nav:
 - modules/ROOT/nav.adoc
 - modules/knowledge-base/nav.adoc

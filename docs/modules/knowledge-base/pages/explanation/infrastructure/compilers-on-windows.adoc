@@ -53,7 +53,8 @@ We recommend using the official LLVM distribution for Windows. It provides a cle
 [source,powershell]
 ----
 # Install the full LLVM toolchain via winget
-winget install LLVM.LLVM
+# Use -i (interactive) to ensure you check the box to add Clang to the system PATH
+winget install LLVM.LLVM -i
 ----
 
 This installation includes `clang`, `clang++`, and the `lld` linker, which are ready to use from any standard PowerShell prompt.

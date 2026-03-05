@@ -11,21 +11,21 @@ Thanks for your interest in contributing. This document explains how to get invo
 
 ## Before you start
 
-- Check existing [issues](https://github.com/devcntr-app/dev-center/issues) and [pull requests](https://github.com/devcntr-app/dev-center/pull-requests) to avoid duplicates.
+- Check existing [issues](https://github.com/dev-centr/devcentr/issues) and [pull requests](https://github.com/dev-centr/devcentr/pull-requests) to avoid duplicates.
 - For larger changes, open an issue first to discuss approach.
 
 ## Development setup
 
-- **Repo:** Clone from `https://github.com/devcntr-app/dev-center` (or your fork). Check the docs in `docs/modules/` for workspace and layout conventions.
+- **Repo:** Clone from `https://github.com/dev-centr/devcentr` (or your fork). Check the docs in `docs/modules/` for workspace and layout conventions.
 - **App:** Application code lives under `/app`. Use the project’s preferred build/run instructions for your platform (Windows, macOS, Linux+GNU).
-- **Docs:** Documentation is in `docs/modules/` and built with [Antora](https://docs.antora.org/). Use AsciiDoc (`.adoc`). The published site is at <https://devcntr.org> (docs at <https://devcntr.org/docs>).
+- **Docs:** Documentation is in `docs/modules/` and built with [Antora](https://docs.antora.org/). Use AsciiDoc (`.adoc`). The published site is at <https://devcentr.org> (docs at <https://devcentr.org/docs>).
 
 ## Submitting changes
 
 1. **Branch** — Create a branch from `main` (e.g. `fix/short-description` or `feature/short-description`).
 2. **Commit** — Use clear, conventional-style messages (e.g. `fix: correct link in workspace docs`, `docs: add CONTRIBUTING`).
 3. **Push** — Push your branch to your fork.
-4. **Pull request** — Open a PR against `devcntr-app/dev-center` `main`. Describe what changed and why; reference any related issues.
+4. **Pull request** — Open a PR against `dev-centr/dev-center` `main`. Describe what changed and why; reference any related issues.
 
 The maintainers may ask for edits. Once approved, your PR will be merged. Tagged releases follow the project’s [Git release workflow](docs/modules/publishing/pages/git-release-workflow.adoc).
 
@@ -35,6 +35,6 @@ By contributing, you agree that your contributions will be licensed under the sa
 
 ## Questions
 
-- Open a [discussion](https://github.com/devcntr-app/dev-center/discussions) or an issue.
-- For funding and sponsorship, see the [Sponsor](https://github.com/sponsors/devcntr-app) button and [.github/FUNDING.yml](.github/FUNDING.yml).
+- Open a [discussion](https://github.com/dev-centr/devcentr/discussions) or an issue.
+- For funding and sponsorship, see the [Sponsor](https://github.com/sponsors/dev-centr) button and [.github/FUNDING.yml](.github/FUNDING.yml).
 

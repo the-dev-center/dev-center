@@ -1,5 +1,5 @@
 = JSON5 Endorsement
-:description: Formal endorsement and specification for using JSON5 in DevCntr projects.
+:description: Formal endorsement and specification for using JSON5 in Dev-Centr projects.
 
 JSON5 is a superset of JSON that expands its syntax to include some features from ECMAScript 5.1. It is designed to be easier for humans to write and maintain by hand.
 
@@ -16,7 +16,7 @@ By endorsing JSON5, we improve the developer experience and maintainability of o
 
 == Specification
 
-All projects within `devcntr-org` organization should prefer JSON5 for:
+All projects within `dev-centr` organization should prefer JSON5 for:
 
 1.  **Configuration Files**: User settings, build configurations, and metadata.
 2.  **Static Data**: Localized strings, mock data, and schemas.
@@ -35,10 +35,11 @@ The preferred file extension is `.json5`. In cases where a tool strictly require
 
 == Implementation in D-lang
 
-For D-lang projects, we use the internal `json5-d` library (to be implemented) which provides a native, high-performance JSON5 parser and serializer compatible with `std.json`.
+For D-lang projects, we use the internal `json5-dlang` library (to be implemented) which provides a native, high-performance JSON5 parser and serializer compatible with `std.json`.
 
 == References
 
 * [JSON5 Official Site](https://json5.org/)
 * [JSON5 Specification](https://spec.json5.org/)
+
 

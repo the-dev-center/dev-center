@@ -1,0 +1,40 @@
+= DevCentr Capabilities
+
+DevCentr is a **Development Orchestration Suite (DOS)**—an ecosystem-centric platform for managing the entire development lifecycle. This page outlines the specific technical capabilities and supported systems.
+
+== 🚀 Environment Orchestration
+
+DevCentr manages the "gravity" of your development world by automating the installation and configuration of:
+
+*   **System Shells:** Standardizing and configuring your shell environment.
+*   **Global Tooling:** Installing system-wide developer tools.
+*   **Language Toolchains:** Managing versions and environments for Node.js, Python, D, and more.
+*   **Containerization:** Native integration with Docker and other virtualized environments.
+
+== 🛠️ Core Functional Pillars
+
+*   **Installation:** One-touch setup for complex developer environments.
+*   **Configuration:** Enforcing reproducible, version-controlled settings across your machine.
+*   **Management:** Active lifecycle monitoring of running services and tools.
+*   **Visualization:** Graphical modeling of project architecture and dependencies.
+
+== 📂 VCS & Repository Support
+
+DevCentr connects to a wide range of version control systems and hosting providers.
+
+[cols="1,1", options="header"]
+|===
+| System | Modern Providers
+| **Git** | GitHub, GitLab, Bitbucket, SourceForge, Gitea, Codeberg
+| **Mercurial** | Heptapod, SourceForge
+| **Subversion** | SourceForge, Assembla
+| **Bazaar** | Launchpad
+| **Perforce** | Helix Core, Assembla
+| **TFS** | Microsoft Azure
+| **Enterprise** | CVS, ClearCase
+|===
+
+For a community-maintained list of self-hosted providers, see the link:https://github.com/dev-centr/repository-providers[Repository Providers registry].
+
+== 🏗️ Architecture
+DevCentr is built with an extension-first architecture, allowing the community to add support for new tools and hosting providers via the source-available codebase.

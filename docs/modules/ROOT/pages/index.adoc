@@ -1,8 +1,8 @@
-= DevCntr
+= DevCentr
 
-Welcome to the DevCntr documentation.
+Welcome to the DevCentr documentation.
 
-DevCntr is a developer tooling application that provides:
+DevCentr is a developer tooling application that provides:
 
 * Developer tooling setup
 * Workflow management
@@ -11,7 +11,7 @@ DevCntr is a developer tooling application that provides:
 
 == Templates & Standardization
 
-Dev Center integrates tightly with the link:https://devcntr.app/templates/[Standard Project Templates] library. It acts as the local engine for:
+DevCentr integrates tightly with the link:https://devcentr.app/templates/[Standard Project Templates] library. It acts as the local engine for:
 
 * **Automatic Tech-Stack recognition**: Identifying the languages and frameworks used in your projects.
 * **Template Installation**: One-click setup for standardized `.vscode` settings and workspace configurations.

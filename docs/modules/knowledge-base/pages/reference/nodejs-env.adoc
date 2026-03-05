@@ -4,6 +4,8 @@ Node's libraries/packages can be managed using different package managers. By de
 
 `pnpm` is a fast alternative to `npm` that saves on disk space by linking a project to globally-installed files on the machine.
 
+Our systems use Corepack to manage package managers. Corepack acts as a wrapper that ensures the version of pnpm used matches what the project expects.
+
 Node.js projects often contain configuration files for package managers:
 
 [cols="1,1"]

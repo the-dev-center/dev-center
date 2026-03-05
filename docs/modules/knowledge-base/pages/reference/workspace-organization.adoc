@@ -1,6 +1,6 @@
 = Workspace Organization Schema
 
-This document defines the standard structure for organizing local code repositories within the DevCntr ecosystem. This structure ensures a consistent, predictable environment for both developers and automated tools.
+This document defines the standard structure for organizing local code repositories within the Dev-Centr ecosystem. This structure ensures a consistent, predictable environment for both developers and automated tools.
 
 == Folder Structure
 
@@ -16,7 +16,7 @@ Use this pattern for:
 
 .Example
 `Z:\code\github.com\amdphreak\my-project` +
-`Z:\code\github.com\devcntr-org\devcntr`
+`Z:\code\github.com\dev-centr\Dev-Centr`
 
 === Protected Forks
 `$ROOT/<host>/<owner>/.forks/<repo>`

@@ -16,7 +16,7 @@ For a D language project like `msi-generator`:
     *   **Docker (ghcr.io)**: Publishing a container image to GitHub Container Registry is excellent.
     *   **Why?** It makes your tool "language agnostic". A Python, Rust, or Java project can use your tool in their detailed CI pipeline without installing a D compiler or dealing with system dependencies.
     *   **Example**:
-        `docker run --rm -v $(pwd):/src ghcr.io/devcntr-app/msi-generator:latest`
+        `docker run --rm -v $(pwd):/src ghcr.io/devcentr/msi-generator:latest`
 
 == Recommended Registries for `msi-generator`
 

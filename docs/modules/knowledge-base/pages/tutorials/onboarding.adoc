@@ -41,6 +41,8 @@ include::partial$git-init-defaultbranch.adoc[]
 npm install -g pnpm
 ----
 
+Your system uses Corepack to manage package managers. Corepack acts as a wrapper that ensures the version of pnpm used matches what the project expects.
+
 == 4. Runtimes (The Engine)
 Install the execution engines required for our projects.
 

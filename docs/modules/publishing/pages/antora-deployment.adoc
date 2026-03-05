@@ -72,13 +72,13 @@ Your question is: *Does this hold up when referencing other git repositories?*
 In a multi-repo site (like the main Dev Center), you have two distinct needs:
 
 === 1. The Production/CI Need (Remote URLs)
-In your main production playbook (e.g., `devcntr-app/docs/antora-playbook.yml`), you should use **Full GitHub URLs**. This is the only way for GitHub Actions to fetch all the pieces.
+In your main production playbook (e.g., `dev-centr/docs/antora-playbook.yml`), you should use **Full GitHub URLs**. This is the only way for GitHub Actions to fetch all the pieces.
 
 [source,yaml]
 ----
 content:
   sources:
-    - url: https://github.com/devcntr-app/msi-generator.git
+    - url: https://github.com/dev-centr/msi-installer-generator.git
       branches: HEAD
       start_path: docs
 ----
@@ -119,6 +119,7 @@ Regardless of strategy, deployment is the same:
 1.  **Build**: Antora generates a static site (default: `build/site` or `public/`).
 2.  **Upload**: Upload this folder to the `gh-pages` branch.
 3.  **Configure**: Set GitHub Pages to deploy from `gh-pages` / `root`.
+
 
 
 

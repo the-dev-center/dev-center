@@ -1,10 +1,59 @@
 = Dev Center Project Vision
 
-== Overview
+== 🛰️ The DOS Vision
 
-I want to make a Dev Center app that provides developer tooling setup, workflow management, software project management, and environment management.
+DevCentr is an organization dedicated to fundamentally improving developer productivity and workflow for pure human development and human-in-the-loop AI vibe-coding.
+
+Our flagship project, **DevCentr**, is a **Development Orchestration Suite (DOS)**—a platform sitting a layer above the code to manage the complexity of the modern developer's world. By treating development as an integrated ecosystem rather than just a series of text files, DevCentr provides an integrated workspace and infrastructure environment designed for the future of engineering.
+
+While traditional IDEs focus on the editor, DevCentr focuses on the **Orchestration** of the entire development lifecycle:
+
+*   **Ecosystem Management:** Author and version your entire environment—shells, toolchains, and infrastructure—as first-class citizens.
+*   **Visual DevEx:** A "Live Blueprint" approach that visually models project architecture, moving beyond simple file trees into system design.
+*   **AI Vibe-Coding Synergy:** A hub that provides the deep contextual metadata necessary for human-in-the-loop AI coding to be truly effective.
 
 It should help new developers and experienced developers set up a new machine for development purposes and provide in depth information about any actions it performs, the environmental changes it makes, and the purposes of the tools it installs.
+
+=== Management Tool Hierarchy (Abstract)
+
+This diagram shows the "what controls what" hierarchy of management roles, reflecting the ideal way to manage development environments.
+
+[mermaid]
+----
+graph TD
+    SYS["System Package Manager (e.g. winget, brew)"] --> VM["Version Manager (e.g. nvm, asdf)"]
+    VM --> RT["Language Runtime (e.g. Node.js)"]
+    RT --> WRAP["Manager Wrapper (e.g. Corepack)"]
+    RT --> NPM["Bundled Manager (e.g. npm)"]
+    WRAP --> PM["External Package Manager (e.g. pnpm, yarn)"]
+    PM --> DEP["Project Dependencies (Libraries)"]
+    NPM --> DEP
+    DEP --> APP["Application Codebase"]
+    SYS --> B_RT["Independent Runtime/PM (e.g. Bun)"]
+    B_RT --> DEP
+----
+
+=== Management Tool Hierarchy (Specific)
+
+This diagram shows the specific tools used and suggested in this ecosystem.
+
+[mermaid]
+----
+graph TD
+    W["UniGetUI / winget"] --> NVM["nvm-windows"]
+    NVM --> NODE["Node.js"]
+    NODE --> CP["Corepack (Bundled)"]
+    NODE --> NPM["npm (Bundled)"]
+    CP --> PNPM["pnpm"]
+    CP --> YARN["yarn"]
+    W --> BUN["Bun"]
+    PNPM --> NEXT["Next.js Framework"]
+    YARN --> NEXT
+    BUN --> NEXT
+    NPM --> NEXT
+    NEXT --> LIBS["Libraries / React"]
+    LIBS --> APP["Project Components"]
+----
 
 The app should contain models or diagrams of the different facets of software project management:
 
