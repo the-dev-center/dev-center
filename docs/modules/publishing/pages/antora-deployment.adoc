@@ -95,9 +95,9 @@ By using the **Root Strategy**, your local dev references are cleaner and match 
 
 Do not manually toggle URLs in your main playbook. Instead, use a **Local Dev Playbook Extension**.
 
-1.  Create `local-antora-playbook.yml` (and Git-ignore it).
+1.  Create `antora-playbook-local.yml` (and Git-ignore it).
 2.  Define only the local overrides:
-
++
 [source,yaml]
 ----
 extends: ./antora-playbook.yml
@@ -108,9 +108,40 @@ content:
       start_path: docs
 ----
 
-3.  Run locally with: `antora local-antora-playbook.yml`.
+3.  Run locally with: `antora antora-playbook-local.yml` (or `pnpm run build:local` if that script points at it).
 
 This keeps your **Root Strategy** intact for the repo's specific CI, while allowing the global "hub" site to aggregate everything seamlessly.
+
+=== Playbook file naming: why `antora-playbook.yml` and `antora-playbook-local.yml`
+
+Use these names even though you might prefer a different scheme (e.g. `playbook.yml` for local and `playbook-online.yml` for production). The reason is **ecosystem convention**.
+
+* **`antora-playbook.yml`** = production/online playbook (remote URLs, used by CI).
+* **`antora-playbook-local.yml`** = local-only playbook (sibling paths, git-ignored); extends the main playbook.
+
+**Why the main playbook must be "online":**
+
+In npm/pnpm, the script name `build` is the standard default. CI, READMEs, and tooling assume `pnpm build` (or `npm run build`) runs the *main* build—i.e. the one that produces the deployable site. So:
+
+* The **`build`** script in `package.json` should run the production playbook (`antora-playbook.yml`). That way `pnpm build` does what everyone expects.
+* The **`build:local`** script runs the local playbook (`antora-playbook-local.yml`) when you want to use sibling repos.
+
+**Reasoning chain (what we tried):**
+
+* First we tried naming by suffix: `playbook.yml` (local) and `playbook-online.yml` (online). Clean, but then the default `pnpm build` would run the local playbook—wrong for CI and for anyone running a plain `pnpm build`.
+* Then we swapped so `build` = online and added `build:online`. That fixed CI, but we had to give up the nice short names and accept that "build" is a reserved default.
+* Conclusion: the whole world expects `pnpm build` to be production. So the *file* that production uses should be the one that has the conventional name: `antora-playbook.yml`. The local override is `antora-playbook-local.yml`. Not our first choice, but it matches how the ecosystem works.
+
+== Package manager run commands
+
+When writing or following docs that run a package binary (e.g. a dev server or a one-off tool), the behavior differs by package manager:
+
+*   **npm**: A single entry point for both cases. `npx` (or `npm exec`) runs a binary from the current project's dependencies if present, otherwise fetches and runs it. No separate "local" vs "download and run" command.
+*   **pnpm**: Two commands. Use `pnpm exec` to run a binary from *already installed* dependencies. Use `pnpm dlx` to *download and run* a package without adding it to the project (one-off execution).
+*   **yarn** (Berry 2+): `yarn dlx` is the equivalent of "download and run"; for local binaries use `yarn run <script>` or the binary from `node_modules/.bin`.
+*   **bun**: `bunx` behaves like `npx` (run local or fetch and run in one command).
+
+When you see `npx` in documentation, use the equivalent for your manager: `pnpm exec` or `pnpm dlx`, `yarn dlx` (one-off) or `yarn run`, or `bunx` as appropriate.
 
 == GitHub Pages Configuration
 
@@ -119,6 +150,97 @@ Regardless of strategy, deployment is the same:
 1.  **Build**: Antora generates a static site (default: `build/site` or `public/`).
 2.  **Upload**: Upload this folder to the `gh-pages` branch.
 3.  **Configure**: Set GitHub Pages to deploy from `gh-pages` / `root`.
+
+== Auto-rebuild when an extension (UI bundle) updates
+
+Sites that depend on a shared Antora extension (e.g. a UI bundle or playbook extension) should rebuild when that extension is updated. Use GitHub's `repository_dispatch` event so the **extension repo** can notify all **subscriber** sites to run their deploy workflow.
+
+=== 1. Subscriber site (each Antora docs repo)
+
+Add `repository_dispatch` to the deploy workflow so it runs on push to `main` *and* when the extension repo sends a dispatch:
+
+[source,yaml]
+----
+# In .github/workflows/deploy.yml (or docs.yml)
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  repository_dispatch:
+    types: [extension-updated]   # or ui-bundle-updated, docs-updated, etc.
+----
+
+No other changes are needed; the rest of the job (checkout, Antora build, deploy) stays the same. Use a distinct `types` value if you have multiple extension sources (e.g. `ui-bundle-updated` for the theme, `playbook-extension-updated` for a shared playbook).
+
+=== 2. Extension repo (UI bundle or playbook extension)
+
+On push or release, trigger each subscriber's workflow by sending a `repository_dispatch` event. Use a Personal Access Token (PAT) that has access to trigger workflows in the subscriber repos.
+
+**Option A — peter-evans/repository-dispatch (one subscriber per step):**
+
+[source,yaml]
+----
+# In the extension repo, e.g. .github/workflows/notify-subscribers.yml
+name: Notify subscriber sites
+
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger dev-centr/docs
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.SUBSCRIBER_DISPATCH_TOKEN }}
+          repository: dev-centr/docs
+          event-type: extension-updated
+          client-payload: '{"source": "${{ github.repository }}", "ref": "${{ github.ref }}"}'
+      - name: Trigger other-subscriber/other-docs
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.SUBSCRIBER_DISPATCH_TOKEN }}
+          repository: other-subscriber/other-docs
+          event-type: extension-updated
+----
+
+**Option B — API call (many subscribers via matrix):**
+
+[source,yaml]
+----
+  notify:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: [dev-centr/docs, dev-centr/devcentr]
+    steps:
+      - name: Trigger ${{ matrix.repo }}
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.SUBSCRIBER_DISPATCH_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ matrix.repo }}/dispatches \
+            -d '{"event_type":"extension-updated","client_payload":{"source":"${{ github.repository }}","ref":"${{ github.ref }}"}}'
+----
+
+=== 3. Token (PAT) setup
+
+The extension repo needs a secret (e.g. `SUBSCRIBER_DISPATCH_TOKEN`) that can create `repository_dispatch` events in each subscriber repo:
+
+*   **Classic PAT**: `repo` scope (or minimal scope that allows "Actions: trigger workflow" where applicable).
+*   **Fine-grained PAT**: Repository access set to each subscriber repo, with permission to trigger workflow runs (e.g. "Actions: Read and write" or the minimal option that allows repository dispatch).
+
+The PAT must be issued by (or have access as) a user or app that has write (or "trigger workflow") access to every subscriber repository. For organization-owned subscriber repos, use an org-level secret or a PAT from a user who has write access to those repos.
+
+=== Summary
+
+*   **Subscriber**: Add `repository_dispatch` with a chosen `event-type` to the existing deploy workflow.
+*   **Extension**: On push/release, call the repository dispatch API (or use `peter-evans/repository-dispatch`) for each subscriber repo.
+*   **Secret**: Store one PAT in the extension repo that can trigger workflows in all subscriber repos.
 
 
 
