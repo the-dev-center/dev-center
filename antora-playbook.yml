@@ -1,0 +1,15 @@
+# Root Strategy playbook for local and CI doc build (single-repo).
+# See docs/modules/publishing/pages/antora-deployment.adoc
+site:
+  title: DevCentr
+  url: https://devcentr.org
+  start_page: DevCentr:ROOT:index.adoc
+content:
+  sources:
+    - url: .
+      start_path: docs
+      branches: HEAD
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
