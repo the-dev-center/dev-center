@@ -5,10 +5,11 @@
   "typescript": {
     "quoteStyle": "preferSingle",
     "semiColons": "asi",
-    "trailingCommas": "es5"
+    "trailingCommas": "es5",
   },
   "json": {
-    "trailingCommas": "jsonc"
+    "trailingCommas": "jsonc",
+    "associations": ["**/*.code-workspace"],
   },
   "markdown": {
   },
@@ -23,7 +24,7 @@
     "**/*-lock.json",
     "**/target",
     "**/dist",
-    "**/.git"
+    "**/.git",
   ],
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.95.15.wasm",
@@ -31,6 +32,6 @@
     "https://plugins.dprint.dev/markdown-0.20.0.wasm",
     "https://plugins.dprint.dev/toml-0.7.0.wasm",
     "https://plugins.dprint.dev/dockerfile-0.3.3.wasm",
-    "https://plugins.dprint.dev/g-plane/malva-v0.15.2.wasm"
-  ]
+    "https://plugins.dprint.dev/g-plane/malva-v0.15.2.wasm",
+  ],
 }
