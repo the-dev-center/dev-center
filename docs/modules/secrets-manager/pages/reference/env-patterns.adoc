@@ -1,0 +1,54 @@
+= .env Usage Patterns
+:navtitle: .env Usage Patterns
+
+The Secrets Manager is designed to be **aware of how `.env` files are used** in the wild, so it can help you maintain a central registry and still work seamlessly with existing tooling.
+
+== Common patterns
+
+=== File names and precedence
+
+* **`.env`** — Base file; often loaded by frameworks (Next.js, Node, Rails, etc.) in development.
+* **`.env.local`** — Local overrides, usually gitignored; takes precedence over `.env` in many tools.
+* **`.env.<environment>`** — e.g. `.env.development`, `.env.production`, `.env.test` — used to separate values by environment.
+* **`.env.<environment>.local`** — Local overrides for a specific environment (e.g. `.env.development.local`).
+
+The manager should recognize these names and, when copying secrets into a project, allow the user to choose the target file (or create one) and optionally respect framework-specific precedence.
+
+=== Syntax
+
+* **KEY=value** — Standard; value is often trimmed. No spaces around `=` in many parsers.
+* **KEY="value"** or **KEY='value'** — Quoted values; inner quotes may be escaped.
+* **Comments:** Lines starting with `#` are ignored.
+* **Blank lines:** Ignored.
+* **Multi-line:** Some tools support backslash continuation or quoted multi-line; the manager can support multi-line values when writing.
+
+Recognition: when **importing** from an existing `.env` (e.g. into the global registry), the manager should parse these patterns and extract KEY/value pairs. When **writing** to `.env`, it should emit valid lines that match the project's expected format (with optional comments for provider/tool).
+
+=== Framework and tool expectations
+
+Many runtimes and CLIs load `.env` automatically:
+
+* **Node.js:** `dotenv`, `dotenv-expand`; often `process.env.KEY`.
+* **Next.js:** Loads `.env`, `.env.local`, `.env.development`, `.env.production` with defined precedence.
+* **Rails:** `dotenv-rails` or built-in; `ENV['KEY']`.
+* **Python:** `python-dotenv`; `os.environ.get('KEY')`.
+* **Docker Compose:** `env_file:` or inline `environment:`; variable substitution in compose files.
+
+The manager does not need to implement each framework's loader; it only needs to **output** valid KEY=value lines (and optional comments) so that the framework's own loader can read them. Provider and tool profiles (see xref:provider-tool-profiles.adoc[Provider and Tool Profiles]) can define the **variable names** that each service or framework expects (e.g. `DATABASE_URL`, `STRIPE_SECRET_KEY`), so that when you attach a secret to a project, the manager can suggest or use the right name in `.env`.
+
+== Opportunity for a central registry
+
+Today, many teams:
+
+* Keep a single `.env` or `.env.local` per repo, gitignored.
+* Copy keys from password managers or docs into the file by hand.
+* Reuse the same keys across repos by copying the file or re-typing.
+
+A **central registry** in the Secrets Manager improves this by:
+
+* **One place to add/update a key:** Add once in the manager; attach to many repos/environments.
+* **Consistent naming:** Provider/tool profiles help keep variable names consistent (e.g. always `STRIPE_SECRET_KEY` for Stripe) across projects.
+* **Audit and discovery:** List which repos and environments use which secrets, without opening each `.env` file.
+* **Copy when needed:** Generate or update `.env` (or `.env.<env>`) from the registry so the framework still loads from a file, without you editing the file by hand.
+
+The manager's UI and docs should **surface this opportunity** — e.g. when opening a project that has a `.env` or `.env.example`, suggest linking the project to the registry or importing existing keys into the registry.

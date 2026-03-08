@@ -1,0 +1,51 @@
+= Secrets Manager Architecture
+:navtitle: Architecture
+
+== Separation of responsibilities
+
+The **secrets database is owned by the standalone Secrets Manager application**, not by DevCentr. This keeps:
+
+* **Single source of truth:** One process is responsible for creating, updating, and locking the database. No risk of two apps writing different formats or locking the same file incorrectly.
+* **Independent use:** Users can run the standalone app without ever opening DevCentr (e.g. to browse the global store, add secrets, or install to a repo).
+* **Clear client role:** DevCentr acts as a **client**: it discovers or is configured with the manager's data directory or API endpoint, then reads (and possibly requests writes through the manager) to show the integrated, repo-filtered view and perform copy/inject actions.
+
+== Components
+
+=== Standalone Secrets Manager
+
+* **Process:** Runs in its own window (desktop or CLI). May be a separate repository from DevCentr to keep build and release cycles independent.
+* **Database:** Local store (e.g. SQLite or similar) at a known path (e.g. user data directory). Encrypted or plaintext depending on user choice.
+* **Responsibilities:**
+** Create/read/update/delete secrets and metadata (provider, tool, environment, project).
+** Expose a way for other processes to query and, if designed, to request injection (e.g. local HTTP/socket or shared config).
+** Optional: small daemon or server mode that runs in the background so DevCentr and scripts can request secrets without launching the full UI.
+
+=== DevCentr integration
+
+* **Module:** A "Secrets" or "Secrets Manager" module inside DevCentr that:
+** Resolves the current repository (and optionally current environment).
+** Connects to the standalone manager's data or API.
+** Displays a **canvas-like interface**: cards or list of secrets, filterable by repo and environment, with drag-and-drop.
+* **Drag-and-drop semantics:**
+** **Register to project:** From the global store (or another project), drag a secret into the current repo's bucket to associate it with this project and selected environment.
+** **Import to global:** From a local source (e.g. existing `.env` or manual entry), drag or add into the global registry so it can be reused.
+* **Copy to .env:** Trigger an action that writes selected secrets into the project's `.env` (or chosen env file), using provider/tool profiles to choose variable names and format.
+
+=== Inter-process communication (IPC)
+
+For the standalone and DevCentr to work together:
+
+* **Option A — Shared database path:** DevCentr is configured with the path to the standalone's database (or a config file that points to it). DevCentr opens the database read-only or via a library that respects the same schema and locking. The standalone remains the only writer when it is running; or both use a shared SQLite DB with a single writer at a time.
+* **Option B — API/socket:** The standalone runs a small local server (e.g. HTTP on localhost or a named pipe/socket). DevCentr sends requests (e.g. "list secrets for repo X, environment Y", "write these keys to repo Z's .env"). The standalone performs all writes and returns results.
+* **Option C — File-based protocol:** The standalone writes a manifest or export to a known location; DevCentr reads it. Less real-time but avoids a long-running server.
+
+Recommendation: **Option B** gives the cleanest separation (standalone is the only process that ever writes the DB) and allows the standalone to enforce encryption and access control. Option A is simpler if both apps can share a library and agree on single-writer discipline.
+
+== Data model (conceptual)
+
+* **Secret:** Id, name, value (or reference to encrypted blob), optional metadata (provider, tool, notes).
+* **Project binding:** (Secret, Repo path or id, Environment) — which secret is attached to which project and environment.
+* **Environments:** Named sets (e.g. `dev`, `prod`, `test`, `staging`) that can be defined globally or per project.
+* **Provider/tool profiles:** Named templates that define typical variable names and formats for `.env` (e.g. `STRIPE_SECRET_KEY`, `DATABASE_URL`). Used for recognition and for generating consistent `.env` content.
+
+Schema details are left to the implementation; the important point is that the **standalone** owns this schema and any migrations.

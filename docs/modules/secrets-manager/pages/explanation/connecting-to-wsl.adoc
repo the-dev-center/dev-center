@@ -1,0 +1,42 @@
+= Connecting to WSL
+:navtitle: Connecting to WSL
+
+This page explains how the Secrets Manager and SSH Manager **connect** to workloads that run **inside WSL (Windows Subsystem for Linux)**. WSL is a separate Linux environment: its own processes, filesystem, and environment variables. Windows processes and WSL processes don't share memory or env by default, so we have to cross that boundary in specific ways.
+
+== Why "connecting" matters
+
+* **Secrets Manager** must either write files (e.g. `.env`) into a path the app can read, or inject env vars into the **process** that runs your app. If that process runs inside WSL, it's a **Linux** process — we're on Windows, so we need a strategy to get secrets across.
+* **SSH Manager** needs the **process** that runs `ssh` or `git` to see an agent (via `SSH_AUTH_SOCK`). If Git runs inside WSL, it looks for a socket in the **Linux** env; our agent might be on Windows. So we need a way for WSL to reach the Windows agent.
+
+Below are the concrete ways we plug in.
+
+== Secrets Manager — writing `.env` into a WSL project
+
+Your repo might live **inside WSL** (e.g. `/home/user/projects/myapp`). From Windows, that path is often visible as `\\wsl$\Ubuntu\home\user\projects\myapp` (or `\\wsl.localhost\...`). The Secrets Manager runs on Windows, so it can **write** a `.env` file to that path, same as any other Windows app writing to a WSL path. Then when you run `npm run dev` or `python app.py` **inside WSL**, the app (running in Linux) reads `.env` from its own filesystem.
+
+So **copy to .env** works: we target the WSL path from Windows, and the Linux process sees the file. We just need to resolve the project path to the WSL-accessible path when the user's project is in WSL.
+
+== Secrets Manager — injecting into a process that runs inside WSL
+
+If you want to **inject** env vars (no `.env` file) into an app that runs **inside WSL**, the process is a **Linux** process. Our injector typically runs on Windows (we own the socket or API). So we need a **small helper inside WSL** that: (1) talks to the Windows-side manager (e.g. over TCP localhost, which WSL can reach), (2) gets the secret key-value pairs, (3) runs the user's command with those vars in the environment (e.g. `env KEY=val python app.py`). The manager stays on Windows; the injection **entry point** for WSL is that helper.
+
+== SSH Manager — using our agent from inside WSL
+
+The SSH client that runs **inside WSL** (e.g. `git pull`, `ssh server`) is a **Linux** process. It looks for `SSH_AUTH_SOCK` in its **Linux** environment. Our forwarding agent might run on **Windows** and bind a Windows named pipe or socket — WSL processes don't see that by default. So to connect we need a **bridge**:
+
+* **Option A:** Run something **inside WSL** that forwards to the Windows agent. For example, a Unix socket in WSL that relays to the Windows named pipe (tools like `npiperelay` + `socat`, or projects like `wsl-ssh-agent-gui`, do this). Then set `SSH_AUTH_SOCK` in WSL to that Unix socket. The Linux SSH client talks to the bridge, and the bridge talks to the Windows agent (which can be our coordinator that forwards to Bitwarden/OpenSSH).
+* **Option B:** Run our **forwarding agent inside WSL** and have it connect to Windows-side backends (e.g. over TCP or a socket). More complex and depends on whether Bitwarden/OpenSSH are reachable from WSL.
+
+So we plug in by documenting or shipping a **WSL bridge** so that `SSH_AUTH_SOCK` in WSL points at a socket that eventually reaches our Windows agent (or the user's chosen Windows agent). The existing xref:knowledge-base:explanation/infrastructure/ssh-keys.adoc[SSH Keys] doc already notes that WSL users need a bridge to use the Windows ssh-agent; the same idea applies when our SSH Manager is the coordinator.
+
+== Summary
+
+| Goal | How we connect |
+|------|-----------------|
+| Copy secrets to a repo that lives in WSL | Write `.env` to the WSL path from Windows (`\\wsl$\...` or `\\wsl.localhost\...`). |
+| Inject secrets into an app that runs in WSL | Provide a WSL-side helper that asks the Windows manager for secrets (e.g. over localhost) and runs the command with those env vars. |
+| Use SSH Manager from inside WSL | Provide or document a bridge (e.g. npiperelay + socat) so WSL's `SSH_AUTH_SOCK` points to a socket that forwards to our Windows agent. |
+
+== VMs and containers
+
+For **containers** (e.g. Docker) and **full VMs**, the boundary is different again: a separate kernel or isolated userspace. Getting secrets in means files, env at container/VM start, or a helper process inside that talks to the host. Docker is the main case and is covered in xref:how-to/docker-integration.adoc[Docker and Docker Secrets].

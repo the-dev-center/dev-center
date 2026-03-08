@@ -1,0 +1,28 @@
+= Encryption and Plaintext Mode
+:navtitle: Encryption and Plaintext Mode
+
+The Secrets Manager stores sensitive data. This page explains the two modes: **encrypted database** (user provides a password) and **plaintext mode** for users who prefer not to encrypt on a trusted machine.
+
+== Encrypted mode (default or recommended)
+
+* **Behavior:** The database (or the sensitive columns/blobs) is encrypted with a key derived from a **user-supplied password**. Without the password, the store is unreadable.
+* **Unlock:** When the user starts the standalone (or when DevCentr needs to read via the standalone), they are prompted for the password. The manager unlocks the store for the session.
+* **Security:** Protects against casual access (e.g. another user on the machine, or a backup/snapshot). It does not protect against an attacker who can run code as the user or capture the password.
+* **Best for:** Users who want a clear improvement over plaintext `.env` files and are willing to enter a password when opening the manager.
+
+== Plaintext mode
+
+* **Behavior:** The database stores secret values in **plaintext** (or with minimal encoding). No password is required to open it.
+* **Rationale:** Many developers today already keep secrets in plaintext `.env` files and rely on `.gitignore`. Plaintext mode in the manager is **equivalent in trust model** — the machine is trusted, and the user prefers simplicity over encryption. The benefit is still **centralization and tooling** (one store, copy to .env, provider profiles, etc.).
+* **Best for:** Single-user machines, dev-only keys, or users who explicitly accept the risk and do not want to manage a password.
+
+== Choosing the mode
+
+* The manager should let the user **choose** at setup (or in settings): encrypted or plaintext.
+* If encrypted, the user must **provide the password** to decrypt; the app should not store the password on disk (only in memory for the session). Optionally support a "remember for session" or timeout.
+* If plaintext, the app should still **warn** (e.g. "Secrets are stored unencrypted. Use only on a trusted machine.") so the choice is informed.
+
+== Implementation notes
+
+* **Encryption:** Use a standard (e.g. AES) with a key derived from the password (e.g. PBKDF2 or Argon2). Encrypt the entire database file or only the value column(s); both are valid. The standalone is the only component that needs to know the key; DevCentr, when it talks to the standalone via API, never sees the raw store — the standalone returns decrypted values over a local channel.
+* **Migration:** Allow switching from plaintext to encrypted (re-save with encryption) or encrypted to plaintext (export then re-import with plaintext). Destructive operations should require confirmation.

@@ -1,0 +1,45 @@
+= Provider and Tool Profiles
+:navtitle: Provider and Tool Profiles
+
+Provider and tool profiles help the Secrets Manager **recognize** what kind of secret you're storing and **generate consistent `.env` variable names** that match what services and frameworks expect.
+
+== Provider profiles
+
+A **provider profile** describes a **service or API** that issues or uses secrets (e.g. Stripe, AWS, SendGrid, GitHub).
+
+Suggested data fields:
+
+* **Name** — e.g. "Stripe", "AWS", "SendGrid".
+* **Typical variable names** — e.g. `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`. Used when writing to `.env` or suggesting names for new secrets.
+* **Optional: URL or docs** — Link to provider's docs on API keys or env vars.
+* **Optional: Placeholder or format hint** — e.g. "sk_live_..." for Stripe secret key, so the UI can show a hint or validate format.
+
+When you **add a secret** and tag it with a provider (or the manager suggests one from the key name), the manager can:
+
+* Pre-fill or suggest the variable name when copying to `.env`.
+* Group secrets by provider in the UI.
+* Use the same name across repos so that code expecting `STRIPE_SECRET_KEY` always finds it.
+
+== Tool profiles
+
+A **tool profile** describes a **framework, CLI, or build tool** that reads `.env` or generates templates (e.g. Next.js, Vite, Rails).
+
+Suggested data fields:
+
+* **Name** — e.g. "Next.js", "Vite", "Rails".
+* **Expected `.env` file names** — e.g. `.env`, `.env.local`, `.env.development`, `.env.production`.
+* **Variable names** the tool or its docs mention — e.g. `NEXT_PUBLIC_*`, `VITE_*` for client-exposed vars. Used to suggest names and to recognize existing vars when importing.
+* **Optional: Comment template** — A line to add above the key in `.env` (e.g. "# Next.js public env").
+
+Tool profiles support:
+
+* **Recognition:** When importing from a project's `.env`, the manager can guess the tool from the repo (e.g. from `package.json` or config files) and map variables to tool expectations.
+* **Generation:** When copying secrets into a project, the manager can choose variable names that match the project's detected tool (e.g. prefix with `VITE_` for a Vite app).
+
+== Recognition abilities
+
+* **On import:** When the user adds a secret from an existing `.env` line or pasted text, the manager can try to match the variable name against known provider/tool profiles and suggest a profile. Example: `STRIPE_SECRET_KEY=sk_live_...` → suggest provider "Stripe".
+* **On add:** When creating a new secret, the user can pick a provider (or tool) from a list; the manager suggests the standard variable name(s) for that provider.
+* **On copy to .env:** When writing to a project's `.env`, the manager uses the secret's provider/tool and the project's detected tool profile to emit the right variable name and optional comment.
+
+Implementations may ship with a **built-in set** of common provider and tool profiles; users can add custom profiles for internal services or less common tools.

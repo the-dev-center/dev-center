@@ -13,6 +13,7 @@
 * xref:how-to/git-lfs.adoc[Large Files & LFS]
 * xref:how-to/git-recovery.adoc[Git Recovery]
 * xref:how-to/kvm-windows-automation.adoc[Windows Automation via KVM]
+* xref:how-to/github-pages-custom-domain.adoc[GitHub Pages Custom Domain]
 
 .📚 Reference
 * xref:reference/index.adoc[Overview]
@@ -37,3 +38,5 @@
 *** xref:explanation/infrastructure/windows-testing-on-linux.adoc[Windows Testing on Linux]
 *** xref:explanation/infrastructure/sync-by-gemini.adoc[Sync: Gemini]
 *** xref:explanation/infrastructure/sync-grok4.adoc[Sync: Grok4]
+** Documentation
+*** xref:explanation/writing-clear-docs-with-ai.adoc[Writing Clear Docs with AI]

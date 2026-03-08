@@ -1,0 +1,22 @@
+= Activity Log
+:navtitle: Activity Log
+:description: Notable changes, documentation updates, and project activity.
+
+This page records significant documentation and project activity. New entries are added at the top. For release history and versioned changelogs, see the repository tags and release notes when available.
+
+== 2025
+
+=== March
+
+* **Secrets Manager documentation** — Added a full documentation module for the Secrets Manager: overview, architecture, .env patterns, provider/tool profiles, environments, copy-to-.env and injection how-tos, Docker integration, standalone vs integrated, encryption modes, back-end providers (Bitwarden and others), and explaining the proxy in the GUI. Added specification for the SSH Manager (master coordinator for agent providers) and for WSL (connecting to WSL) and virtual environments (venv: no special handling). Linked from ROOT index and specifications.
+* **Todo & Roadmap** — Added a Todo & Roadmap page to the documentation (this was previously only at repository root as `TODO.adoc`). Integrated into the doc nav and index.
+* **Activity log** — Added this Activity Log page to record notable changes and updates.
+
+=== Earlier
+
+* **Project vision and specs** — UI specification and roadmap, environment navigator concept, logical vs optical pixels. Component specs for Dependency Modeler, Project Recognizer, Workspace Template Manager, Text Editor Link System, and others.
+* **Knowledge base** — SSH keys, Git management, workspace organization, pnpm mechanics, self-hosting, Windows testing on Linux, KVM automation, and other how-tos and explanations.
+* **Publishing and upstream contributions** — Antora deployment, package registries, git release workflow; upstream contribution tracking.
+
+---
+_Add new entries at the top of the current year/month. Use a short bold label and a one-line description._

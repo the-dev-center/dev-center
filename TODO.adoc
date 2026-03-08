@@ -1,6 +1,8 @@
 = Dev Center TODO List
 :description: Outstanding tasks and roadmap for the Dev Center application and documentation.
 
+The published version of this list is in the documentation: `docs/modules/ROOT/pages/todo-roadmap.adoc`. Keep the two in sync or treat the doc version as canonical for the built site.
+
 == 🚀 High Priority
 
 * [ ] **Windows Testing Automation Integration**

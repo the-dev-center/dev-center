@@ -1,0 +1,34 @@
+= Secrets Manager Overview
+:navtitle: Overview
+
+== Purpose
+
+The Secrets Manager provides a **central registry** for API keys, tokens, passwords, and other sensitive values used in development. It is designed to:
+
+* Make it easy to **recognize** that you can move from ad-hoc `.env` files to a single, queryable store.
+* Support **copying** secrets from the registry into a project's `.env` (or `.env.<environment>`) when you want file-based config.
+* Support **injecting** secrets into the development process (e.g. environment variables for a running app or test run) so that sensitive values never need to touch the repo's working tree.
+* Work with **multiple environments** (dev, prod, testing variants) and optional **provider/tool profiles** so that secret names and formats match what your frameworks and services expect.
+
+== Scope
+
+* **Standalone application:** A separate, launchable application that owns the secrets database. It can run without DevCentr. Users browse and search the global store, attach secrets to repos and environments, and optionally export or inject.
+* **DevCentr integration:** DevCentr connects to the standalone's database (or a known data directory/API). From within a repo, the user sees a filtered, canvas-like view of secrets for that repo and environment, with drag-and-drop to register a secret to the project or import from the global registry.
+* **.env awareness:** The manager understands common `.env` patterns (KEY=value, comments, multi-line, tool-specific files like `.env.local`). It can suggest variable names from provider/tool profiles and help keep `.env` content in sync with the registry.
+* **Optional encryption:** The database can be encrypted with a user-supplied password. A plaintext mode is available for users who prefer not to encrypt on a trusted machine (similar to today's plaintext `.env` + `.gitignore` approach).
+
+== High-level workflow
+
+. **Store:** Add secrets to the global registry (standalone or from DevCentr). Optionally tag with provider, tool, environment, and project.
+. **Attach to project:** In DevCentr (or standalone), associate secrets with a repository and environment (e.g. "my-api-key" for repo `my-app`, environment `dev`).
+. **Use in project:**
++
+* **Copy to .env:** Select secrets and write them into the project's `.env` (or `.env.development`, etc.). The manager can merge with existing keys or overwrite by key.
+* **Inject:** Configure the development process (e.g. script, IDE run config, or small daemon) to request secrets from the manager at runtime; the manager provides values as environment variables or via a secure channel.
+
+. **Docker:** When building or running containers, the manager can interface with Docker (and Docker's secrets) to supply secrets to images or running containers.
+
+== Out of scope (for this module)
+
+* Cloud-hosted secret stores (e.g. AWS Secrets Manager, HashiCorp Vault) are not replaced; the focus is a **local** central registry that improves on plaintext `.env` and supports injection and Docker. Integration with cloud secret managers may be a future extension.
+* Team sync or multi-machine sync of the database is not defined here; the design assumes a single-machine or explicitly shared store (e.g. network share or future sync mechanism).

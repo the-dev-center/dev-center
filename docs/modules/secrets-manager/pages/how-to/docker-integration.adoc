@@ -1,0 +1,45 @@
+= Docker and Docker Secrets
+:navtitle: Docker and Docker Secrets
+
+This page describes how the Secrets Manager can **interface with Docker** and with **Docker's own secrets mechanism** so that secrets can be supplied to containers or images as needed.
+
+== Two integration points
+
+. **Installing secrets into a container or image** — Getting values from the manager **into** a Docker context (e.g. build args, run-time env, or mounted files).
+. **Docker Secrets** — Docker Swarm and Docker Compose support a "secrets" feature (files or values injected into the container at runtime). The manager may need to **produce** secrets in a form Docker can consume, or **sync** with Docker's secret store.
+
+== Installing secrets from the manager into Docker
+
+Use cases:
+
+* **Build time:** You need an API key during `docker build` (e.g. private npm token). Build args can be supplied from the manager (e.g. a script that runs `docker build --build-arg NPM_TOKEN=$(manager get secret npm-token)`).
+* **Run time:** You want the container to have env vars from the manager. Options:
+** **Run script:** A wrapper that gets secrets from the manager and runs `docker run -e KEY=value ...` (or `--env-file` with a temp file the manager writes).
+** **Compose:** Use `env_file:` pointing to a file the manager generates (e.g. `.env.docker` in the project, updated from the registry), or use a Compose variable substitution that reads from a manager-generated file.
+
+The manager does not need to "talk to Docker" directly; it only needs to **expose** secrets (via CLI, API, or file export) so that your existing Docker workflows (scripts, Compose, CI) can consume them.
+
+=== Optional: manager-driven workflow
+
+A more integrated flow could be:
+
+* In the standalone (or DevCentr), user selects "Install secrets for Docker" for a project and environment.
+* The manager writes a **temporary or gitignored env file** (e.g. `.env.docker` or `.env.docker.local`) that Docker Compose or your run script uses. Or it provides a one-line command: `docker run ... $(manager env-for-docker repo env)` that expands to `-e KEY=val ...`.
+* For **images**, "install" might mean: the manager provides build args or a Dockerfile snippet (e.g. `ARG NPM_TOKEN` and instructions to pass it at build time from the manager). Pushing secrets into an image is generally discouraged; prefer runtime injection.
+
+== Docker's own secrets (Docker Secrets)
+
+Docker has a **secrets** feature:
+
+* **Docker Swarm:** Secrets are created with `docker secret create` and mounted into services (e.g. `/run/secrets/my_secret`). They are not passed as env vars by default; the app reads the file.
+* **Docker Compose (v3.1+):** You can define `secrets:` and attach them to services; Compose creates the secret and mounts it.
+
+The Secrets Manager could:
+
+* **Export for Docker:** Generate a file or value that you then feed to `docker secret create` (e.g. `manager get secret mykey | docker secret create mykey -`). So the manager remains the source; you "install" into Docker's secret store when needed.
+* **Sync (advanced):** If the manager runs in an environment that has Docker available, it could offer "Sync to Docker secrets" for a given stack (create or update Docker secrets from the registry). This requires the manager to call Docker CLI or API and is optional.
+
+== Summary
+
+* **Manager → Docker:** The manager exposes secrets (CLI, API, or file). Your build/run scripts or Compose use them (build-arg, env, or env_file). Optionally, the manager can write a file tailored for Docker (e.g. `.env.docker`) or output in a format suitable for `docker secret create`.
+* **Docker Secrets:** Use the manager as the source of truth; export from the manager and pipe into `docker secret create`, or use a manager-generated file that Compose references. Full two-way sync with Docker's secret store is a possible future enhancement.

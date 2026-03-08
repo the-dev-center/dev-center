@@ -1,0 +1,37 @@
+= Secrets Manager
+:navtitle: Secrets Manager
+
+The Secrets Manager is a central registry for API keys, tokens, and other sensitive values used across your development projects. It helps you move from scattered, plaintext `.env` files and `.gitignore` hacks to a single, searchable store that can feed into `.env` files or inject directly into your development process.
+
+== Why a secrets manager?
+
+* **Recognize the opportunity:** Many teams keep keys in repo-local `.env` files (or `.env.local`, `.env.development`) and rely on `.gitignore` to avoid committing them. That works, but there is no central view, no reuse across repos, and no structured way to manage multiple environments (dev, staging, prod).
+* **Central registry:** Store secrets once in an encrypted (or optional plaintext) database. Attach them to projects and environments. Copy into `.env` when needed, or let the tooling inject them at runtime.
+* **.env-aware:** The manager understands common `.env` usage patterns and can suggest or generate the right variable names and formats for your stack (e.g. provider-specific prefixes, tool-specific keys).
+
+== Key capabilities
+
+* **Standalone application:** Run the secrets manager in its own window, independent of DevCentr. It owns the database. DevCentr (and other tools) connect to it as a client.
+* **Integrated view in DevCentr:** Inside each repository, an integrated module shows secrets filtered by the current repo and environment, with a canvas-like interface and drag-and-drop to register a secret to the project or import from the global store.
+* **Multiple environments:** Manage dev, prod, and testing variants per project. Secrets can be scoped to environment and optionally to provider/tool profiles.
+* **Provider and tool profiles:** Saved profiles (e.g. AWS, Stripe, SendGrid) and tool profiles (e.g. frameworks that generate `.env` templates) help with recognition and with generating consistent key names in `.env`.
+* **Copy vs inject:** Copy selected secrets into a project's `.env` file, or use an injection workflow where the manager provides secrets to the development process (e.g. via a small daemon or IDE/CLI hook).
+* **Docker:** Interface with Docker and Docker's secrets mechanism so that secrets can be installed into containers or images as needed.
+* **Back-end providers:** Optionally interface with industrial secret stores (e.g. Bitwarden Secrets Manager, 1Password, Vault) so the manager acts as a **master front-end**: we display and proxy, we don't store their secrets. Same idea can apply to SSH: an **SSH Manager** coordinates Bitwarden SSH agent and other agents, pulling data and launching their login GUIs while we act as a proxy (client to them, provider to you).
+
+== Documentation map
+
+* xref:overview.adoc[Overview] — Purpose, scope, and high-level workflow.
+* xref:architecture.adoc[Architecture] — Standalone process, database ownership, and how DevCentr talks to the manager.
+* xref:reference/env-patterns.adoc[.env Usage Patterns] — How the manager recognizes and works with `.env` files.
+* xref:reference/provider-tool-profiles.adoc[Provider and Tool Profiles] — Defining providers and tools for secret naming and templates.
+* xref:reference/environments.adoc[Environments] — Dev, prod, and test variants.
+* xref:how-to/copy-to-env.adoc[Copy Secrets into .env] — Copying from the registry into project `.env`.
+* xref:how-to/inject-into-process.adoc[Injecting Secrets into the Dev Process] — Where and how injection can hook into the development process.
+* xref:how-to/docker-integration.adoc[Docker and Docker Secrets] — Using the manager with Docker images and Docker secrets.
+* xref:explanation/standalone-vs-integrated.adoc[Standalone vs Integrated] — Why the database lives in the standalone app.
+* xref:explanation/encryption-modes.adoc[Encryption and Plaintext Mode] — Encrypted database vs plaintext mode for local-only use.
+* xref:explanation/backend-providers.adoc[Back-end Providers (Bitwarden and Others)] — Using Bitwarden Secrets Manager and other industrial back-ends as storage; we act as master front-end.
+* xref:explanation/explaining-the-proxy-in-the-gui.adoc[Explaining the Proxy in the GUI] — How to explain the proxy/coordinator model in the UI so users aren't confused.
+* xref:explanation/connecting-to-wsl.adoc[Connecting to WSL] — How the Secrets Manager and SSH Manager connect to workloads inside WSL (paths, injection helper, SSH bridge).
+* xref:explanation/virtual-environments.adoc[Virtual Environments] — Why Python-style venvs need no special handling (same process, no boundary).

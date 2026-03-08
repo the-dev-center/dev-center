@@ -11,6 +11,8 @@ This section contains technical specifications for Dev Center components and fea
 * xref:components/code-execution-recording.adoc[Code Execution Recording] - Code block execution and output recording system
 * xref:components/git-repository-manager.adoc[Git Repository Manager] - Repository relocation and renaming
 * xref:components/workspace-template-manager.adoc[Workspace Template Manager] - Template installer and synchronization module for standardized projects
+* xref:components/secrets-manager.adoc[Secrets Manager] - Central registry for secrets with .env awareness, standalone and integrated UI, and optional injection and Docker integration
+* xref:components/ssh-manager.adoc[SSH Manager] - Master coordinator for SSH agent providers (Bitwarden, OpenSSH, etc.); proxy that pulls data and launches their login GUIs
 * xref:json5.adoc[JSON5 Endorsement] - Formal endorsement of JSON5 for configuration and data
 
 

@@ -1,0 +1,35 @@
+= Copy Secrets into .env
+:navtitle: Copy Secrets into .env
+
+This guide describes how to get secrets from the central registry **into a project's `.env` file** (or `.env.<environment>`) so your existing framework or tool can load them as before.
+
+== When to use copy-to-.env
+
+* You want the app to keep loading config from a **file** (e.g. `dotenv`, Next.js, Rails).
+* You're okay with the secret values existing on disk in the project directory (gitignored).
+* You prefer to "sync" from the registry when you need to refresh keys, rather than injecting at runtime.
+
+== Steps (conceptual)
+
+. **Open the Secrets view** for the current repo (in DevCentr) or the standalone app with the repo selected.
+. **Choose environment** (e.g. dev, prod) so the list shows the right set of secrets.
+. **Select secrets** to write (e.g. all attached to this project/env, or a subset).
+. **Choose target file:** `.env`, `.env.local`, `.env.development`, etc. The manager may suggest based on environment and tool profile.
+. **Confirm:** The manager writes KEY=value lines (and optional comments). It can **merge** with existing keys (update only selected keys, leave others intact) or **replace** the file; behavior should be configurable or clear in the UI.
+. **Verify:** Ensure the target file is in `.gitignore` (the manager can warn if it is not).
+
+== Merge behavior
+
+* **Merge:** For each selected secret, set or update that KEY in the file; leave other lines unchanged. Good when the file already has other keys or comments you want to keep.
+* **Replace:** Write only the selected secrets into the file (optionally with a header comment). Simpler but overwrites the whole file.
+
+Implementation may offer "merge" by default and an option to "Replace file" for advanced users.
+
+== Variable names
+
+When writing, the manager uses:
+
+* The **variable name** stored with the secret (often from a provider/tool profile), or
+* A name you override at copy time.
+
+So the `.env` content stays consistent with what your code expects (e.g. `DATABASE_URL`, `STRIPE_SECRET_KEY`).

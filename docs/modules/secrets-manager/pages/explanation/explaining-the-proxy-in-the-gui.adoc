@@ -1,0 +1,39 @@
+= Explaining the Proxy in the GUI
+:navtitle: Explaining the Proxy in the GUI
+
+The Secrets Manager (and the SSH Manager) can act as a **proxy** or **master front-end**: we don't always store the data ourselves; we talk to other services (Bitwarden, system SSH agent, etc.) and present a unified view. This is powerful but can confuse users. The GUI must explain **who stores what** and **what happens when you click**.
+
+== Why users get confused
+
+* **"Where are my secrets?"** — If they use Bitwarden, the secrets live in Bitwarden. If they use the local DB, they live in the standalone's database. Mixing both in one UI without labels can make it unclear.
+* **"Who is the manager?"** — For SSH, the user might have Bitwarden's SSH agent, Windows OpenSSH agent, or 1Password's agent. DevCentr's "SSH Manager" doesn't replace them; it **coordinates** them. Users need to see that we're a **coordinator**, not the thing that holds the keys.
+* **"Is this secure?"** — Passing data through our app can sound risky. We need to state clearly: when using a back-end provider, we **request** secrets from them and **forward** (e.g. to `.env` or to the process). We don't persist them in our own store unless the user chose local DB. For SSH, we **signal** the underlying agent (e.g. "please sign this") and they may show their own login GUI; we don't see the private key.
+
+== What the GUI should communicate
+
+=== Source labels
+
+* **Secrets view:** Every secret (or group) should show its **source**: e.g. "Local," "Bitwarden," "1Password." So at a glance the user knows "this row comes from Bitwarden, that row from my local store."
+* **SSH view:** Each key or identity should indicate **which agent** is providing it: "Bitwarden SSH Agent," "Windows OpenSSH Agent," etc. When we launch a login flow, the UI should say "Opening Bitwarden to unlock your keys" (or similar) so the user knows the other app is doing the secure part.
+
+=== Short in-UI copy
+
+* **Secrets:** A line such as: "Secrets are stored in [Bitwarden / Local database]. DevCentr displays them here and can copy to .env or inject when you run your app." Optionally: "We never store Bitwarden secrets in DevCentr; we request them when you need them."
+* **SSH:** "SSH keys are managed by [Bitwarden / Windows OpenSSH / …]. DevCentr shows them here and forwards sign requests to that agent. To add or unlock keys, use the agent's app or we can open it for you."
+
+=== First-run or settings
+
+* When the user adds a **back-end provider** (e.g. Bitwarden Secrets Manager), show a short explanation: "DevCentr will show your Bitwarden secrets here. They stay in Bitwarden; we only request them when you copy to .env or inject." Same idea for SSH: "We'll list keys from your configured SSH agent(s). Signing and unlocking happen in their app."
+
+=== When we launch their login GUI
+
+* For Bitwarden (or any provider) login: "Log in with Bitwarden to allow DevCentr to read your secrets. We won't store your password." For SSH: "Unlock your keys in Bitwarden (or your SSH agent). DevCentr will then be able to use them for Git and SSH." So the user understands that **they** are logging into the other service; we're just triggering the flow.
+
+== Summary
+
+* **Label sources** — Local vs Bitwarden vs other in the secrets list; which SSH agent in the SSH list.
+* **One-line explanation** — "We display and forward; we don't store [provider] secrets" (or "we coordinate; your agent holds the keys" for SSH).
+* **Clarify on add** — When connecting a new back-end, explain the proxy model in one or two sentences.
+* **Clarify on login** — When we open the provider's login/unlock UI, say that we're opening *their* app so *they* can authenticate; we don't see the secret material.
+
+This keeps the workflow clear: DevCentr is a **client** and **coordinator**, not the vault. The industrial service (or local DB) is the source of truth; we send signals and present a single pane of glass.

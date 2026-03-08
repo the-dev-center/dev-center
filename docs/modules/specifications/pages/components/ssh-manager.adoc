@@ -1,0 +1,68 @@
+= SSH Manager
+:description: Specification for the SSH manager as a master coordinator of SSH agent providers.
+
+== Overview
+
+The SSH Manager is a **master coordinator** for SSH agent providers. It does not replace the system SSH agent or third-party agents (e.g. Bitwarden SSH agent, 1Password SSH agent, Windows OpenSSH). Instead, it acts as a **proxy**: it is a **client** of those agents (pulling data from them, sending sign requests) and a **provider** to the rest of DevCentr and the user (presenting a unified view of keys and identities, and fulfilling SSH/Git operations by delegating to the underlying agent). The goal is one place to see and use SSH keys regardless of which agent actually holds them, while the real security (storage, passphrase, signing) stays in the industrial or system agent.
+
+== Why a coordinator?
+
+Users may have:
+
+* **Windows OpenSSH agent** — Keys loaded with `ssh-add`; agent holds them in memory.
+* **Bitwarden SSH agent** — Keys stored in Bitwarden; the Bitwarden app or CLI unlocks and signs.
+* **1Password SSH agent** — Similar: 1Password holds keys and signs on request.
+* **Pageant (PuTTY)** or other agents on Windows.
+
+Each agent has its own GUI or CLI for login and key management. The user might not want to give that up — they trust Bitwarden or 1Password for storage and unlock. So DevCentr does **not** become a new SSH agent that stores keys; it becomes a **coordinator** that:
+
+* **Pulls data** from configured agents (list identities, status: locked/unlocked).
+* **Launches the agent's login/unlock GUI** when the user needs to authenticate (e.g. "Unlock Bitwarden to use this key"). The user completes login in Bitwarden (or the system); we don't see the passphrase or private key.
+* **Sends sign requests** to the agent when Git or SSH needs to authenticate. The agent performs the signing; we just forward the request and the result. So we're a **client** of the agent and a **provider** to the rest of the system (e.g. Git, terminal, or DevCentr features that need SSH).
+
+== Ideal workflow (and why it can sound insecure)
+
+The flow is:
+
+. User configures one or more **SSH agent providers** (e.g. "Use Bitwarden SSH agent," "Use Windows OpenSSH agent").
+. DevCentr's SSH Manager **queries** them (via agent socket or provider API) to list available keys.
+. When the user (or Git) needs to use a key, the manager **sends a signal** to the appropriate agent: "please sign this challenge for identity X." The agent may show its own GUI (e.g. Bitwarden unlock) if the key is locked.
+. The agent signs and returns the result; DevCentr (or the SSH client) uses it to complete authentication. The private key never leaves the agent.
+
+This can **sound** insecure because "DevCentr is in the middle" — but the important point is that **we don't hold or see the private key**. We only send requests and pass through responses. The agent remains the single place where keys live and where signing happens. We're a **proxy**: client to the agent, provider to the rest of the stack. The GUI must explain this so users aren't confused — see xref:secrets-manager:explanation/explaining-the-proxy-in-the-gui.adoc[Explaining the Proxy in the GUI] (the same principles apply to SSH).
+
+== Capabilities
+
+* **Unified view:** List SSH identities from all configured agents in one place (e.g. "Key for GitHub" from Bitwarden, "id_ed25519" from OpenSSH). Show which agent provides each key.
+* **Launch login GUIs:** When a key is locked or the agent needs auth, trigger the provider's unlock flow (e.g. open Bitwarden, or prompt for `ssh-add` passphrase via the system). Don't implement our own password box for their keys — let the agent do it.
+* **Delegate signing:** When Git or SSH needs to authenticate, route the sign request to the correct agent. This may require DevCentr (or a helper) to act as an SSH agent that **forwards** to the underlying agents, or to set `SSH_AUTH_SOCK` (or equivalent) so the SSH client talks to an agent we control that in turn talks to Bitwarden/OpenSSH. Implementation details (e.g. agent forwarding process, socket layout) are left to the product.
+
+== SSH_AUTH_SOCK: one socket per session (transient, not permanent)
+
+The SSH client (`ssh`, Git when using SSH) talks to exactly **one** agent per process: it reads the `SSH_AUTH_SOCK` environment variable and connects to that socket (or Windows named pipe). There is no built-in "try agent A, then B" — one process, one `SSH_AUTH_SOCK`, one agent.
+
+* **Not permanently mapped to one provider:** The "lease" on `SSH_AUTH_SOCK` is **per session** (or per process tree). Whatever sets the env when that session starts — e.g. your shell profile, Bitwarden's launcher, or DevCentr — determines which agent the SSH client uses. So it's **transient**: Terminal A might point at Bitwarden's socket, Terminal B at OpenSSH's, depending on how each was started. There is no system-wide permanent binding.
+* **Within a session it's fixed:** For that process, all SSH/Git auth goes to the one agent behind that socket. To have **multiple** providers (Bitwarden + OpenSSH) usable from the same shell without the user switching env, we must **be** that single agent: run our own process that binds to a socket, set `SSH_AUTH_SOCK` to it, and implement the SSH agent protocol by **forwarding** list-identities and sign requests to the appropriate backend (Bitwarden for key X, OpenSSH for key Y). Then from the client's perspective there is still one socket = one agent; that agent is us, and we multiplex to the real providers.
+* **Configuration:** Let the user add/remove agent providers (Bitwarden, OpenSSH, 1Password, etc.) and optionally set priority or which key to use for which host (e.g. reuse `~/.ssh/config` semantics or surface them in the UI).
+
+== Interfacing with Bitwarden SSH and other agents
+
+* **Bitwarden SSH agent:** Bitwarden can act as an SSH agent (socket or named pipe). DevCentr would need to discover or configure that socket and send standard SSH agent protocol messages (list identities, sign request). When the key is locked, Bitwarden shows its own unlock UI. We don't handle the passphrase — we just wait for the agent to become ready.
+* **Windows OpenSSH agent:** Uses a socket or Windows named pipe. Same idea: list keys, forward sign requests. If the user hasn't run `ssh-add`, the agent may have no keys; we can show "Add keys in OpenSSH" or link to docs.
+* **1Password / others:** Similar: each provider has an agent interface (socket, CLI, or API). We integrate by implementing the client side and, when needed, launching their app for login.
+
+So we **pull data from them** (list keys, status) and **send signals** (sign this, or "user wants to use this key — please unlock"). We act as **manager** in the sense of "orchestrator," not "storage."
+
+== Relation to existing SSH key docs
+
+The xref:knowledge-base:explanation/infrastructure/ssh-keys.adoc[SSH Keys] explanation in the Knowledge Base covers key generation, `~/.ssh/config`, and using the system ssh-agent. The **SSH Manager** is an optional layer on top: it coordinates multiple agents and presents a single view in DevCentr. Users who are happy with a single agent (e.g. OpenSSH only) don't need to use the SSH Manager; those who use Bitwarden or multiple agents can use it as a master front-end.
+
+== User communication
+
+Because the model is "we coordinate, they store and sign," the GUI must explain:
+
+* **Who holds the keys** — e.g. "Keys from Bitwarden SSH Agent" vs "Keys from Windows OpenSSH."
+* **What happens when you unlock** — "We'll open Bitwarden so you can unlock your keys. DevCentr doesn't see your passphrase."
+* **What we do** — "We show your keys here and forward sign requests to your agent when Git or SSH needs them."
+
+See xref:secrets-manager:explanation/explaining-the-proxy-in-the-gui.adoc[Explaining the Proxy in the GUI] for shared guidance on source labels, one-line explanations, and first-run copy. The same ideas apply to both the Secrets Manager (Bitwarden Secrets Manager, etc.) and the SSH Manager (Bitwarden SSH, OpenSSH, etc.).

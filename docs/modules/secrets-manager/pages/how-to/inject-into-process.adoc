@@ -1,0 +1,55 @@
+= Injecting Secrets into the Dev Process
+:navtitle: Inject Secrets into the Dev Process
+
+This page describes the **injection** workflow: how secrets from the registry can be provided to your app or test run **without** writing them into a `.env` file, and where you might hook into the development process.
+
+== What injection means
+
+Instead of copying secrets into `.env`, a process (your app, test runner, or build) **requests** the needed secrets at runtime from the Secrets Manager. The manager returns the values (e.g. as environment variables or over a secure channel), and the development process uses them without ever persisting them in the repo.
+
+Benefits:
+
+* No secret material in the project directory (except in memory at runtime).
+* Single source of truth: rotate a key in the manager, and the next run gets the new value.
+* Easier to enforce "prod keys never on disk" for sensitive environments.
+
+== Where to hook in
+
+Injection requires something in the **execution path** to ask the manager for secrets and then expose them to the app. Possible hook points:
+
+=== 1. Wrapper script or CLI
+
+* A small script (e.g. `dev-with-secrets` or `run-with-secrets`) that:
+. Calls the Secrets Manager (API or CLI) with repo + environment.
+. Receives key-value pairs.
+. Sets them as environment variables (e.g. `export KEY=value`).
+. Executes the real command (e.g. `npm run dev`, `pytest`).
+* The app then runs with `process.env.KEY` or `os.environ['KEY']` already set; no `.env` file needed for those keys.
+
+=== 2. IDE / editor run configuration
+
+* If the IDE supports "env file" or "environment variables" for a run config, you could:
+* Point it to a **generated** file that the manager writes to a **temporary location** (e.g. `/tmp/myapp-env`) just before run, and delete after; or
+* Use an IDE extension that talks to the Secrets Manager and injects vars into the run config (so the IDE sets env when it starts the process).
+
+=== 3. Daemon or local server
+
+* The Secrets Manager (standalone) runs a small **local server** (e.g. HTTP on localhost or a socket). A thin client (script or extension) sends: "repo path + environment" and receives key-value pairs.
+* Your run script or IDE calls this client, which gets the vars and then either:
+** Writes a temp `.env` and passes its path to the process, or
+** Execs the child process with the vars in its environment (no file).
+
+=== 4. Test runners and CI
+
+* In CI, injection might mean: CI job asks the manager (or a CI-specific secret store) for vars and exports them before running tests. For local dev, the same wrapper script can be used so that `pnpm test` or `pytest` gets secrets from the manager when run via the wrapper.
+
+== Security considerations
+
+* **Transport:** Communication between the app/script and the manager should be local only (localhost, socket, or shared memory). No secrets over the network unless the manager is explicitly designed for remote access.
+* **Access control:** The manager should only hand out secrets to processes that are authorized (e.g. user confirmation, or a token that the user has placed in a secure location). Implementation details are left to the product.
+* **Memory:** Injected vars exist in the process's environment; they are not on disk in the project. They may still appear in process lists or crash dumps depending on the OS, so this is "better than plaintext in repo" but not bulletproof.
+
+== Summary
+
+* **Copy to .env** = manager writes keys to a file; your existing loader reads the file. No change to how you run the app.
+* **Inject** = something (script, IDE, or daemon) asks the manager for secrets and sets them in the process environment (or a temp file) before/during run. Requires a hook in your run process; the exact hook is implementation-defined (wrapper script, IDE integration, or daemon client).

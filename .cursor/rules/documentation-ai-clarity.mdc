@@ -1,0 +1,17 @@
+---
+description: When writing or rewriting docs, ask AI to write for "80 IQ" audience for clearest results
+alwaysApply: true
+---
+
+# Documentation: AI clarity hack
+
+When asking AI to draft or rewrite articles, documentation, or how-tos, use this prompt (or equivalent):
+
+**"Write this for 80 IQ people."**
+
+Variants that work well:
+- "Write so someone with no background can follow."
+- "Explain every term the first time. Short sentences, one idea per step."
+- "Rewrite for maximum clarity; assume the reader is not an expert."
+
+This produces the clearest, most scannable docs: short sentences, jargon explained once, ordered steps, tables for copy-paste, and a quick "What do I need?" at the top. Add this instruction whenever you request new or rewritten documentation.

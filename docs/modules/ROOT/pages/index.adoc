@@ -8,6 +8,7 @@ DevCentr is a developer tooling application that provides:
 * Workflow management
 * Software project management
 * Environment management
+* Central secrets registry (xref:secrets-manager:index.adoc[Secrets Manager]) for .env-aware key storage and optional injection
 
 == Templates & Standardization
 
@@ -22,6 +23,9 @@ include::partial$tooling-knowledge-gap.adoc[]
 == Quick Links
 
 * xref:project-vision.adoc[Project Vision] - Learn about the project's goals and design philosophy
+* xref:todo-roadmap.adoc[Todo & Roadmap] - Outstanding tasks and development roadmap
+* xref:activity-log.adoc[Activity Log] - Notable changes and documentation updates
 * xref:knowledge-base:index.adoc[Knowledge Base] - Best practices and technical knowledge
 * xref:specifications:index.adoc[Component Specifications] - Technical specifications for components and features
+* xref:secrets-manager:index.adoc[Secrets Manager] - Central registry for keys, .env copy/inject, and Docker integration
 

@@ -1,0 +1,23 @@
+* xref:index.adoc[Secrets Manager]
+
+.Overview & design
+* xref:overview.adoc[Overview]
+* xref:architecture.adoc[Architecture]
+
+.Reference
+* xref:reference/env-patterns.adoc[.env Usage Patterns]
+* xref:reference/provider-tool-profiles.adoc[Provider and Tool Profiles]
+* xref:reference/environments.adoc[Environments (dev / prod / test)]
+
+.How-to
+* xref:how-to/copy-to-env.adoc[Copy Secrets into .env]
+* xref:how-to/inject-into-process.adoc[Injecting Secrets into the Dev Process]
+* xref:how-to/docker-integration.adoc[Docker and Docker Secrets]
+
+.Explanation
+* xref:explanation/standalone-vs-integrated.adoc[Standalone vs Integrated]
+* xref:explanation/encryption-modes.adoc[Encryption and Plaintext Mode]
+* xref:explanation/backend-providers.adoc[Back-end Providers (Bitwarden and Others)]
+* xref:explanation/explaining-the-proxy-in-the-gui.adoc[Explaining the Proxy in the GUI]
+* xref:explanation/connecting-to-wsl.adoc[Connecting to WSL]
+* xref:explanation/virtual-environments.adoc[Virtual Environments]

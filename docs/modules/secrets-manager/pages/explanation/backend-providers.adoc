@@ -1,0 +1,56 @@
+= Back-end Providers (Bitwarden and Others)
+:navtitle: Back-end Providers
+
+The Secrets Manager can operate in two ways: with its **own local database** (encrypted or plaintext) or as a **master front-end** that interfaces with industrial secret-storage back-ends. When using back-end providers, DevCentr does not store the secrets; it proxies requests and displays what the provider returns.
+
+== Why interface with industrial back-ends?
+
+Many users already store secrets in:
+
+* **Bitwarden Secrets Manager** — API and SDK for machine accounts; secrets retrieved via access tokens (e.g. `BWS_ACCESS_TOKEN`). Supports projects, listing, and retrieval.
+* **Other vaults** — 1Password, HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, etc. Each has its own API and auth model.
+
+If the DevCentr Secrets Manager can talk to these services, users get:
+
+* **One UI:** Browse, search, and "copy to .env" or inject from the same DevCentr (or standalone) interface, whether the underlying store is local or Bitwarden/Vault/cloud.
+* **No duplication:** Keep using the same back-end for team sync, compliance, or preference; DevCentr becomes a **client** that displays and forwards, rather than a second place to store secrets.
+* **Flexibility:** Use local DB for dev-only keys and Bitwarden (or another provider) for shared or sensitive secrets — or use only one back-end. The manager can support multiple back-ends and let the user choose which source(s) to show in the unified view.
+
+== Master front-end pattern
+
+* **DevCentr (or the standalone Secrets Manager) = master front-end.** It does not own the secret values when a back-end provider is used; it:
+** Authenticates to the provider (e.g. Bitwarden CLI login, or machine access token).
+** Sends **signals** (requests): list projects/secrets, get secret value for key X, etc.
+** Receives data from the provider and displays it in the same canvas-like UI used for the local store.
+** When the user chooses "Copy to .env" or "Inject," the front-end requests the value from the provider (or from its local cache if the provider SDK returns it) and then writes to `.env` or passes to the inject pipeline. Secrets do not persist in DevCentr's own database in this mode; they pass through.
+* **Security implication:** The front-end is a **client** of the provider. Secrets remain in the provider's storage and are only fetched when needed (or cached in memory for the session, depending on implementation). DevCentr never becomes the system of record for those secrets — the industrial service is. This can be *more* secure than a local-only store if the provider offers better access control, audit, and encryption.
+
+== Bitwarden Secrets Manager
+
+Bitwarden offers a **Secrets Manager** product (separate from the password-manager vault) aimed at machine and application secrets. It has:
+
+* **SDK and CLI** — List secrets, get secrets by project, authenticate with access tokens (e.g. `BWS_ACCESS_TOKEN`).
+* **Projects** — Organize secrets by project; maps well to "attach to repo" or "environment" in DevCentr.
+* **Machine accounts** — Token-based auth for automation; the DevCentr integration would use a token (or trigger Bitwarden's login flow) to obtain access.
+
+The DevCentr Secrets Manager can integrate with Bitwarden Secrets Manager so that:
+
+* User configures a Bitwarden back-end (e.g. access token or OAuth/login flow).
+* The unified "Secrets" view in DevCentr (or standalone) shows secrets from Bitwarden (and optionally from the local DB in the same view).
+* User can copy those secrets to a project's `.env` or use them in the inject workflow; values are requested from Bitwarden at action time.
+
+== Other providers (future)
+
+The same **master front-end** pattern applies to other providers:
+
+* **1Password** — APIs and CLI for vault access; similar "list/get" and auth.
+* **HashiCorp Vault** — REST API; token or other auth; list/get secrets by path.
+* **AWS Secrets Manager / Azure Key Vault** — Cloud APIs; credentials for the cloud account; DevCentr would request secrets via their SDKs or APIs.
+
+Each provider has different auth (OAuth, token, IAM, certificate). The Secrets Manager UI would need a **per-provider configuration** (e.g. "Add Bitwarden," "Add 1Password") and, where applicable, **launch the provider's login GUI** so the user can authenticate; the front-end then stores only a session or token (or nothing, if the provider SDK holds the session) and uses it to send requests. Explaining this in the GUI is critical so users understand who holds the secrets — see xref:explaining-the-proxy-in-the-gui.adoc[Explaining the Proxy in the GUI].
+
+== Summary
+
+* **Local DB mode:** Secrets stored in the standalone's encrypted or plaintext database; DevCentr is a client of the standalone.
+* **Back-end provider mode:** Secrets stored in Bitwarden Secrets Manager (or another industrial back-end); DevCentr/standalone is a **client of that provider** and acts as a **master front-end** that displays and proxies. We send signals to the provider; we don't store the secrets ourselves.
+* **Hybrid:** Support both in one UI — e.g. show "Local" and "Bitwarden" (and later others) as sources; user can copy from either into `.env` or use in injection. This gives maximum flexibility without forcing a single storage choice.

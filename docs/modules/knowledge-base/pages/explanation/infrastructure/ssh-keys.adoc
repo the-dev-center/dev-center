@@ -179,6 +179,8 @@ I recommend checking out https://github.com/frequency403/OpenSSH-GUI for a graph
 
 There are alternative SSH agents available, such as Pageant for Windows and Keychain for macOS. Many popular password managers (1Password, Bitwarden) also provide their own SSH agents that can replace ssh-agent. The choice is yours.
 
+DevCentr may offer an **SSH Manager** that acts as a master coordinator: it lists keys from your configured agents (e.g. Bitwarden, OpenSSH), launches their login/unlock GUIs when needed, and forwards sign requests to them so Git and SSH work from one place. See xref:specifications:components/ssh-manager.adoc[SSH Manager] in the specifications.
+
 === Installing SSH Agent
 
 ==== Linux and macOS

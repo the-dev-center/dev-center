@@ -1,0 +1,17 @@
+= Virtual Environments (venv, conda, etc.)
+:navtitle: Virtual Environments
+
+This page clarifies how the Secrets Manager works with **virtual environments** in the Python sense (venv, virtualenv, pipenv, Poetry, conda). The short answer: **no special handling is needed.** The mental model is different from WSL or containers — there is no boundary to cross.
+
+== Same process, no boundary
+
+A virtual environment is **not** a separate machine or kernel. It's the same OS process: you activate the venv (which sets `PATH` and maybe `VIRTUAL_ENV`), then run `python`. That process inherits the **same** environment as the shell (including any env vars we injected at the shell level, or it loads `.env` from the current working directory).
+
+So there is **nothing to "connect"** — we're already in the same process. The venv only chooses which Python interpreter and which packages are used; it doesn't change where the process reads files from or what env vars it sees.
+
+== What this means in practice
+
+* **Copy to .env:** We write `.env` in the project directory. The Python process (whether or not it's using a venv) will see that file when it runs in that directory — as long as the app loads `.env` (e.g. `python-dotenv`). The venv doesn't change that.
+* **Inject:** If we wrap the run command (e.g. a script that gets secrets and runs `python app.py`), we can run that with the venv activated (`source .venv/bin/activate; env API_KEY=... python app.py`). The venv only affects which `python` is used; the env vars we inject are still in the process environment.
+
+No extra "venv plugin" is required. Secrets flow in via the same mechanisms (`.env` in the project, or injection into the process that runs Python). For environments that *do* have a boundary (WSL, Docker, VMs), see xref:explanation/connecting-to-wsl.adoc[Connecting to WSL] and xref:how-to/docker-integration.adoc[Docker and Docker Secrets].

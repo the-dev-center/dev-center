@@ -6,6 +6,8 @@
 * xref:components/code-execution-recording.adoc[Code Execution Recording]
 * xref:components/git-repository-manager.adoc[Git Repository Manager]
 * xref:components/workspace-template-manager.adoc[Workspace Template Manager]
+* xref:components/secrets-manager.adoc[Secrets Manager]
+* xref:components/ssh-manager.adoc[SSH Manager]
 * xref:features/opening-web-content-from-docs.adoc[Opening Web Content from Docs]
 * xref:features/text-editor-separate-process.adoc[Text Editor Separate Process]
 

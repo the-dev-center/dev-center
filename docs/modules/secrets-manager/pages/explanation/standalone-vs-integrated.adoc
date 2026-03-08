@@ -1,0 +1,34 @@
+= Standalone vs Integrated
+:navtitle: Standalone vs Integrated
+
+The Secrets Manager is designed as a **standalone application** that can run on its own, with **integrated views** inside DevCentr. This section explains why and how.
+
+== Why a standalone?
+
+* **Database ownership:** One process should own the secrets database (create, lock, migrate, encrypt). If DevCentr owned it, then running the "manager" without DevCentr would require a separate, duplicate store — and keeping two stores in sync is brittle. So the **standalone owns the database**; DevCentr is a client.
+* **Use without DevCentr:** Users who only want a central place to store and copy secrets (e.g. into `.env` by hand or via a script) can use the standalone alone. No need to run the full DevCentr app.
+* **Separate release cycle:** The standalone can be a **separate repository** and product. It can ship updates (e.g. new provider profiles, encryption improvements) without tying them to DevCentr releases. DevCentr then depends on a **contract** (data directory location, or API) to talk to the standalone.
+
+== Integrated experience in DevCentr
+
+* **Repo-scoped view:** When you have a repository open in DevCentr, the "Secrets" module shows secrets **filtered by that repo** (and chosen environment). You see only what's relevant.
+* **Canvas-like UI:** Secrets are presented in a visual, card-like or list layout. You can drag a secret from the "global" or "other project" area and drop it onto the current project to **register** it for this repo and environment. You can also drag from a local source (e.g. "Add from .env") into the global registry to **import**.
+* **Actions:** From this view you can copy selected secrets to the project's `.env`, or trigger an inject workflow (if the run process is configured to use the manager).
+* **Discovery:** DevCentr finds the standalone's data or API (e.g. from a config file, or a well-known path under user data). If the standalone is not running, DevCentr can show a message: "Start the Secrets Manager to use this feature" or offer to launch it.
+
+== Process communication
+
+For the integrated view to work:
+
+* **Standalone running:** The standalone may run a small server (localhost or socket) so DevCentr can query "secrets for repo X, env Y" and send "write these to repo Z's .env". See xref:../architecture.adoc[Architecture].
+* **Standalone not running:** DevCentr can still read from a **shared database path** if the schema is documented and DevCentr opens it read-only (and the standalone is the only writer when it runs). That allows a "read-only" integrated view; write actions (copy to .env, register secret) would require starting the standalone or queuing until it is available.
+
+Recommendation: support both — **optional server** for full two-way integration, and **shared DB path** for read-only or simple write (with single-writer discipline) so that minimal setup still works.
+
+== Possible separate repository
+
+If the standalone is its own product:
+
+* **Repository:** e.g. `dev-centr/secrets-manager` or similar. Contains the standalone app (UI, database, optional server), CLI if any, and shared schema/API docs.
+* **DevCentr:** Depends on the **contract** (where the DB lives, or the API). DevCentr can bundle a "compatibility" library or just read the DB and call the API; it does not need to ship the standalone's binary, but can offer a "Launch Secrets Manager" button that starts the standalone if installed.
+* **Installation:** User installs both DevCentr and the Secrets Manager (or only one). When both are installed and the manager is running, DevCentr shows the full integrated experience; otherwise, it can still work in a degraded way (e.g. "Open Secrets Manager" opens the standalone's window or install link).

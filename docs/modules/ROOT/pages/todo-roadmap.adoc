@@ -1,0 +1,37 @@
+= Todo & Roadmap
+:navtitle: Todo & Roadmap
+:description: Outstanding tasks and development roadmap for the DevCentr application and documentation.
+
+This page is the **task-level** TODO and roadmap for the DevCentr app and its docs. The org-wide summary (themes and priorities across all Dev-Centr projects) lives on the central docs site: link:https://docs.devcentr.org/home/latest/todo-roadmap.html[Todo & Roadmap (docs.devcentr.org)]. A working copy may also be kept at the repository root as `TODO.adoc`.
+
+== High priority
+
+* [ ] **Windows Testing Automation Integration**
+** [ ] Implement a `Virtualization` module in D-lang to interface with `libvirt`.
+** [ ] Add a dedicated tab for Snapshot Management in the GUI.
+** [ ] Support one-click revert to "Clean Baseline" for Windows VMs.
+** [ ] Integrate QEMU Guest Agent command runner.
+* [ ] **Installer Maker Integration**
+** [ ] Research open-source installer makers (Inno Setup, NSIS) and provide a wrapper module.
+
+== Documentation
+
+* [x] Add "Testing Windows Builds on Linux" explanation.
+* [x] Add "Windows Automation via KVM" how-to guide.
+* [ ] Create a tutorial for setting up a fresh Windows 11 VM with QGA and OpenSSH.
+* [x] Add Secrets Manager module (overview, architecture, .env patterns, back-end providers, SSH Manager, WSL/virtual environments).
+* [ ] Implement and document the standalone Secrets Manager application.
+
+== Core app
+
+* [ ] Finish Project Templates installation logic in `app.d`.
+* [ ] Implement real tool detection in `tool_manager.d` (currently mostly mock data).
+* [ ] Add support for `pnpm` workspace analysis.
+* [ ] Integrate Secrets Manager (standalone client + repo-filtered UI).
+* [ ] Integrate SSH Manager (coordinator for agent providers, WSL bridge).
+
+== Roadmap themes
+
+* **Secrets & SSH:** Standalone secrets manager, back-end providers (e.g. Bitwarden), SSH Manager as coordinator, WSL and venv support.
+* **Environment navigator:** Model environment hierarchy (Hardware → Hypervisor/OS → VM → Container/App), environment browser, PATH and env var editing. See xref:project-vision.adoc[Project Vision].
+* **UI:** DPI-aware / logical pixel support for consistent sizing across high-density displays (see project vision UI Specification & Roadmap).

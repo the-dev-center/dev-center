@@ -1,7 +1,10 @@
 * xref:index.adoc[Dev Center]
 * xref:project-vision.adoc[Project Vision]
+* xref:todo-roadmap.adoc[Todo & Roadmap]
+* xref:activity-log.adoc[Activity Log]
 * xref:knowledge-base:index.adoc[Knowledge Base]
 * xref:specifications:index.adoc[Specifications]
+* xref:secrets-manager:index.adoc[Secrets Manager]
 * xref:publishing:index.adoc[Software Publishing]
 * xref:upstream-contributions:index.adoc[Upstream Contributions]
 

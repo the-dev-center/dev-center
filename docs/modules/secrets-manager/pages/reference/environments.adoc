@@ -1,0 +1,40 @@
+= Environments (dev / prod / test)
+:navtitle: Environments
+
+Secrets often differ by **environment**: development, staging, production, and test variants. The Secrets Manager lets you scope secrets and project bindings to named environments.
+
+== Environment concept
+
+* **Environment** — A named context such as `dev`, `development`, `staging`, `prod`, `production`, `test`, `testing`. You can define these globally or per project.
+* **Secret binding:** A secret can be **attached to a project for a specific environment**. Example: the same logical key "Database URL" might have value `postgres://localhost/dev` for `dev` and a different value for `prod`. In the registry, that can be two separate secrets (e.g. "Database URL (dev)" and "Database URL (prod)") or one secret with environment-specific values, depending on implementation.
+* **Default environment:** When opening the integrated view in DevCentr for a repo, the manager can default to "dev" or to a user preference, and let the user switch to prod/test.
+
+== Typical environments
+
+| Name       | Typical use |
+| ---------- | ----------  |
+| `dev` / `development` | Local development; often relaxed security, local DB. |
+| `test` / `testing`    | Automated tests; may use mocks or test DBs. |
+| `staging`             | Pre-production; mirrors prod with test data. |
+| `prod` / `production`| Live production; real keys, strict access. |
+
+The manager does not enforce semantics; it only needs to support **named environments** so that when you "copy to .env" or "inject for run", you choose which environment's secrets to use.
+
+== Relation to .env files
+
+Many stacks use file names to represent environment:
+
+* `.env.development` → dev
+* `.env.production` → prod
+* `.env.test` → test
+
+When **copying to .env**, the manager can map the selected environment to the appropriate file (e.g. choose "dev" → write to `.env.development` or `.env.local`). Tool profiles can define this mapping per framework.
+
+== Data model note
+
+Implementations can model this as:
+
+* One secret record with multiple "environment values" (keyed by environment name), or
+* Multiple secret records (one per environment) linked by a logical name or tag.
+
+Either way, the UI should let the user filter and select by environment and avoid mixing prod and dev keys by mistake (e.g. confirm before writing prod keys into a file).
