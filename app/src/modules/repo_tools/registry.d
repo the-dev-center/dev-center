@@ -96,11 +96,8 @@ class RepoToolsRegistry
     /// Background hook point: discover external tools with open handles under known repos.
     void discoverExternalTools(string[] repoRoots)
     {
-        // Basic implementation hook: currently a no-op. On platforms where
-        // handle enumeration is available, this method can be extended to:
-        // * Enumerate processes and their open file handles.
-        // * Attach processes that have handles inside any of the given repoRoots.
-        auto _ = repoRoots.length;
+        import modules.repo_tools.handle_discovery : discoverExternalToolsForRoots;
+        discoverExternalToolsForRoots(this, repoRoots);
     }
 
 private:

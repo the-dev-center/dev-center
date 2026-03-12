@@ -4,6 +4,10 @@ import dlangui;
 import modules.template_installer.installer;
 import modules.template_installer.project_manager;
 import modules.repo_tools.registry;
+import modules.repo_tools.git_diff_stats;
+import modules.repo_tools.repo_browser;
+import modules.repo_tools.git_gui_dialog;
+import modules.repo_tools.git_viewers;
 import modules.project_recognizer.recognizer;
 import modules.system_overview.tool_manager;
 import modules.system_overview.widgets;
@@ -16,8 +20,9 @@ import std.path;
 import std.file;
 import std.conv;
 import std.process : environment;
-import std.algorithm : endsWith;
+import std.algorithm : endsWith, canFind;
 import std.array : empty, array;
+import std.string : toLower;
 
 mixin APP_ENTRY_POINT;
 
@@ -28,8 +33,14 @@ class DevCenterApp {
     ToolManager toolManager;
     RepoToolsRegistry repoTools;
     ArchitectureModel currentModel;
+    string codeRoot;          /// Root of the code hierarchy (Z:\code)
+    RepoNode[] allRepos;      /// Cached scan results
+    RepoNode[] filteredRepos; /// After search filter
+    string selectedRepoPath;  /// Currently selected repo
+    uint discoveryTimerId;    /// Background tool-discovery timer
 
     StringListAdapter templateAdapter;
+    StringListAdapter repoAdapter;
     StringListAdapter stackAdapter;
     StringListAdapter workflowTemplateAdapter;
     WorkflowTemplateRef[] workflowTemplateList;  /// Cached list for install
@@ -41,6 +52,20 @@ class DevCenterApp {
         toolManager = new ToolManager();
         string dataRoot = buildPath(getHomeDir(), ".dev-center");
         repoTools = new RepoToolsRegistry(dataRoot);
+
+        // Determine code root from environment or default
+        string drive = environment.get("CODE_ROOT");
+        if (drive is null || drive.length == 0)
+        {
+            version (Windows)
+                codeRoot = "Z:\\code";
+            else
+                codeRoot = buildPath(getHomeDir(), "code");
+        }
+        else
+        {
+            codeRoot = drive;
+        }
 
         // Target current directory
         string projectRoot = getcwd();
@@ -57,6 +82,7 @@ class DevCenterApp {
         projectManager = new ProjectWorkspaceManager(projectRoot, recognizer);
 
         templateAdapter = new StringListAdapter();
+        repoAdapter = new StringListAdapter();
         stackAdapter = new StringListAdapter();
         workflowTemplateAdapter = new StringListAdapter();
     }
@@ -148,15 +174,32 @@ class DevCenterApp {
                             }
                         }
 
-                        VerticalLayout {
+                        HorizontalLayout {
                     id: pageTemplates; layoutWidth: fill; layoutHeight: fill; padding: 10
-                            TextWidget { text: "Browse Projects"; fontSize: 14pt; margin: 5 }
-                            HorizontalLayout {
-                                layoutWidth: fill; margin: 5
-                                EditLine { id: searchRepos; text: ""; layoutWidth: fill; placeholderText: "Search hosts, owners, and repos..." }
+
+                            // Left side: repo tree + search
+                            VerticalLayout {
+                                layoutWidth: fill; layoutHeight: fill
+                                TextWidget { text: "Browse Projects"; fontSize: 14pt; margin: 5 }
+                                HorizontalLayout {
+                                    layoutWidth: fill; margin: 5
+                                    EditLine { id: searchRepos; text: ""; layoutWidth: fill; placeholderText: "Search hosts, owners, and repos..." }
+                                    Button { id: btnRefreshRepos; text: "Refresh" }
+                                }
+                                ListWidget { id: listRepos; layoutWidth: fill; layoutHeight: fill }
+                                HorizontalLayout {
+                                    layoutWidth: fill; margin: 5
+                                    Button { id: btnOpenGitGui; text: "Open Git Viewer" }
+                                }
                             }
-                            ListWidget { id: listRepos; layoutWidth: 220; layoutHeight: fill }
-                            // Right-hand tools panel can be added here in a future iteration.
+
+                            // Right side: tools panel
+                            VerticalLayout {
+                                id: toolsPanel; layoutWidth: 280; layoutHeight: fill; padding: 10; background: "#1E1E1E"
+                                TextWidget { text: "Attached Tools"; fontSize: 12pt; fontWeight: 700; margin: 5; textColor: "#007AFF" }
+                                ListWidget { id: listAttachedTools; layoutWidth: fill; layoutHeight: fill }
+                                Button { id: btnDiscoverTools; text: "Discover Tools" }
+                            }
                         }
 
                         VerticalLayout {
@@ -233,6 +276,28 @@ class DevCenterApp {
         // Template list is no longer displayed directly; the Browse Projects page
         // will be wired to a repository browser in a future revision.
 
+        auto listRepos = window.mainWidget.childById!ListWidget("listRepos");
+        listRepos.adapter = repoAdapter;
+        listRepos.itemClick = delegate(Widget source, int itemIndex) {
+            if (itemIndex >= 0 && itemIndex < filteredRepos.length) {
+                selectedRepoPath = filteredRepos[itemIndex].fullPath;
+                refreshToolsPanel();
+            }
+            return true;
+        };
+
+        auto listAttachedTools = window.mainWidget.childById!ListWidget("listAttachedTools");
+        auto toolsAdapter = new StringListAdapter();
+        listAttachedTools.adapter = toolsAdapter;
+        listAttachedTools.itemClick = delegate(Widget source, int itemIndex) {
+            import modules.repo_tools.platform : bringProcessToFront;
+            auto tools = repoTools.instancesForRepo(selectedRepoPath);
+            if (itemIndex >= 0 && itemIndex < tools.length) {
+                bringProcessToFront(tools[itemIndex].pid);
+            }
+            return true;
+        };
+
         auto listStacks = window.mainWidget.childById!ListWidget("listStacks");
         listStacks.adapter = stackAdapter;
 
@@ -242,6 +307,15 @@ class DevCenterApp {
         setupEventHandlers();
         refreshTemplates();
         refreshProject();
+
+        // Start background discovery timer (every 10 seconds)
+        discoveryTimerId = window.setTimer(10000, delegate() {
+            string[] roots;
+            foreach (r; allRepos) roots ~= r.fullPath;
+            repoTools.discoverExternalTools(roots);
+            refreshToolsPanel();
+            return true;
+        });
 
         window.show();
     }
@@ -256,6 +330,9 @@ class DevCenterApp {
             contentStack.showChild(pageIds[index]);
         }
         sidebar.visibility = showSidebar ? Visibility.Visible : Visibility.Gone;
+        if (index == 1) {
+            refreshRepoList();
+        }
         if (index == 4) {
             refreshWorkflowTemplates();
         }
@@ -377,6 +454,41 @@ class DevCenterApp {
             return true;
         };
 
+        // Repo browser: search on text change
+        auto searchEdit = window.mainWidget.childById!EditLine("searchRepos");
+        searchEdit.contentChange = delegate(EditableContent content) {
+            refreshRepoList();
+        };
+
+        window.mainWidget.childById!Button("btnRefreshRepos").click = delegate(Widget w) {
+            allRepos = scanCodeRoot(codeRoot);
+            refreshRepoList();
+            return true;
+        };
+
+        window.mainWidget.childById!Button("btnOpenGitGui").click = delegate(Widget w) {
+            if (selectedRepoPath.length > 0)
+            {
+                showGitGuiSelectorDialog(window, selectedRepoPath, repoTools);
+            }
+            else
+            {
+                window.showMessageBox(UIString.fromRaw("Git Viewer"d), UIString.fromRaw("Select a repository first."d));
+            }
+            return true;
+        };
+
+        window.mainWidget.childById!Button("btnDiscoverTools").click = delegate(Widget w) {
+            string[] roots;
+            foreach (r; allRepos)
+            {
+                roots ~= r.fullPath;
+            }
+            repoTools.discoverExternalTools(roots);
+            refreshToolsPanel();
+            return true;
+        };
+
         window.mainWidget.childById!Button("btnInstall").click = delegate(Widget w) {
             auto list = window.mainWidget.childById!ListWidget("listTemplates");
             if (list.selectedItemIndex >= 0) {
@@ -399,6 +511,102 @@ class DevCenterApp {
         auto label = window.mainWidget.childById!TextWidget("projectPathLabel");
         if (label) {
             label.text = UIString.fromRaw("Path: "d ~ to!dstring(getcwd()));
+        }
+    }
+
+    void refreshRepoList() {
+        repoAdapter.clear();
+
+        // Scan on first call
+        if (allRepos.length == 0)
+        {
+            allRepos = scanCodeRoot(codeRoot);
+        }
+
+        // Apply search filter
+        auto searchEdit = window.mainWidget.childById!EditLine("searchRepos");
+        string query = to!string(searchEdit.text);
+        filteredRepos = filterRepos(allRepos, query);
+
+        // Group by host/owner and render as tree-like list
+        string lastHost = "";
+        string lastOwner = "";
+
+        foreach (repo; filteredRepos)
+        {
+            // Insert host header
+            if (repo.host != lastHost)
+            {
+                repoAdapter.add(to!dstring("▸ " ~ repo.host));
+                lastHost = repo.host;
+                lastOwner = ""; // reset owner on new host
+            }
+
+            // Insert owner header
+            if (repo.owner != lastOwner)
+            {
+                string ownerPrefix = repo.isClone ? "  ▸ .clones/" : "  ▸ ";
+                repoAdapter.add(to!dstring(ownerPrefix ~ repo.owner));
+                lastOwner = repo.owner;
+            }
+
+            // Compute diff stats for this repo
+            auto stats = computeDiffStats(repo.fullPath);
+
+            string prefix = repo.isFork ? "    ⑂ " : "    " ;
+            string label;
+            if (stats.isDirty)
+            {
+                label = prefix ~ repo.name ~ "  [+"
+                    ~ to!string(stats.linesAdded)
+                    ~ " / -"
+                    ~ to!string(stats.linesRemoved)
+                    ~ " ("
+                    ~ to!string(stats.filesChanged)
+                    ~ " files)]";
+            }
+            else
+            {
+                label = prefix ~ repo.name ~ "  (clean)";
+            }
+
+            // Append tools count from registry
+            auto tools = repoTools.instancesForRepo(repo.fullPath);
+            if (tools.length > 0)
+            {
+                label ~= "  🔧" ~ to!string(tools.length);
+            }
+
+            repoAdapter.add(to!dstring(label));
+        }
+    }
+
+    void refreshToolsPanel() {
+        auto toolsList = window.mainWidget.childById!ListWidget("listAttachedTools");
+        if (!toolsList) return;
+
+        auto adapter = cast(StringListAdapter) toolsList.adapter;
+        if (!adapter) return;
+
+        adapter.clear();
+
+        if (selectedRepoPath.length == 0)
+        {
+            adapter.add(to!dstring("Select a repo to see tools"));
+            return;
+        }
+
+        auto tools = repoTools.instancesForRepo(selectedRepoPath);
+        if (tools.length == 0)
+        {
+            adapter.add(to!dstring("No tools attached"));
+            return;
+        }
+
+        foreach (tool; tools)
+        {
+            string entry = tool.label ~ " (PID " ~ to!string(tool.pid) ~ ")";
+            adapter.add(to!dstring(entry));
         }
     }
 

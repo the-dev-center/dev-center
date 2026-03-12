@@ -1,10 +1,35 @@
 = 2026-03-12 – Repository browser tools integration and dirty diff stats
 
-* Added specifications for:
+== Phase 1 (prior session)
+
+* Added specifications and documentation for:
 ** Repository tools registry, including automatic discovery of external applications with open file handles in repositories.
 ** Repository browser enhancements: diff-stats-as-dirty indicator, tools column, right-hand tools panel, provider/owner filters, and search.
 ** Git repository manager extensions for workspace reorganization, atomic repo moves with handle detection, and drag-and-drop transfers across owners and providers.
-* Updated the DevCentr application to begin integrating these capabilities into the main UI.
-* Related commits:
-** _TBD: link to implementation commits for the repository tools registry and browser integration._
+* Partially integrated capabilities into the main UI:
+** Introduced `RepoToolsRegistry` with JSON-backed persistence and per-repo tool instance queries.
+** Added a `git_diff_stats` helper module (had a broken `runGit()` function).
+** Added a `git_viewers` helper module to detect installed Git GUIs via PATH probing.
+** Added a single-entry repo list for cwd in the Browse Projects page.
+
+== Phase 2 (2026-03-12 audit and implementation)
+
+* **Audit**: Reviewed all checked items in STATUS.md and unchecked falsely-marked tasks.
+* **Fixed `git_diff_stats`**: Rewrote `runGit()` to use `pipeProcess` instead of the broken `collectException` + delegate pattern that silently returned empty arrays.
+* **New module `repo_browser.d`**: Scans the `Z:\code` hierarchy following FOLDER_SCHEMA.md (host/owner/repo, `.forks`, `.clones`) and returns structured `RepoNode[]` results with search/filter support.
+* **New module `git_gui_dialog.d`**: Dialog showing installed Git GUIs in a grid, with a link to the `git-guis.adoc` article and launch + `RepoToolsRegistry` registration.
+* **New module `handle_discovery.d`**: External app discovery using PowerShell process enumeration on Windows and `lsof` on Linux/macOS. Wired into `RepoToolsRegistry.discoverExternalTools()`.
+* **Overhauled Browse Projects page** in `app.d`:
+** Repo tree rendered with host ▸ owner ▸ repo hierarchy, diff stats per repo, and tool count badges.
+** Right-hand "Attached Tools" panel showing tools for the selected repo.
+** "Open Git Viewer" button wired to the Git GUI selector dialog.
+** "Discover Tools" button for on-demand external tool discovery.
+** Search field now filters across all repos in real time.
+
+== Still remaining
+
+* Built-in Git Viewer D module (tree panel, timeline widget, indexer service).
+* Per-platform "bring window to front" for attached tools.
+* Automatic periodic background timer for tool discovery.
+
 
