@@ -19,8 +19,10 @@ This update addresses the deployment consistency issues encountered when deployi
 * **Security & Build Pipeline**: Added `onlyBuiltDependencies` to the root `package.json` to explicitly allow `esbuild`, `@parcel/watcher`, and `sharp` to run their install scripts in strict pnpm 10 environments.
 * **Next.js Export Fix**: Modified `apps/docs/next.config.mjs` to dynamically disable `output: 'export'` when deploying to Vercel. This resolves a critical build failure where static exports were conflicting with API search routes and URL rewrites.
 * **Node Environment**: Standardized Node engine requirements to `>=22` across all workspace projects to align with Vercel's default environments.
+* **Nitro Vercel Preset**: Updated `apps/web/vite.config.ts` to set `server: { preset: "vercel" }` inside `solidStart()` when the `VERCEL` env var is present. Without this, Nitro builds a generic Node server bundle (`.output/`) that Vercel cannot run. With it, Nitro produces the `.vercel/output/` format Vercel expects for serverless function deployment. Local and CI builds fall back to `node-server`.
 
 == Verification
 
 * Verified that `pnpm build` executes correctly when scoped to sub-directories.
 * Confirmed that Vercel-specific environment variables correctly toggle the Next.js export mode.
+* Confirmed that the `VERCEL` env var gates the Nitro preset switch without affecting local `node-server` builds.
