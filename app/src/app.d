@@ -8,6 +8,7 @@ import modules.repo_tools.git_diff_stats;
 import modules.repo_tools.repo_browser;
 import modules.repo_tools.git_gui_dialog;
 import modules.repo_tools.git_viewers;
+import modules.repo_tools.hallmark_toolbar;
 import modules.project_recognizer.recognizer;
 import modules.system_overview.tool_manager;
 import modules.system_overview.widgets;
@@ -193,12 +194,30 @@ class DevCenterApp {
                                 }
                             }
 
-                            // Right side: tools panel
+                            // Right side: Project Details & Tools panel
                             VerticalLayout {
-                                id: toolsPanel; layoutWidth: 280; layoutHeight: fill; padding: 10; background: "#1E1E1E"
-                                TextWidget { text: "Attached Tools"; fontSize: 12pt; fontWeight: 700; margin: 5; textColor: "#007AFF" }
-                                ListWidget { id: listAttachedTools; layoutWidth: fill; layoutHeight: fill }
-                                Button { id: btnDiscoverTools; text: "Discover Tools" }
+                                id: toolsPanel; layoutWidth: fill; layoutHeight: fill; // replaced rigid 280-width
+                                
+                                // Placeholder layout where the Hallmark Toolbar will be injected
+                                VerticalLayout { id: hallmarkContainer; layoutWidth: fill; layoutHeight: WRAP_CONTENT; }
+
+                                HorizontalLayout {
+                                    layoutWidth: fill; layoutHeight: fill;
+                                    
+                                    // Attached Tools sub-panel inside the right-hand area
+                                    VerticalLayout {
+                                        layoutWidth: 280; layoutHeight: fill; padding: 10; background: "#1E1E1E"
+                                        TextWidget { text: "Attached Tools"; fontSize: 12pt; fontWeight: 700; margin: 5; textColor: "#007AFF" }
+                                        ListWidget { id: listAttachedTools; layoutWidth: fill; layoutHeight: fill }
+                                        Button { id: btnDiscoverTools; text: "Discover Tools" }
+                                    }
+                                    
+                                    // Placeholder for future Readme WebView or integrated Editor
+                                    VerticalLayout {
+                                        layoutWidth: fill; layoutHeight: fill; padding: 10;
+                                        TextWidget { text: "Select a repository to view details."; id: repoPreviewText; alignment: center; textColor: "#AAAAAA" }
+                                    }
+                                }
                             }
                         }
 
@@ -582,6 +601,21 @@ class DevCenterApp {
     }
 
     void refreshToolsPanel() {
+        // --- Setup Hallmark Strip ---
+        auto hallmarkContainer = window.mainWidget.childById!VerticalLayout("hallmarkContainer");
+        if (hallmarkContainer) {
+            hallmarkContainer.removeAllChildren();
+            if (selectedRepoPath.length > 0) {
+                hallmarkContainer.addChild(createRepoToolbar(window, selectedRepoPath));
+            }
+        }
+        
+        auto repoText = window.mainWidget.childById!TextWidget("repoPreviewText");
+        if (repoText) {
+            repoText.text = UIString.fromRaw(selectedRepoPath.length > 0 ? "Repository: "d ~ to!dstring(selectedRepoPath) : "Select a repository to view details."d);
+        }
+
+        // --- Setup Tools List ---
         auto toolsList = window.mainWidget.childById!ListWidget("listAttachedTools");
         if (!toolsList) return;
 

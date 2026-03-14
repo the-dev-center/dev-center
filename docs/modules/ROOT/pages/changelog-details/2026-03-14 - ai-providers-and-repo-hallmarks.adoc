@@ -1,0 +1,9 @@
+= 2026-03-14 – AI Providers & Repo Hallmarks
+
+* Introduced `ai_providers.d` module defining profiles and registry access to major AI APIs (OpenAI, Anthropic, Gemini, Groq, Mistral).
+* Introduced `changelog_generator.d` pipeline utilizing `git log -p` and the active AI provider to draft formatted, high-level structural Asciidoc changelogs.
+* Redesigned the Repository Browser UI detail panel:
+** Converted static rigid panels into a dynamic flex layout with `hallmarkContainer`.
+** Implemented `hallmark_toolbar.d` featuring **Compound Buttons** for standard repo files (`README.md`, `changelog.adoc`). Compound buttons segment click actions (Highlight, Web View, Fast Edit, Open Default).
+** Added intelligent `.code-workspace` recognition and a `Launch Workspace` button that proxies editor startup.
+* Introduced `editor_detector.d` containing scanning logic for VSCode forks (VSCodium, Cursor, Windsurf, Trae, PearAI) via system PATH and an explicit dialog selector if multiple are found, including custom fork executable registration hooks.
