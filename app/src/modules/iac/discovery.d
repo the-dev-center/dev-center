@@ -2,9 +2,9 @@ module modules.iac.discovery;
 
 import std.algorithm : canFind;
 import std.array : array, appender;
-import std.file;
-import std.path;
-import std.string;
+import std.file : DirEntry, SpanMode, dirEntries, exists, isDir, readText;
+import std.path : absolutePath, baseName, buildPath, canonicalizePath, dirName, isAbsolute, relativePath, extension;
+import std.string : strip, startsWith, toLower;
 import std.typecons : Nullable, nullable;
 
 /// Type of IaC tooling detected for a base.
@@ -215,7 +215,7 @@ private string[] collectIacFiles(string repoRoot, string dirPath)
         if (isIacFile(entry.name))
         {
             auto rel = relativePath(entry.name, repoRoot);
-            files.put(canonicalizePath(rel));
+            files ~= canonicalizePath(rel);
         }
     }
 
@@ -235,12 +235,12 @@ private string[] collectIacFiles(string repoRoot, string dirPath)
             if (isIacFile(entry.name))
             {
                 auto rel = relativePath(entry.name, repoRoot);
-                files.put(canonicalizePath(rel));
+                files ~= canonicalizePath(rel);
             }
         }
     }
 
-    auto result = files.data;
+    auto result = files;
     result.sort;
     return result;
 }
@@ -356,8 +356,11 @@ private IacDependency[] collectDependencies(string repoRoot, const string[] conf
                 deps ~= extractTerraformDeps(relPath, content);
             }
             break;
-        default:
-            // For other tools we do not yet have dependency parsing.
+        case IacTool.pulumi:
+        case IacTool.cloudformation:
+        case IacTool.bicep:
+        case IacTool.ansible:
+        case IacTool.unknown:
             break;
     }
 
