@@ -29,7 +29,7 @@ This page is the **task-level** TODO and roadmap for the DevCentr app and its do
 * [ ] Add support for `pnpm` workspace analysis.
 * [ ] Integrate Secrets Manager (standalone client + repo-filtered UI).
 * [ ] Integrate SSH Manager (coordinator for agent providers, WSL bridge).
-* [ ] **GraphRAG Client Support**: Add support to DevCentr to connect to a standalone persistent GraphRAG D-lang indexer service.
+* [ ] **GraphRAG Client Support**: Add support to DevCentr to connect to a standalone persistent GraphRAG D-lang indexer service. Explore Unison-lang architectural models (content-addressable immutable ASTs instead of traditional text files) to potentially augment or replace standard compilation flows.
 
 == Extensibility Ecosystem (Planned)
 
@@ -42,4 +42,4 @@ This page is the **task-level** TODO and roadmap for the DevCentr app and its do
 * **Environment navigator:** Model environment hierarchy (Hardware → Hypervisor/OS → VM → Container/App), environment browser, PATH and env var editing. See xref:project-vision.adoc[Project Vision].
 * **UI:** DPI-aware / logical pixel support for consistent sizing across high-density displays (see project vision UI Specification & Roadmap).
 * **Ecosystem Streaming:** Empowering devs to publish extensions directly from their repos by streaming and local-building through DevCentr's build systems.
-* **Intelligent App Interop:** Providing integrations with GraphRAG background services (D-lang) to allow semantic understanding of codebases.
+* **Intelligent App Interop**: Providing integrations with GraphRAG background services (D-lang) to allow semantic understanding of codebases. Long-term goals include bridging into Unison-lang style paradigms (AST hashing vs pure text logic) to radically drop build times.
