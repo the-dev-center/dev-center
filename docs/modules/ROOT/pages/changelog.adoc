@@ -2,6 +2,11 @@
 
 This changelog records notable changes to the DevCentr application and its documentation. Entries are organized in reverse chronological order and kept brief. Each entry links to a more detailed changelog article where needed.
 
+== 2026-03-14 – Roadmap, Extensions & GraphRAG
+
+* Outlined vision and specifications for AI-audited extension registries, local module streaming from Git guest repos, and standalone GraphRAG client support.
+* See xref:ROOT:changelog-details/2026-03-14 - roadmap-extensions-graphrag.adoc[Detailed changelog].
+
 == 2026-03-12 – Vercel deployment and build asymmetry documentation
 
 * Standardized PNPM 10 and documented the asymmetric build strategy for Vercel monorepo deployments.

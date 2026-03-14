@@ -4,7 +4,7 @@ link:https://devcentr.org[image:https://img.shields.io/badge/site-devcentr.org-2
 
 **TL;DR:** DevCentr is an app to manage software development on Windows, macOS, and Linux+GNU.
 
-DevCentr is a **Development Orchestration Suite (DOS)**—a platform that sits a layer above the code to manage the complexity of the modern developer's world. By treating development as an integrated ecosystem rather than just a series of text files, DevCentr provides an integrated workspace and infrastructure environment designed for the future of engineering.
+DevCentr is a **Development Orchestration Suite (DOS)**—a platform (collection of apps and services) that sits a layer above the code to manage the complexity of the modern developer's world. By treating development as an integrated ecosystem rather than just a hodgepodge of siloed tools, DevCentr provides an integrated workspace and infrastructure environment designed for the future of engineering.
 
 == 🛰️ The DOS Vision
 
@@ -16,6 +16,7 @@ While traditional IDEs focus on the editor, DevCentr focuses on the **Orchestrat
 
 DevCentr is an open, extension-based platform for pure human development and emergent AI-assisted workflows.
 
+xref:ROOT:ide-history.adoc[This tool is what an IDE should have been in the first place.]
 
 == 🚀 Capabilities
 
@@ -73,3 +74,7 @@ See link:CONTRIBUTING.md[CONTRIBUTING.md].
 == Code of Conduct
 
 Eh, don't destroy things. Disagreements are fine.
+
+== Credit
+
+This project is the brain child of Ryan Johnson, a computer scientist and UX visionary based in the greater Memphis, Tennessee area.

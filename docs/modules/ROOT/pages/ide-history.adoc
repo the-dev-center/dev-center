@@ -1,0 +1,19 @@
+= What an IDE Should Have Been In The First Place
+
+2. Is this or is this not an IDE?
+No, it is not an IDE.
+
+An IDE (Integrated Development Environment) always has a text editor at its very core. Your entire workflow in an IDE assumes that the text editor is the center of the universe.
+
+DevCentr does not appear to be a text editor. It is the exact opposite of an IDE. It is an infrastructure manager that treats your text editor as just another tool it can launch and monitor. You could call it an Integrated Infrastructure Environment, but it lacks the "Development" (code typing) aspect of a traditional IDE.
+
+3. Is this what an IDE should have been in the first place?
+Yes, absolutely.
+
+The term "IDE" was created decades ago when a developer's entire "environment" consisted of just two things: a text editor and a compiler. It made sense to combine them into one window.
+
+Today, building software is much more complicated. An "environment" now includes Docker containers, package managers, separate Git clients, cloud deployments, and Virtual Machines.
+
+Modern IDEs like VS Code or Visual Studio try to handle this modern complexity by stuffing everything into side panels inside your text editor. This is why IDEs get so bloated. The text editor is trying to safely write a file while simultaneously trying to manage Docker, run a web server, and manage your Git history.
+
+DevCentr fixes this mistake. It recognizes that the text editor is just a tool, not the center of the universe. By pulling the "environment management" out of the text editor and putting it into a dedicated control panel, DevCentr lets your text editor just be a text editor, while it handles the heavy lifting of managing your computer's infrastructure.

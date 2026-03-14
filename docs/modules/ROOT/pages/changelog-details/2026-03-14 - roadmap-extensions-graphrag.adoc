@@ -1,0 +1,9 @@
+= 2026-03-14 – Roadmap, Extensions & GraphRAG
+
+Today's updates laid the roadmap for the next generation of DevCentr extensibility and codebase analysis capabilities:
+
+* **Ecosystem Streaming**: Planned a web service and extension marker system to allow extensions to be built entirely locally from guest Git repositories, bypassing traditional CI/CD overhead and package registries.
+* **AI-Audited Registry**: Planned a new marketplace backed by a hybrid graph/vector cloud DB, utilizing AI to audit extension source code for safety, correctness, and anomalous behavior.
+* **GraphRAG Support**: Updated specs and roadmap to track the planned support and integration for a standalone GraphRAG indexer service (to be built persistently in D-lang) for deep semantic codebase understanding.
+
+These changes were pushed to `todo-roadmap.adoc` and `TODO.adoc`.
