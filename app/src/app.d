@@ -327,14 +327,7 @@ class DevCenterApp {
         refreshTemplates();
         refreshProject();
 
-        // Start background discovery timer (every 10 seconds)
-        discoveryTimerId = window.setTimer(10000, delegate() {
-            string[] roots;
-            foreach (r; allRepos) roots ~= r.fullPath;
-            repoTools.discoverExternalTools(roots);
-            refreshToolsPanel();
-            return true;
-        });
+        // Start background discovery timer (TODO: implement properly with DlangUI timers in future)
 
         window.show();
     }
