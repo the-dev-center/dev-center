@@ -1,4 +1,4 @@
-module app.src.modules.repo_tools.editor_detector;
+module modules.repo_tools.editor_detector;
 
 import std.process;
 import std.file;

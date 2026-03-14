@@ -1,11 +1,11 @@
-module app.src.modules.services.changelog_generator;
+module modules.services.changelog_generator;
 
 import std.stdio;
 import std.process;
 import std.array;
 import std.string;
 
-import app.src.modules.services.ai_providers;
+import modules.services.ai_providers;
 
 struct ChangelogProposal
 {

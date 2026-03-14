@@ -1,4 +1,4 @@
-module app.src.modules.repo_tools.hallmark_toolbar;
+module modules.repo_tools.hallmark_toolbar;
 
 import dlangui;
 import std.file : exists, dirEntries, SpanMode;
@@ -6,7 +6,7 @@ import std.path : buildPath, extension;
 import std.string : endsWith;
 import std.conv : to;
 
-import app.src.modules.repo_tools.editor_detector;
+import modules.repo_tools.editor_detector;
 
 /// Creates a "Compound Button" layout that splits behavior into multiple discrete click areas.
 /// Primary text acts as the label, secondary icon buttons handle targeted actions.

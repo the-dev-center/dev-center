@@ -1,4 +1,4 @@
-module app.src.modules.services.ai_providers;
+module modules.services.ai_providers;
 
 import std.stdio;
 import std.net.curl;

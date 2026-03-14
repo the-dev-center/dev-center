@@ -1,4 +1,4 @@
-module app.src.modules.repo_tools.repo_browser;
+module modules.repo_tools.repo_browser;
 
 import std.file : dirEntries, SpanMode, exists, isDir;
 import std.path : buildPath, baseName, dirName;

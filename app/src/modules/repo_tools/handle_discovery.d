@@ -1,4 +1,4 @@
-module app.src.modules.repo_tools.handle_discovery;
+module modules.repo_tools.handle_discovery;
 
 import modules.repo_tools.registry;
 import std.conv : to;

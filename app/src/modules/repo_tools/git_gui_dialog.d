@@ -1,4 +1,4 @@
-module app.src.modules.repo_tools.git_gui_dialog;
+module modules.repo_tools.git_gui_dialog;
 
 import dlangui;
 import modules.repo_tools.git_viewers;

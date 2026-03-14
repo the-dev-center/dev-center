@@ -1,4 +1,4 @@
-module app.src.modules.repo_tools.git_viewer_indexer;
+module modules.repo_tools.git_viewer_indexer;
 
 import std.process : pipeProcess, Redirect, wait;
 import std.string : splitLines, strip, splitter;

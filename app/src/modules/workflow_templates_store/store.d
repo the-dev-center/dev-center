@@ -1,4 +1,4 @@
-module app.src.modules.workflow_templates_store.store;
+module modules.workflow_templates_store.store;
 
 import std.process : pipeProcess, wait;
 import std.path : buildPath;
