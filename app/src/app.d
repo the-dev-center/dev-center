@@ -695,8 +695,8 @@ variable "example" {
   default     = "hello"
 }
 `;
-        write(buildPath(infraDir, "main.tofu"), mainContent);
-        write(buildPath(infraDir, "variables.tofu"), varsContent);
+        std.file.write(buildPath(infraDir, "main.tofu"), mainContent);
+        std.file.write(buildPath(infraDir, "variables.tofu"), varsContent);
         window.showMessageBox(UIString.fromRaw("Infra"d), UIString.fromRaw("Created infra/ with main.tofu and variables.tofu. Open the Infra page to see it."d));
     }
 
