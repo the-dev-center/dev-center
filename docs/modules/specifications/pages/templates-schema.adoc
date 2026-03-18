@@ -1,0 +1,99 @@
+= Templates Repository Schema
+:description: Schema for the DevCentr templates repository, including versioning and preference separation.
+
+This document defines the structure and conventions for the templates repository used by DevCentr. Apply these rules when creating or maintaining a templates repo (e.g. `the-dev-center/templates` or your fork).
+
+== Overview
+
+The templates repository provides workspace configurations, `.gitignore` rules, and other project-scaffolding files. It is organized to support:
+
+* **Version history per ecosystem** — different versions of templates for the same technology.
+* **Preference-agnostic base files** — shared rules that work for everyone.
+* **Developer/team-specific preferences** — formatters, tool choices, and standards that vary by team or organization.
+
+== Folder Structure
+
+[source,text]
+----
+templates/
+├── workspaces/           # Workspace and project configs
+│   ├── _common/          # Shared across all ecosystems
+│   │   ├── .gitignore
+│   │   ├── .gitattributes
+│   │   ├── .editorconfig
+│   │   └── ...
+│   ├── d/                # Ecosystem: D language
+│   │   ├── v1/           # Version folder (optional)
+│   │   │   └── .gitignore
+│   │   └── .gitignore    # Current/evergreen
+│   ├── node/
+│   │   ├── v18/
+│   │   └── v20/
+│   └── python/
+│       ├── v3.10/
+│       └── v3.12/
+├── _base/                # Preference-agnostic base files
+│   ├── .gitattributes
+│   ├── .editorconfig
+│   └── ...
+└── _preferences/         # Team/developer-specific overlays
+    ├── dprint/           # dprint formatting standards
+    ├── prettier/         # Prettier standards
+    └── org-name/        # Organization-specific (e.g. Acme Corp)
+        └── ...
+----
+
+== Version Folders
+
+GitHub's gitignore repo uses `community/` for version-specific templates. DevCentr's templates repo uses **version folders** per ecosystem so that different versions of the same technology can coexist.
+
+* **Evergreen (current):** Files at the ecosystem root (e.g. `d/.gitignore`) represent the current supported version.
+* **Versioned:** Folders named `v<N>` or `v<major>.<minor>` (e.g. `d/v1/`, `node/v18/`) hold templates for specific versions.
+* **Discovery:** DevCentr lists both evergreen and versioned templates. Users choose the version that matches their project.
+
+Example for D:
+
+[source,text]
+----
+workspaces/d/
+├── .gitignore      # Current D ecosystem
+├── .code-workspace
+├── v1/             # D 1.x specific
+│   └── .gitignore
+└── v2/             # D 2.x specific (if needed later)
+    └── .gitignore
+----
+
+== Base vs Preferences
+
+=== _base (Preference-Agnostic)
+
+The `_base/` directory contains files that should work for everyone regardless of tool choice:
+
+* `.gitattributes` — EOL, text/binary detection. No formatter or tool-specific rules.
+* `.editorconfig` — Generic EOL and basic formatting (indent, charset). No dprint/Prettier/ESLint-specific rules.
+* Common `.gitignore` patterns — Build dirs, logs, OS junk. No tool-specific ignores (e.g. no `dprint.json` vs `.prettierrc` preference).
+
+These files are merged first when applying templates.
+
+=== _preferences (Developer/Team-Specific)
+
+The `_preferences/` directory holds overlays for specific tools or organizations:
+
+* **dprint/** — Configs and gitignore additions for teams using dprint.
+* **prettier/** — For teams using Prettier.
+* **org-name/** — Organization-specific standards (naming, required files, etc.).
+
+Users (or teams) select a preference profile when initializing or syncing. Only one preference profile is applied at a time to avoid conflicts.
+
+== Migrating _common
+
+If your current `_common/` folder contains preference-specific content (e.g. dprint config):
+
+1. Move preference-agnostic parts to `_base/`.
+2. Move tool-specific parts (dprint, Prettier, etc.) to `_preferences/<tool>/`.
+3. Keep `_common/` for truly shared ecosystem content (e.g. generic `.gitignore` that applies to all projects).
+
+== Relation to GitHub Gitignore
+
+DevCentr can use both its own templates repo and https://github.com/github/gitignore[GitHub's gitignore]. The templates repo schema above applies only to the DevCentr source. When using GitHub as a source, DevCentr follows GitHub's structure (root, Global, community). See xref:knowledge-base:reference/gitignore-template-sources.adoc[Gitignore Template Sources].

@@ -5,6 +5,7 @@
 * xref:components/repository-tools-registry.adoc[Repository Tools Registry]
 * xref:components/repository-provider-registry.adoc[Repository Provider Registry]
 * xref:components/git-viewer.adoc[Git Viewer]
+* xref:components/gitignore-viewer.adoc[Gitignore Viewer]
 * xref:components/text-editor-link-system.adoc[Text Editor Link System]
 * xref:components/code-execution-recording.adoc[Code Execution Recording]
 * xref:components/git-repository-manager.adoc[Git Repository Manager]
@@ -16,4 +17,5 @@
 * xref:features/opening-web-content-from-docs.adoc[Opening Web Content from Docs]
 * xref:features/text-editor-separate-process.adoc[Text Editor Separate Process]
 * xref:reference/definition-files.adoc[Definition Files (Services and Languages)]
+* xref:pages/templates-schema.adoc[Templates Repository Schema]
 
