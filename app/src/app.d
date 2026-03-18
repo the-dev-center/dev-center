@@ -214,7 +214,7 @@ class DevCenterApp {
                                     
                                     // Placeholder for future Readme WebView or integrated Editor
                                     VerticalLayout {
-                                        layoutWidth: fill; layoutHeight: fill; padding: 10;
+                                        id: repoPreviewContainer; layoutWidth: fill; layoutHeight: fill; padding: 10;
                                         TextWidget { text: "Select a repository to view details."; id: repoPreviewText; alignment: center; textColor: "#AAAAAA" }
                                     }
                                 }
@@ -599,7 +599,7 @@ class DevCenterApp {
         if (hallmarkContainer) {
             hallmarkContainer.removeAllChildren();
             if (selectedRepoPath.length > 0) {
-                hallmarkContainer.addChild(createRepoToolbar(window, selectedRepoPath));
+                hallmarkContainer.addChild(createRepoToolbar(window, selectedRepoPath, installer, repoTools));
             }
         }
         

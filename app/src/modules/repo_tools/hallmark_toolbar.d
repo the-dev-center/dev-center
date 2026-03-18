@@ -7,6 +7,10 @@ import std.string : endsWith;
 import std.conv : to;
 
 import modules.repo_tools.editor_detector;
+import modules.repo_tools.repo_init;
+import modules.repo_tools.gitignore_viewer_widget;
+import modules.template_installer.installer;
+import modules.repo_tools.registry;
 
 /// Creates a "Compound Button" layout that splits behavior into multiple discrete click areas.
 /// Primary text acts as the label, secondary icon buttons handle targeted actions.
@@ -107,7 +111,9 @@ void showEditorSelectorDialog(Window parentWindow, string targetPath)
 }
 
 /// Builds the hallmark strip for a specific repository.
-Widget createRepoToolbar(Window parentWindow, string repoPath)
+/// If onShowGitignoreViewer is set and .gitignore exists, adds a Gitignore compound button.
+Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller installer, RepoToolsRegistry repoTools,
+    void delegate(Window, string, TemplateInstaller) onShowGitignoreViewer = null)
 {
     HorizontalLayout bar = new HorizontalLayout("RepoToolbar");
     bar.layoutWidth(FILL_PARENT).layoutHeight(WRAP_CONTENT);
@@ -125,6 +131,65 @@ Widget createRepoToolbar(Window parentWindow, string repoPath)
         ));
     }
     
+    // GITIGNORE Hallmark
+    bool hasGitignore = exists(buildPath(repoPath, ".gitignore"));
+    if (hasGitignore) {
+        bar.addChild(createCompoundButton("Gitignore",
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Highlighting .gitignore in File Tree..."d)); return true; },
+            delegate(Widget w) {
+                auto container = parentWindow.mainWidget.childById("repoPreviewContainer");
+                if (container) {
+                    container.removeAllChildren();
+                    import modules.repo_tools.gitignore_viewer_widget;
+                    auto viewer = new GitignoreViewerWidget(repoPath, installer);
+                    auto toolRow = new HorizontalLayout();
+                    toolRow.layoutWidth(FILL_PARENT).padding(5);
+                    auto saveBtn = new Button(null, "Save"d);
+                    saveBtn.click = delegate(Widget w2) { viewer.save(); return true; };
+                    auto closeBtn = new Button(null, "Close"d);
+                    closeBtn.click = delegate(Widget w2) {
+                        container.removeAllChildren();
+                        auto def = new TextWidget(null, "Repository: "d ~ to!dstring(repoPath));
+                        def.alignment(Alignment.Center).textColor(0xAAAAAA);
+                        container.addChild(def);
+                        return true;
+                    };
+                    toolRow.addChild(saveBtn);
+                    toolRow.addChild(closeBtn);
+                    container.addChild(toolRow);
+                    container.addChild(viewer);
+                }
+                return true;
+            },
+            delegate(Widget w) {
+                auto container = parentWindow.mainWidget.childById("repoPreviewContainer");
+                if (container) {
+                    container.removeAllChildren();
+                    import modules.repo_tools.gitignore_viewer_widget;
+                    auto viewer = new GitignoreViewerWidget(repoPath, installer);
+                    auto toolRow = new HorizontalLayout();
+                    toolRow.layoutWidth(FILL_PARENT).padding(5);
+                    auto saveBtn = new Button(null, "Save"d);
+                    saveBtn.click = delegate(Widget w2) { viewer.save(); return true; };
+                    auto closeBtn = new Button(null, "Close"d);
+                    closeBtn.click = delegate(Widget w2) {
+                        container.removeAllChildren();
+                        auto def = new TextWidget(null, "Repository: "d ~ to!dstring(repoPath));
+                        def.alignment(Alignment.Center).textColor(0xAAAAAA);
+                        container.addChild(def);
+                        return true;
+                    };
+                    toolRow.addChild(saveBtn);
+                    toolRow.addChild(closeBtn);
+                    container.addChild(toolRow);
+                    container.addChild(viewer);
+                }
+                return true;
+            },
+            delegate(Widget w) { showEditorSelectorDialog(parentWindow, buildPath(repoPath, ".gitignore")); return true; }
+        ));
+    }
+
     // CHANGELOG Hallmark
     bool hasChangelog = exists(buildPath(repoPath, "changelog.adoc")) || exists(buildPath(repoPath, "docs", "modules", "ROOT", "pages", "changelog.adoc"));
     if (hasChangelog) {
@@ -135,7 +200,7 @@ Widget createRepoToolbar(Window parentWindow, string repoPath)
             delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Sending to default system text editor..."d)); return true; }
         ));
     }
-    
+
     Spacer spacer = new Spacer();
     spacer.layoutWidth(FILL_PARENT);
     bar.addChild(spacer);
@@ -200,8 +265,7 @@ Widget createRepoToolbar(Window parentWindow, string repoPath)
     btnInit.styleId = "BUTTON_TRANSPARENT";
     btnInit.textColor = 0x00AAFF;
     btnInit.click = delegate(Widget w) {
-        parentWindow.showMessageBox(UIString.fromRaw("Workspace Builder"d), 
-            UIString.fromRaw("Opening Workspace Generator... (This parses the DevCentr template repo to combine folders, extensions, and settings into a new .code-workspace vs standard .vscode/ depending on scope isolation needs)"d));
+        showRepoInitDialog(parentWindow, repoPath, installer);
         return true;
     };
     btnsArea.addChild(btnInit);
