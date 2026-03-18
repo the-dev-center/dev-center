@@ -1,0 +1,74 @@
+= Gitignore Template Sources
+:description: How different template sources (DevCentr, GitHub, local) organize and provide gitignore templates.
+
+DevCentr supports multiple sources for `.gitignore` templates. This page explains how each source works and why templates are organized differently.
+
+== Template Source Options
+
+|===
+| Source | Description | Use Case
+
+| **DevCentr**
+| Templates from the DevCentr templates repository (e.g. `the-dev-center/templates`). Uses whitelist strategy and ecosystem-specific merges.
+| Project-specific setup with whitelist defaults, team standards.
+
+| **GitHub**
+| Templates from link:https://github.com/github/gitignore[github/gitignore]. Industry-standard collection.
+| Broad compatibility, language/tool coverage, familiar to most developers.
+
+| **Local**
+| Templates from a folder on your machine (e.g. a cloned or copied set of gitignore files).
+| Custom or private templates not in a remote repo.
+|===
+
+== Why GitHub Uses Root vs Global vs Community
+
+The link:https://github.com/github/gitignore[GitHub gitignore repository] organizes templates into three areas. Understanding this helps you pick the right template.
+
+=== Root Folder (Base Templates)
+
+Templates at the **root** of the repo (e.g. `VisualStudio.gitignore`, `Node.gitignore`) are for **programming languages and core technologies** in common use. They define a meaningful starter set of rules for popular stacks.
+
+* **Use when:** Your project uses that language or framework as its primary stack.
+* **Example:** `VisualStudio.gitignore` for .NET/C# projects.
+
+=== Global Folder
+
+Templates in the `Global/` directory (e.g. `VisualStudioCode.gitignore`, `Windows.gitignore`) are for **editors, tools, and operating systems** that apply across many projects. GitHub recommends adding these to your *global* gitignore (so they apply to all repos) or merging them into project-specific templates when you want them permanently.
+
+* **Use when:** You use that editor/tool/OS and want its patterns in your project (or in your global config).
+* **Example:** `VisualStudioCode.gitignore` for VS Code workspace/extension artifacts.
+
+=== Community Folder
+
+Templates in `community/` are for **specialized frameworks, version-specific templates, or niche tools** that are not mainstream enough for the root. These should be added when you decide to adopt that framework.
+
+* **Use when:** Your project uses a less common or version-specific stack.
+* **Example:** `community/DotNet/InforCRM.gitignore`.
+
+=== Summary: Root vs Global
+
+|===
+| Location | Purpose | Typical Content
+
+| **Root**
+| Popular languages and core technologies
+| VisualStudio, Node, Python, Go, Rust, etc.
+
+| **Global**
+| Editors, tools, operating systems
+| VisualStudioCode, Windows, macOS, JetBrains, etc.
+|===
+
+The split exists because: root = "what your project is built with"; Global = "what environment/tools you use while developing." A .NET project might use `VisualStudio.gitignore` (root) plus `Windows.gitignore` (Global) if you develop on Windows.
+
+== Implementation in DevCentr
+
+When you use the Init Repo or Gitignore Viewer:
+
+* Select a **template source** (DevCentr, GitHub, or Local).
+* DevCentr fetches and merges templates from that source.
+* You can compare your project's `.gitignore` to a template and see missing items (with strikethrough).
+* Suppress warnings for lines you intentionally omit; suppressions are stored in `.devcentr.sdl` under `gitignore.suppressMissing`.
+
+See xref:specifications:per-repo-settings.adoc[Per-Repository Settings] for the suppression format.
