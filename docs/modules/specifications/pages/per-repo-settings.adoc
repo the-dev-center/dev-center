@@ -37,6 +37,23 @@ Example placeholder (no behavior assigned yet):
 // Keys and structure TBD as features need them.
 ```
 
+== Gitignore Suppressions
+
+When the Gitignore Viewer compares your `.gitignore` to a template, it may warn about patterns that exist in the template but are missing from your file. You can suppress these warnings for patterns you intentionally omit.
+
+Add a `gitignore` tag with nested `suppressMissing` entries. Each entry is a pattern (or line) from the template that you do not want to be warned about:
+
+```
+gitignore {
+  suppressMissing [
+    "build/"
+    "*.log"
+  ]
+}
+```
+
+Patterns are matched exactly against template lines. Suppressions are stored in `.devcentr.sdl` at the repository root and can be committed so the team shares the same suppression set.
+
 == Relation to other config
 
 * **User config:** `%USERPROFILE%\Dev Center` (or equivalent) holds user- and machine-specific settings; see project vision.
