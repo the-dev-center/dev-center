@@ -1,0 +1,48 @@
+= Gitignore Viewer
+:description: Specification for the integrated .gitignore editor and template comparison view.
+
+== Overview
+
+The Gitignore Viewer is a side-panel tool in the project browser that lets you edit and model `.gitignore` files. It combines a text editor with a technology model and template comparison to help you keep your ignore rules in sync with standards.
+
+== Features (Planned)
+
+=== Layout
+
+* **Left:** Minimap (reusable) — A miniature preview of the document, like VS Code's minimap. Shows the visible region and supports click/drag to navigate. This component will be reusable for other editors.
+* **Center:** Plain-text editor — Edit the `.gitignore` content directly.
+* **Right:** Model view — A tree of technologies recognized in the open gitignore. When the user clicks a technology, the related lines in the editor are highlighted (whole line).
+* **Bottom right:** Template comparison — Tabs for template sources (DevCentr, GitHub, Local). Each tab shows the template code for the selected technology; missing items in the project's gitignore are shown with strikethrough.
+
+=== Technology Recognition
+
+The model parses gitignore comments and patterns to infer technologies (e.g. Node, Python, build/, .env). A line can map to multiple technologies (e.g. `build/` shared across ecosystems). Clicking a technology highlights all related lines.
+
+=== Template Comparison
+
+* Load a template from the selected source for the chosen technology.
+* Compare project gitignore to template; missing items get strikethrough.
+* Users can suppress warnings for intentionally omitted lines.
+* Suppressions are stored in `.devcentr.sdl` under `gitignore.suppressMissing`.
+
+=== Integration
+
+* Available in the side-panel of the project viewer when a repo is selected.
+* Accessible from the hallmark toolbar or a dedicated ".gitignore" compound button.
+* Can be opened from the Init Repo dialog for comparison during setup.
+
+== Implementation Status
+
+* [ ] Reusable minimap widget
+* [ ] Gitignore text editor with line highlighting
+* [ ] Technology model (parse gitignore, build tree)
+* [ ] Template source tabs and comparison
+* [ ] Strikethrough for missing items
+* [ ] Suppression persistence in .devcentr.sdl
+* [ ] Side-panel integration
+
+== Related
+
+* xref:knowledge-base:reference/gitignore-template-sources.adoc[Gitignore Template Sources] — DevCentr vs GitHub vs local
+* xref:per-repo-settings.adoc[Per-Repository Settings] — `gitignore.suppressMissing` format
+* xref:gitignore-whitelist.adoc[Gitignore Whitelist Strategy] — Asterisk strategy

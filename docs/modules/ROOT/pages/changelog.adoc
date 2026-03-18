@@ -2,6 +2,24 @@
 
 This changelog records notable changes to the DevCentr application and its documentation. Entries are organized in reverse chronological order and kept brief. Each entry links to a more detailed changelog article where needed.
 
+== 2026-03-18 – Gitignore Templates, EOL, and Templates Schema
+
+* Added GitHub gitignore (link:https://github.com/github/gitignore[github/gitignore]) as a template source alongside DevCentr in the Init Repo flow. Users can select source (DevCentr or GitHub) and merge templates from either.
+* Documented GitHub's base vs Global vs community layout in xref:knowledge-base:reference/gitignore-template-sources.adoc[Gitignore Template Sources]. Root = languages/core tech; Global = editors/tools/OS.
+* Added `.editorconfig` tab and default template to Init Repo (LF with CRLF overrides for `.bat`, `.cmd`, `.reg`). Repo init now writes `.gitattributes`, `.gitignore`, and `.editorconfig`.
+* Updated xref:knowledge-base:reference/git-management.adoc[Git Management]: clarified `core.autocrlf input` vs `false`, when each applies, and EditorConfig step.
+* Added xref:knowledge-base:reference/windows-eol-exceptions.adoc[Windows EOL Exceptions] for batch, registry, PowerShell, Visual Studio.
+* Defined xref:specifications:templates-schema.adoc[Templates Schema]: version folders per ecosystem, `_base` (preference-agnostic), `_preferences` (team/tool-specific).
+* Per-repo settings: documented `gitignore.suppressMissing` for suppressing template comparison warnings.
+* Gitignore Viewer implemented: reusable minimap, technology tree, template comparison with DevCentr/GitHub/Local tabs, missing-item strikethrough (red), Suppress button storing in `.devcentr.sdl`, side-panel integration via hallmark toolbar.
+* See xref:ROOT:changelog-details/2026-03-18 - gitignore-templates-and-eol.adoc[Detailed changelog].
+
+== 2026-03-17 – Winget Registration Documentation
+
+* Added comprehensive guides for manual and automated Winget app registration, including `wingetcreate` usage, GitHub PAT requirements, and Windows-runner workarounds for Linux-based CI/CD pipelines.
+* Integrated in-app Winget support module in `VersionControlWidget`, providing direct links to documentation and local `wingetcreate` availability checks.
+* See xref:ROOT:changelog-details/2026-03-17 - winget-registration-docs.adoc[Detailed changelog].
+
 == 2026-03-14 – AI Providers, Changelog Generation, and Repo Hallmarks
 
 * Added AI provider API key workflows, integrated a git-diff based changelog generator service, and implemented a compound-button hallmark toolbar to access standard repository roots and multiple IDE forks automatically.

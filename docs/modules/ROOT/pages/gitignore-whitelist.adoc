@@ -1,0 +1,52 @@
+= Gitignore Whitelist Strategy
+:description: Using the asterisk strategy to treat .gitignore as a whitelist for cleaner repository roots.
+
+In complex development environments, repository roots often become cluttered with build artifacts, logs, temporary files, and tool-specific configurations. The traditional "blacklist" approach to `.gitignore` requires you to constantly add new patterns as you encounter new junk files.
+
+A more robust and "subtly brilliant" strategy is to treat `.gitignore` as a **whitelist** by default.
+
+== The Asterisk Strategy
+
+The core of this strategy is to ignore everything by default and then selectively allow only what you want to track.
+
+[source,gitignore]
+----
+# Ignore everything
+*
+
+# Allow the .gitignore itself
+!.gitignore
+
+# Allow essential project files
+!README.adoc
+!LICENSE
+!package.json
+!app/
+!docs/
+!src/
+----
+
+== Why Use This?
+
+1. **Clean Repository Root**: It prevents accidental commits of logs, binaries, or "junk" that tools might dump in your root.
+2. **Deterministic State**: You know exactly what is being tracked. If a new file is added, git won't see it unless you explicitly allow it (or force add it).
+3. **Reduced Maintenance**: Instead of chasing a never-ending list of build artifacts from various tools (node_modules, build/, bin/, .obj, etc.), you only focus on your source code.
+
+== Best of Both Worlds
+
+You don't have to be strictly whitelist-only. You can still use blacklist rules for common assets nested within directories that are otherwise whitelisted.
+
+[source,gitignore]
+----
+# Allow the app directory
+!app/
+
+# But ignore common junk inside the app directory
+**/build/
+**/*.log
+**/.DS_Store
+----
+
+== Implementation in DevCentr
+
+The DevCentr "Init Repo" flow automatically sets up this strategy for you, merging it with ecosystem-specific templates (like D, Python, or Node.js) to ensure your repository stays sane and deterministic from day one.

@@ -1,0 +1,47 @@
+= 2026-03-18 – Gitignore Template Sources, EOL Configuration, and Templates Schema
+:description: GitHub gitignore as template source, Windows EOL exceptions, templates repo schema, and per-repo settings.
+
+== Summary
+
+This update adds support for multiple gitignore template sources (DevCentr, GitHub, local), documents line-ending configuration and Windows-specific exceptions, and defines a new templates repository schema with version folders and preference separation.
+
+== Gitignore Template Sources
+
+* **DevCentr source:** Existing whitelist strategy with ecosystem-specific merges from the templates repo.
+* **GitHub source:** Added support for link:https://github.com/github/gitignore[github/gitignore] as a template source. DevCentr caches the repo under `~/.dev-center/github-gitignore` and surfaces root, Global, and community templates.
+* **Init Repo dialog:** Template source selector (DevCentr vs GitHub) with source-specific template lists. When GitHub is selected, a scrollable list of templates (root, Global, community) appears for selection.
+
+== GitHub Base vs Global Structure
+
+Documented in xref:knowledge-base:reference/gitignore-template-sources.adoc[Gitignore Template Sources]:
+
+* **Root:** Programming languages and core technologies (e.g. VisualStudio, Node, Python).
+* **Global:** Editors, tools, and operating systems (e.g. VisualStudioCode, Windows). GitHub recommends these for global gitignore or permanent project merges.
+* **community:** Specialized or version-specific templates.
+
+== Line Endings and Windows Exceptions
+
+* **git-management.adoc:** Expanded with "Choosing input vs false" guidance and when `core.autocrlf input` makes sense on Windows.
+* **EditorConfig:** Added Step 4 with `.editorconfig` for cross-editor EOL enforcement and CRLF overrides for `.bat`, `.cmd`, `.reg`.
+* **windows-eol-exceptions.adoc:** New reference documenting when LF breaks on Windows (batch files, registry files, PowerShell, Visual Studio) and EditorConfig overrides.
+* **Init Repo:** Added `.editorconfig` tab with default content including Windows exceptions. Initialize flow now writes `.editorconfig`.
+
+== Templates Schema
+
+* **templates-schema.adoc:** New specification for the templates repository:
+** Version folders per ecosystem (e.g. `d/v1/`, `node/v18/`) for version history.
+** `_base/` for preference-agnostic files (no dprint/Prettier specifics).
+** `_preferences/` for developer/team overlays (dprint, prettier, org-name).
+** Migration path from current `_common/` layout.
+
+== Per-Repository Settings
+
+* **gitignore.suppressMissing:** Documented in per-repo-settings.adoc for suppressing template-comparison warnings. Stored in `.devcentr.sdl`.
+
+== Gitignore Viewer (Implemented)
+
+* **Reusable MinimapWidget:** Miniature document preview with click/drag to scroll. API: `setText()`, `setVisibleRegion()`, `onScrollRequested()`.
+* **GitignoreViewerWidget:** Layout: minimap | plaintext editor | (technology tree + template comparison). Opens in side-panel when user clicks Gitignore View/Edit in hallmark toolbar.
+* **Technology tree:** Parses `.gitignore` to recognize Node, Python, D, Rust, Go, Build, Logs, Env, IDE, OS. Clicking a technology highlights related lines in the editor.
+* **Template comparison:** Tabs for DevCentr, GitHub, Local. Missing template lines shown in red; suppressed (stored in `.devcentr.sdl`) in gray. "Suppress" button per missing line.
+* **Integration:** Gitignore compound button added to hallmark when `.gitignore` exists. Save and Close buttons in viewer toolbar.
