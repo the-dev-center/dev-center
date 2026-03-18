@@ -15,6 +15,7 @@
 * xref:how-to/github-pages-custom-domain.adoc[GitHub Pages Custom Domain]
 * xref:how-to/git-release-workflow.adoc[Git Release Workflow]
 * xref:how-to/automated-releases.adoc[Automated Releases]
+* xref:how-to/winget-registration.adoc[Winget Registration]
 
 .📚 Reference
 * xref:reference/index.adoc[Overview]
@@ -26,6 +27,8 @@
 * xref:reference/nodejs-env.adoc[Node.js Environment]
 * xref:reference/asciidoc-tools.adoc[AsciiDoc Tooling]
 * xref:reference/package-registries.adoc[Package Registries]
+* xref:reference/gitignore-template-sources.adoc[Gitignore Template Sources]
+* xref:reference/windows-eol-exceptions.adoc[Windows EOL Exceptions]
 
 .🧠 Explanation
 * xref:explanation/index.adoc[Overview]

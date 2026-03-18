@@ -1,0 +1,115 @@
+= Windows Line Ending Exceptions
+:description: When forcing LF breaks files on Windows and what to do instead.
+
+Most modern development uses LF everywhere. Some Windows-specific files, however, **must** use CRLF or they fail. This page explains which ones and how to configure them.
+
+== Tool Defaults on Windows
+
+| Tool / Environment | Default EOL on Windows
+| VS Code | CRLF for new files. Detects existing line endings on open.
+| Visual Studio | CRLF strictly. Often struggles to preserve LF unless forced via `.editorconfig`.
+| JetBrains (IntelliJ, etc.) | System-dependent (CRLF). Can be toggled to Unix (LF) in global settings.
+| Git for Windows | CRLF in the working directory (via `core.autocrlf=true` default).
+| Notepad | Supports both; defaults to CRLF.
+
+== The "LF Everywhere" Trend
+
+Most modern development (Web, Node.js, Open Source) enforces **LF** for cross-platform consistency:
+
+* **Formatters:** Prettier and ESLint default to LF and often flag CRLF as an error.
+* **Build tools:** Shell scripts (`.sh`), Dockerfiles, and CI/CD (GitHub Actions, GitLab CI) require LF.
+* **Compilers:** Rust, Go, Clang are usually agnostic, but metadata files like `Cargo.lock` often default to LF.
+
+== Configuration for LF on Windows
+
+To align Windows development with this trend:
+
+1. **Git:** Disable automatic conversion and enforce input normalization.
++
+[source,bash]
+----
+git config --global core.autocrlf input
+----
+
+2. **EditorConfig:** Force EOL across all editors. Put `.editorconfig` in the project root:
++
+[source,ini]
+----
+[*]
+end_of_line = lf
+insert_final_newline = true
+----
+
+3. **VS Code:** Set `files.eol` to `\n` for new files.
+
+== When LF Breaks on Windows
+
+Some components fail or behave unpredictably with LF instead of CRLF.
+
+=== Batch Files (`.bat`, `.cmd`)
+
+* **Status:** Strictly broken.
+* **Behavior:** `cmd.exe` often fails to parse multi-line logic (IF/ELSE, FOR loops) with LF. Errors like "The system cannot find the drive specified" or silent failures can occur.
+* **Configurability:** None. Batch files must use CRLF.
+
+=== PowerShell Scripts (`.ps1`)
+
+* **Status:** Partially broken / context-dependent.
+* **Behavior:** Modern PowerShell (v7+) usually runs LF scripts, but the shebang line (`#!`) for cross-platform use must end in LF. Legacy Windows modules or redirection may inject or expect CRLF.
+* **Configurability:** Script-level; no global lock to LF.
+
+=== Visual Studio (2022 / 2026)
+
+* **Status:** Configurable but buggy.
+* **Behavior:** Built around CRLF. `.editorconfig` with `end_of_line = lf` helps, but:
+** Copilot/AI tools may inject LF into CRLF files (or vice versa), causing mixed-line-ending warnings.
+** Resource files (`.rc`) can become corrupted or fail to compile without CRLF.
+** IntelliSense can break or offset in LF files.
+* **Configurability:** Use `.editorconfig` and disable "Inconsistent Line Endings" in Tools > Options.
+
+=== Windows Registry Files (`.reg`)
+
+* **Status:** Highly sensitive.
+* **Behavior:** Registry files must be encoded correctly (typically UTF-16 LE with BOM) and usually require CRLF. Importing with LF can fail with "The specified file is not a registry script".
+* **Configurability:** None. Always use CRLF for `.reg` files.
+
+=== Standard Windows Notepad
+
+* **Status:** Functional (modern) / broken (legacy).
+* **Behavior:** Modern Notepad (Windows 10/11) supports LF. Legacy `notepad.exe` in older environments or WinPE may treat LF-only files as a single long line.
+* **Configurability:** Modern Notepad can toggle EOL in the status bar but cannot be globally locked to LF. DevCentr does not target legacy notepad.exe.
+
+== Summary
+
+| Tool | EOL=LF result | Configurability
+| Batch scripts (`.bat`, `.cmd`) | Breaks execution | None
+| Registry files (`.reg`) | Import fails | None
+| PowerShell (`.ps1`) | Works (usually) | Script-level
+| Visual Studio | Mixed warnings / bugs | `.editorconfig`
+| Legacy Notepad | UI layout breaks | None
+
+== EditorConfig Overrides for Exceptions
+
+Use `.editorconfig` to force CRLF only where necessary:
+
+[source,ini]
+----
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.bat]
+end_of_line = crlf
+
+[*.cmd]
+end_of_line = crlf
+
+[*.reg]
+end_of_line = crlf
+
+[*.ps1]
+# Optional: keep lf for shebang compatibility; use crlf if you hit redirection issues
+# end_of_line = crlf
+----
+
+Tools that generate batch files, `.reg` files, or other Windows-specific assets should configure them to use CRLF when writing to disk.

@@ -66,9 +66,38 @@ Configure your editor to use LF so new and saved files stay LF and match Git. In
 Editor Eol only affects new files or files when you save. For existing files, change line endings in the editor (e.g. in VS Code use the status bar "CRLF"/"LF" control) if needed.
 ====
 
+==== Step 4: Use EditorConfig for Cross-Editor Consistency
+
+Put a `.editorconfig` in the project root to force EOL across all editors (VS Code, Visual Studio, JetBrains, etc.):
+
+[source,ini]
+----
+[*]
+end_of_line = lf
+insert_final_newline = true
+----
+
+Some Windows-specific files must use CRLF. Add overrides for them:
+
+[source,ini]
+----
+[*.bat]
+end_of_line = crlf
+
+[*.cmd]
+end_of_line = crlf
+
+[*.reg]
+end_of_line = crlf
+----
+
+See xref:reference/windows-eol-exceptions.adoc[Windows EOL Exceptions] for details.
+
 === Alternative: `core.autocrlf input`
 
-If you want Git to normalize line endings only on commit (CRLF→LF) and not on checkout, set `core.autocrlf` to `input`. Your working tree can then stay CRLF on Windows if you prefer; the repository will store LF. Use this if you explicitly want checkout-to-disk as "native" but still want commits normalized to LF.
+If you want Git to normalize line endings only on commit (CRLF→LF) and not on checkout, set `core.autocrlf` to `input`. Your working tree can then stay CRLF on Windows if you prefer; the repository will store LF.
+
+**When to use `input` instead of `false`:** On Windows, many tools (VS Code, Visual Studio, JetBrains, Git for Windows installer) default to CRLF. If you prefer to avoid forcing LF in your working tree and only want commits normalized to LF, `input` is a good choice. It normalizes on commit while leaving checkout behavior alone.
 
 .Global:
 [source,bash]
@@ -219,6 +248,8 @@ personal  git@github.com:YourUsername/project-name.git (push)
 
 == Related Topics
 
+* xref:reference/windows-eol-exceptions.adoc[Windows EOL Exceptions] - When LF breaks on Windows (batch, registry, etc.)
+* xref:reference/gitignore-template-sources.adoc[Gitignore Template Sources] - DevCentr vs GitHub vs local
 * xref:how-to/git-ignore-local.adoc[.gitignore.local Convention] - Local ignore files
 * xref:explanation/infrastructure/git-branching.adoc[Branching Strategies] - Git flow, trunk-based development
 * xref:how-to/git-hooks.adoc[Git Hooks] - Automation via commit hooks
