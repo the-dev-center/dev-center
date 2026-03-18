@@ -40,6 +40,56 @@ class TemplateInstaller
         this.templatesRepoUrl = templatesRepoUrl;
     }
 
+    /// Returns the path to the template cache.
+    @property string cachePath() const { return cacheRoot; }
+
+    /// Path to cached github/gitignore repo (sibling of templates cache).
+    @property string githubGitIgnorePath() const
+    {
+        return buildPath(dirName(cacheRoot), "github-gitignore");
+    }
+
+    /// Ensures github/gitignore is cloned and up to date. Returns true on success.
+    bool ensureGitHubGitIgnoreCache(bool forceful = false)
+    {
+        auto path = githubGitIgnorePath;
+        auto metadataPath = buildPath(path, ".git");
+        bool needsSync = forceful || !exists(metadataPath);
+        if (!needsSync)
+        {
+            try
+            {
+                auto meta = buildPath(dirName(path), "github-gitignore-metadata.json");
+                if (exists(meta))
+                {
+                    auto content = readText(meta);
+                    auto json = parseJSON(content);
+                    auto lastStr = json["lastUpdated"].str;
+                    auto last = SysTime.fromISOExtString(lastStr);
+                    if (Clock.currTime() - last > hours(24)) needsSync = true;
+                }
+                else needsSync = true;
+            }
+            catch (Exception) { needsSync = true; }
+        }
+        if (!needsSync) return true;
+        mkdirRecurse(dirName(path));
+        if (!exists(path))
+        {
+            auto r = execute(["git", "clone", "--depth", "1", "https://github.com/github/gitignore.git", path]);
+            if (r.status != 0) return false;
+        }
+        else
+        {
+            auto r = execute(["git", "-C", path, "pull"]);
+            if (r.status != 0) return false;
+        }
+        JSONValue metadata;
+        metadata["lastUpdated"] = JSONValue(Clock.currTime().toISOExtString());
+        write(buildPath(dirName(path), "github-gitignore-metadata.json"), metadata.toString());
+        return true;
+    }
+
     /// Ensures the template cache is up to date.
     /// If forceful is false, only updates if 24 hours have passed since last update.
     bool updateCache(bool forceful = false)
