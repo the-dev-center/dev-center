@@ -110,6 +110,7 @@ The repository browser exposes context menus on hosts, owners, and repositories:
 *** `GitHub settings` (when provider is GitHub).
 *** `GitLab settings` (when provider is GitLab).
 ** These entries open the provider settings UI described in xref:components/repository-provider-registry.adoc[Repository Provider Registry] and provider profile docs.
+** *Organization profile:* When an owner is selected, the side-panel shows an Organization Profile section (for providers that support it: GitHub, GitLab, Gitea). Buttons open the org's public and private/member profile pages on the provider, open the profile repos (e.g. `.github`, `.github-private`) in the browser, and highlight local copies of those repos in the project tree. Profile repo names and README paths are defined per provider in `profiles.json5`; see xref:knowledge-base:reference/vcs-provider-profiles.adoc[VCS Provider Profiles].
 * *Repository node / row:*
 ** Open in file explorer.
 ** Open in terminal.

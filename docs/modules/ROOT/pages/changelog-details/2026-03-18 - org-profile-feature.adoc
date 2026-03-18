@@ -1,0 +1,43 @@
+= 2026-03-18 – Organization Profile Feature in Repository Browser
+
+* Organization profile support added to the Browse Projects side-panel when an owner (organization) is selected in the project tree.
+* Provider-specific profile configuration stored in `app/src/modules/vcs/profiles.json5` (GitHub, GitLab, Gitea).
+* Buttons to open public and private/member profile pages on the provider (e.g. `?view_as=public`, `?view_as=member` for GitHub).
+* Buttons to open profile repos in the browser (e.g. `org/.github`, `org/.github-private` for GitHub).
+* Button to highlight local copies of profile repos in the project tree.
+
+== Details
+
+=== Provider Profiles (profiles.json5)
+
+Each provider that supports organization-level profile READMEs has an `orgProfile` section defining:
+
+* `publicRepo` — Repository name for the public profile (e.g. `.github` for GitHub, `gitlab-profile` for GitLab).
+* `privateRepo` — Repository name for member-only profile (e.g. `.github-private` for GitHub); `null` if not supported (GitLab has a single profile).
+* `readmePath` — Path to the README within the repo (e.g. `profile/README.md` for GitHub, `README.md` for GitLab).
+* `readmeFormat` — Format of the README (e.g. `markdown`).
+* `baseUrl` — Template for the org URL with `{org}` and `{host}` placeholders.
+* `publicViewParam` / `memberViewParam` — Query params for profile page views (e.g. `?view_as=public`, `?view_as=member` for GitHub).
+
+=== GitHub
+
+* Public: `org/.github` (must be public), README at `profile/README.md`.
+* Private: `org/.github-private`, README at `profile/README.md`.
+* Profile URLs: `https://github.com/{org}?view_as=public`, `https://github.com/{org}?view_as=member`.
+
+=== GitLab
+
+* Single profile: `gitlab-profile` repo, README at root `README.md`.
+* No separate public/private profile repos.
+
+=== Gitea
+
+* Public: `org/.profile`, README at root.
+* Private: `org/.profile-private`, README at root.
+
+=== UI Flow
+
+1. User clicks an owner (organization) in the Browse Projects tree.
+2. If the provider supports org profiles, the side-panel shows an "Organization Profile" section.
+3. Buttons: Open Public Profile, Open Private Profile, Open Public Profile Repo, Open Private Profile Repo (when supported), Highlight Profile Repos in Tree.
+4. "Highlight" selects the first locally cloned profile repo in the tree.

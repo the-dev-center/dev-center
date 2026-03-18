@@ -28,6 +28,7 @@
 * xref:reference/asciidoc-tools.adoc[AsciiDoc Tooling]
 * xref:reference/package-registries.adoc[Package Registries]
 * xref:reference/gitignore-template-sources.adoc[Gitignore Template Sources]
+* xref:reference/vcs-provider-profiles.adoc[VCS Provider Profiles]
 * xref:reference/windows-eol-exceptions.adoc[Windows EOL Exceptions]
 
 .🧠 Explanation

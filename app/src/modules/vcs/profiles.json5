@@ -1,0 +1,60 @@
+{
+  "github": {
+    "displayName": "GitHub",
+    "hostPattern": "github.com",
+    "release": {
+      "markCommand": "gh release create {tag} --title \"{title}\" --notes \"{notes}\"",
+      "viewUrl": "https://github.com/{owner}/{repo}/releases"
+    },
+    "orgProfile": {
+      "publicRepo": ".github",
+      "privateRepo": ".github-private",
+      "readmePath": "profile/README.md",
+      "readmeFormat": "markdown",
+      "baseUrl": "https://github.com/{org}",
+      "publicViewParam": "?view_as=public",
+      "memberViewParam": "?view_as=member"
+    }
+  },
+  "gitlab": {
+    "displayName": "GitLab",
+    "hostPattern": "gitlab.com",
+    "release": {
+      "markCommand": "glab release create {tag} --name \"{title}\" --notes \"{notes}\"",
+      "viewUrl": "https://{host}/{owner}/{repo}/-/releases"
+    },
+    "orgProfile": {
+      "publicRepo": "gitlab-profile",
+      "privateRepo": null,
+      "readmePath": "README.md",
+      "readmeFormat": "markdown",
+      "baseUrl": "https://{host}/{org}",
+      "publicViewParam": "",
+      "memberViewParam": ""
+    }
+  },
+  "gitea": {
+    "displayName": "Gitea",
+    "hostPattern": "gitea.com",
+    "release": {
+      "markCommand": "git tag -a {tag} -m \"{title}\n\n{notes}\" && git push origin {tag}",
+      "viewUrl": "https://{host}/{owner}/{repo}/releases"
+    },
+    "orgProfile": {
+      "publicRepo": ".profile",
+      "privateRepo": ".profile-private",
+      "readmePath": "README.md",
+      "readmeFormat": "markdown",
+      "baseUrl": "https://{host}/{org}",
+      "publicViewParam": "",
+      "memberViewParam": ""
+    }
+  },
+  "generic": {
+    "displayName": "Generic Git",
+    "release": {
+      "markCommand": "git tag -a {tag} -m \"{title}\n\n{notes}\" && git push origin {tag}",
+      "viewUrl": ""
+    }
+  }
+}

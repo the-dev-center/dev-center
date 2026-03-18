@@ -16,6 +16,8 @@ import modules.workflow_templates_store.browser;
 import modules.workflow_templates_store.store;
 import modules.infra.discovery : discoverInfra, InfraDiscoveryMode, InfraDiscoverySummary;
 import modules.infra.ui : InfraDiscoveryPanel, openUrlInBrowser;
+import modules.vcs.vcs_profiles : loadProfilesJson, getProviderForHost, hasOrgProfileSupport, orgProfilePublicUrl, orgProfileMemberUrl, orgProfilePublicRepoUrl, orgProfilePrivateRepoUrl, VCSProviderProfile;
+import std.json : JSONValue;
 import std.stdio;
 import std.path;
 import std.file;
@@ -38,6 +40,12 @@ class DevCenterApp {
     RepoNode[] allRepos;      /// Cached scan results
     RepoNode[] filteredRepos; /// After search filter
     string selectedRepoPath;  /// Currently selected repo
+    string selectedHost;      /// When owner/org selected
+    string selectedOwner;     /// When org selected (for profile panel)
+    enum BrowserItemType { host, owner, repo }
+    struct BrowserItem { BrowserItemType type; string host; string owner; RepoNode repo; }
+    BrowserItem[] browserItems; /// Maps list index to item type
+    JSONValue vcsProfiles;     /// Loaded from profiles.json5
     uint discoveryTimerId;    /// Background tool-discovery timer
 
     StringListAdapter templateAdapter;
@@ -81,6 +89,9 @@ class DevCenterApp {
         }
 
         projectManager = new ProjectWorkspaceManager(projectRoot, recognizer);
+
+        string vcsProfilesPath = buildPath(projectRoot, "src", "modules", "vcs", "profiles.json5");
+        vcsProfiles = loadProfilesJson(vcsProfilesPath);
 
         templateAdapter = new StringListAdapter();
         repoAdapter = new StringListAdapter();
@@ -201,6 +212,8 @@ class DevCenterApp {
                                 // Placeholder layout where the Hallmark Toolbar will be injected
                                 VerticalLayout { id: hallmarkContainer; layoutWidth: fill; layoutHeight: WRAP_CONTENT; }
 
+                                VerticalLayout { id: orgProfileContainer; layoutWidth: fill; layoutHeight: WRAP_CONTENT; }
+
                                 HorizontalLayout {
                                     layoutWidth: fill; layoutHeight: fill;
                                     
@@ -298,8 +311,11 @@ class DevCenterApp {
         auto listRepos = window.mainWidget.childById!ListWidget("listRepos");
         listRepos.adapter = repoAdapter;
         listRepos.itemClick = delegate(Widget source, int itemIndex) {
-            if (itemIndex >= 0 && itemIndex < filteredRepos.length) {
-                selectedRepoPath = filteredRepos[itemIndex].fullPath;
+            if (itemIndex >= 0 && itemIndex < browserItems.length) {
+                auto bi = browserItems[itemIndex];
+                selectedHost = bi.host;
+                selectedOwner = bi.owner;
+                selectedRepoPath = (bi.type == BrowserItemType.repo) ? bi.repo.fullPath : "";
                 refreshToolsPanel();
             }
             return true;
@@ -528,6 +544,7 @@ class DevCenterApp {
 
     void refreshRepoList() {
         repoAdapter.clear();
+        browserItems.length = 0;
 
         // Scan on first call
         if (allRepos.length == 0)
@@ -550,6 +567,7 @@ class DevCenterApp {
             if (repo.host != lastHost)
             {
                 repoAdapter.add(to!dstring("▸ " ~ repo.host));
+                browserItems ~= BrowserItem(BrowserItemType.host, repo.host, "", RepoNode.init);
                 lastHost = repo.host;
                 lastOwner = ""; // reset owner on new host
             }
@@ -559,6 +577,7 @@ class DevCenterApp {
             {
                 string ownerPrefix = repo.isClone ? "  ▸ .clones/" : "  ▸ ";
                 repoAdapter.add(to!dstring(ownerPrefix ~ repo.owner));
+                browserItems ~= BrowserItem(BrowserItemType.owner, repo.host, repo.owner, RepoNode.init);
                 lastOwner = repo.owner;
             }
 
@@ -590,6 +609,7 @@ class DevCenterApp {
             }
 
             repoAdapter.add(to!dstring(label));
+            browserItems ~= BrowserItem(BrowserItemType.repo, repo.host, repo.owner, repo);
         }
     }
 
@@ -602,10 +622,78 @@ class DevCenterApp {
                 hallmarkContainer.addChild(createRepoToolbar(window, selectedRepoPath, installer, repoTools));
             }
         }
+
+        // --- Setup Org Profile Panel (when owner/org selected) ---
+        auto orgProfileContainer = window.mainWidget.childById!VerticalLayout("orgProfileContainer");
+        if (orgProfileContainer) {
+            orgProfileContainer.removeAllChildren();
+            if (selectedOwner.length > 0 && selectedHost.length > 0 && selectedRepoPath.length == 0) {
+                auto profile = getProviderForHost(vcsProfiles, selectedHost);
+                if (hasOrgProfileSupport(profile)) {
+                    auto box = new VerticalLayout();
+                    box.layoutWidth(FILL_PARENT).padding(10).background("#222222");
+                    box.addChild(new TextWidget(null, "Organization Profile"d).fontSize(14).fontWeight(700));
+                    string infoText = "Provider: " ~ profile.displayName ~ " — Profile READMEs in " ~ profile.orgProfile.publicRepo;
+                    if (profile.orgProfile.privateRepo.length > 0) infoText ~= " / " ~ profile.orgProfile.privateRepo;
+                    auto infoW = new TextWidget(null, to!dstring(infoText));
+                    infoW.textColor = 0xAAAAAA; infoW.fontSize = 10;
+                    box.addChild(infoW);
+                    auto btnRow1 = new HorizontalLayout();
+                    btnRow1.padding(0, 8, 0, 0);
+                    auto btnPublic = new Button(null, "Open Public Profile"d);
+                    btnPublic.click = delegate(Widget w) {
+                        string url = orgProfilePublicUrl(profile, selectedOwner);
+                        if (url.length > 0) openUrlInBrowser(url);
+                        return true;
+                    };
+                    btnRow1.addChild(btnPublic);
+                    auto btnMember = new Button(null, "Open Private Profile"d);
+                    btnMember.click = delegate(Widget w) {
+                        string url = orgProfileMemberUrl(profile, selectedOwner);
+                        if (url.length > 0) openUrlInBrowser(url);
+                        return true;
+                    };
+                    btnRow1.addChild(btnMember);
+                    box.addChild(btnRow1);
+                    auto btnRow2 = new HorizontalLayout();
+                    btnRow2.padding(0, 4, 0, 0);
+                    auto btnOpenPublicRepo = new Button(null, "Open Public Profile Repo"d);
+                    btnOpenPublicRepo.click = delegate(Widget w) {
+                        string url = orgProfilePublicRepoUrl(profile, selectedOwner);
+                        if (url.length > 0) openUrlInBrowser(url);
+                        return true;
+                    };
+                    btnRow2.addChild(btnOpenPublicRepo);
+                    if (profile.orgProfile.privateRepo.length > 0) {
+                        auto btnOpenPrivateRepo = new Button(null, "Open Private Profile Repo"d);
+                        btnOpenPrivateRepo.click = delegate(Widget w) {
+                            string url = orgProfilePrivateRepoUrl(profile, selectedOwner);
+                            if (url.length > 0) openUrlInBrowser(url);
+                            return true;
+                        };
+                        btnRow2.addChild(btnOpenPrivateRepo);
+                    }
+                    box.addChild(btnRow2);
+                    auto btnHighlight = new Button(null, "Highlight Profile Repos in Tree"d);
+                    btnHighlight.padding(0, 8, 0, 0);
+                    btnHighlight.click = delegate(Widget w) {
+                        highlightProfileReposInTree(profile);
+                        return true;
+                    };
+                    box.addChild(btnHighlight);
+                    orgProfileContainer.addChild(box);
+                }
+            }
+        }
         
         auto repoText = window.mainWidget.childById!TextWidget("repoPreviewText");
         if (repoText) {
-            repoText.text = UIString.fromRaw(selectedRepoPath.length > 0 ? "Repository: "d ~ to!dstring(selectedRepoPath) : "Select a repository to view details."d);
+            if (selectedRepoPath.length > 0)
+                repoText.text = UIString.fromRaw("Repository: "d ~ to!dstring(selectedRepoPath));
+            else if (selectedOwner.length > 0 && selectedHost.length > 0)
+                repoText.text = UIString.fromRaw("Organization: "d ~ to!dstring(selectedHost) ~ "/"d ~ to!dstring(selectedOwner));
+            else
+                repoText.text = UIString.fromRaw("Select a repository or organization to view details."d);
         }
 
         // --- Setup Tools List ---
@@ -619,7 +707,7 @@ class DevCenterApp {
 
         if (selectedRepoPath.length == 0)
         {
-            adapter.add(to!dstring("Select a repo to see tools"));
+            adapter.add(to!dstring(selectedOwner.length > 0 ? "Select a repo under this org to see attached tools."d : "Select a repo to see tools"d));
             return;
         }
 
@@ -634,6 +722,31 @@ class DevCenterApp {
         {
             string entry = tool.label ~ " (PID " ~ to!string(tool.pid) ~ ")";
             adapter.add(to!dstring(entry));
+        }
+    }
+
+    void highlightProfileReposInTree(VCSProviderProfile profile) {
+        string publicPath = buildPath(codeRoot, selectedHost, selectedOwner, profile.orgProfile.publicRepo);
+        string privatePath = profile.orgProfile.privateRepo.length > 0
+            ? buildPath(codeRoot, selectedHost, selectedOwner, profile.orgProfile.privateRepo) : "";
+        int highlightIdx = -1;
+        foreach (i, bi; browserItems) {
+            if (bi.type == BrowserItemType.repo && bi.repo.host == selectedHost && bi.repo.owner == selectedOwner) {
+                if (bi.repo.fullPath == publicPath || (privatePath.length > 0 && bi.repo.fullPath == privatePath)) {
+                    highlightIdx = cast(int)i;
+                    break;
+                }
+            }
+        }
+        if (highlightIdx >= 0) {
+            auto listRepos = window.mainWidget.childById!ListWidget("listRepos");
+            if (listRepos) {
+                listRepos.selectedItemIndex = highlightIdx;
+                selectedRepoPath = browserItems[highlightIdx].repo.fullPath;
+                refreshToolsPanel();
+            }
+        } else {
+            window.showMessageBox(UIString.fromRaw("Profile Repos"d), UIString.fromRaw("No local copy of profile repos found. Clone "d ~ to!dstring(profile.orgProfile.publicRepo) ~ " or "d ~ to!dstring(profile.orgProfile.privateRepo) ~ " first."d));
         }
     }
 

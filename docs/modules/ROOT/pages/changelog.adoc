@@ -2,6 +2,12 @@
 
 This changelog records notable changes to the DevCentr application and its documentation. Entries are organized in reverse chronological order and kept brief. Each entry links to a more detailed changelog article where needed.
 
+== 2026-03-18 – Organization Profile and Gitignore
+
+* Organization profile feature in repository browser: when selecting an owner/org in the project tree, the side-panel shows buttons to open public/private profile pages on GitHub/GitLab/Gitea, open profile repos in the browser, and highlight local profile repos in the tree.
+* Provider-specific org profile config in `app/src/modules/vcs/profiles.json5` (repo names, README paths, URL formats).
+* See xref:ROOT:changelog-details/2026-03-18 - org-profile-feature.adoc[Org Profile Feature] and xref:ROOT:changelog-details/2026-03-18 - gitignore-templates-and-eol.adoc[Gitignore details].
+
 == 2026-03-18 – Gitignore Templates, EOL, and Templates Schema
 
 * Added GitHub gitignore (link:https://github.com/github/gitignore[github/gitignore]) as a template source alongside DevCentr in the Init Repo flow. Users can select source (DevCentr or GitHub) and merge templates from either.
