@@ -5,6 +5,7 @@ import modules.infra.discovery;
 import std.conv : to;
 import std.array : array, join;
 import std.string : indexOf, replace;
+import std.algorithm : canFind;
 import std.path : buildPath;
 import std.file : exists, mkdirRecurse, write;
 
@@ -15,17 +16,17 @@ enum devcentrDocsBase = "https://docs.devcentr.org/";
 /// Opens a URL in the default browser. Returns true if spawn succeeded.
 bool openUrlInBrowser(string url)
 {
-    import std.process : spawnProcess;
+    import std.process : spawnProcess, wait;
     version (Windows)
     {
-        return spawnProcess("cmd", ["/c", "start", "\"\"", url]).wait() == 0;
+        return wait(spawnProcess(["cmd", "/c", "start", "\"\"", url])) == 0;
     }
     else version (Posix)
     {
         version (OSX)
-            return spawnProcess("open", [url]).wait() == 0;
+            return wait(spawnProcess(["open", url])) == 0;
         else
-            return spawnProcess("xdg-open", [url]).wait() == 0;
+            return wait(spawnProcess(["xdg-open", url])) == 0;
     }
     else
         return false;
@@ -129,7 +130,17 @@ class InfraDetailPanel : ScrollWidget
             {
                 _content.addChild(new TextWidget(null, to!dstring("IaC base: " ~ n.displayName)));
                 _content.addChild(new TextWidget(null, to!dstring("Path: " ~ n.basePath)));
-                auto files = new TextWidget(null, to!dstring("Config files: " ~ (n.base.configFiles.length ? join(", ", n.base.configFiles) : "none")));
+                string filesStr = "none";
+                if (n.base.configFiles.length > 0)
+                {
+                    filesStr = "";
+                    foreach (i, f; n.base.configFiles)
+                    {
+                        if (i > 0) filesStr ~= ", ";
+                        filesStr ~= f;
+                    }
+                }
+                auto files = new TextWidget(null, to!dstring("Config files: " ~ filesStr));
                 files.maxLines = 20;
                 _content.addChild(files);
                 break;

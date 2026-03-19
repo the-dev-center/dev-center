@@ -1,6 +1,9 @@
 module modules.repo_tools.git_gui_dialog;
 
 import dlangui;
+import dlangui;
+import dlangui.dialogs.dialog : Dialog, DialogFlag;
+import dlangui.core.events : Action;
 import modules.repo_tools.git_viewers;
 import modules.repo_tools.registry;
 import modules.infra.ui : openUrlInBrowser;
@@ -42,7 +45,7 @@ void showGitGuiSelectorDialog(Window parentWindow, string repoRoot, RepoToolsReg
 
         // Icon placeholder (use tool icon if available)
         auto icon = new TextWidget(null, UIString.fromRaw("⚙"d));
-        icon.fontSize(16).minWidth(32).alignment(Alignment.Center);
+        icon.fontSize(16).minWidth(32).alignment(Align.Center);
         row.addChild(icon);
 
         auto label = new TextWidget(null, UIString.fromRaw(to!dstring(viewer.label)));
@@ -92,7 +95,7 @@ void showGitGuiSelectorDialog(Window parentWindow, string repoRoot, RepoToolsReg
                         UIString.fromRaw("Failed to launch "d ~ to!dstring(viewerLabel) ~ ": "d ~ to!dstring(e.msg)));
                 }
             }
-            dlg.close(DialogActions.Accept);
+            dlg.close(new Action(1));
             return true;
         };
 

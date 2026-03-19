@@ -39,7 +39,7 @@ void discoverExternalToolsForRoots(RepoToolsRegistry registry, string[] repoRoot
 // ---------------------------------------------------------------------------
 private void discoverWindows(RepoToolsRegistry registry, string[] repoRoots)
 {
-    import std.process : pipeProcess, Redirect;
+    import std.process : pipeProcess, Redirect, wait;
 
     // Build a PowerShell one-liner that checks each process's main module path.
     // For each match, emit "PID|ProcessName|MainModulePath".
@@ -103,7 +103,7 @@ private void discoverWindows(RepoToolsRegistry registry, string[] repoRoots)
             }
         }
 
-        pipes.pid.wait();
+        wait(pipes.pid);
     }
     catch (Exception)
     {
@@ -116,7 +116,7 @@ private void discoverWindows(RepoToolsRegistry registry, string[] repoRoots)
 // ---------------------------------------------------------------------------
 private void discoverLinux(RepoToolsRegistry registry, string[] repoRoots)
 {
-    import std.process : pipeProcess, Redirect;
+    import std.process : pipeProcess, Redirect, wait;
 
     foreach (root; repoRoots)
     {
@@ -149,7 +149,7 @@ private void discoverLinux(RepoToolsRegistry registry, string[] repoRoots)
                 registry.registerOrUpdateInstance(inst);
             }
 
-            pipes.pid.wait();
+            wait(pipes.pid);
         }
         catch (Exception)
         {

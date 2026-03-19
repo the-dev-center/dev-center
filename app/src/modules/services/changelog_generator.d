@@ -4,6 +4,7 @@ import std.stdio;
 import std.process;
 import std.array;
 import std.string;
+import std.conv : to;
 
 import modules.services.ai_providers;
 

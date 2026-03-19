@@ -77,10 +77,10 @@ class GitignoreViewerWidget : VerticalLayout
         _techList = new ListWidget("tech_list");
         _techList.layoutWidth(FILL_PARENT).layoutHeight(120);
         _techList.adapter = _techAdapter;
-        _techList.selectionChanged = delegate(ListWidget w) {
-            int idx = w.selectedItemIndex;
+        _techList.itemClick = delegate(Widget w, int idx) {
             if (idx >= 0 && idx < _techs.length)
                 highlightTechLines(_techs[idx]);
+            return true;
         };
         rightPanel.addChild(_techList);
 
@@ -220,37 +220,27 @@ class GitignoreViewerWidget : VerticalLayout
 
     private void highlightTechLines(RecognizedTech tech)
     {
+        import dlangui.core.editable : TextRange, TextPosition;
         if (!_editor || tech.lineIndices.length == 0) return;
 
         auto lines = _content.splitLines();
         int firstLine = tech.lineIndices[0];
         if (firstLine >= lines.length) return;
 
-        size_t pos = 0;
-        foreach (i; 0 .. firstLine)
-            pos += lines[i].length + 1;
+        int lastLine = tech.lineIndices[$ - 1];
+        if (lastLine >= lines.length) lastLine = cast(int)lines.length - 1;
 
-        size_t len = lines[firstLine].length;
-        if (tech.lineIndices.length > 1)
-        {
-            int lastLine = tech.lineIndices[$ - 1];
-            for (int j = firstLine; j <= lastLine && j < lines.length; j++)
-                len += lines[j].length + 1;
-            len -= 1;
-        }
+        int endPos = cast(int)lines[lastLine].length;
 
-        _editor.cursorPosition = pos;
-        _editor.selectRange(pos, len);
+        _editor.setCaretPos(firstLine, 0);
+        _editor.selectionRange = TextRange(TextPosition(firstLine, 0), TextPosition(lastLine, endPos));
     }
 
     private void scrollEditorToLine(int lineIndex)
     {
         auto lines = _content.splitLines();
         if (lineIndex >= lines.length) return;
-        size_t pos = 0;
-        foreach (i; 0 .. lineIndex)
-            pos += lines[i].length + 1;
-        _editor.cursorPosition = pos;
+        _editor.setCaretPos(lineIndex, 0);
     }
 
     private void refreshTemplatePanels()

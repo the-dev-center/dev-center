@@ -631,7 +631,7 @@ class DevCenterApp {
                 auto profile = getProviderForHost(vcsProfiles, selectedHost);
                 if (hasOrgProfileSupport(profile)) {
                     auto box = new VerticalLayout();
-                    box.layoutWidth(FILL_PARENT).padding(10).background("#222222");
+                    box.layoutWidth(FILL_PARENT).padding(Rect(10, 10, 10, 10)).backgroundColor(0x222222);
                     box.addChild(new TextWidget(null, "Organization Profile"d).fontSize(14).fontWeight(700));
                     string infoText = "Provider: " ~ profile.displayName ~ " — Profile READMEs in " ~ profile.orgProfile.publicRepo;
                     if (profile.orgProfile.privateRepo.length > 0) infoText ~= " / " ~ profile.orgProfile.privateRepo;
@@ -639,7 +639,7 @@ class DevCenterApp {
                     infoW.textColor = 0xAAAAAA; infoW.fontSize = 10;
                     box.addChild(infoW);
                     auto btnRow1 = new HorizontalLayout();
-                    btnRow1.padding(0, 8, 0, 0);
+                    btnRow1.padding(Rect(0, 8, 0, 0));
                     auto btnPublic = new Button(null, "Open Public Profile"d);
                     btnPublic.click = delegate(Widget w) {
                         string url = orgProfilePublicUrl(profile, selectedOwner);
@@ -656,7 +656,7 @@ class DevCenterApp {
                     btnRow1.addChild(btnMember);
                     box.addChild(btnRow1);
                     auto btnRow2 = new HorizontalLayout();
-                    btnRow2.padding(0, 4, 0, 0);
+                    btnRow2.padding(Rect(0, 4, 0, 0));
                     auto btnOpenPublicRepo = new Button(null, "Open Public Profile Repo"d);
                     btnOpenPublicRepo.click = delegate(Widget w) {
                         string url = orgProfilePublicRepoUrl(profile, selectedOwner);
@@ -675,7 +675,7 @@ class DevCenterApp {
                     }
                     box.addChild(btnRow2);
                     auto btnHighlight = new Button(null, "Highlight Profile Repos in Tree"d);
-                    btnHighlight.padding(0, 8, 0, 0);
+                    btnHighlight.padding(Rect(0, 8, 0, 0));
                     btnHighlight.click = delegate(Widget w) {
                         highlightProfileReposInTree(profile);
                         return true;

@@ -1,10 +1,10 @@
 module modules.iac.discovery;
 
-import std.algorithm : canFind;
+import std.algorithm : canFind, endsWith;
 import std.array : array, appender;
 import std.file : DirEntry, SpanMode, dirEntries, exists, isDir, readText;
-import std.path : absolutePath, baseName, buildPath, canonicalizePath, dirName, isAbsolute, relativePath, extension;
-import std.string : strip, startsWith, toLower;
+import std.path : absolutePath, baseName, buildPath, dirName, isAbsolute, relativePath, extension;
+import std.string : strip, startsWith, toLower, indexOf;
 import std.typecons : Nullable, nullable;
 
 /// Type of IaC tooling detected for a base.
@@ -62,7 +62,8 @@ Nullable!ResolvedModulePath resolveModuleSourceToPath(
     string moduleSource,
     string searchRoot)
 {
-    import std.path : dirName, expandPath, isAbsolute;
+    import std.path : dirName, isAbsolute;
+    import std.path : buildNormalizedPath;
     auto trimmed = moduleSource.strip();
     if (trimmed.length == 0)
     {
@@ -84,7 +85,7 @@ Nullable!ResolvedModulePath resolveModuleSourceToPath(
     string resolved;
     try
     {
-        resolved = absolutePath(expandPath(combined));
+        resolved = absolutePath(buildNormalizedPath(combined));
     }
     catch (Exception)
     {
@@ -203,7 +204,7 @@ private void discoverBaseInDirectory(string repoRoot, string dirPath, ref IacBas
 /// Collect IaC config files that live directly under the directory or exactly one level deeper.
 private string[] collectIacFiles(string repoRoot, string dirPath)
 {
-    auto files = appender!string[];
+    string[] files;
 
     // Files directly in dirPath.
     foreach (DirEntry entry; dirEntries(dirPath, SpanMode.shallow))
@@ -240,8 +241,9 @@ private string[] collectIacFiles(string repoRoot, string dirPath)
         }
     }
 
-    auto result = files;
-    result.sort;
+    import std.algorithm : sort;
+    string[] result = files.dup;
+    result.sort();
     return result;
 }
 
@@ -375,6 +377,7 @@ private IacDependency[] extractTerraformDeps(string relPath, const string conten
 
     // Very small and forgiving scan:
     // - Look for lines starting with "module" and then find "source =".
+    import std.string : splitLines;
     auto lines = content.splitLines();
     foreach (line; lines)
     {

@@ -1,6 +1,9 @@
 module modules.repo_tools.hallmark_toolbar;
 
 import dlangui;
+import dlangui.core.events : Action;
+import dlangui.widgets.popup : PopupAlign;
+import dlangui.widgets.styles : Align;
 import std.file : exists, dirEntries, SpanMode;
 import std.path : buildPath, extension;
 import std.string : endsWith;
@@ -27,7 +30,7 @@ Widget createCompoundButton(string label, void delegate(Widget) onHighlight, voi
     Button btnMain = new Button();
     btnMain.text = UIString.fromRaw(to!dstring(label));
     btnMain.styleId = "BUTTON_TRANSPARENT";
-    if (onHighlight) btnMain.click = onHighlight;
+    if (onHighlight) btnMain.click = delegate(Widget w) { onHighlight(w); return true; };
     hl.addChild(btnMain);
     
     // Vertical Separator
@@ -39,7 +42,7 @@ Widget createCompoundButton(string label, void delegate(Widget) onHighlight, voi
     Button btnView = new Button();
     btnView.text = UIString.fromRaw("View"d);
     btnView.styleId = "BUTTON_TRANSPARENT";
-    if (onOpenViewer) btnView.click = onOpenViewer;
+    if (onOpenViewer) btnView.click = delegate(Widget w) { onOpenViewer(w); return true; };
     hl.addChild(btnView);
     
     TextWidget div2 = new TextWidget(null, UIString.fromRaw("|"d));
@@ -50,7 +53,7 @@ Widget createCompoundButton(string label, void delegate(Widget) onHighlight, voi
     Button btnEdit = new Button();
     btnEdit.text = UIString.fromRaw("Edit"d);
     btnEdit.styleId = "BUTTON_TRANSPARENT";
-    if (onInternalEdit) btnEdit.click = onInternalEdit;
+    if (onInternalEdit) btnEdit.click = delegate(Widget w) { onInternalEdit(w); return true; };
     hl.addChild(btnEdit);
     
     TextWidget div3 = new TextWidget(null, UIString.fromRaw("|"d));
@@ -61,7 +64,7 @@ Widget createCompoundButton(string label, void delegate(Widget) onHighlight, voi
     Button btnExtEdit = new Button();
     btnExtEdit.text = UIString.fromRaw("Open With"d);
     btnExtEdit.styleId = "BUTTON_TRANSPARENT";
-    if (onExternalEdit) btnExtEdit.click = onExternalEdit;
+    if (onExternalEdit) btnExtEdit.click = delegate(Widget w) { onExternalEdit(w); return true; };
     hl.addChild(btnExtEdit);
     
     return hl;
@@ -93,21 +96,26 @@ void showEditorSelectorDialog(Window parentWindow, string targetPath)
     }
     
     // Create a simple custom list selection dialog or popup menu
-    PopupMenu menu = new PopupMenu();
+    MenuItem menuRoot = new MenuItem();
     foreach(i, EditorProfile ed; availableEditors)
     {
-        auto item = menu.addMenuItem(new MenuItem(new Action(to!int(100+i), UIString.fromRaw(to!dstring(ed.name)))));
-        item.action.bind(this, delegate(Action a) {
-            openPathWithEditor(availableEditors[a.id - 100], targetPath);
-            return true;
-        });
+        auto action = new Action(to!int(100+i), UIString.fromRaw(to!dstring(ed.name)));
+        menuRoot.add(action);
     }
     
     // Add the "Register Fork (+)" option
-    menu.addMenuItem(new MenuItem(new Action(999, UIString.fromRaw("Register custom fork..."d))));
+    menuRoot.add(new Action(999, UIString.fromRaw("Register custom fork..."d)));
     
+    PopupMenu menu = new PopupMenu(menuRoot);
+    menu.menuItemAction = delegate(const Action a) {
+        if (a.id >= 100 && a.id < 100 + availableEditors.length) {
+            openPathWithEditor(availableEditors[a.id - 100], targetPath);
+            return true;
+        }
+        return false;
+    };
     // Show near mouse pointer
-    menu.popup(parentWindow.mainWidget, 0, 0); 
+    parentWindow.showPopup(menu, parentWindow.mainWidget, PopupAlign.Center, 0, 0); 
 }
 
 /// Builds the hallmark strip for a specific repository.
@@ -124,10 +132,10 @@ Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller
     bool hasReadme = exists(buildPath(repoPath, "README.adoc")) || exists(buildPath(repoPath, "README.md"));
     if (hasReadme) {
         bar.addChild(createCompoundButton("Readme", 
-            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Highlighting Readme in File Tree..."d)); return true; },
-            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Opening markdown/asciidoc webview viewer..."d)); return true; },
-            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Opening fast DevCentr text editor..."d)); return true; },
-            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Sending to default system text editor..."d)); return true; }
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Highlighting Readme in File Tree..."d)); },
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Opening markdown/asciidoc webview viewer..."d)); },
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Opening fast DevCentr text editor..."d)); },
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Sending to default system text editor..."d)); }
         ));
     }
     
@@ -135,7 +143,7 @@ Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller
     bool hasGitignore = exists(buildPath(repoPath, ".gitignore"));
     if (hasGitignore) {
         bar.addChild(createCompoundButton("Gitignore",
-            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Highlighting .gitignore in File Tree..."d)); return true; },
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Highlighting .gitignore in File Tree..."d)); },
             delegate(Widget w) {
                 auto container = parentWindow.mainWidget.childById("repoPreviewContainer");
                 if (container) {
@@ -150,7 +158,7 @@ Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller
                     closeBtn.click = delegate(Widget w2) {
                         container.removeAllChildren();
                         auto def = new TextWidget(null, "Repository: "d ~ to!dstring(repoPath));
-                        def.alignment(Alignment.Center).textColor(0xAAAAAA);
+                        def.alignment(Align.Center).textColor(0xAAAAAA);
                         container.addChild(def);
                         return true;
                     };
@@ -159,7 +167,6 @@ Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller
                     container.addChild(toolRow);
                     container.addChild(viewer);
                 }
-                return true;
             },
             delegate(Widget w) {
                 auto container = parentWindow.mainWidget.childById("repoPreviewContainer");
@@ -175,7 +182,7 @@ Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller
                     closeBtn.click = delegate(Widget w2) {
                         container.removeAllChildren();
                         auto def = new TextWidget(null, "Repository: "d ~ to!dstring(repoPath));
-                        def.alignment(Alignment.Center).textColor(0xAAAAAA);
+                        def.alignment(Align.Center).textColor(0xAAAAAA);
                         container.addChild(def);
                         return true;
                     };
@@ -184,9 +191,8 @@ Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller
                     container.addChild(toolRow);
                     container.addChild(viewer);
                 }
-                return true;
             },
-            delegate(Widget w) { showEditorSelectorDialog(parentWindow, buildPath(repoPath, ".gitignore")); return true; }
+            delegate(Widget w) { showEditorSelectorDialog(parentWindow, buildPath(repoPath, ".gitignore")); }
         ));
     }
 
@@ -194,14 +200,14 @@ Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller
     bool hasChangelog = exists(buildPath(repoPath, "changelog.adoc")) || exists(buildPath(repoPath, "docs", "modules", "ROOT", "pages", "changelog.adoc"));
     if (hasChangelog) {
         bar.addChild(createCompoundButton("Changelog", 
-            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Highlighting Changelog in File Tree..."d)); return true; },
-            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Opening changelog webview viewer..."d)); return true; },
-            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Opening DevCentr AI changelog generation tool..."d)); return true; },
-            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Sending to default system text editor..."d)); return true; }
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Highlighting Changelog in File Tree..."d)); },
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Opening changelog webview viewer..."d)); },
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Opening DevCentr AI changelog generation tool..."d)); },
+            delegate(Widget w) { parentWindow.showMessageBox(UIString.fromRaw("Action"d), UIString.fromRaw("Sending to default system text editor..."d)); }
         ));
     }
 
-    Spacer spacer = new Spacer();
+    HSpacer spacer = new HSpacer();
     spacer.layoutWidth(FILL_PARENT);
     bar.addChild(spacer);
     
@@ -233,15 +239,21 @@ Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller
                 showEditorSelectorDialog(parentWindow, workspaces[0]);
             } else {
                 import dlangui.dialogs.dialog;
-                PopupMenu menu = new PopupMenu();
+                import std.path : baseName;
+                MenuItem menuRoot = new MenuItem();
                 foreach(i, ws; workspaces) {
-                    auto item = menu.addMenuItem(new MenuItem(new Action(to!int(200+i), UIString.fromRaw(to!dstring(baseName(ws))))));
-                    item.action.bind(btnLaunchWksp, delegate(Action a) {
+                    auto action = new Action(to!int(200+i), UIString.fromRaw(to!dstring(baseName(ws))));
+                    menuRoot.add(action);
+                }
+                PopupMenu menu = new PopupMenu(menuRoot);
+                menu.menuItemAction = delegate(const Action a) {
+                    if (a.id >= 200 && a.id < 200 + workspaces.length) {
                         showEditorSelectorDialog(parentWindow, workspaces[a.id - 200]);
                         return true;
-                    });
-                }
-                menu.popup(parentWindow.mainWidget, 0, 0); 
+                    }
+                    return false;
+                };
+                parentWindow.showPopup(menu, btnLaunchWksp, PopupAlign.Below, 0, 0); 
             }
             return true;
         };

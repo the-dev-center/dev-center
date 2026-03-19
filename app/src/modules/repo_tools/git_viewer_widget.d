@@ -1,12 +1,17 @@
 module modules.repo_tools.git_viewer_widget;
 
 import dlangui;
+import dlangui.widgets.popup : PopupAlign;
 import dlangui.graphics.drawbuf : DrawBuf;
 import modules.repo_tools.git_viewer_indexer;
+import modules.repo_tools.git_attributes_helper;
 import std.conv : to;
 import std.path : baseName;
 import std.datetime.systime : SysTime, unixTimeToStdTime;
-import std.algorithm : max, min;
+import std.algorithm : max, min, sort;
+import std.file : dirEntries, SpanMode;
+import std.string : toLower;
+import std.array : array;
 
 /// A custom widget to draw the horizontal commit timeline.
 class TimelineWidget : Widget {
@@ -25,8 +30,8 @@ class TimelineWidget : Widget {
     override void onDraw(DrawBuf buf) {
         super.onDraw(buf);
         
-        auto rect = contentRect;
-        if (rect.isEmpty) return;
+        auto rect = _pos;
+        if (rect.empty) return;
 
         auto commits = _indexer.commits;
         if (commits.length == 0) return;
@@ -37,7 +42,7 @@ class TimelineWidget : Widget {
         if (duration == 0) duration = 1;
 
         // Draw background
-        dc.fillRect(rect, 0x111111);
+        buf.fillRect(rect, 0x111111);
 
         // Draw commit blocks
         foreach (commit; commits) {
@@ -58,7 +63,7 @@ class TimelineWidget : Widget {
             }
 
             Rect blockRect = Rect(x, rect.bottom - height - 10, x + width, rect.bottom - 10);
-            dc.fillRect(blockRect, color);
+            buf.fillRect(blockRect, color);
         }
 
         // Draw scrubber/playhead
@@ -72,8 +77,8 @@ class TimelineWidget : Widget {
     override bool onMouseEvent(MouseEvent event) {
         if (event.action == MouseAction.ButtonDown || (event.action == MouseAction.Move && (event.flags & MouseFlag.LButton))) {
             // Calculate timestamp from X position
-            auto rect = contentRect;
-            if (_indexer.commits.length > 0 && !rect.isEmpty) {
+            auto rect = _pos;
+            if (_indexer.commits.length > 0 && !rect.empty) {
                 long minTs = _indexer.commits[$-1].timestamp;
                 long maxTs = _indexer.commits[0].timestamp;
                 long duration = maxTs - minTs;
@@ -101,7 +106,7 @@ class GitViewerWindow {
     }
 
     void show() {
-        _window = Platform.instance.createWindow("Git Viewer - " ~ baseName(_repoRoot), null);
+        _window = Platform.instance.createWindow(to!dstring("Git Viewer - " ~ baseName(_repoRoot)), null);
         
         auto mainLayout = new VerticalLayout();
         mainLayout.layoutWidth(FILL_PARENT).layoutHeight(FILL_PARENT).padding(0);
@@ -118,6 +123,41 @@ class GitViewerWindow {
         
         auto tree = new ListWidget("repo_tree");
         tree.layoutWidth(250).layoutHeight(FILL_PARENT).backgroundColor(0x1F1F1F);
+        
+        auto treeAdapter = new StringListAdapter();
+        string[] files;
+        foreach (entry; dirEntries(_repoRoot, SpanMode.shallow)) {
+            files ~= baseName(entry.name);
+        }
+        files.sort!((a, b) => a.toLower() < b.toLower());
+        foreach (f; files) treeAdapter.add(to!dstring(f));
+        tree.adapter = treeAdapter;
+        
+        tree.mouseEvent = delegate(Widget w, MouseEvent event) {
+            if (event.action == MouseAction.ButtonDown && event.button == MouseButton.Right) {
+                // Show context menu if .gitattributes is selected
+                int idx = tree.selectedItemIndex;
+                if (idx >= 0 && idx < treeAdapter.items.length) {
+                    string filename = to!string(treeAdapter.items[idx]);
+                    if (filename == ".gitattributes") {
+                        MenuItem menuRoot = new MenuItem();
+                        auto action = new Action(1, UIString.fromRaw("Show other locations (user, system)..."d));
+                        menuRoot.add(action);
+                        PopupMenu menu = new PopupMenu(menuRoot);
+                        menu.menuItemAction = delegate(const Action a) {
+                            if (a.id == 1) {
+                                showGitAttributesLocationsDialog(_window, _repoRoot);
+                                return true;
+                            }
+                            return false;
+                        };
+                        _window.showPopup(menu, tree, PopupAlign.Point | PopupAlign.Right, event.x, event.y);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
         centerLayout.addChild(tree);
 
         auto diffArea = new VerticalLayout();

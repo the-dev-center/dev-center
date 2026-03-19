@@ -19,14 +19,16 @@ version (Windows)
         HWND foundHwnd;
     }
 
-    private extern(Windows) BOOL enumWindowProc(HWND hwnd, LPARAM lParam) {
+    private extern(Windows) BOOL enumWindowProc(HWND hwnd, LPARAM lParam) nothrow {
         EnumData* data = cast(EnumData*)lParam;
         DWORD pid;
-        GetWindowThreadProcessId(hwnd, &pid);
-        if (pid == data.targetPid && IsWindowVisible(hwnd)) {
-            data.foundHwnd = hwnd;
-            return FALSE; // Stop enumerating
-        }
+        try {
+            GetWindowThreadProcessId(hwnd, &pid);
+            if (pid == data.targetPid && IsWindowVisible(hwnd)) {
+                data.foundHwnd = hwnd;
+                return FALSE; // Stop enumerating
+            }
+        } catch (Exception) {}
         return TRUE;
     }
 

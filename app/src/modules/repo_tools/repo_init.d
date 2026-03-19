@@ -1,6 +1,7 @@
 module modules.repo_tools.repo_init;
 
 import dlangui;
+import dlangui.dialogs.dialog : Dialog, DialogFlag;
 import std.file;
 import std.path;
 import std.conv;
@@ -96,7 +97,7 @@ void showRepoInitDialog(Window parentWindow, string repoRoot, TemplateInstaller 
     ghContainer.layoutWidth(FILL_PARENT);
     ghContainer.addChild(ghLabel);
     ghContainer.addChild(ghScroll);
-    ghContainer.visible = false;
+    ghContainer.visibility = Visibility.Gone;
 
     CheckBox[] ghCheckboxes;
     GitIgnoreTemplate[] ghTemplates;
@@ -115,13 +116,13 @@ void showRepoInitDialog(Window parentWindow, string repoRoot, TemplateInstaller 
     }
 
     rbDevCentr.click = delegate(Widget w) {
-        ecoContainer.visible = true;
-        ghContainer.visible = false;
+        ecoContainer.visibility = Visibility.Visible;
+        ghContainer.visibility = Visibility.Gone;
         return true;
     };
     rbGitHub.click = delegate(Widget w) {
-        ecoContainer.visible = false;
-        ghContainer.visible = true;
+        ecoContainer.visibility = Visibility.Gone;
+        ghContainer.visibility = Visibility.Visible;
         populateGitHubTemplates();
         return true;
     };
@@ -183,7 +184,7 @@ void showRepoInitDialog(Window parentWindow, string repoRoot, TemplateInstaller 
                 }
             }
             if (mergedIgnore == "# From github/gitignore\n\n") {
-                mergedIgnore = "# Whitelist strategy\n*\n!.gitignore\n!README.adoc\n!LICENSE\n\n# Select GitHub templates above and click Refresh."d;
+                mergedIgnore = "# Whitelist strategy\n*\n!.gitignore\n!README.adoc\n!LICENSE\n\n# Select GitHub templates above and click Refresh.";
             }
         }
         gitIgnoreEdit.text = UIString.fromRaw(to!dstring(mergedIgnore));
@@ -198,10 +199,11 @@ void showRepoInitDialog(Window parentWindow, string repoRoot, TemplateInstaller 
 
     // 5. Actions
     auto actionRow = new HorizontalLayout();
-    actionRow.layoutWidth(FILL_PARENT).alignment(Alignment.Right).padding(10);
+    import dlangui.widgets.styles : Align;
+    actionRow.layoutWidth(FILL_PARENT).alignment(Align.Right).padding(10);
     
     auto btnCancel = new Button(null, UIString.fromRaw("Cancel"d));
-    btnCancel.click = delegate(Widget w) { dlg.close(DialogActions.Cancel); return true; };
+    btnCancel.click = delegate(Widget w) { dlg.close(new Action(2)); return true; };
     actionRow.addChild(btnCancel);
     
     auto btnInit = new Button(null, UIString.fromRaw("Initialize"d));
@@ -220,7 +222,7 @@ void showRepoInitDialog(Window parentWindow, string repoRoot, TemplateInstaller 
             }
             
             parentWindow.showMessageBox(UIString.fromRaw("Success"d), UIString.fromRaw("Repository initialized successfully."d));
-            dlg.close(DialogActions.Accept);
+            dlg.close(new Action(1));
         } catch (Exception e) {
             parentWindow.showMessageBox(UIString.fromRaw("Error"d), UIString.fromRaw("Failed to initialize: "d ~ to!dstring(e.msg)));
         }

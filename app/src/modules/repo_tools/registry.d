@@ -129,9 +129,9 @@ private:
                 inst.repoRoot = item["repoRoot"].str;
                 inst.kind = item["kind"].str == "builtinModule" ? ToolKind.builtinModule : ToolKind.externalApp;
                 inst.label = item["label"].str;
-                inst.icon = item.get("icon", JSONValue("")).str;
-                inst.pid = item.get("pid", JSONValue(0)).integer;
-                inst.executable = item.get("executable", JSONValue("")).str;
+                inst.icon = ("icon" in item) ? item["icon"].str : "";
+                inst.pid = ("pid" in item) ? cast(int)item["pid"].integer : 0;
+                inst.executable = ("executable" in item) ? item["executable"].str : "";
                 loaded ~= inst;
             }
             instances = loaded;

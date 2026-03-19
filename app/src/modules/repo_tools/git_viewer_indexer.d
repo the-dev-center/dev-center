@@ -1,6 +1,7 @@
 module modules.repo_tools.git_viewer_indexer;
 
-import std.process : pipeProcess, Redirect, wait;
+import core.time : msecs;
+import std.process : pipeProcess, Redirect, wait, Config;
 import std.string : splitLines, strip;
 import std.algorithm : splitter;
 import std.conv : to;
@@ -14,6 +15,7 @@ struct IndexedCommit
 {
     string hash;
     long timestamp;
+    SysTime timestampObj;
     string subject;
     size_t linesAdded;
     size_t linesRemoved;
@@ -53,19 +55,20 @@ class GitViewerIndexer
 
     private void run()
     {
-        import std.process : pipeProcess, Redirect;
+        import std.process : pipeProcess, Redirect, Config;
+        import core.time : msecs;
 
         // Initial pass: get commit hashes and timestamps quickly
         int status;
         auto pipes = pipeProcess(["git", "log", "--pretty=format:%H|%at|%s"],
-            Redirect.stdout | Redirect.stderr, null, null, _repoRoot);
+            Redirect.stdout | Redirect.stderr, null, Config.none, _repoRoot);
 
         foreach (line; pipes.stdout.byLine)
         {
             if (_paused) {
                 // Spinning wait for resume or stop signal
                 while (_paused && _indexing) {
-                    Thread.sleep(core.time.msecs(100));
+                    Thread.sleep(msecs(100));
                 }
                 if (!_indexing) break;
             }
@@ -77,7 +80,7 @@ class GitViewerIndexer
             item.hash = parts[0];
             try {
                 item.timestamp = to!long(parts[1]);
-                item.timestampObj = SysTime(unixTimeToStdTime(item.timestamp)); // Populate SysTime field
+                item.timestampObj = SysTime(unixTimeToStdTime(item.timestamp));
             } catch (Exception) {}
             item.subject = parts[2];
             item.isIndexed = false;
@@ -92,11 +95,11 @@ class GitViewerIndexer
         {
             if (!_indexing) break;
             while (_paused && _indexing) {
-                Thread.sleep(core.time.msecs(100));
+                Thread.sleep(msecs(100));
             }
 
             auto statsPipes = pipeProcess(["git", "show", "--numstat", "--format=", commit.hash],
-                Redirect.stdout | Redirect.stderr, null, null, _repoRoot);
+                Redirect.stdout | Redirect.stderr, null, Config.none, _repoRoot);
 
             foreach (statLine; statsPipes.stdout.byLine)
             {
@@ -118,7 +121,7 @@ class GitViewerIndexer
             commit.isIndexed = true;
 
             // Artificial delay to simulate background work and not saturate I/O
-            Thread.sleep(core.time.msecs(10));
+            Thread.sleep(msecs(10));
         }
 
         _indexing = false;

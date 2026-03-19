@@ -174,31 +174,31 @@ InfraService[] loadInfraServices()
         }
 
         InfraService svc;
-        svc.id = serviceTag.getTag("id") !is null && !serviceTag.getTag("id").values.empty
+        svc.id = serviceTag.getTag("id") !is null && serviceTag.getTag("id").values.length > 0
             ? serviceTag.getTag("id").values[0].get!string
             : "";
         auto nameTag = serviceTag.getTag("name");
-        if (nameTag !is null && !nameTag.values.empty)
+        if (nameTag !is null && nameTag.values.length > 0)
         {
             svc.name = nameTag.values[0].get!string;
         }
         auto descTag = serviceTag.getTag("shortDescription");
-        if (descTag !is null && !descTag.values.empty)
+        if (descTag !is null && descTag.values.length > 0)
         {
             svc.shortDescription = descTag.values[0].get!string;
         }
         auto homepageTag = serviceTag.getTag("homepage");
-        if (homepageTag !is null && !homepageTag.values.empty)
+        if (homepageTag !is null && homepageTag.values.length > 0)
         {
             svc.homepage = homepageTag.values[0].get!string;
         }
         auto docsTag = serviceTag.getTag("docs");
-        if (docsTag !is null && !docsTag.values.empty)
+        if (docsTag !is null && docsTag.values.length > 0)
         {
             svc.docs = docsTag.values[0].get!string;
         }
         auto devcentrDocTag = serviceTag.getTag("devcentrDoc");
-        if (devcentrDocTag !is null && !devcentrDocTag.values.empty)
+        if (devcentrDocTag !is null && devcentrDocTag.values.length > 0)
         {
             svc.devcentrDoc = devcentrDocTag.values[0].get!string;
         }

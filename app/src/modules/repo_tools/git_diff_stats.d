@@ -19,12 +19,12 @@ struct DiffStats
 /// Run a git command in the given repository and return stdout as lines.
 private string[] runGit(string repoRoot, string[] args, out int status)
 {
-    import std.process : pipeProcess, Redirect;
+    import std.process : pipeProcess, Redirect, Config, wait;
     import std.string : splitLines;
 
     try
     {
-        auto pipes = pipeProcess(["git"] ~ args, Redirect.stdout | Redirect.stderr, null, null, repoRoot);
+        auto pipes = pipeProcess(["git"] ~ args, Redirect.stdout | Redirect.stderr, null, Config.none, repoRoot);
         string output;
         foreach (line; pipes.stdout.byLine)
         {

@@ -1,6 +1,6 @@
 module modules.workflow_templates_store.browser;
 
-import std.process;
+import std.process : spawnProcess, wait, environment;
 import std.path : buildPath;
 import std.file : exists, readText;
 import std.string : strip;
@@ -41,7 +41,7 @@ bool openWorkflowTemplatesStore()
     string url = getWorkflowTemplatesStoreURL();
     version (Windows)
     {
-        return spawnProcess("cmd", ["/c", "start", "\"\"", url]).wait() == 0;
+        return wait(spawnProcess(["cmd", "/c", "start", "\"\"", url])) == 0;
     }
     else version (Posix)
     {

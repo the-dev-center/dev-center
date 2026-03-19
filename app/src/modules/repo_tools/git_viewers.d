@@ -3,6 +3,7 @@ module modules.repo_tools.git_viewers;
 import std.file : exists, isFile;
 import std.path : buildPath;
 import std.process : environment;
+import std.algorithm : endsWith;
 import std.algorithm : splitter;
 import std.array : array;
 

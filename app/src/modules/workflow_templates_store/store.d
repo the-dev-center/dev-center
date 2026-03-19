@@ -1,6 +1,7 @@
 module modules.workflow_templates_store.store;
 
 import std.process : pipeProcess, wait;
+import std.algorithm : endsWith;
 import std.path : buildPath;
 import std.file : exists, mkdirRecurse, write;
 import std.json : JSONValue, parseJSON, JSONType;

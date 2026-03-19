@@ -45,8 +45,8 @@ class MinimapWidget : Widget
     override void onDraw(DrawBuf buf)
     {
         super.onDraw(buf);
-        auto rect = contentRect;
-        if (rect.isEmpty) return;
+        auto rect = _pos;
+        if (rect.empty) return;
 
         buf.fillRect(rect, 0x1A1A1A);
         auto lines = _text.splitLines();
@@ -76,8 +76,8 @@ class MinimapWidget : Widget
 
     override bool onMouseEvent(MouseEvent event)
     {
-        auto rect = contentRect;
-        if (rect.isEmpty || !_onScrollRequested) return false;
+        auto rect = _pos;
+        if (rect.empty || !_onScrollRequested) return false;
 
         if (event.action == MouseAction.ButtonDown || event.action == MouseAction.Move)
         {
