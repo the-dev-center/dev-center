@@ -36,7 +36,7 @@ This documentation site mixes two ways of grouping content and this section expl
 The DevCentr docs currently mix two ways of grouping content:
 
 . **Product/feature modules** — ROOT (overview, vision), specifications (component specs), secrets-manager (one product area), publishing (release/distribution), upstream-contributions. Each module is tied to a *thing* or *workflow*.
-. **Intent-based (Diátaxis) module** — knowledge-base. Content is grouped by *user intent*: tutorials, how-to, reference, explanation. It is topic-agnostic and acts as shared "best practices and reference" for the whole ecosystem.
+. **Intent-based (Diátaxis) module** — general-knowledge. Content is grouped by *user intent*: tutorials, how-to, reference, explanation. It is topic-agnostic and acts as shared "best practices and reference" for the whole ecosystem.
 
 So: **everything in the docs is documentation; not everything is in the knowledge-base module.** The knowledge-base is the shared, intent-first content that doesn’t belong to a single product.
 
@@ -58,4 +58,4 @@ Related Products:
 
 Knowledge-base:
 
-* xref:knowledge-base:index.adoc[Knowledge Base] — Tutorials, how-tos, reference, and explanations of common development tools and practices (Diátaxis-organized)
+* xref:general-knowledge:index.adoc[General Knowledge] — Tutorials, how-tos, reference, and explanations of common development tools and practices (Diátaxis-organized)

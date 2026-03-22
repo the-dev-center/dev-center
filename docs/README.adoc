@@ -16,7 +16,7 @@ This directory contains the Antora component descriptor. The playbook lives at r
 Modules follow a hybrid of product/workflow boundaries and intent-based (Diátaxis) structure. See link:modules/ROOT/pages/docs-organization.adoc[Doc Organization] for the rationale and debate.
 
 * **ROOT** — Project overview, vision, and doc organization
-* **knowledge-base** — Diátaxis-organized tutorials, how-tos, reference, and explanations (shared, not dev-center-specific)
+* **general-knowledge** (separate repo) — Diátaxis-organized tutorials, how-tos, reference, and explanations (shared, product-agnostic)
 * **specifications** — Dev-center app component and feature specifications
 * **secrets-manager** — Secrets Manager product docs
 * **publishing** — Release workflow, automation, package registries (Antora deployment lives in antora-supplemental docs)
@@ -35,3 +35,16 @@ The following Git documentation pages are placeholders and need content:
 * [ ] `git/git-recovery.adoc` - Reflog, reset, recovering from mistakes
 
 Each placeholder contains a checklist of topics to cover.
+
+== AI And Local Reference Material
+
+When AI agents work on DevCentr, they should prefer local cloned docs and source trees over stale built-in model memory for version-sensitive libraries.
+
+Recommended workflow:
+
+* Run `pwsh ./scripts/refresh-local-library-docs.ps1` from the repository root.
+* Keep cloned docs/source in `docs/_local-library-docs/` so repo-local indexing can see them.
+* Keep machine-specific pointers in `AI-LOCAL-LIBRARY-DOCS.local.json5` and do not commit that file.
+* Start from `AI-LOCAL-LIBRARY-DOCS.example.json5` when setting up a new machine.
+
+For this repo, repo-local indexed docs are preferred over web search for D/Phobos and direct D dependencies. Web search is the fallback, not the default.

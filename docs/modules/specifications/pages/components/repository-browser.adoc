@@ -4,6 +4,8 @@ The repository browser (or workspace browser) is the UI that lets users navigate
 
 The browser also acts as the launching point for repo-specific tools and external applications (text editors, Git GUIs, terminals, etc). It exposes a tools side-panel which tracks all tools currently attached to the selected repository, regardless of whether DevCentr launched them.
 
+It should also host an integrated repository terminal so users can run commands directly against the selected repository without depending on an external editor terminal. See xref:components/repository-browser-terminal.adoc[Repository Browser Terminal].
+
 == Model: hosts, owners, repos
 
 The browser reflects the workspace organization schema:
@@ -18,7 +20,7 @@ When browsing an **owner** node, the UI adapts to whether the owner is a **user*
 
 == Relation to workspace schema
 
-The folder layout is defined in xref:knowledge-base:reference/workspace-organization.adoc[Workspace Organization]. The repository browser is the visual navigation over that layout (and optionally over remote discovery when connected to a provider). Clones, forks, and org membership rules in that doc determine where repos live and how they are grouped under owners and hosts.
+The folder layout is defined in xref:general-knowledge:reference/workspace-organization.adoc[Workspace Organization]. The repository browser is the visual navigation over that layout (and optionally over remote discovery when connected to a provider). Clones, forks, and org membership rules in that doc determine where repos live and how they are grouped under owners and hosts.
 
 == UI layout and zones
 
@@ -110,10 +112,11 @@ The repository browser exposes context menus on hosts, owners, and repositories:
 *** `GitHub settings` (when provider is GitHub).
 *** `GitLab settings` (when provider is GitLab).
 ** These entries open the provider settings UI described in xref:components/repository-provider-registry.adoc[Repository Provider Registry] and provider profile docs.
-** *Organization profile:* When an owner is selected, the side-panel shows an Organization Profile section (for providers that support it: GitHub, GitLab, Gitea). Buttons open the org's public and private/member profile pages on the provider, open the profile repos (e.g. `.github`, `.github-private`) in the browser, and highlight local copies of those repos in the project tree. Profile repo names and README paths are defined per provider in `profiles.json5`; see xref:knowledge-base:reference/vcs-provider-profiles.adoc[VCS Provider Profiles].
+** *Organization profile:* When an owner is selected, the side-panel shows an Organization Profile section (for providers that support it: GitHub, GitLab, Gitea). Buttons open the org's public and private/member profile pages on the provider, open the profile repos (e.g. `.github`, `.github-private`) in the browser, and highlight local copies of those repos in the project tree. Profile repo names and README paths are defined per provider in `profiles.json5`; see xref:general-knowledge:reference/vcs-provider-profiles.adoc[VCS Provider Profiles].
 * *Repository node / row:*
 ** Open in file explorer.
 ** Open in terminal.
+** Open integrated terminal.
 ** Open in text editor (VS Code, Cursor, etc).
 ** Open Git viewer (built-in Git viewer or external Git GUIs).
 ** Manage IaC (open the Infra page scoped to this repo).

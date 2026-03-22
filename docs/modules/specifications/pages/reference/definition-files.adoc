@@ -10,6 +10,24 @@ DevCentr uses definition files (SDL and similar) to drive discovery, install off
 
 Each service entry typically has: id, name, shortDescription, homepage, docs, devcentrDoc. Keep all service definitions in this file (or in that folder); do not mix in language runtimes or frameworks.
 
+== AI client profiles
+
+* **Location (app):** `app/src/modules/services/ai_client_profiles.json5`
+* **Purpose:** Profiles for AI-capable editors, coding agents, and CLIs that DevCentr can guide through MCP and skills setup.
+* **Used by:** The future AI Config interface and editor manager workflows for Context7/MCP setup, skills links, config file hints, launch commands, and issue-reporting links.
+
+Each client entry can include:
+
+* Display name and category
+* Launch command
+* Context7 docs URL
+* Context7 config section URL
+* Source page URL for extracting snippets
+* Config file path hints
+* Easy setup commands
+* Manual setup requirements
+* Skills/rules support notes
+
 == Language ecosystems
 
 * **Location (app):** `app/src/modules/languages/<ecosystem>.sdl` (e.g. `node.sdl`, `python.sdl`)

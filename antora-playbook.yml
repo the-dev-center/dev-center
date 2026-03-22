@@ -9,6 +9,9 @@ content:
     - url: .
       start_path: docs
       branches: HEAD
+    - url: https://github.com/dev-centr/general-knowledge.git
+      branches: HEAD
+      start_path: docs
 ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable

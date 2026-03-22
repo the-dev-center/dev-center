@@ -15,7 +15,10 @@ import modules.system_overview.widgets;
 import modules.workflow_templates_store.browser;
 import modules.workflow_templates_store.store;
 import modules.infra.discovery : discoverInfra, InfraDiscoveryMode, InfraDiscoverySummary;
+import modules.infra.logging : initDevCenterLogging, logInfo;
 import modules.infra.ui : InfraDiscoveryPanel, openUrlInBrowser;
+import modules.repo_tools.repo_terminal_widget : RepoTerminalWidget;
+import modules.services.ai_config_dialog : showAIConfigDialog;
 import modules.vcs.vcs_profiles : loadProfilesJson, getProviderForHost, hasOrgProfileSupport, orgProfilePublicUrl, orgProfileMemberUrl, orgProfilePublicRepoUrl, orgProfilePrivateRepoUrl, VCSProviderProfile;
 import std.json : JSONValue;
 import std.stdio;
@@ -60,6 +63,8 @@ class DevCenterApp {
         installer = new TemplateInstaller(cacheRoot);
         toolManager = new ToolManager();
         string dataRoot = buildPath(getHomeDir(), ".dev-center");
+        initDevCenterLogging(dataRoot);
+        logInfo("DevCenterApp constructor started.");
         repoTools = new RepoToolsRegistry(dataRoot);
 
         // Determine code root from environment or default
@@ -92,6 +97,7 @@ class DevCenterApp {
 
         string vcsProfilesPath = buildPath(projectRoot, "src", "modules", "vcs", "profiles.json5");
         vcsProfiles = loadProfilesJson(vcsProfilesPath);
+        logInfo("VCS profiles loaded.");
 
         templateAdapter = new StringListAdapter();
         repoAdapter = new StringListAdapter();
@@ -100,248 +106,71 @@ class DevCenterApp {
     }
 
     void createUI() {
+        logInfo("Creating main UI window.");
         window = Platform.instance.createWindow("Dev Center", null);
 
-        window.mainWidget = parseML(q{
-            VerticalLayout {
-                layoutWidth: fill; layoutHeight: fill
-                padding: 0
+        string uiPath = buildPath(getcwd(), "src", "ui", "main.sdl");
+        window.mainWidget = parseML(readText(uiPath));
 
-                // Top Bar
-                HorizontalLayout {
-                    layoutWidth: fill; padding: 10; background: "#121212"
-                    TextWidget { text: "Dev Center"; fontSize: 18pt; fontWeight: 800; textColor: "#007AFF" }
-                    Spacer { layoutWidth: fill }
-                    Button { id: btnHome; text: "Home"; styleId: "BUTTON_TRANSPARENT" }
-                    Button { id: btnUpdate; text: "Check for Updates" }
-                }
-
-                // Main Section with Sidebar
-                HorizontalLayout {
-                    layoutWidth: fill; layoutHeight: fill
-
-                    // Left Sidebar
-                    VerticalLayout {
-                        id: sidebar; layoutWidth: 200; layoutHeight: fill; padding: 5
-                        background: "#1A1A1A"; visibility: gone
-                        Button { id: navHome; text: "Home"; layoutWidth: fill }
-                        Button { id: navDashboard; text: "Tool Status"; layoutWidth: fill }
-                        Button { id: navTemplates; text: "Browse Projects"; layoutWidth: fill }
-                        Button { id: navProject; text: "Project Analysis"; layoutWidth: fill }
-                        Button { id: navWorkflowTemplates; text: "Workflow templates"; layoutWidth: fill }
-                        Button { id: navInfra; text: "Infra"; layoutWidth: fill }
-                    }
-
-                    // Main Content
-            TabHost {
-                id: contentStack; layoutWidth: fill; layoutHeight: fill
-
-                // Page 0: Home Screen
-                VerticalLayout {
-                    id: pageHome; layoutWidth: fill; layoutHeight: fill; padding: 40; alignment: center
-                    TextWidget { text: "Welcome to Dev Center"; fontSize: 24pt; fontWeight: 800; margin: 20; alignment: center }
-
-                            HorizontalLayout {
-                                layoutWidth: fill; alignment: center; spacing: 30
-
-                                // Choice 1: Browse Projects
-                                VerticalLayout {
-                                    id: choiceBrowse; layoutWidth: 300; layoutHeight: 350; padding: 20; background: "#252525"
-                                    ImageWidget { drawableId: "folder_open"; layoutWidth: 128; layoutHeight: 128; alignment: center; margin: 10 }
-                                    TextWidget { text: "Browse Projects"; fontSize: 16pt; fontWeight: 600; alignment: center; margin: 10 }
-                                    TextWidget { text: "Explore templates, discover local projects, and manage your workspace."; fontSize: 10pt; textColor: "#AAAAAA"; alignment: center; maxLines: 3 }
-                                    Spacer { layoutHeight: fill }
-                                    Button { id: btnChoiceBrowse; text: "Open Browser"; layoutWidth: fill }
-                                }
-
-                                // Choice 2: Tool Status
-                                VerticalLayout {
-                                    id: choiceTools; layoutWidth: 300; layoutHeight: 350; padding: 20; background: "#252525"
-                                    ImageWidget { drawableId: "settings"; layoutWidth: 128; layoutHeight: 128; alignment: center; margin: 10 }
-                                    TextWidget { text: "Tool Status"; fontSize: 16pt; fontWeight: 600; alignment: center; margin: 10 }
-                                    TextWidget { text: "overview of installed development tools, PATH variables, and available missing tools."; fontSize: 10pt; textColor: "#AAAAAA"; alignment: center; maxLines: 3 }
-                                    Spacer { layoutHeight: fill }
-                                    Button { id: btnChoiceTools; text: "View Dashboard"; layoutWidth: fill }
-                                }
-
-                                // Choice 3: Workflow templates (replaces GitHub's broken template UX)
-                                VerticalLayout {
-                                    id: choiceWorkflowTemplates; layoutWidth: 300; layoutHeight: 350; padding: 20; background: "#252525"
-                                    ImageWidget { drawableId: "folder_open"; layoutWidth: 128; layoutHeight: 128; alignment: center; margin: 10 }
-                                    TextWidget { text: "Workflow templates"; fontSize: 16pt; fontWeight: 600; alignment: center; margin: 10 }
-                                    TextWidget { text: "Browse full workflow files to copy. Not GitHub Marketplace actions — real templates."; fontSize: 10pt; textColor: "#AAAAAA"; alignment: center; maxLines: 3 }
-                                    Spacer { layoutHeight: fill }
-                                    Button { id: btnChoiceWorkflowTemplates; text: "Open store"; layoutWidth: fill }
-                                }
-
-                                // Choice 4: Install or add
-                                VerticalLayout {
-                                    id: choiceInstall; layoutWidth: 300; layoutHeight: 350; padding: 20; background: "#252525"
-                                    ImageWidget { drawableId: "settings"; layoutWidth: 128; layoutHeight: 128; alignment: center; margin: 10 }
-                                    TextWidget { text: "Install or add"; fontSize: 16pt; fontWeight: 600; alignment: center; margin: 10 }
-                                    TextWidget { text: "Add Infrastructure as Code (OpenTofu) or project technologies (frameworks, runtimes) to this repo."; fontSize: 10pt; textColor: "#AAAAAA"; alignment: center; maxLines: 3 }
-                                    Spacer { layoutHeight: fill }
-                                    Button { id: btnChoiceInstall; text: "Install or add..."; layoutWidth: fill }
-                                }
-                            }
-                        }
-
-                        HorizontalLayout {
-                    id: pageTemplates; layoutWidth: fill; layoutHeight: fill; padding: 10
-
-                            // Left side: repo tree + search
-                            VerticalLayout {
-                                layoutWidth: fill; layoutHeight: fill
-                                TextWidget { text: "Browse Projects"; fontSize: 14pt; margin: 5 }
-                                HorizontalLayout {
-                                    layoutWidth: fill; margin: 5
-                                    EditLine { id: searchRepos; text: ""; layoutWidth: fill; placeholderText: "Search hosts, owners, and repos..." }
-                                    Button { id: btnRefreshRepos; text: "Refresh" }
-                                }
-                                ListWidget { id: listRepos; layoutWidth: fill; layoutHeight: fill }
-                                HorizontalLayout {
-                                    layoutWidth: fill; margin: 5
-                                    Button { id: btnOpenGitGui; text: "Open Git Viewer" }
-                                }
-                            }
-
-                            // Right side: Project Details & Tools panel
-                            VerticalLayout {
-                                id: toolsPanel; layoutWidth: fill; layoutHeight: fill; // replaced rigid 280-width
-                                
-                                // Placeholder layout where the Hallmark Toolbar will be injected
-                                VerticalLayout { id: hallmarkContainer; layoutWidth: fill; layoutHeight: WRAP_CONTENT; }
-
-                                VerticalLayout { id: orgProfileContainer; layoutWidth: fill; layoutHeight: WRAP_CONTENT; }
-
-                                HorizontalLayout {
-                                    layoutWidth: fill; layoutHeight: fill;
-                                    
-                                    // Attached Tools sub-panel inside the right-hand area
-                                    VerticalLayout {
-                                        layoutWidth: 280; layoutHeight: fill; padding: 10; background: "#1E1E1E"
-                                        TextWidget { text: "Attached Tools"; fontSize: 12pt; fontWeight: 700; margin: 5; textColor: "#007AFF" }
-                                        ListWidget { id: listAttachedTools; layoutWidth: fill; layoutHeight: fill }
-                                        Button { id: btnDiscoverTools; text: "Discover Tools" }
-                                    }
-                                    
-                                    // Placeholder for future Readme WebView or integrated Editor
-                                    VerticalLayout {
-                                        id: repoPreviewContainer; layoutWidth: fill; layoutHeight: fill; padding: 10;
-                                        TextWidget { text: "Select a repository to view details."; id: repoPreviewText; alignment: center; textColor: "#AAAAAA" }
-                                    }
-                                }
-                            }
-                        }
-
-                        VerticalLayout {
-                    id: pageProject; layoutWidth: fill; layoutHeight: fill; padding: 10
-                            TextWidget { text: "Project Analysis"; fontSize: 14pt; margin: 5 }
-                            TextWidget { id: projectPathLabel; text: "Path: " }
-                            ListWidget { id: listStacks; layoutWidth: fill; layoutHeight: fill }
-                            HorizontalLayout {
-                                Button { id: btnSaveTemplate; text: "Save as New Template" }
-                                Button { id: btnSync; text: "Sync Templates" }
-                            }
-                        }
-
-                        VerticalLayout {
-                    id: pageDashboard; layoutWidth: fill; layoutHeight: fill; padding: 10
-                            TextWidget { text: "Tool Status Overview"; fontSize: 18pt; margin: 10 }
-
-                            TabWidget {
-                                id: dashboardTabs; layoutWidth: fill; layoutHeight: fill
-                                VerticalLayout { id: tabInstalled; text: "Installed"; layoutWidth: fill; layoutHeight: fill }
-                                VerticalLayout { id: tabAvailable; text: "Available"; layoutWidth: fill; layoutHeight: fill }
-                            }
-                        }
-
-                        VerticalLayout {
-                    id: pageWorkflowTemplates; layoutWidth: fill; layoutHeight: fill; padding: 10
-                            TextWidget { text: "Workflow templates"; fontSize: 14pt; margin: 5 }
-                            TextWidget { id: workflowInstallPathLabel; text: "Install into: "; margin: 2 }
-                            ListWidget { id: listWorkflowTemplates; layoutWidth: fill; layoutHeight: fill }
-                            HorizontalLayout {
-                                Button { id: btnRefreshWorkflowTemplates; text: "Refresh list" }
-                                Button { id: btnInstallWorkflowTemplate; text: "Install into repo" }
-                                Button { id: btnOpenWorkflowStore; text: "Open store in browser" }
-                            }
-                        }
-
-                        VerticalLayout {
-                    id: pageInfra; layoutWidth: fill; layoutHeight: fill; padding: 10
-                            TextWidget { text: "Infrastructure (IaC)"; fontSize: 14pt; margin: 5 }
-                            TextWidget { id: infraPathLabel; text: "Scope: "; margin: 2 }
-                            HorizontalLayout { layoutWidth: fill; margin: 5
-                                Button { id: btnRefreshInfra; text: "Refresh" }
-                                Button { id: btnInfraDocs; text: "Docs" }
-                            }
-                            HorizontalLayout { id: infraPanelContainer; layoutWidth: fill; layoutHeight: fill }
-                        }
-
-                        VerticalLayout {
-                    id: pageInstall; layoutWidth: fill; layoutHeight: fill; padding: 20
-                            TextWidget { text: "Install or add"; fontSize: 18pt; margin: 10 }
-                            TextWidget { id: installPathLabel; text: "Repo: "; margin: 5 }
-                            VerticalLayout { layoutWidth: fill; spacing: 10
-                                Button { id: btnInstallIac; text: "Add Infrastructure as Code (OpenTofu)"; layoutWidth: 300 }
-                                Button { id: btnInstallIacDocs; text: "Docs: Infrastructure as Code"; layoutWidth: 300 }
-                                Button { id: btnInstallTech; text: "Add project technologies (frameworks, runtimes)"; layoutWidth: 300 }
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        // Programmatically add dashboard content
+        // The tab bodies are declared in DML already; just populate them.
         auto tabInstalled = window.mainWidget.childById!VerticalLayout("tabInstalled");
-        tabInstalled.addChild(new ToolStatusDashboard(toolManager, true));
+        if (tabInstalled)
+            tabInstalled.addChild(new ToolStatusDashboard(toolManager, true));
 
         auto tabAvailable = window.mainWidget.childById!VerticalLayout("tabAvailable");
-        tabAvailable.addChild(new ToolStatusDashboard(toolManager, false));
-
-        auto dashboardTabs = window.mainWidget.childById!TabWidget("dashboardTabs");
-        dashboardTabs.addTab(tabInstalled, "Installed Tools"d);
-        dashboardTabs.addTab(tabAvailable, "Available Tools"d);
+        if (tabAvailable)
+            tabAvailable.addChild(new ToolStatusDashboard(toolManager, false));
 
         // Template list is no longer displayed directly; the Browse Projects page
         // will be wired to a repository browser in a future revision.
 
         auto listRepos = window.mainWidget.childById!ListWidget("listRepos");
-        listRepos.adapter = repoAdapter;
-        listRepos.itemClick = delegate(Widget source, int itemIndex) {
-            if (itemIndex >= 0 && itemIndex < browserItems.length) {
-                auto bi = browserItems[itemIndex];
-                selectedHost = bi.host;
-                selectedOwner = bi.owner;
-                selectedRepoPath = (bi.type == BrowserItemType.repo) ? bi.repo.fullPath : "";
-                refreshToolsPanel();
-            }
-            return true;
-        };
+        if (listRepos) {
+            listRepos.adapter = repoAdapter;
+            listRepos.itemClick = delegate(Widget source, int itemIndex) {
+                if (itemIndex >= 0 && itemIndex < browserItems.length) {
+                    auto bi = browserItems[itemIndex];
+                    selectedHost = bi.host;
+                    selectedOwner = bi.owner;
+                    selectedRepoPath = (bi.type == BrowserItemType.repo) ? bi.repo.fullPath : "";
+                    refreshToolsPanel();
+                }
+                return true;
+            };
+        }
 
         auto listAttachedTools = window.mainWidget.childById!ListWidget("listAttachedTools");
         auto toolsAdapter = new StringListAdapter();
-        listAttachedTools.adapter = toolsAdapter;
-        listAttachedTools.itemClick = delegate(Widget source, int itemIndex) {
-            import modules.repo_tools.platform : bringProcessToFront;
-            auto tools = repoTools.instancesForRepo(selectedRepoPath);
-            if (itemIndex >= 0 && itemIndex < tools.length) {
-                bringProcessToFront(tools[itemIndex].pid);
-            }
-            return true;
-        };
+        if (listAttachedTools) {
+            listAttachedTools.adapter = toolsAdapter;
+            listAttachedTools.itemClick = delegate(Widget source, int itemIndex) {
+                import modules.repo_tools.platform : bringProcessToFront;
+                auto tools = repoTools.instancesForRepo(selectedRepoPath);
+                if (itemIndex >= 0 && itemIndex < tools.length) {
+                    bringProcessToFront(tools[itemIndex].pid);
+                }
+                return true;
+            };
+        }
 
         auto listStacks = window.mainWidget.childById!ListWidget("listStacks");
-        listStacks.adapter = stackAdapter;
+        if (listStacks)
+            listStacks.adapter = stackAdapter;
 
         auto listWorkflowTemplates = window.mainWidget.childById!ListWidget("listWorkflowTemplates");
-        listWorkflowTemplates.adapter = workflowTemplateAdapter;
+        if (listWorkflowTemplates)
+            listWorkflowTemplates.adapter = workflowTemplateAdapter;
+
+        auto sidebar = window.mainWidget.childById("sidebar");
+        if (sidebar)
+            sidebar.visibility = Visibility.Gone;
 
         setupEventHandlers();
         refreshTemplates();
         refreshProject();
+        auto contentStack = window.mainWidget.childById!FrameLayout("contentStack");
+        if (contentStack)
+            contentStack.showChild("pageHome", Visibility.Gone);
 
         // Start background discovery timer (TODO: implement properly with DlangUI timers in future)
 
@@ -349,10 +178,11 @@ class DevCenterApp {
     }
 
     void setupEventHandlers() {
-    auto contentStack = window.mainWidget.childById!TabHost("contentStack");
+    auto contentStack = window.mainWidget.childById!FrameLayout("contentStack");
     auto sidebar = window.mainWidget.childById("sidebar");
 
         auto showPage = delegate(int index, bool showSidebar) {
+        logInfo("Switching to page index " ~ to!string(index));
         string[] pageIds = ["pageHome", "pageTemplates", "pageProject", "pageDashboard", "pageWorkflowTemplates", "pageInfra", "pageInstall"];
         if (index >= 0 && index < pageIds.length) {
             contentStack.showChild(pageIds[index]);
@@ -373,82 +203,49 @@ class DevCenterApp {
         }
     };
 
-        window.mainWidget.childById!Button("btnHome").click = delegate(Widget w) {
-            showPage(0, false);
-            return true;
-        };
-        window.mainWidget.childById!Button("navHome").click = delegate(Widget w) {
-            showPage(0, false);
-            return true;
+        auto bindClick = delegate(string id, bool delegate(Widget) handler) {
+            auto btn = cast(Button)window.mainWidget.childById(id);
+            if (btn)
+                btn.click = handler;
         };
 
-        window.mainWidget.childById!Button("btnChoiceBrowse").click = delegate(Widget w) {
-            showPage(1, true);
+        bindClick("btnHome", delegate(Widget w) { showPage(0, false); return true; });
+        bindClick("btnAIConfig", delegate(Widget w) { showAIConfigDialog(window, selectedRepoPath); return true; });
+        bindClick("navHome", delegate(Widget w) { showPage(0, false); return true; });
+        bindClick("btnChoiceBrowse", delegate(Widget w) { showPage(1, true); return true; });
+        bindClick("navTemplates", delegate(Widget w) { showPage(1, true); return true; });
+        bindClick("btnChoiceTools", delegate(Widget w) { showPage(3, true); return true; });
+        bindClick("navDashboard", delegate(Widget w) { showPage(3, true); return true; });
+        bindClick("navProject", delegate(Widget w) { showPage(2, true); refreshProject(); return true; });
+        bindClick("navWorkflowTemplates", delegate(Widget w) { showPage(4, true); return true; });
+        bindClick("btnChoiceWorkflowTemplates", delegate(Widget w) { showPage(4, true); return true; });
+        bindClick("btnChoiceInstall", delegate(Widget w) { showPage(6, true); return true; });
+        bindClick("btnInstallIacDocs", delegate(Widget w) {
+            openUrlInBrowser("https://docs.devcentr.org/general-knowledge/latest/explanation/infrastructure/iac.html");
             return true;
-        };
-        window.mainWidget.childById!Button("navTemplates").click = delegate(Widget w) {
-            showPage(1, true);
+        });
+        bindClick("btnInstallIac", delegate(Widget w) { bootstrapOpenTofuHere(); return true; });
+        bindClick("btnInstallTech", delegate(Widget w) {
+            window.showMessageBox(
+                UIString.fromRaw("Project technologies"d),
+                UIString.fromRaw("Frameworks and runtimes will be available here. Use the sidebar to open Project Analysis or Infra."d)
+            );
             return true;
-        };
-
-        window.mainWidget.childById!Button("btnChoiceTools").click = delegate(Widget w) {
-            showPage(3, true);
+        });
+        bindClick("navInfra", delegate(Widget w) { showPage(5, true); return true; });
+        bindClick("btnRefreshInfra", delegate(Widget w) { refreshInfra(); return true; });
+        bindClick("btnInfraDocs", delegate(Widget w) {
+            openUrlInBrowser("https://docs.devcentr.org/general-knowledge/latest/explanation/infrastructure/iac.html");
             return true;
-        };
-        window.mainWidget.childById!Button("navDashboard").click = delegate(Widget w) {
-            showPage(3, true);
-            return true;
-        };
-
-        window.mainWidget.childById!Button("navProject").click = delegate(Widget w) {
-            showPage(2, true);
-            refreshProject();
-            return true;
-        };
-
-        window.mainWidget.childById!Button("navWorkflowTemplates").click = delegate(Widget w) {
-            showPage(4, true);
-            return true;
-        };
-        window.mainWidget.childById!Button("btnChoiceWorkflowTemplates").click = delegate(Widget w) {
-            showPage(4, true);
-            return true;
-        };
-        window.mainWidget.childById!Button("btnChoiceInstall").click = delegate(Widget w) {
-            showPage(6, true);
-            return true;
-        };
-        window.mainWidget.childById!Button("btnInstallIacDocs").click = delegate(Widget w) {
-            openUrlInBrowser("https://docs.devcentr.org/knowledge-base/latest/explanation/infrastructure/iac.html");
-            return true;
-        };
-        window.mainWidget.childById!Button("btnInstallIac").click = delegate(Widget w) {
-            bootstrapOpenTofuHere();
-            return true;
-        };
-        window.mainWidget.childById!Button("btnInstallTech").click = delegate(Widget w) {
-            window.showMessageBox(UIString.fromRaw("Project technologies"d), UIString.fromRaw("Frameworks and runtimes will be available here. Use the sidebar to open Project Analysis or Infra."d));
-            return true;
-        };
-        window.mainWidget.childById!Button("navInfra").click = delegate(Widget w) {
-            showPage(5, true);
-            return true;
-        };
-        window.mainWidget.childById!Button("btnRefreshInfra").click = delegate(Widget w) {
-            refreshInfra();
-            return true;
-        };
-        window.mainWidget.childById!Button("btnInfraDocs").click = delegate(Widget w) {
-            openUrlInBrowser("https://docs.devcentr.org/knowledge-base/latest/explanation/infrastructure/iac.html");
-            return true;
-        };
-
-        window.mainWidget.childById!Button("btnRefreshWorkflowTemplates").click = delegate(Widget w) {
+        });
+        bindClick("btnRefreshWorkflowTemplates", delegate(Widget w) {
             refreshWorkflowTemplates();
             return true;
-        };
-        window.mainWidget.childById!Button("btnInstallWorkflowTemplate").click = delegate(Widget w) {
-            auto list = window.mainWidget.childById!ListWidget("listWorkflowTemplates");
+        });
+        bindClick("btnInstallWorkflowTemplate", delegate(Widget w) {
+            auto list = cast(ListWidget)window.mainWidget.childById("listWorkflowTemplates");
+            if (list is null)
+                return true;
             int idx = list.selectedItemIndex;
             if (idx < 0 || idx >= workflowTemplateList.length) {
                 window.showMessageBox(UIString.fromRaw("Install"d), UIString.fromRaw("Select a template first."d));
@@ -469,61 +266,49 @@ class DevCenterApp {
                 window.showMessageBox(UIString.fromRaw("Install failed"d), UIString.fromRaw(to!dstring(errMsg)));
             }
             return true;
-        };
-        window.mainWidget.childById!Button("btnOpenWorkflowStore").click = delegate(Widget w) {
-            openWorkflowTemplatesStore();
-            return true;
-        };
-
-        window.mainWidget.childById!Button("btnUpdate").click = delegate(Widget w) {
+        });
+        bindClick("btnOpenWorkflowStore", delegate(Widget w) { openWorkflowTemplatesStore(); return true; });
+        bindClick("btnUpdate", delegate(Widget w) {
             bool updated = installer.updateCache(true);
             refreshTemplates();
             window.showMessageBox(UIString.fromRaw("Status"d), UIString.fromRaw(updated ? "Cache Updated"d : "Up to Date"d));
             return true;
-        };
+        });
 
-        // Repo browser: search on text change
-        auto searchEdit = window.mainWidget.childById!EditLine("searchRepos");
-        searchEdit.contentChange = delegate(EditableContent content) {
-            refreshRepoList();
-        };
+        auto searchEdit = cast(EditLine)window.mainWidget.childById("searchRepos");
+        if (searchEdit) {
+            searchEdit.contentChange = delegate(EditableContent content) {
+                refreshRepoList();
+            };
+        }
 
-        window.mainWidget.childById!Button("btnRefreshRepos").click = delegate(Widget w) {
+        bindClick("btnRefreshRepos", delegate(Widget w) {
             allRepos = scanCodeRoot(codeRoot);
             refreshRepoList();
             return true;
-        };
-
-        window.mainWidget.childById!Button("btnOpenGitGui").click = delegate(Widget w) {
+        });
+        bindClick("btnOpenGitGui", delegate(Widget w) {
             if (selectedRepoPath.length > 0)
-            {
                 showGitGuiSelectorDialog(window, selectedRepoPath, repoTools);
-            }
             else
-            {
                 window.showMessageBox(UIString.fromRaw("Git Viewer"d), UIString.fromRaw("Select a repository first."d));
-            }
             return true;
-        };
-
-        window.mainWidget.childById!Button("btnDiscoverTools").click = delegate(Widget w) {
+        });
+        bindClick("btnDiscoverTools", delegate(Widget w) {
             string[] roots;
             foreach (r; allRepos)
-            {
                 roots ~= r.fullPath;
-            }
             repoTools.discoverExternalTools(roots);
             refreshToolsPanel();
             return true;
-        };
-
-        window.mainWidget.childById!Button("btnInstall").click = delegate(Widget w) {
-            auto list = window.mainWidget.childById!ListWidget("listTemplates");
-            if (list.selectedItemIndex >= 0) {
+        });
+        bindClick("btnInstall", delegate(Widget w) {
+            auto list = cast(ListWidget)window.mainWidget.childById("listTemplates");
+            if (list && list.selectedItemIndex >= 0) {
                 // TODO: proper install
             }
             return true;
-        };
+        });
     }
 
     void refreshTemplates() {
@@ -686,14 +471,54 @@ class DevCenterApp {
             }
         }
         
-        auto repoText = window.mainWidget.childById!TextWidget("repoPreviewText");
-        if (repoText) {
+        auto previewContainer = window.mainWidget.childById!VerticalLayout("repoPreviewContainer");
+        if (previewContainer)
+        {
+            previewContainer.removeAllChildren();
             if (selectedRepoPath.length > 0)
-                repoText.text = UIString.fromRaw("Repository: "d ~ to!dstring(selectedRepoPath));
-            else if (selectedOwner.length > 0 && selectedHost.length > 0)
-                repoText.text = UIString.fromRaw("Organization: "d ~ to!dstring(selectedHost) ~ "/"d ~ to!dstring(selectedOwner));
+            {
+                auto tabs = new TabWidget();
+                tabs.layoutWidth(FILL_PARENT).layoutHeight(FILL_PARENT);
+
+                auto overview = new ScrollWidget();
+                overview.layoutWidth(FILL_PARENT).layoutHeight(FILL_PARENT);
+                auto overviewContent = new VerticalLayout();
+                overviewContent.layoutWidth(FILL_PARENT).padding(10);
+                auto title = new TextWidget(null, "Repository Details"d);
+                title.fontSize(14).fontWeight(700).margins(Rect(0, 0, 0, 6));
+                overviewContent.addChild(title);
+                auto repoText = new TextWidget(null, "Repository: "d ~ to!dstring(selectedRepoPath));
+                repoText.textColor = 0xCCCCCC;
+                overviewContent.addChild(repoText);
+                auto docsRow = new HorizontalLayout();
+                docsRow.layoutWidth(FILL_PARENT).margins(Rect(0, 8, 0, 8));
+                auto aiBtn = new Button(null, "Open AI Config"d);
+                aiBtn.click = delegate(Widget w) { showAIConfigDialog(window, selectedRepoPath); return true; };
+                docsRow.addChild(aiBtn);
+                auto skillsBtn = new Button(null, "Open Context7 Skills Browser"d);
+                skillsBtn.click = delegate(Widget w) { openUrlInBrowser("https://context7.com/skills/"); return true; };
+                docsRow.addChild(skillsBtn);
+                overviewContent.addChild(docsRow);
+                auto note = new TextWidget(null,
+                    "Use the Terminal tab for repo-scoped commands. Use AI Config for Context7 MCP, skills, and AI provider setup."d);
+                note.textColor = 0xAAAAAA;
+                overviewContent.addChild(note);
+                overview.contentWidget = overviewContent;
+                tabs.addTab(overview, "Overview"d);
+
+                auto terminal = new RepoTerminalWidget(selectedRepoPath, repoTools);
+                tabs.addTab(terminal, "Terminal"d);
+                previewContainer.addChild(tabs);
+            }
             else
-                repoText.text = UIString.fromRaw("Select a repository or organization to view details."d);
+            {
+                auto repoText = new TextWidget(null,
+                    selectedOwner.length > 0 && selectedHost.length > 0
+                        ? UIString.fromRaw("Organization: "d ~ to!dstring(selectedHost) ~ "/"d ~ to!dstring(selectedOwner))
+                        : UIString.fromRaw("Select a repository or organization to view details."d));
+                repoText.alignment(Align.Center).textColor(0xAAAAAA);
+                previewContainer.addChild(repoText);
+            }
         }
 
         // --- Setup Tools List ---

@@ -63,6 +63,19 @@ Site: link:https://devcentr.org[devcentr.org] — Docs: link:https://docs.devcen
 
 Changelogs are recorded to the docs in xref:ROOT:changelog.adoc[Changelog]. Viewable on the site at link:https://docs.devcentr.org/changelog.html[Changelog].
 
+== AI Local Docs
+
+If you use AI tools on this repo, do not trust model memory for D or library APIs when precision matters.
+
+Prefer repo-local library docs and source clones for version-sensitive work:
+
+* Run `pwsh ./scripts/refresh-local-library-docs.ps1`
+* Keep the generated clones under `docs/_local-library-docs/` (ignored by git)
+* Keep your machine-specific manifest in `AI-LOCAL-LIBRARY-DOCS.local.json5` (ignored by git)
+* Use `AI-LOCAL-LIBRARY-DOCS.example.json5` as the template
+
+For DevCentr, local indexed docs are usually better than web search for `std`, `dlangui`, and `sdlang-d`, because AI agents can search the exact checked-out sources inside the repo tree. Use web search only as a fallback when the local docs are missing or obviously stale.
+
 == License
 
 See link:LICENSE[LICENSE]. Custom source-available license with branding restrictions.

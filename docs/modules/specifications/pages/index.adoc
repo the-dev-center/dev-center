@@ -6,7 +6,9 @@ This section contains technical specifications for Dev Center components and fea
 
 * xref:components/dependency-modeler.adoc[Dependency Modeler] - Dependency modeling system for intra-project and external dependencies
 * xref:components/project-recognizer.adoc[Project Recognizer] - Project technology stack recognition module
+* xref:components/ai-config-interface.adoc[AI Config Interface] - Global AI configuration dialog for providers, MCP setup, and skills
 * xref:components/repository-provider-registry.adoc[Repository Provider Registry] - Version control system provider registry
+* xref:components/repository-browser-terminal.adoc[Repository Browser Terminal] - Integrated repo-scoped terminal with segmented command history blocks
 * xref:components/text-editor-link-system.adoc[Text Editor Link System] - Text editor with visual link system design
 * xref:components/code-execution-recording.adoc[Code Execution Recording] - Code block execution and output recording system
 * xref:components/git-repository-manager.adoc[Git Repository Manager] - Repository relocation and renaming
@@ -21,6 +23,8 @@ This section contains technical specifications for Dev Center components and fea
 == Features
 
 * xref:features/opening-web-content-from-docs.adoc[Opening Web Content from Docs] - Native WebView integration for in-app browsing
+* xref:features/ai-doc-sources-and-mcp-setup.adoc[AI Doc Sources and MCP Setup] - Preferred docs-source order for AI work: MCP first, repo-local docs second, web search last
+* xref:features/better-automatic-ai-routing.adoc[Automatic AI Model Routing] - Route subtasks to different models by category during long sessions; cost-aware vendor proposal (e.g. Cursor-class hosts)
 * xref:features/text-editor-separate-process.adoc[Text Editor Separate Process] - Separate process text editor design philosophy
 
 == Specification Format

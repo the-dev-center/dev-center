@@ -20,7 +20,7 @@ While the app uses the APIs for different providers, the following tools are use
 
 The Git Repository Manager is aware of both:
 
-* The local workspace layout under `$ROOT` (see xref:knowledge-base:reference/workspace-organization.adoc[Workspace Organization]).
+* The local workspace layout under `$ROOT` (see xref:general-knowledge:reference/workspace-organization.adoc[Workspace Organization]).
 * The remote structure for connected providers (owners, orgs, and repositories as reported by provider APIs).
 
 When a user connects a provider account (GitHub, GitLab, etc), the manager:
@@ -104,7 +104,7 @@ When a user drags a repository from one owner or provider to another in the repo
 
 Transfers always respect:
 
-* The global remote naming conventions described in xref:knowledge-base:reference/git-management.adoc[Git Management].
+* The global remote naming conventions described in xref:general-knowledge:reference/git-management.adoc[Git Management].
 * The workspace organization schema for final on-disk layout.
 
 == Related

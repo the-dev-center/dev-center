@@ -1,0 +1,190 @@
+VerticalLayout {
+    layoutWidth: fill; layoutHeight: fill
+    padding: 0
+
+    // Top Bar
+    HorizontalLayout {
+        layoutWidth: fill; padding: 10; backgroundColor: "#121212"
+        TextWidget { text: "Dev Center"; fontSize: 18pt; fontWeight: 800; textColor: "#007AFF" }
+        HSpacer { layoutWidth: fill }
+        Button { id: btnAIConfig; text: "AI Config" }
+        Button { id: btnHome; text: "Home"; styleId: "BUTTON_TRANSPARENT" }
+        Button { id: btnUpdate; text: "Check for Updates" }
+    }
+
+    // Main Section with Sidebar
+    HorizontalLayout {
+        layoutWidth: fill; layoutHeight: fill
+
+        // Left Sidebar
+        VerticalLayout {
+            id: sidebar; layoutWidth: 200; layoutHeight: fill; padding: 5
+            backgroundColor: "#1A1A1A"
+            Button { id: navHome; text: "Home"; layoutWidth: fill }
+            Button { id: navDashboard; text: "Tool Status"; layoutWidth: fill }
+            Button { id: navTemplates; text: "Browse Projects"; layoutWidth: fill }
+            Button { id: navProject; text: "Project Analysis"; layoutWidth: fill }
+            Button { id: navWorkflowTemplates; text: "Workflow templates"; layoutWidth: fill }
+            Button { id: navInfra; text: "Infra"; layoutWidth: fill }
+        }
+
+        // Main Content
+        FrameLayout {
+            id: contentStack; layoutWidth: fill; layoutHeight: fill
+
+            // Page 0: Home Screen
+            VerticalLayout {
+                id: pageHome; layoutWidth: fill; layoutHeight: fill; padding: 40; alignment: center
+                TextWidget { text: "Welcome to Dev Center"; fontSize: 24pt; fontWeight: 800; margins: 20; alignment: center }
+
+                HorizontalLayout {
+                    layoutWidth: fill; alignment: center
+
+                    // Choice 1: Browse Projects
+                    VerticalLayout {
+                        id: choiceBrowse; layoutWidth: 300; layoutHeight: 350; padding: 20; backgroundColor: "#252525"
+                        ImageWidget { drawableId: "folder_open"; layoutWidth: 128; layoutHeight: 128; alignment: center; margins: 10 }
+                        TextWidget { text: "Browse Projects"; fontSize: 16pt; fontWeight: 600; alignment: center; margins: 10 }
+                        TextWidget { text: "Explore templates, discover local projects, and manage your workspace."; fontSize: 10pt; textColor: "#AAAAAA"; alignment: center }
+                        VSpacer { layoutHeight: fill }
+                        Button { id: btnChoiceBrowse; text: "Open Browser"; layoutWidth: fill }
+                    }
+
+                    // Choice 2: Tool Status
+                    VerticalLayout {
+                        id: choiceTools; layoutWidth: 300; layoutHeight: 350; padding: 20; backgroundColor: "#252525"
+                        ImageWidget { drawableId: "settings"; layoutWidth: 128; layoutHeight: 128; alignment: center; margins: 10 }
+                        TextWidget { text: "Tool Status"; fontSize: 16pt; fontWeight: 600; alignment: center; margins: 10 }
+                        TextWidget { text: "overview of installed development tools, PATH variables, and available missing tools."; fontSize: 10pt; textColor: "#AAAAAA"; alignment: center }
+                        VSpacer { layoutHeight: fill }
+                        Button { id: btnChoiceTools; text: "View Dashboard"; layoutWidth: fill }
+                    }
+
+                    // Choice 3: Workflow templates (replaces GitHub's broken template UX)
+                    VerticalLayout {
+                        id: choiceWorkflowTemplates; layoutWidth: 300; layoutHeight: 350; padding: 20; backgroundColor: "#252525"
+                        ImageWidget { drawableId: "folder_open"; layoutWidth: 128; layoutHeight: 128; alignment: center; margins: 10 }
+                        TextWidget { text: "Workflow templates"; fontSize: 16pt; fontWeight: 600; alignment: center; margins: 10 }
+                        TextWidget { text: "Browse full workflow files to copy. Not GitHub Marketplace actions — real templates."; fontSize: 10pt; textColor: "#AAAAAA"; alignment: center }
+                        VSpacer { layoutHeight: fill }
+                        Button { id: btnChoiceWorkflowTemplates; text: "Open store"; layoutWidth: fill }
+                    }
+
+                    // Choice 4: Install or add
+                    VerticalLayout {
+                        id: choiceInstall; layoutWidth: 300; layoutHeight: 350; padding: 20; backgroundColor: "#252525"
+                        ImageWidget { drawableId: "settings"; layoutWidth: 128; layoutHeight: 128; alignment: center; margins: 10 }
+                        TextWidget { text: "Install or add"; fontSize: 16pt; fontWeight: 600; alignment: center; margins: 10 }
+                        TextWidget { text: "Add Infrastructure as Code (OpenTofu) or project technologies (frameworks, runtimes) to this repo."; fontSize: 10pt; textColor: "#AAAAAA"; alignment: center }
+                        VSpacer { layoutHeight: fill }
+                        Button { id: btnChoiceInstall; text: "Install or add..."; layoutWidth: fill }
+                    }
+                }
+            }
+
+            HorizontalLayout {
+                id: pageTemplates; layoutWidth: fill; layoutHeight: fill; padding: 10
+
+                // Left side: repo tree + search
+                VerticalLayout {
+                    layoutWidth: fill; layoutHeight: fill
+                    TextWidget { text: "Browse Projects"; fontSize: 14pt; margins: 5 }
+                    HorizontalLayout {
+                        layoutWidth: fill; margins: 5
+                        EditLine { id: searchRepos; text: ""; layoutWidth: fill }
+                        Button { id: btnRefreshRepos; text: "Refresh" }
+                    }
+                    ListWidget { id: listRepos; layoutWidth: fill; layoutHeight: fill }
+                    HorizontalLayout {
+                        layoutWidth: fill; margins: 5
+                        Button { id: btnOpenGitGui; text: "Open Git Viewer" }
+                    }
+                }
+
+                // Right side: Project Details & Tools panel
+                VerticalLayout {
+                    id: toolsPanel; layoutWidth: fill; layoutHeight: fill; // replaced rigid 280-width
+
+                    // Placeholder layout where the Hallmark Toolbar will be injected
+                    VerticalLayout { id: hallmarkContainer; layoutWidth: fill; layoutHeight: WRAP_CONTENT; }
+
+                    VerticalLayout { id: orgProfileContainer; layoutWidth: fill; layoutHeight: WRAP_CONTENT; }
+
+                    HorizontalLayout {
+                        layoutWidth: fill; layoutHeight: fill;
+
+                        // Attached Tools sub-panel inside the right-hand area
+                        VerticalLayout {
+                            layoutWidth: 280; layoutHeight: fill; padding: 10; backgroundColor: "#1E1E1E"
+                            TextWidget { text: "Attached Tools"; fontSize: 12pt; fontWeight: 700; margins: 5; textColor: "#007AFF" }
+                            ListWidget { id: listAttachedTools; layoutWidth: fill; layoutHeight: fill }
+                            Button { id: btnDiscoverTools; text: "Discover Tools" }
+                        }
+
+                        // Placeholder for future Readme WebView or integrated Editor
+                        VerticalLayout {
+                            id: repoPreviewContainer; layoutWidth: fill; layoutHeight: fill; padding: 10;
+                            TextWidget { text: "Select a repository to view details."; id: repoPreviewText; alignment: center; textColor: "#AAAAAA" }
+                        }
+                    }
+                }
+            }
+
+            VerticalLayout {
+                id: pageProject; layoutWidth: fill; layoutHeight: fill; padding: 10
+                TextWidget { text: "Project Analysis"; fontSize: 14pt; margins: 5 }
+                TextWidget { id: projectPathLabel; text: "Path: " }
+                ListWidget { id: listStacks; layoutWidth: fill; layoutHeight: fill }
+                HorizontalLayout {
+                    Button { id: btnSaveTemplate; text: "Save as New Template" }
+                    Button { id: btnSync; text: "Sync Templates" }
+                }
+            }
+
+            VerticalLayout {
+                id: pageDashboard; layoutWidth: fill; layoutHeight: fill; padding: 10
+                TextWidget { text: "Tool Status Overview"; fontSize: 18pt; margins: 10 }
+
+                TabWidget {
+                    id: dashboardTabs; layoutWidth: fill; layoutHeight: fill
+                    VerticalLayout { id: tabInstalled; text: "Installed"; layoutWidth: fill; layoutHeight: fill }
+                    VerticalLayout { id: tabAvailable; text: "Available"; layoutWidth: fill; layoutHeight: fill }
+                }
+            }
+
+            VerticalLayout {
+                id: pageWorkflowTemplates; layoutWidth: fill; layoutHeight: fill; padding: 10
+                TextWidget { text: "Workflow templates"; fontSize: 14pt; margins: 5 }
+                TextWidget { id: workflowInstallPathLabel; text: "Install into: "; margins: 2 }
+                ListWidget { id: listWorkflowTemplates; layoutWidth: fill; layoutHeight: fill }
+                HorizontalLayout {
+                    Button { id: btnRefreshWorkflowTemplates; text: "Refresh list" }
+                    Button { id: btnInstallWorkflowTemplate; text: "Install into repo" }
+                    Button { id: btnOpenWorkflowStore; text: "Open store in browser" }
+                }
+            }
+
+            VerticalLayout {
+                id: pageInfra; layoutWidth: fill; layoutHeight: fill; padding: 10
+                TextWidget { text: "Infrastructure (IaC)"; fontSize: 14pt; margins: 5 }
+                TextWidget { id: infraPathLabel; text: "Scope: "; margins: 2 }
+                HorizontalLayout { layoutWidth: fill; margins: 5
+                    Button { id: btnRefreshInfra; text: "Refresh" }
+                    Button { id: btnInfraDocs; text: "Docs" }
+                }
+                HorizontalLayout { id: infraPanelContainer; layoutWidth: fill; layoutHeight: fill }
+            }
+
+            VerticalLayout {
+                id: pageInstall; layoutWidth: fill; layoutHeight: fill; padding: 20
+                TextWidget { text: "Install or add"; fontSize: 18pt; margins: 10 }
+                TextWidget { id: installPathLabel; text: "Repo: "; margins: 5 }
+                VerticalLayout { layoutWidth: fill
+                    Button { id: btnInstallIac; text: "Add Infrastructure as Code (OpenTofu)"; layoutWidth: 300 }
+                    Button { id: btnInstallIacDocs; text: "Docs: Infrastructure as Code"; layoutWidth: 300 }
+                    Button { id: btnInstallTech; text: "Add project technologies (frameworks, runtimes)"; layoutWidth: 300 }
+                }
+            }
+        }
+    }
+}

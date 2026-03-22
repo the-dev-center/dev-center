@@ -8,9 +8,9 @@ This page explains how this documentation site is organized and the trade-offs b
 The DevCentr docs currently mix two ways of grouping content:
 
 . **Product/feature modules** — ROOT (overview, vision), specifications (component specs), secrets-manager (one product area), publishing (release/distribution), upstream-contributions. Each module is tied to a *thing* or *workflow*.
-. **Intent-based (Diátaxis) module** — knowledge-base. Content is grouped by *user intent*: tutorials, how-to, reference, explanation. It is topic-agnostic and acts as shared "best practices and reference" for the whole ecosystem.
+. **Intent-based (Diátaxis) module** — general-knowledge. Content is grouped by *user intent*: tutorials, how-to, reference, explanation. It is topic-agnostic and acts as shared "best practices and reference" for the whole ecosystem.
 
-That can feel disjoint: "Is the knowledge-base just a catch-all? Is everything in the docs a knowledge base?"
+That can feel disjoint: "Is the general-knowledge just a catch-all? Is everything in the docs a knowledge base?"
 
 == Is the Knowledge Base Redundant?
 
@@ -25,7 +25,7 @@ That can feel disjoint: "Is the knowledge-base just a catch-all? Is everything i
 
 Other modules are **product- or workflow-specific**: they describe the DevCentr app (specifications, secrets-manager), release/publishing flows (publishing), or contributing elsewhere (upstream-contributions). They may use Diátaxis-style *pages* (how-to, reference, explanation) inside the module, but the *module boundary* is "this product" or "this workflow," not "this user intent."
 
-So: **everything in the docs is documentation; not everything is in the knowledge-base module.** The knowledge-base is the shared, intent-first content that doesn’t belong to a single product.
+So: **everything in the docs is documentation; not everything is in the general-knowledge module.** The general-knowledge is the shared, intent-first content that doesn’t belong to a single product.
 
 == How to Organize: One Module with Subfolders vs. Many Modules vs. Module per Diátaxis Mode
 
@@ -47,13 +47,13 @@ Three patterns people consider:
 
 **Recommendation for this project:**
 
-* **Keep the current hybrid:** product/workflow modules (ROOT, specifications, secrets-manager, publishing, upstream-contributions) + one **knowledge-base** module that is Diátaxis-organized (tutorials/, how-to/, reference/, explanation/).
+* **Keep the current hybrid:** product/workflow modules (ROOT, specifications, secrets-manager, publishing, upstream-contributions) + one **general-knowledge** module that is Diátaxis-organized (tutorials/, how-to/, reference/, explanation/).
 * **Do not** split into one module per Diátaxis mode; that scatters topics across modules.
 * **Do not** collapse everything into one module; that would blur product-specific vs. shared content and make nav and ownership unclear.
-* **Refine over time:** Move content that is clearly "general practice" into knowledge-base. Keep product-specific and workflow-specific content in their modules. When a topic (e.g. "Antora") is generic, consider moving it to a shared org (e.g. antora-supplemental) rather than duplicating it here.
+* **Refine over time:** Move content that is clearly "general practice" into general-knowledge. Keep product-specific and workflow-specific content in their modules. When a topic (e.g. "Antora") is generic, consider moving it to a shared org (e.g. antora-supplemental) rather than duplicating it here.
 
 == Summary
 
-* The **knowledge-base** module is not redundant: it is the intent-based (Diátaxis), topic-agnostic home for shared how-tos, reference, and explanations.
+* The **general-knowledge** module is not redundant: it is the intent-based (Diátaxis), topic-agnostic home for shared how-tos, reference, and explanations.
 * The rest of the docs are **product/workflow modules** with clearer ownership.
-* Prefer **one Diátaxis-organized module (knowledge-base) + topic/product modules** over "one module per Diátaxis mode" or "one giant module." When content is general (e.g. Antora deployment), prefer moving it to a shared docs org over keeping it in multiple places.
+* Prefer **one Diátaxis-organized module (general-knowledge) + topic/product modules** over "one module per Diátaxis mode" or "one giant module." When content is general (e.g. Antora deployment), prefer moving it to a shared docs org over keeping it in multiple places.

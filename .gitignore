@@ -28,3 +28,10 @@ app/dub.selections.json
 
 # Build outputs and logs
 app/logs/
+
+# Local AI/reference material
+AI-LOCAL-LIBRARY-DOCS.local.json5
+docs/_local-library-docs/
+
+# Local Antora playbook (use sibling paths, no remote URLs)
+antora-playbook-local.yml

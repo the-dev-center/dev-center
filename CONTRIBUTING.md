@@ -19,6 +19,9 @@ Thanks for your interest in contributing. This document explains how to get invo
 - **Repo:** Clone from `https://github.com/dev-centr/devcentr` (or your fork). Check the docs in `docs/modules/` for workspace and layout conventions.
 - **App:** Application code lives under `/app`. Use the project’s preferred build/run instructions for your platform (Windows, macOS, Linux+GNU).
 - **Docs:** Documentation is in `docs/modules/` and built with [Antora](https://docs.antora.org/). Use AsciiDoc (`.adoc`). The published site is at <https://devcentr.org> (docs at <https://devcentr.org/docs>).
+- **unit-threaded override:** To silence DUB sub-package warnings (until upstream merges the fix), register our patched fork locally:
+  `dub add-local path/to/unit-threaded 0.7.55`
+  where `path/to/unit-threaded` is a clone of <https://github.com/dlang-supplemental/unit-threaded>. See xref:ROOT:dub-local-remote-paths.adoc[DUB Local vs Remote Paths] for details.
 
 ## Submitting changes
 
@@ -27,7 +30,7 @@ Thanks for your interest in contributing. This document explains how to get invo
 3. **Push** — Push your branch to your fork.
 4. **Pull request** — Open a PR against `dev-centr/dev-center` `main`. Describe what changed and why; reference any related issues.
 
-The maintainers may ask for edits. Once approved, your PR will be merged. Tagged releases follow the project’s [Git release workflow](docs/modules/knowledge-base/pages/how-to/git-release-workflow.adoc).
+The maintainers may ask for edits. Once approved, your PR will be merged. Tagged releases follow the project’s [Git release workflow](https://docs.devcentr.org/general-knowledge/latest/how-to/git-release-workflow.html).
 
 ## License and branding
 

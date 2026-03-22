@@ -43,7 +43,7 @@ Behavior depends on context:
 * **Org + owner:** IaC flow is **org-level** infra repo (create/link, OpenTofu, bootstrap).
 * **Org + repo:** IaC flow is **per-project** and must present the decision flow below (and orphaned/registration when relevant).
 
-During any IaC flow, a **Docs** button opens the DevCentr documentation section for Infrastructure as Code (the xref:knowledge-base:explanation/infrastructure/iac.adoc[Infrastructure as Code (IaC)] page). That page explains OpenTofu, **personal use (repo-level)** vs **organization use** (org-level, per-project, delegation patterns).
+During any IaC flow, a **Docs** button opens the DevCentr documentation section for Infrastructure as Code (the xref:general-knowledge:explanation/infrastructure/iac.adoc[Infrastructure as Code (IaC)] page). That page explains OpenTofu, **personal use (repo-level)** vs **organization use** (org-level, per-project, delegation patterns).
 
 == Decision flow: installing Infra into a repository
 
@@ -80,7 +80,7 @@ When DevCentr detects that:
 
 it should **mark** that project IaC as potentially orphaned (e.g. in the Infra discovery view or repo browser) and **offer assistance** to register with the central repo.
 
-Registration assistance can follow the patterns described in the xref:knowledge-base:explanation/infrastructure/iac.adoc[Infrastructure as Code (IaC)] doc (organization use):
+Registration assistance can follow the patterns described in the xref:general-knowledge:explanation/infrastructure/iac.adoc[Infrastructure as Code (IaC)] doc (organization use):
 
 * **Registration via metadata:** Add or edit a registration file in the central repo (e.g. `services/<project>.yaml`) with repo URL, environments, required modules, outputs, ownership. The central repo never holds the project’s actual `.tofu` files.
 * **Thin wrapper module:** Expose a small public module from this repo that the central repo can import; keep full IaC in the project.
@@ -101,4 +101,4 @@ This split keeps file operations clear: service definitions stay in one place; f
 == Related
 
 * xref:iac-discovery.adoc[IaC Discovery] — how IaC is discovered and mapped in repos.
-* xref:knowledge-base:explanation/infrastructure/iac.adoc[Infrastructure as Code (IaC)] — OpenTofu, **personal use (repo-level)** vs **organization use**, delegation patterns (Docs button target).
+* xref:general-knowledge:explanation/infrastructure/iac.adoc[Infrastructure as Code (IaC)] — OpenTofu, **personal use (repo-level)** vs **organization use**, delegation patterns (Docs button target).

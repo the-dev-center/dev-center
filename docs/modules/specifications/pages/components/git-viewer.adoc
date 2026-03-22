@@ -104,9 +104,9 @@ When a user chooses *Open Git Viewer* for a repository:
 * DevCentr shows installed Git GUIs alongside its own viewer.
 * Only Git GUIs that are **detected as installed** are shown:
 ** Detection is based on known installation paths or presence on PATH.
-** The detection logic is backed by the same tool metadata used in xref:knowledge-base:reference/recommended-tools.adoc[Recommended Development Tools].
+** The detection logic is backed by the same tool metadata used in xref:general-knowledge:reference/recommended-tools.adoc[Recommended Development Tools].
 * The dialog includes a link to:
-** xref:knowledge-base:reference/git-guis.adoc[Git GUIs and Visual History Browsers].
+** xref:general-knowledge:reference/git-guis.adoc[Git GUIs and Visual History Browsers].
 
 This ensures:
 

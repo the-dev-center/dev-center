@@ -30,8 +30,9 @@ DevCentr’s Publishing view can link you into the appropriate PackageHub docs w
 
 == In This Section
 
-* xref:knowledge-base:how-to/git-release-workflow.adoc[Git Release Workflow] — When and how to treat work as a "release" (general guide)
-* xref:knowledge-base:how-to/automated-releases.adoc[Automated Releases] — Building and attaching binaries with GitHub Actions (general guide)
+* xref:general-knowledge:how-to/git-release-workflow.adoc[Git Release Workflow] — When and how to treat work as a "release" (general guide)
+* xref:general-knowledge:how-to/automated-releases.adoc[Automated Releases] — Building and attaching binaries with GitHub Actions (general guide)
+* xref:general-knowledge:how-to/winget-registration.adoc[Winget Registration] — Registering apps to Windows Package Manager (manually or via CI/CD)
 * xref:vercel-deployment.adoc[Vercel Monorepo Deployment] — Configuring Root Directories and handling build script asymmetry
-* xref:knowledge-base:reference/package-registries.adoc[Package Registries] — Choosing where to publish (ecosystem registries, GitHub, package managers)
+* xref:general-knowledge:reference/package-registries.adoc[Package Registries] — Choosing where to publish (ecosystem registries, GitHub, package managers)
 * link:https://antora-supplemental.github.io/docs/[Antora deployment and doc-site build] — Root vs. subfolder strategy, CI, GitHub Pages, and multi-repo playbooks (hosted in antora-supplemental docs)

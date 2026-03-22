@@ -3,6 +3,7 @@
     "targetType": "executable",
     "sourcePaths": ["src"],
     "dependencies": {
+        "arsd-official": "~>10.9.10",
         "dlangui": {
             "repository": "git+https://github.com/dlang-supplemental/dlangui.git",
             "version": "0.10.0-devcentr1"

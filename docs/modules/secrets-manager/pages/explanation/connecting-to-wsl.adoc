@@ -27,7 +27,7 @@ The SSH client that runs **inside WSL** (e.g. `git pull`, `ssh server`) is a **L
 * **Option A:** Run something **inside WSL** that forwards to the Windows agent. For example, a Unix socket in WSL that relays to the Windows named pipe (tools like `npiperelay` + `socat`, or projects like `wsl-ssh-agent-gui`, do this). Then set `SSH_AUTH_SOCK` in WSL to that Unix socket. The Linux SSH client talks to the bridge, and the bridge talks to the Windows agent (which can be our coordinator that forwards to Bitwarden/OpenSSH).
 * **Option B:** Run our **forwarding agent inside WSL** and have it connect to Windows-side backends (e.g. over TCP or a socket). More complex and depends on whether Bitwarden/OpenSSH are reachable from WSL.
 
-So we plug in by documenting or shipping a **WSL bridge** so that `SSH_AUTH_SOCK` in WSL points at a socket that eventually reaches our Windows agent (or the user's chosen Windows agent). The existing xref:knowledge-base:explanation/infrastructure/ssh-keys.adoc[SSH Keys] doc already notes that WSL users need a bridge to use the Windows ssh-agent; the same idea applies when our SSH Manager is the coordinator.
+So we plug in by documenting or shipping a **WSL bridge** so that `SSH_AUTH_SOCK` in WSL points at a socket that eventually reaches our Windows agent (or the user's chosen Windows agent). The existing xref:general-knowledge:explanation/infrastructure/ssh-keys.adoc[SSH Keys] doc already notes that WSL users need a bridge to use the Windows ssh-agent; the same idea applies when our SSH Manager is the coordinator.
 
 == Summary
 

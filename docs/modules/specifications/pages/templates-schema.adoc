@@ -96,4 +96,4 @@ If your current `_common/` folder contains preference-specific content (e.g. dpr
 
 == Relation to GitHub Gitignore
 
-DevCentr can use both its own templates repo and https://github.com/github/gitignore[GitHub's gitignore]. The templates repo schema above applies only to the DevCentr source. When using GitHub as a source, DevCentr follows GitHub's structure (root, Global, community). See xref:knowledge-base:reference/gitignore-template-sources.adoc[Gitignore Template Sources].
+DevCentr can use both its own templates repo and https://github.com/github/gitignore[GitHub's gitignore]. The templates repo schema above applies only to the DevCentr source. When using GitHub as a source, DevCentr follows GitHub's structure (root, Global, community). See xref:general-knowledge:reference/gitignore-template-sources.adoc[Gitignore Template Sources].

@@ -1,0 +1,17 @@
+= Winget Registration Documentation
+2026-03-17
+
+Added comprehensive instructions for registering applications to the Windows Package Manager (Winget). This addresses a common gap in deployment documentation, particularly regarding CI/CD integration.
+
+== Key Improvements
+
+* **WingetCreate Guide**: Detailed steps for installing and using `wingetcreate` for both initial registrations and updates.
+* **Authentication**: Clarified the requirement for a GitHub Classic Personal Access Token (PAT) and how to securely store it locally with `wingetcreate token`.
+* **CI/CD Integration**: Documented the process for automating Winget submissions using GitHub Actions.
+* **Runner Workaround**: Explained the necessity of using a Windows runner for Winget tasks, even when the primary build environment is Ubuntu/Linux, including a portable `wingetcreate.exe` download strategy.
+* **Security**: Emphasized the use of the `WINGET_CREATE_GITHUB_TOKEN` environment variable in CI/CD environments.
+* **In-App Integration**: Added a "Winget Support" dialog to the DevCentr application's VCS module, providing direct access to documentation and a local `wingetcreate` tool check.
+
+== Context
+
+This documentation was added to the standard DevCentr Publishing flow to assist developers in distributing native Windows applications and CLI tools more effectively.

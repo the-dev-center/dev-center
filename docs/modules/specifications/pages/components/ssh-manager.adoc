@@ -55,7 +55,7 @@ So we **pull data from them** (list keys, status) and **send signals** (sign thi
 
 == Relation to existing SSH key docs
 
-The xref:knowledge-base:explanation/infrastructure/ssh-keys.adoc[SSH Keys] explanation in the Knowledge Base covers key generation, `~/.ssh/config`, and using the system ssh-agent. The **SSH Manager** is an optional layer on top: it coordinates multiple agents and presents a single view in DevCentr. Users who are happy with a single agent (e.g. OpenSSH only) don't need to use the SSH Manager; those who use Bitwarden or multiple agents can use it as a master front-end.
+The xref:general-knowledge:explanation/infrastructure/ssh-keys.adoc[SSH Keys] explanation in the Knowledge Base covers key generation, `~/.ssh/config`, and using the system ssh-agent. The **SSH Manager** is an optional layer on top: it coordinates multiple agents and presents a single view in DevCentr. Users who are happy with a single agent (e.g. OpenSSH only) don't need to use the SSH Manager; those who use Bitwarden or multiple agents can use it as a master front-end.
 
 == User communication
 

@@ -1,0 +1,11 @@
+# Local dev playbook — copy to antora-playbook-local.yml (gitignored).
+# Uses sibling repos instead of remote URLs. Run: pnpm dlx antora antora-playbook-local.yml
+extends: ./antora-playbook.yml
+content:
+  sources:
+    - url: .
+      start_path: docs
+      branches: HEAD
+    - url: ../general-knowledge
+      branches: HEAD
+      start_path: docs

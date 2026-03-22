@@ -1,18 +1,2679 @@
 DlangUI log file
-2026-03-12 01:42:30.457 I  UIAppMain started
-2026-03-12 01:42:30.457 I  DevCenterApp constructor started
-2026-03-12 01:42:30.458 I  Home dir: \Users\rjamd
-2026-03-12 01:42:30.458 I  Cache root: \Users\rjamd\.dev-center\templates
-2026-03-12 01:42:30.459 I  TemplateInstaller initialized
-2026-03-12 01:42:30.460 I  ToolManager initialized
-2026-03-12 01:42:30.460 I  Project root: Z:\code\github.com\dev-centr\devcentr\app
-2026-03-12 01:42:30.460 I  Profiles dir: Z:\code\github.com\dev-centr\devcentr\app\src\modules\project-recognizer\profiles
-2026-03-12 01:42:30.460 I  Loading recognizer from profiles dir
-2026-03-12 01:42:30.461 E  Caught exception: No JSON profiles found in directory: Z:\code\github.com\dev-centr\devcentr\app\src\modules\project-recognizer\profiles
-2026-03-12 01:42:30.461 I  UIAppMain returned -1
-2026-03-12 01:42:30.461 I  Destroying DrawableCache
-2026-03-12 01:42:30.461 I  Destroying ImageCache
-2026-03-12 01:42:30.461 I  Destroying Win32FontManager
-2026-03-12 01:42:30.461 D  Destroying font manager
-2026-03-12 01:42:30.461 D  Exiting main
-2026-03-12 01:42:30.461 D  Calling GC.collect
+2026-03-18 23:38:20.689 I  Log level changed to Trace
+2026-03-18 23:38:20.690 I  Logger is initialized
+2026-03-18 23:38:20.690 D  myWinMain()
+2026-03-18 23:38:20.690 I  Current executable: Z:\code\github.com\dev-centr\devcentr\app\
+2026-03-18 23:38:20.690 I  Command line: 
+2026-03-18 23:38:20.690 I  Command line params: ["Z:\\code\\github.com\\dev-centr\\devcentr\\app\\dev-center.exe"]
+2026-03-18 23:38:20.690 V  Creating platform
+2026-03-18 23:38:20.690 V  Registering window class
+2026-03-18 23:38:20.690 V  Initializing font manager
+2026-03-18 23:38:20.690 I  Creating Win32FontManager
+2026-03-18 23:38:20.690 I  Win32FontManager.initialize()
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Marlett)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial Black)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial Black)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial Black)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial Black)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial Black)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Arial Black)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight SemiConde)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight SemiConde)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight SemiConde)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight SemiConde)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight SemiConde)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight SemiConde)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight SemiConde)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiCondensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold SemiConden)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold SemiConden)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold SemiConden)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold SemiConden)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold SemiConden)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold SemiConden)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold SemiConden)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Light Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiLight Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Bahnschrift SemiBold Condensed)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri Light)
+2026-03-18 23:38:20.691 D  registerFont(SansSerif,Calibri Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Calibri Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Calibri Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Calibri Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Calibri Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Calibri Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Calibri Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Calibri Light)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria Math)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria Math)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria Math)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria Math)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria Math)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria Math)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Cambria Math)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara Light)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Candara Light)
+2026-03-18 23:38:20.693 D  registerFont(Cursive,Comic Sans MS)
+2026-03-18 23:38:20.693 D  registerFont(Cursive,Comic Sans MS)
+2026-03-18 23:38:20.693 D  registerFont(Cursive,Comic Sans MS)
+2026-03-18 23:38:20.693 D  registerFont(Cursive,Comic Sans MS)
+2026-03-18 23:38:20.693 D  registerFont(Cursive,Comic Sans MS)
+2026-03-18 23:38:20.693 D  registerFont(Cursive,Comic Sans MS)
+2026-03-18 23:38:20.693 D  registerFont(MonoSpace,Consolas)
+2026-03-18 23:38:20.693 D  registerFont(MonoSpace,Consolas)
+2026-03-18 23:38:20.693 D  registerFont(MonoSpace,Consolas)
+2026-03-18 23:38:20.693 D  registerFont(MonoSpace,Consolas)
+2026-03-18 23:38:20.693 D  registerFont(MonoSpace,Consolas)
+2026-03-18 23:38:20.693 D  registerFont(MonoSpace,Consolas)
+2026-03-18 23:38:20.693 D  registerFont(MonoSpace,Consolas)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Constantia)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Constantia)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Constantia)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Constantia)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Constantia)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Constantia)
+2026-03-18 23:38:20.693 D  registerFont(Serif,Constantia)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Corbel)
+2026-03-18 23:38:20.693 D  registerFont(SansSerif,Corbel)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel Light)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel Light)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel Light)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel Light)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel Light)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel Light)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Corbel Light)
+2026-03-18 23:38:20.694 D  registerFont(MonoSpace,Courier New)
+2026-03-18 23:38:20.694 D  registerFont(MonoSpace,Courier New)
+2026-03-18 23:38:20.694 D  registerFont(MonoSpace,Courier New)
+2026-03-18 23:38:20.694 D  registerFont(MonoSpace,Courier New)
+2026-03-18 23:38:20.694 D  registerFont(MonoSpace,Courier New)
+2026-03-18 23:38:20.694 D  registerFont(MonoSpace,Courier New)
+2026-03-18 23:38:20.694 D  registerFont(MonoSpace,Courier New)
+2026-03-18 23:38:20.694 D  registerFont(MonoSpace,Courier New)
+2026-03-18 23:38:20.694 D  registerFont(MonoSpace,Courier New)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Ebrima)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Ebrima)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Ebrima)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Ebrima)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Franklin Gothic Medium)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Franklin Gothic Medium)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Franklin Gothic Medium)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Franklin Gothic Medium)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Franklin Gothic Medium)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Franklin Gothic Medium)
+2026-03-18 23:38:20.694 D  registerFont(Fantasy,Gabriola)
+2026-03-18 23:38:20.694 D  registerFont(Fantasy,Gabriola)
+2026-03-18 23:38:20.694 D  registerFont(Fantasy,Gabriola)
+2026-03-18 23:38:20.694 D  registerFont(Fantasy,Gabriola)
+2026-03-18 23:38:20.694 D  registerFont(Fantasy,Gabriola)
+2026-03-18 23:38:20.694 D  registerFont(Fantasy,Gabriola)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Gadugi)
+2026-03-18 23:38:20.694 D  registerFont(Serif,Georgia)
+2026-03-18 23:38:20.694 D  registerFont(Serif,Georgia)
+2026-03-18 23:38:20.694 D  registerFont(Serif,Georgia)
+2026-03-18 23:38:20.694 D  registerFont(Serif,Georgia)
+2026-03-18 23:38:20.694 D  registerFont(Serif,Georgia)
+2026-03-18 23:38:20.694 D  registerFont(Serif,Georgia)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Impact)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Impact)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Impact)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Impact)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Impact)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Impact)
+2026-03-18 23:38:20.694 D  registerFont(Cursive,Ink Free)
+2026-03-18 23:38:20.694 D  registerFont(Cursive,Ink Free)
+2026-03-18 23:38:20.694 D  registerFont(Cursive,Ink Free)
+2026-03-18 23:38:20.694 D  registerFont(Cursive,Ink Free)
+2026-03-18 23:38:20.694 D  registerFont(Cursive,Ink Free)
+2026-03-18 23:38:20.694 D  registerFont(Cursive,Ink Free)
+2026-03-18 23:38:20.694 D  registerFont(Cursive,Ink Free)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Javanese Text)
+2026-03-18 23:38:20.694 D  registerFont(SansSerif,Leelawadee UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Leelawadee UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Leelawadee UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Leelawadee UI Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Leelawadee UI Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Leelawadee UI Semilight)
+2026-03-18 23:38:20.695 D  registerFont(MonoSpace,Lucida Console)
+2026-03-18 23:38:20.695 D  registerFont(MonoSpace,Lucida Console)
+2026-03-18 23:38:20.695 D  registerFont(MonoSpace,Lucida Console)
+2026-03-18 23:38:20.695 D  registerFont(MonoSpace,Lucida Console)
+2026-03-18 23:38:20.695 D  registerFont(MonoSpace,Lucida Console)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Lucida Sans Unicode)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Lucida Sans Unicode)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Lucida Sans Unicode)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Lucida Sans Unicode)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Lucida Sans Unicode)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Lucida Sans Unicode)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Lucida Sans Unicode)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Malgun Gothic Semilight)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Himalaya)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei UI Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei UI Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft JhengHei UI Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft New Tai Lue)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft PhagsPa)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Sans Serif)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft Tai Le)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI Light)
+2026-03-18 23:38:20.695 D  registerFont(SansSerif,Microsoft YaHei UI Light)
+2026-03-18 23:38:20.695 D  registerFont(Cursive,Microsoft Yi Baiti)
+2026-03-18 23:38:20.695 D  registerFont(Serif,MingLiU-ExtB)
+2026-03-18 23:38:20.695 D  registerFont(Serif,MingLiU-ExtB)
+2026-03-18 23:38:20.695 D  registerFont(Serif,PMingLiU-ExtB)
+2026-03-18 23:38:20.696 D  registerFont(Serif,PMingLiU-ExtB)
+2026-03-18 23:38:20.696 D  registerFont(Serif,MingLiU_HKSCS-ExtB)
+2026-03-18 23:38:20.696 D  registerFont(Serif,MingLiU_HKSCS-ExtB)
+2026-03-18 23:38:20.696 D  registerFont(Serif,MingLiU_MSCS-ExtB)
+2026-03-18 23:38:20.696 D  registerFont(Serif,MingLiU_MSCS-ExtB)
+2026-03-18 23:38:20.696 D  registerFont(Cursive,Mongolian Baiti)
+2026-03-18 23:38:20.696 D  registerFont(MonoSpace,MS Gothic)
+2026-03-18 23:38:20.696 D  registerFont(MonoSpace,MS Gothic)
+2026-03-18 23:38:20.696 D  registerFont(MonoSpace,MS Gothic)
+2026-03-18 23:38:20.696 D  registerFont(MonoSpace,MS Gothic)
+2026-03-18 23:38:20.696 D  registerFont(MonoSpace,MS Gothic)
+2026-03-18 23:38:20.696 D  registerFont(MonoSpace,MS Gothic)
+2026-03-18 23:38:20.696 D  registerFont(MonoSpace,MS Gothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS UI Gothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS UI Gothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS UI Gothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS UI Gothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS UI Gothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS UI Gothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS UI Gothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS PGothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS PGothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS PGothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS PGothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS PGothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS PGothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MS PGothic)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,MV Boli)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,Myanmar Text)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,Nirmala UI)
+2026-03-18 23:38:20.696 D  registerFont(SansSerif,Nirmala UI Semilight)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Nirmala Text)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Nirmala Text Semilight)
+2026-03-18 23:38:20.697 D  registerFont(Serif,Palatino Linotype)
+2026-03-18 23:38:20.697 D  registerFont(Serif,Palatino Linotype)
+2026-03-18 23:38:20.697 D  registerFont(Serif,Palatino Linotype)
+2026-03-18 23:38:20.697 D  registerFont(Serif,Palatino Linotype)
+2026-03-18 23:38:20.697 D  registerFont(Serif,Palatino Linotype)
+2026-03-18 23:38:20.697 D  registerFont(Serif,Palatino Linotype)
+2026-03-18 23:38:20.697 D  registerFont(Serif,Palatino Linotype)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Sans Serif Collection)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Sans Serif Collection)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Sans Serif Collection)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Sans Serif Collection)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Sans Serif Collection)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Sans Serif Collection)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Sans Serif Collection)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Sans Serif Collection)
+2026-03-18 23:38:20.697 D  registerFont(Serif,Segoe Fluent Icons)
+2026-03-18 23:38:20.697 D  registerFont(Serif,Segoe MDL2 Assets)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Segoe Print)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Segoe Print)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Segoe Print)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Segoe Print)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Segoe Print)
+2026-03-18 23:38:20.697 D  registerFont(SansSerif,Segoe Print)
+2026-03-18 23:38:20.697 D  registerFont(Cursive,Segoe Script)
+2026-03-18 23:38:20.697 D  registerFont(Cursive,Segoe Script)
+2026-03-18 23:38:20.697 D  registerFont(Cursive,Segoe Script)
+2026-03-18 23:38:20.697 D  registerFont(Cursive,Segoe Script)
+2026-03-18 23:38:20.698 D  registerFont(Cursive,Segoe Script)
+2026-03-18 23:38:20.698 D  registerFont(Cursive,Segoe Script)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Black)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Black)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Black)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Black)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Black)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Black)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Black)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Emoji)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Historic)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semibold)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semibold)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semibold)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semibold)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semibold)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semibold)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semibold)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semibold)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semibold)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semilight)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semilight)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semilight)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semilight)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semilight)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semilight)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semilight)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semilight)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Semilight)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Symbol)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semilig)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semilig)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semilig)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semilig)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semilig)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semilig)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semilig)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semibol)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semibol)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semibol)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semibol)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semibol)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semibol)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Small Semibol)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Light)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Semiligh)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Semiligh)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Semiligh)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Semiligh)
+2026-03-18 23:38:20.698 D  registerFont(SansSerif,Segoe UI Variable Text Semiligh)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text Semiligh)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text Semiligh)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Light)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Light)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Light)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Light)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Light)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Light)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Light)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semil)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semil)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semil)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semil)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semil)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semil)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semil)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semib)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semib)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semib)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semib)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semib)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semib)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Segoe UI Variable Display Semib)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,SimSun)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,SimSun)
+2026-03-18 23:38:20.699 D  registerFont(MonoSpace,NSimSun)
+2026-03-18 23:38:20.699 D  registerFont(MonoSpace,NSimSun)
+2026-03-18 23:38:20.699 D  registerFont(MonoSpace,SimSun-ExtB)
+2026-03-18 23:38:20.699 D  registerFont(MonoSpace,SimSun-ExtB)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Small Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Text Semibold)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Subheading)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Subheading)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Subheading)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Subheading)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Subheading)
+2026-03-18 23:38:20.699 D  registerFont(SansSerif,Sitka Subheading)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Subheading)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Subheading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Subheading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Subheading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Subheading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Subheading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Subheading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Subheading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Heading Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Display Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner Semibold)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Sitka Banner Semibold)
+2026-03-18 23:38:20.701 D  registerFont(Serif,Sylfaen)
+2026-03-18 23:38:20.701 D  registerFont(Serif,Sylfaen)
+2026-03-18 23:38:20.701 D  registerFont(Serif,Sylfaen)
+2026-03-18 23:38:20.701 D  registerFont(Serif,Sylfaen)
+2026-03-18 23:38:20.701 D  registerFont(Serif,Sylfaen)
+2026-03-18 23:38:20.701 D  registerFont(Serif,Sylfaen)
+2026-03-18 23:38:20.701 D  registerFont(Serif,Symbol)
+2026-03-18 23:38:20.701 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Tahoma)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Times New Roman)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Times New Roman)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Times New Roman)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Times New Roman)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Times New Roman)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Times New Roman)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Times New Roman)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Times New Roman)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Times New Roman)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Trebuchet MS)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Trebuchet MS)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Trebuchet MS)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Trebuchet MS)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Trebuchet MS)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Trebuchet MS)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Verdana)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Verdana)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Verdana)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Verdana)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Verdana)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Verdana)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Verdana)
+2026-03-18 23:38:20.702 D  registerFont(Serif,Webdings)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Wingdings)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semibold)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semibold)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semibold)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semibold)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semibold)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semibold)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semibold)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Light)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Medium)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Medium)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Medium)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Medium)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Medium)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Medium)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic Medium)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semilight)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semilight)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semilight)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semilight)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semilight)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semilight)
+2026-03-18 23:38:20.702 D  registerFont(SansSerif,Yu Gothic UI Semilight)
+2026-03-18 23:38:20.702 D  registerFont(MonoSpace,SimSun-ExtG)
+2026-03-18 23:38:20.702 D  registerFont(MonoSpace,SimSun-ExtG)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Book Antiqua)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Book Antiqua)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Book Antiqua)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Book Antiqua)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Book Antiqua)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Book Antiqua)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Bradley Hand ITC)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Bookshelf Symbol 7)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Century)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Century)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Century)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Century)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Century)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Century)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Dubai)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Dubai)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Dubai Light)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Dubai Light)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Dubai Medium)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Dubai Medium)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Freestyle Script)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,French Script MT)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Century Gothic)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Century Gothic)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Century Gothic)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Century Gothic)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Century Gothic)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Century Gothic)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Kristen ITC)
+2026-03-18 23:38:20.703 D  registerFont(Fantasy,Juice ITC)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Lucida Handwriting)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Mistral)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Mistral)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Mistral)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Mistral)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Mistral)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Mistral)
+2026-03-18 23:38:20.703 D  registerFont(Serif,MT Extra)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Papyrus)
+2026-03-18 23:38:20.703 D  registerFont(Cursive,Pristina)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,MS Reference Sans Serif)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,MS Reference Sans Serif)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,MS Reference Sans Serif)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,MS Reference Sans Serif)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,MS Reference Sans Serif)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,MS Reference Sans Serif)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,MS Reference Sans Serif)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,MS Reference Specialty)
+2026-03-18 23:38:20.703 D  registerFont(Fantasy,Tempus Sans ITC)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Wingdings 2)
+2026-03-18 23:38:20.703 D  registerFont(Serif,Wingdings 3)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Roboto Condensed)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Roboto Condensed)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Roboto Condensed)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Roboto Condensed)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Roboto Condensed)
+2026-03-18 23:38:20.703 D  registerFont(SansSerif,Roboto Condensed)
+2026-03-18 23:38:20.704 D  registerFont(SansSerif,Roboto Condensed)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiBold)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiBold)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiBold)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiBold)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiBold)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiBold)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Code SemiBold)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono ExtraLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono Light)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono SemiLight)
+2026-03-18 23:38:20.704 D  registerFont(MonoSpace,Cascadia Mono)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono SemiBold)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono SemiBold)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono SemiBold)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono SemiBold)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono SemiBold)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono SemiBold)
+2026-03-18 23:38:20.705 D  registerFont(MonoSpace,Cascadia Mono SemiBold)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,AniMe Vision - MB_EN)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,DejaVu Math TeX Gyre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,DejaVu Math TeX Gyre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,DejaVu Math TeX Gyre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,DejaVu Math TeX Gyre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,DejaVu Math TeX Gyre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Sans Armenian)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Sans Armenian)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Sans Armenian)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Sans Armenian)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Gentium Basic)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Gentium Basic)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Gentium Basic)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,David Libre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,David Libre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,David Libre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,David Libre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,David Libre)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Carlito)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Carlito)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Carlito)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Carlito)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Carlito)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Carlito)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Carlito)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,OpenSymbol)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,OpenSymbol)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Sans Arabic)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif Lao)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Serif Armenian)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Serif Armenian)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Serif Armenian)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Serif Armenian)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Naskh Arabic)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Naskh Arabic)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Naskh Arabic)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Naskh Arabic)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif Georgian)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Caladea)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Caladea)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Caladea)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Caladea)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif Hebrew)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif Hebrew)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif Hebrew)
+2026-03-18 23:38:20.705 D  registerFont(Serif,Noto Serif Hebrew)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Amiri)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Amiri)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Amiri)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Amiri)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Amiri)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Noto Sans Lisu)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Alef)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Alef)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Alef)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Alef)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Alef)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi Medium)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi Medium)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi Medium)
+2026-03-18 23:38:20.705 D  registerFont(SansSerif,Reem Kufi Medium)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Reem Kufi Medium)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Reem Kufi Medium)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Reem Kufi SemiBold)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Reem Kufi SemiBold)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Reem Kufi SemiBold)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Reem Kufi SemiBold)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Reem Kufi SemiBold)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Reem Kufi SemiBold)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Scheherazade)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Scheherazade)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Sans Lao)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Sans Georgian Bold)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Kufi Arabic)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Kufi Arabic)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Kufi Arabic)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Kufi Arabic)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Kufi Arabic)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Sans Hebrew)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Sans Hebrew)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Sans Hebrew)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Sans Hebrew)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Amiri Quran)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Miriam Mono CLM)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif Condensed)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif Condensed)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif Condensed)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif Condensed)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif Condensed)
+2026-03-18 23:38:20.707 D  registerFont(Serif,DejaVu Serif Condensed)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Gentium Book Basic)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Gentium Book Basic)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Gentium Book Basic)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Rubik)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Rubik)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Rubik)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Rubik)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Rubik)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Rubik)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,Noto Sans Georgian)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans Light)
+2026-03-18 23:38:20.707 D  registerFont(SansSerif,DejaVu Sans Light)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Light)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Light)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Light)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Light)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Light)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Condensed)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Condensed)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Condensed)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Condensed)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Condensed)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Condensed)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Condensed)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Condensed)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,DejaVu Sans Condensed)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,DejaVu Sans Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,DejaVu Sans Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,DejaVu Sans Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,DejaVu Sans Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,DejaVu Sans Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,DejaVu Sans Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,DejaVu Sans Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,DejaVu Sans Mono)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Linux Biolinum G)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Linux Biolinum G)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Linux Biolinum G)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Linux Biolinum G)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Linux Biolinum G)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Linux Biolinum G)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Linux Biolinum G)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Linux Biolinum G)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans Narrow)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans Narrow)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans Narrow)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans Narrow)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans Narrow)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans Narrow)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,Liberation Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,Liberation Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,Liberation Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,Liberation Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,Liberation Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,Liberation Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,Liberation Mono)
+2026-03-18 23:38:20.708 D  registerFont(MonoSpace,Liberation Mono)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans)
+2026-03-18 23:38:20.708 D  registerFont(SansSerif,Liberation Sans)
+2026-03-18 23:38:20.708 D  registerFont(Serif,Liberation Serif)
+2026-03-18 23:38:20.708 D  registerFont(Serif,Liberation Serif)
+2026-03-18 23:38:20.708 D  registerFont(Serif,Liberation Serif)
+2026-03-18 23:38:20.708 D  registerFont(Serif,Liberation Serif)
+2026-03-18 23:38:20.708 D  registerFont(Serif,Liberation Serif)
+2026-03-18 23:38:20.708 D  registerFont(Serif,Liberation Serif)
+2026-03-18 23:38:20.708 D  registerFont(Serif,Liberation Serif)
+2026-03-18 23:38:20.709 D  registerFont(Serif,Liberation Serif)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine Display G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine Display G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine Display G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine Display G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine Display G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine Display G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine Display G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine Display G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,Linux Libertine G)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,MrsEavesRoman)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,MrsEavesSmallCaps)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,MrsEavesSmartLig)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,MrsEavesSmartLigRoman)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,MrsEaves)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,MrsEavesFractions)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,MrsEavesJustLig)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,MrsEavesJustLigRoman)
+2026-03-18 23:38:20.709 D  registerFont(SansSerif,MrsEavesPetiteCaps)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Thin)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Thin)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Thin)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Thin)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Thin)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Thin)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Thin)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono ExtraLight)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono ExtraLight)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono ExtraLight)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono ExtraLight)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono ExtraLight)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono ExtraLight)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono ExtraLight)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Light)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Light)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Light)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Light)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Light)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Light)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Light)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Medium)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Medium)
+2026-03-18 23:38:20.709 D  registerFont(MonoSpace,JetBrains Mono Medium)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono Medium)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono Medium)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono Medium)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono Medium)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono SemiBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono SemiBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono SemiBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono SemiBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono SemiBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono SemiBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono SemiBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono ExtraBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono ExtraBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono ExtraBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono ExtraBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono ExtraBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono ExtraBold)
+2026-03-18 23:38:20.710 D  registerFont(MonoSpace,JetBrains Mono ExtraBold)
+2026-03-18 23:38:20.710 I  Found 1078 font faces
+2026-03-18 23:38:20.710 D  initResourceManagers()
+2026-03-18 23:38:20.710 I  Creating ImageCache
+2026-03-18 23:38:20.710 I  Creating DrawableCache
+2026-03-18 23:38:20.710 D  Calling initSharedResourceManagers()
+2026-03-18 23:38:20.710 D  Calling initStandardEditorActions()
+2026-03-18 23:38:20.710 D  Calling registerStandardWidgets()
+2026-03-18 23:38:20.710 D  Registering standard widgets for DML
+2026-03-18 23:38:20.710 D  initResourceManagers() -- finished
+2026-03-18 23:38:20.710 D  Creating default theme
+2026-03-18 23:38:20.710 I  Entering UIAppMain: ["Z:\\code\\github.com\\dev-centr\\devcentr\\app\\dev-center.exe"]
+2026-03-18 23:38:20.712 D  Platform.createWindow is called
+2026-03-18 23:38:20.712 V  Platform.createWindow : setDefaultLanguageAndThemeIfNecessary
+2026-03-18 23:38:20.712 V  setDefaultLanguageAndThemeIfNecessary : setting UI language
+2026-03-18 23:38:20.712 V  Loading language file
+2026-03-18 23:38:20.712 D  Loading string resources from file @embedded@/std_en.ini
+2026-03-18 23:38:20.713 V  Calling onThemeChanged
+2026-03-18 23:38:20.713 D  DrawableCache.clear()
+2026-03-18 23:38:20.713 V  setDefaultLanguageAndThemeIfNecessary : setting UI theme
+2026-03-18 23:38:20.713 V  uiTheme setting new theme theme_default
+2026-03-18 23:38:20.713 D  <?xml version="1.0" encoding="utf-8"?>
+<theme id="theme_default"
+        fontSize="10pt"
+        fontFace="Helvetica Neue,Verdana,Arial,DejaVu Sans,Liberation Sans,Helvetica,Roboto,Droid Sans"
+        fontFamily="SansSerif"
+        >
+    <color id="window_background" value="#FFFFFF"/>
+    <color id="dialog_background" value="#EEEEEE"/>
+    <color id="edit_background" value="#FFFFFF"/>
+    <color id="edit_caret" value="#000000"/>
+    <color id="edit_caret_replace" value="#808080FF"/>
+    <color id="editor_matching_bracket_highlight" value="#60FFE0B0"/>
+    <color id="editor_selection_focused" value="#B060A0FF"/>
+    <color id="editor_selection_normal" value="#D060A0FF"/>
+    <color id="editor_search_highlight_current" value="#60A0C0FF"/>
+    <color id="editor_search_highlight_other" value="#90F0D080"/>
+    <color id="editor_left_pane_background" value="#F4F4F4"/>
+    <color id="editor_left_pane_background2" value="#FFFFFF"/>
+    <color id="editor_left_pane_background3" value="#F0F0F0"/>
+    <color id="editor_left_pane_line_number_text" value="#4060D0"/>
+    <color id="editor_left_pane_line_number_background" value="#F8F8F8"/>
+    <color id="editor_left_pane_line_icon_color_breakpoint" value="#FF0000"/>
+    <color id="editor_left_pane_line_icon_color_bookmark" value="#0000FF"/>
+    <color id="editor_left_pane_line_icon_color_error" value="#80FF0000"/>
+
+    <color id="grid_selection_color" value="#804040FF"/>
+    <color id="grid_selection_color_row" value="#C0A0B0FF"/>
+    <color id="grid_cell_background_fixed" value="#C0E0E0E0"/>
+    <color id="grid_cell_border_color" value="#C0C0C0C0"/>
+    <color id="grid_cell_border_color_header" value="#C0202020"/>
+    <color id="grid_cell_background_header" value="#C0909090"/>
+    <color id="grid_cell_background_header_selected" value="#80FFC040"/>
+    <color id="file_dialog_dir_name_color" value="#000080"/>
+
+    <style id="BUTTON"
+        backgroundImageId="btn_background"
+        align="Center"
+        margins="3pt,3pt,3pt,3pt"
+        focusRectColors="#000"
+        textFlags="UnderlineHotKeys"
+        >
+        <state state_enabled="true" state_hovered="true" textColor="#006080"/>
+        <state state_enabled="false" textColor="#80000000"/>
+    </style>
+    <style id="BUTTON_TRANSPARENT"
+        backgroundImageId="btn_background_transparent"
+        align="Center"
+        />
+    <style id="BUTTON_CHECK_TRANSPARENT"
+        backgroundImageId="btn_background_check_transparent"
+        align="Center"
+        />
+    <style id="BUTTON_LABEL"
+        layoutWidth="FILL_PARENT"
+        margins="2pt,2pt,2pt,2pt"
+        align="Left|VCenter"
+        textFlags="UnderlineHotKeys"
+        >
+        <state state_enabled="false" textColor="#80000000"/>
+        <state state_enabled="true" state_hovered="true" textColor="#006080"/>
+    </style>
+    <style id="BUTTON_LABEL_LINK" parent="BUTTON_LABEL"
+        textColor="#0000C0"
+        >
+        <state state_enabled="false" textColor="#60C0C0FF"/>
+        <state state_enabled="true" state_hovered="true" textColor="#8080FF" textFlags="Underline"/>
+    </style>
+    <style id="BUTTON_IMAGE"
+        margins="2,2,2,2"
+        align="Center"
+        />
+    <style id="SWITCH"
+        margins="2,2,2,2"
+        align="Center"
+        backgroundImageId="switch"
+        />
+    <style id="CHECKBOX"
+        backgroundImageId="@null"
+        margins="2,2,2,2"
+        padding="2,2,2,2"
+	focusRectColors="@null"
+        />
+    <style id="CHECKBOX_IMAGE" parent="BUTTON_IMAGE"
+        align="Center"
+        margins="2,2,2,2"
+        />
+    <style id="CHECKBOX_LABEL" parent="BUTTON_LABEL"
+        align="Left|VCenter"
+	focusRectColors="#000"
+        >
+        <state state_enabled="true" state_hovered="true" textColor="#006080"/>
+        <state state_enabled="false" textColor="#909090"/>
+    </style>
+    <style id="RADIOBUTTON" parent="CHECKBOX"
+        margins="2,2,2,2"
+        padding="2,2,2,2"
+        />
+    <style id="RADIOBUTTON_IMAGE" parent="CHECKBOX_IMAGE"
+        align="Center"
+        margins="2,2,2,2"
+        />
+    <style id="RADIOBUTTON_LABEL" parent="CHECKBOX_LABEL"
+        align="Left|VCenter"
+	focusRectColors="#000"
+        >
+        <state state_enabled="true" state_hovered="true" textColor="#006080"/>
+        <state state_enabled="false" textColor="#909090"/>
+    </style>
+    <style id="TEXT"
+        margins="2,2,2,2"
+        padding="1,1,1,1"
+        align="Left|VCenter"
+        >
+        <state state_enabled="false" textColor="#A0000000"/>
+    </style>
+    <style id="MULTILINE_TEXT"
+        margins="2,2,2,2"
+        padding="1,1,1,1"
+        align="Left|VCenter"
+        maxLines="0"
+        >
+        <state state_enabled="false" textColor="#A0000000"/>
+    </style>
+    <style id="HSPACER"
+        layoutWidth="FILL_PARENT"
+        layoutWeight="100"
+        minWidth="5"
+        />
+    <style id="VSPACER"
+        layoutHeight="FILL_PARENT"
+        layoutWeight="100"
+        minHeight="5"
+        />
+    <style id="BUTTON_NOMARGINS"
+        backgroundImageId="btn_background"
+        align="Center"
+        />
+    <color id="sample_color_rgb" value="#8CF"/>
+    <color id="sample_color_argb" value="#48CF"/>
+    <color id="sample_color_rrggbb" value="#80C0F0"/>
+    <color id="sample_color_aarrggbb" value="#4080C0F0"/>
+    <drawable id="btn_check" value="btn_check"/>
+    <drawable id="btn_radio" value="btn_radio"/>
+    <drawable id="scrollbar_button_up" value="scrollbar_btn_up"/>
+    <drawable id="scrollbar_button_down" value="scrollbar_btn_down"/>
+    <drawable id="scrollbar_button_left" value="scrollbar_btn_left"/>
+    <drawable id="scrollbar_button_right" value="scrollbar_btn_right"/>
+    <drawable id="scrollbar_indicator_vertical" value="scrollbar_indicator_vertical"/>
+    <drawable id="scrollbar_indicator_horizontal" value="scrollbar_indicator_horizontal"/>
+    <style id="SCROLLBAR"
+        backgroundColor="#dce2e8"
+        align="Center"
+        />
+    <style id="SLIDER"
+        backgroundImageId="slider_background"
+        align="Center"
+        />
+    <style id="SCROLLBAR_BUTTON"
+        backgroundImageId="scrollbar_btn_background"
+        align="Center"
+        />
+    <style id="SCROLLBAR_BUTTON_TRANSPARENT"
+        backgroundImageId="scrollbar_btn_transparent_background"
+        align="Center"
+        />
+    <style id="SLIDER"
+        />
+    <style id="PAGE_SCROLL"
+        backgroundColor="#FFFFFFFF"
+        >
+        <state state_pressed="true" backgroundColor="#C0404080"/>
+        <state state_hovered="true" backgroundColor="#F0404080"/>
+    </style>
+
+    <style id="TAB_DOWN_DARK"
+        backgroundImageId="dock_window_caption_background_down"
+        layoutWidth="FILL_PARENT"
+        >
+    </style>
+    <style id="TAB_DOWN_BUTTON_DARK"
+        padding="2pt,1pt,2pt,1pt"
+        backgroundImageId="tab_btn_dark_down"
+        />
+    <style id="TAB_DOWN_BUTTON"
+        padding="2pt,1pt,2pt,1pt"
+        backgroundImageId="tab_btn_down"
+        />
+    <style id="TAB_UP_DARK"
+        backgroundImageId="dock_window_caption_background"
+        layoutWidth="FILL_PARENT"
+        >
+    </style>
+    <style id="TAB_UP_BUTTON_DARK"
+        padding="2pt,1pt,2pt,1pt"
+        backgroundImageId="tab_btn_dark_up"
+        >
+        <length id="overlap" value="2"/>
+    </style>
+    <style id="TAB_UP_BUTTON_DARK_TEXT"
+        textColor="#000000"
+        align="Center"
+        >
+        <state state_selected="false" state_window_focused="false" state_hovered="false" textColor="#9c9c9c"/>
+    </style>
+    <style id="TAB_UP"
+        backgroundImageId="tab_up_background"
+        layoutWidth="FILL_PARENT"
+        >
+        <state state_selected="true" backgroundImageId="tab_up_backgrond_selected"/>
+    </style>
+    <style id="TAB_UP_BUTTON_TEXT"
+        padding="3pt,1pt,3pt,1pt"
+        textColor="#000000"
+        align="Center"
+        >
+        <state state_selected="true" state_focused="true" textColor="#000000"/>
+        <state state_selected="true" textColor="#000000"/>
+        <state state_focused="true" textColor="#000000"/>
+        <state state_hovered="true" textColor="#0000C0"/>
+    </style>
+    <style id="TAB_UP_BUTTON"
+        padding="2pt,1pt,2pt,1pt"
+        backgroundImageId="tab_btn_up"
+        />
+    <style id="TAB_HOST"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        backgroundColor="#F0F0F0"
+        />
+    <style id="TAB_WIDGET"
+        backgroundColor="#EEEEEE"
+        />
+
+    <style id="MAIN_MENU"
+        layoutWidth="FILL_PARENT"
+        backgroundImageId="main_menu_background"
+	layoutWeight="0"
+        />
+    <style id="MAIN_MENU_ITEM"
+        padding="3pt,2pt,3pt,2pt"
+        backgroundImageId="main_menu_item_background"
+        textFlags="Parent"
+        />
+    <style id="MENU_ITEM"
+        backgroundImageId="menu_item_background"
+        padding="3pt,2pt,3pt,2pt"
+        >
+    </style>
+    <style id="MENU_SEPARATOR"
+        backgroundImageId="menu_separator"
+        padding="3pt,2pt,3pt,2pt"
+        >
+    </style>
+    <style id="MENU_ICON"
+        margins="2pt,2pt,2pt,2pt"
+        align="Left|VCenter"
+        >
+        <state state_enabled="false" alpha="160"/>
+    </style>
+    <style id="MENU_LABEL"
+        margins="2pt,1pt,2pt,1pt"
+        align="Left|VCenter"
+        textFlags="UnderlineHotKeys"
+        >
+        <state state_enabled="false" textColor="#80404040"/>
+    </style>
+    <style id="MAIN_MENU_LABEL"
+        margins="2pt,1pt,2pt,1pt"
+        align="Left|VCenter"
+        textFlags="Parent"
+        >
+        <state state_enabled="false" textColor="#80404040"/>
+    </style>
+    <style id="MENU_ACCEL"
+        margins="2pt,1pt,2pt,1pt"
+        align="Left|VCenter"
+        >
+        <state state_enabled="false" textColor="#80404040"/>
+    </style>
+    <style id="TRANSPARENT_BUTTON_BACKGROUND"
+        backgroundImageId="btn_background_transparent"
+        padding="2pt,1pt,2pt,1pt"
+        />
+    <style id="POPUP_MENU"
+        backgroundImageId="popup_menu_background_normal"
+        />
+    <style id="LIST_ITEM"
+        backgroundImageId="list_item_background"
+        />
+
+    <style id="COMBO_BOX"
+        backgroundImageId="combobox_background"
+        padding="2pt,2pt,2pt,2pt"
+        margins="2pt,2pt,2pt,2pt"
+        minWidth="40"
+        />
+    <style id="COMBO_BOX_BODY"
+        padding="2pt,2pt,2pt,2pt"
+        minWidth="40"
+        align="Left|VCenter"
+	focusRectColors="#000"
+        />
+    <style id="COMBO_BOX_BUTTON"
+        padding="2pt,2pt,2pt,2pt"
+        backgroundImageId="btn_background_transparent"
+        align="Center"
+        />
+
+    <style id="EDIT_LINE"
+        backgroundImageId="editbox_background"
+        padding="3pt,3pt,3pt,3pt"
+        margins="1pt,1pt,1pt,1pt"
+        minWidth="40"
+        />
+    <style id="EDIT_BOX"
+        fontFace="Menlo,Consolas,DejaVuSansMono,Lucida Sans Typewriter,Courier New,Lucida Console"
+        backgroundImageId="editbox_background"
+        padding="2pt,2pt,2pt,2pt"
+        margins="2pt,2pt,2pt,2pt"
+        minWidth="100"
+        minHeight="60"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        />
+    <style id="LOG_WIDGET"
+        fontFace="Menlo,Consolas,DejaVuSansMono,DejaVu Sans Mono,Lucida Sans Typewriter,Courier New,Lucida Console"
+        fontSize="9pt"
+        fontFamily="MonoSpace"
+        backgroundImageId="editbox_background"
+        padding="2pt,2pt,2pt,2pt"
+        margins="2pt,2pt,2pt,2pt"
+        minWidth="100"
+        minHeight="60"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        />
+    <style id="LIST_BOX"
+        backgroundImageId="editbox_background"
+        padding="2pt,2pt,2pt,2pt"
+        margins="2pt,2pt,2pt,2pt"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        />
+    <style id="EDIT_BOX_NO_FRAME"
+        fontFace="Menlo,Consolas,DejaVuSansMono,Lucida Sans Typewriter,Courier New,Lucida Console"
+        backgroundColor="#FFFFFF"
+        padding="2pt,2pt,2pt,2pt"
+        margins="2pt,2pt,2pt,2pt"
+        minWidth="100"
+        minHeight="60"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        />
+    <style id="STRING_GRID"
+        backgroundImageId="editbox_background"
+        padding="2pt,2pt,2pt,2pt"
+        margins="2pt,2pt,2pt,2pt"
+        minWidth="100"
+        minHeight="60"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        />
+    <style id="FILE_DIALOG_GRID"
+        backgroundImageId="editbox_background"
+        padding="2pt,2pt,2pt,2pt"
+        margins="2pt,2pt,2pt,2pt"
+        minWidth="100"
+        minHeight="60"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        />
+    <style id="STATUS_LINE"
+        backgroundColor="#eceffa"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="WRAP_CONTENT"
+        padding="1pt,1pt,1pt,1pt"
+	layoutWeight="0"
+        />
+    <style id="DOCK_HOST"
+        backgroundColor="#eceffa"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        padding="2pt,2pt,2pt,2pt"
+        />
+    <style id="DOCK_HOST_BODY"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        padding="0,0,0,0"
+        margins="3pt,3pt,3pt,3pt"
+        />
+    <style id="DOCK_WINDOW"
+        backgroundImageId="dock_window_background"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        padding="0,0,0,0"
+        margins="2,2,2,2"
+        />
+    <style id="FLOATING_WINDOW"
+        backgroundImageId="popup_window_background"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        padding="1pt,1pt,1pt,1pt"
+        margins="4pt,4pt,4pt,4pt"
+        />
+    <style id="DOCK_WINDOW_CAPTION"
+        backgroundImageId="dock_window_caption_background"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="WRAP_CONTENT"
+        padding="1pt,1pt,1pt,1pt"
+        />
+    <style id="DOCK_WINDOW_CAPTION_LABEL"
+        textColor="#000000"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="WRAP_CONTENT"
+        padding="3pt,3pt,3pt,3pt"
+        align="Left|VCenter"
+        />
+    <style id="DOCK_WINDOW_BODY"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="FILL_PARENT"
+        padding="3,3,3,3"
+        />
+
+    <style id="TOOLBAR_HOST"
+        backgroundImageId="toolbar_host_background"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="WRAP_CONTENT"
+        padding="1pt,1pt,1pt,1pt"
+        />
+    <style id="TOOLTIP"
+        backgroundImageId="tooltip_background"
+        layoutWidth="WRAP_CONTENT"
+        layoutHeight="WRAP_CONTENT"
+        margins="2pt,5pt,2pt,1pt"
+        padding="2pt,2pt,2pt,2pt"
+	textColor="#404040"
+        />
+    <style id="TOOLBAR"
+        backgroundImageId="toolbar_background"
+        layoutWidth="WRAP_CONTENT"
+        layoutHeight="WRAP_CONTENT"
+        margins="2pt,1pt,2pt,1pt"
+        />
+    <style id="TOOLBAR_BUTTON"
+        backgroundImageId="toolbar_button_background"
+        align="Center"
+        margins="1pt,1pt,1pt,1pt"
+        padding="2pt,2pt,2pt,2pt"
+        >
+        <state state_enabled="false" alpha="160" backgroundImageId="toolbar_button_null"/>
+    </style>
+    <style id="TOOLBAR_CONTROL"
+        backgroundImageId="toolbar_control_background"
+        align="Center"
+        margins="1pt,1pt,1pt,1pt"
+        padding="2pt,2pt,2pt,2pt"
+        >
+        <state state_enabled="false" alpha="160" backgroundImageId="@null"/>
+    </style>
+    <style id="TOOLBAR_SEPARATOR"
+        align="Center"
+        />
+
+    <style id="TREE_ITEM"
+        minWidth="100"
+        minHeight="14"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="WRAP_CONTENT"
+        >
+    </style>
+    <style id="TREE_ITEM_EXPAND_ICON"
+        align="Left|VCenter"
+        textFlags="Parent"
+    />
+    <style id="TREE_ITEM_BODY"
+        align="Left|VCenter"
+        textFlags="Parent"
+        backgroundImageId="list_item_background"
+    />
+    <style id="TREE_ITEM_ICON"
+        align="Left|VCenter"
+        textFlags="Parent"
+    />
+    <style id="TREE_ITEM_LABEL"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="WRAP_CONTENT"
+        align="Left|VCenter"
+        textFlags="Parent"
+        >
+        <state state_default="true" fontWeight="bold"/>
+    </style>
+
+    <style id="SETTINGS_TREE"
+        margins="5pt,5pt,5pt,5pt"
+        backgroundColor="#FFFFFF"
+        layoutWeight="3"
+    />
+
+    <style id="SETTINGS_PAGES"
+        margins="0,8pt,8pt,8pt"
+        padding="4pt,4pt,4pt,4pt"
+        layoutWidth="FILL_PARENT"
+        layoutWeight="5"
+    />
+
+    <style id="SETTINGS_PAGE_TITLE"
+        margins="4pt,4pt,4pt,10pt"
+	fontSize="120%"
+	layoutWeight="0"
+        layoutWidth="FILL_PARENT"
+    />
+
+    <style id="RESIZER_VERTICAL"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="WRAP_CONTENT"
+	minHeight="7pt"
+	maxHeight="7pt"
+	backgroundColor="#E0E0E0">
+        <state state_focused="true" backgroundColor="#40C0C000"/>
+        <state state_pressed="true" backgroundColor="#4080C000"/>
+        <state state_selected="true" backgroundColor="#00F8F9Fa"/>
+        <state state_hovered="true" backgroundColor="#C0FFFF00"/>
+    </style>
+    <style id="RESIZER_HORIZONTAL"
+        layoutWidth="FILL_PARENT"
+        layoutHeight="WRAP_CONTENT"
+	minWidth="7pt"
+	maxWidth="7pt"
+	backgroundColor="#E0E0E0">
+        <state state_focused="true" backgroundColor="#40C0C000"/>
+        <state state_pressed="true" backgroundColor="#4080C000"/>
+        <state state_selected="true" backgroundColor="#00F8F9Fa"/>
+        <state state_hovered="true" backgroundColor="#C0FFFF00"/>
+    </style>
+
+    <style id="GROUP_BOX"
+        margins="2pt,4pt,2pt,2pt">
+        <drawable id="group_box_frame_up_left" value="group_box_frame_up_left"/>
+        <drawable id="group_box_frame_up_right" value="group_box_frame_up_right"/>
+        <drawable id="group_box_frame_bottom" value="group_box_frame_bottom"/>
+    </style>
+
+    <style id="GROUP_BOX_CAPTION"
+        align="Left|VCenter"
+	textColor="#504840"
+        padding="1pt,1pt,1pt,1pt">
+    </style>
+
+    <style id="PROGRESS_BAR"
+        padding="2pt,2pt,2pt,2pt"
+        margins="2pt,2pt,2pt,2pt"
+        minWidth="50pt"
+        minHeight="16pt"
+        backgroundImageId="progress_bar_background_frame"
+        >
+        <drawable id="progress_bar_gauge" value="#4080FF"/>
+        <drawable id="progress_bar_gauge_animation" value="progress_bar_gauge_animation.tiled"/>
+        <drawable id="progress_bar_indeterminate" value="#80C080"/>
+        <drawable id="progress_bar_indeterminate_animation" value="progress_bar_gauge_animation.tiled"/>
+    </style>
+
+   <style id="SIMPLE_BAR_CHART"
+        padding="2pt,2pt,2pt,2pt"
+        margins="2pt,2pt,2pt,2pt"
+        minWidth="250pt"
+        >
+        <color id="chart_background_color" value="#FFFFFF"/>
+        <color id="chart_axis_color" value="#C0C0C0"/>
+        <color id="chart_segment_tag_color" value="#C0C0C0"/>
+   </style>
+
+</theme>
+
+
+2026-03-18 23:38:20.713 D  ["state_hovered":"true", "textColor":"#006080", "state_enabled":"true"]
+2026-03-18 23:38:20.713 D  ["textColor":"#80000000", "state_enabled":"false"]
+2026-03-18 23:38:20.713 D  ["textColor":"#80000000", "state_enabled":"false"]
+2026-03-18 23:38:20.713 D  ["state_hovered":"true", "textColor":"#006080", "state_enabled":"true"]
+2026-03-18 23:38:20.713 D  ["textColor":"#60C0C0FF", "state_enabled":"false"]
+2026-03-18 23:38:20.713 D  ["state_hovered":"true", "textColor":"#8080FF", "state_enabled":"true", "textFlags":"Underline"]
+2026-03-18 23:38:20.713 D  ["state_hovered":"true", "textColor":"#006080", "state_enabled":"true"]
+2026-03-18 23:38:20.713 D  ["textColor":"#909090", "state_enabled":"false"]
+2026-03-18 23:38:20.714 D  ["state_hovered":"true", "textColor":"#006080", "state_enabled":"true"]
+2026-03-18 23:38:20.714 D  ["textColor":"#909090", "state_enabled":"false"]
+2026-03-18 23:38:20.714 D  ["textColor":"#A0000000", "state_enabled":"false"]
+2026-03-18 23:38:20.714 D  ["textColor":"#A0000000", "state_enabled":"false"]
+2026-03-18 23:38:20.714 D  ["backgroundColor":"#C0404080", "state_pressed":"true"]
+2026-03-18 23:38:20.714 D  ["backgroundColor":"#F0404080", "state_hovered":"true"]
+2026-03-18 23:38:20.714 D  ["state_window_focused":"false", "state_hovered":"false", "textColor":"#9c9c9c", "state_selected":"false"]
+2026-03-18 23:38:20.714 D  ["state_selected":"true", "backgroundImageId":"tab_up_backgrond_selected"]
+2026-03-18 23:38:20.714 D  ["textColor":"#000000", "state_selected":"true", "state_focused":"true"]
+2026-03-18 23:38:20.714 D  ["textColor":"#000000", "state_selected":"true"]
+2026-03-18 23:38:20.714 D  ["textColor":"#000000", "state_focused":"true"]
+2026-03-18 23:38:20.714 D  ["state_hovered":"true", "textColor":"#0000C0"]
+2026-03-18 23:38:20.714 D  ["alpha":"160", "state_enabled":"false"]
+2026-03-18 23:38:20.714 D  ["textColor":"#80404040", "state_enabled":"false"]
+2026-03-18 23:38:20.714 D  ["textColor":"#80404040", "state_enabled":"false"]
+2026-03-18 23:38:20.714 D  ["textColor":"#80404040", "state_enabled":"false"]
+2026-03-18 23:38:20.714 D  ["alpha":"160", "state_enabled":"false", "backgroundImageId":"toolbar_button_null"]
+2026-03-18 23:38:20.714 D  ["alpha":"160", "state_enabled":"false", "backgroundImageId":"@null"]
+2026-03-18 23:38:20.715 D  ["state_default":"true", "fontWeight":"bold"]
+2026-03-18 23:38:20.715 D  ["backgroundColor":"#40C0C000", "state_focused":"true"]
+2026-03-18 23:38:20.715 D  ["backgroundColor":"#4080C000", "state_pressed":"true"]
+2026-03-18 23:38:20.715 D  ["backgroundColor":"#00F8F9Fa", "state_selected":"true"]
+2026-03-18 23:38:20.715 D  ["backgroundColor":"#C0FFFF00", "state_hovered":"true"]
+2026-03-18 23:38:20.715 D  ["backgroundColor":"#40C0C000", "state_focused":"true"]
+2026-03-18 23:38:20.715 D  ["backgroundColor":"#4080C000", "state_pressed":"true"]
+2026-03-18 23:38:20.715 D  ["backgroundColor":"#00F8F9Fa", "state_selected":"true"]
+2026-03-18 23:38:20.715 D  ["backgroundColor":"#C0FFFF00", "state_hovered":"true"]
+2026-03-18 23:38:20.715 I  Applying loaded theme theme_default
+2026-03-18 23:38:20.715 D  DrawableCache.clear()
+2026-03-18 23:38:20.715 V  Platform.createWindow : new Win32Window
+2026-03-18 23:38:20.715 D  Screen dimensions: Rect(0, 0, 2560, 1440)
+2026-03-18 23:38:20.734 D  Window onCreate
+2026-03-18 23:38:20.734 V  created window, adding to map
+2026-03-18 23:38:20.901 D  glSupport not initialized: trying to create
+2026-03-18 23:38:20.901 V  Compiling solid fill program
+2026-03-18 23:38:20.901 D  compileShader: glslVersion = 4.60, type: GL_VERTEX_SHADER
+2026-03-18 23:38:20.972 D  compileShader: glslVersion = 4.60, type: GL_FRAGMENT_SHADER
+2026-03-18 23:38:20.972 D  Program linked successfully
+2026-03-18 23:38:20.972 V  Program is initialized successfully
+2026-03-18 23:38:20.972 V  Compiling texture program
+2026-03-18 23:38:20.972 D  compileShader: glslVersion = 4.60, type: GL_VERTEX_SHADER
+2026-03-18 23:38:20.974 D  compileShader: glslVersion = 4.60, type: GL_FRAGMENT_SHADER
+2026-03-18 23:38:20.975 D  Program linked successfully
+2026-03-18 23:38:20.975 V  Program is initialized successfully
+2026-03-18 23:38:20.975 D  Shaders compiled successfully
+2026-03-18 23:38:20.975 V  OpenGL is initialized ok
+2026-03-18 23:38:20.975 D  Loading image from file @embedded@/dlangui-logo1.png
+2026-03-18 23:38:30.999 D  Loading image from file @embedded@/btn_pressed.9.png
+2026-03-18 23:38:30.999 D  Loading image from file @embedded@/btn_default.9.png
+2026-03-18 23:38:30.999 D  Loading image from file @embedded@/btn_normal.9.png
+2026-03-18 23:38:30.999 D  Loading image from file @embedded@/btn_hover.9.png
+2026-03-18 23:38:30.999 D  Loading image from file @embedded@/btn_disabled.9.png
+2026-03-18 23:38:30.999 D  loaded .xml drawable from @embedded@/btn_background.xml
+2026-03-18 23:38:31.001 D  loaded .xml drawable from @embedded@/btn_background_transparent.xml
+2026-03-18 23:38:31.004 W  resource folder_open is not found
+2026-03-18 23:38:31.008 W  resource settings is not found
+2026-03-18 23:38:31.010 D  Loading image from file @embedded@/scrollbar_btn_left.png
+2026-03-18 23:38:31.011 D  Loading image from file @embedded@/scrollbar_btn_background_pressed.9.png
+2026-03-18 23:38:31.011 D  Loading image from file @embedded@/scrollbar_btn_background_normal.9.png
+2026-03-18 23:38:31.011 D  Loading image from file @embedded@/scrollbar_btn_background_hover.9.png
+2026-03-18 23:38:31.011 D  loaded .xml drawable from @embedded@/scrollbar_btn_transparent_background.xml
+2026-03-18 23:38:31.011 D  Loading image from file @embedded@/scrollbar_btn_right.png
+2026-03-18 23:38:31.011 D  Loading image from file @embedded@/scrollbar_indicator_horizontal.png
+2026-03-18 23:38:31.011 D  Loading image from file @embedded@/scrollbar_btn_background_disabled.9.png
+2026-03-18 23:38:31.011 D  loaded .xml drawable from @embedded@/scrollbar_btn_background.xml
+2026-03-18 23:38:31.011 D  Loading image from file @embedded@/scrollbar_btn_up.png
+2026-03-18 23:38:31.011 D  Loading image from file @embedded@/scrollbar_btn_down.png
+2026-03-18 23:38:31.011 D  Loading image from file @embedded@/scrollbar_indicator_vertical.png
+2026-03-18 23:38:31.046 D  onResize 584x361
+2026-03-18 23:38:31.046 D  resize: measure took 0 ms
+2026-03-18 23:38:31.046 D  resize: layout took 0 ms
+2026-03-18 23:38:31.049 V  created glyph cache page 1024x1024
+2026-03-18 23:38:31.052 V  created image cache page 1024x1024
+2026-03-18 23:38:31.054 D  updateTexture - new texture id=1
+2026-03-18 23:38:31.054 D  updateTexture for cache page - setting image 1024x1024 tx=1
+2026-03-18 23:38:31.055 D  updateTexture - new texture id=2
+2026-03-18 23:38:31.055 D  updateTexture for cache page - setting image 1024x1024 tx=2
+2026-03-18 23:38:31.645 D  updateTexture for cache page - setting image 1024x1024 tx=2
+2026-03-18 23:38:32.264 D  onResize 585x361
+2026-03-18 23:38:32.264 D  resize: measure took 0 ms
+2026-03-18 23:38:32.264 D  resize: layout took 0 ms
+2026-03-18 23:38:32.275 D  onResize 590x362
+2026-03-18 23:38:32.275 D  resize: measure took 0 ms
+2026-03-18 23:38:32.276 D  resize: layout took 1 ms
+2026-03-18 23:38:32.286 D  onResize 602x367
+2026-03-18 23:38:32.286 D  resize: measure took 0 ms
+2026-03-18 23:38:32.286 D  resize: layout took 0 ms
+2026-03-18 23:38:32.295 D  onResize 626x376
+2026-03-18 23:38:32.295 D  resize: measure took 0 ms
+2026-03-18 23:38:32.295 D  resize: layout took 0 ms
+2026-03-18 23:38:32.297 D  updateTexture for cache page - setting image 1024x1024 tx=1
+2026-03-18 23:38:32.307 D  onResize 663x388
+2026-03-18 23:38:32.307 D  resize: measure took 0 ms
+2026-03-18 23:38:32.307 D  resize: layout took 0 ms
+2026-03-18 23:38:32.308 D  updateTexture for cache page - setting image 1024x1024 tx=1
+2026-03-18 23:38:32.319 D  onResize 726x406
+2026-03-18 23:38:32.319 D  resize: measure took 0 ms
+2026-03-18 23:38:32.319 D  resize: layout took 0 ms
+2026-03-18 23:38:32.319 D  updateTexture for cache page - setting image 1024x1024 tx=1
+2026-03-18 23:38:32.319 D  updateTexture for cache page - setting image 1024x1024 tx=2
+2026-03-18 23:38:32.332 D  onResize 808x426
+2026-03-18 23:38:32.332 D  resize: measure took 0 ms
+2026-03-18 23:38:32.332 D  resize: layout took 0 ms
+2026-03-18 23:38:32.333 D  updateTexture for cache page - setting image 1024x1024 tx=1
+2026-03-18 23:38:32.342 D  onResize 882x442
+2026-03-18 23:38:32.343 D  resize: measure took 1 ms
+2026-03-18 23:38:32.343 D  resize: layout took 0 ms
+2026-03-18 23:38:32.344 D  updateTexture for cache page - setting image 1024x1024 tx=1
+2026-03-18 23:38:32.354 D  onResize 979x462
+2026-03-18 23:38:32.354 D  resize: measure took 0 ms
+2026-03-18 23:38:32.354 D  resize: layout took 0 ms
+2026-03-18 23:38:32.366 D  onResize 1086x480
+2026-03-18 23:38:32.366 D  resize: measure took 0 ms
+2026-03-18 23:38:32.366 D  resize: layout took 0 ms
+2026-03-18 23:38:32.367 D  updateTexture for cache page - setting image 1024x1024 tx=1
+2026-03-18 23:38:32.379 D  onResize 1194x495
+2026-03-18 23:38:32.379 D  resize: measure took 0 ms
+2026-03-18 23:38:32.379 D  resize: layout took 0 ms
+2026-03-18 23:38:32.380 D  updateTexture for cache page - setting image 1024x1024 tx=1
+2026-03-18 23:38:32.392 D  onResize 1308x508
+2026-03-18 23:38:32.392 D  resize: measure took 0 ms
+2026-03-18 23:38:32.392 D  resize: layout took 0 ms
+2026-03-18 23:38:32.393 D  updateTexture for cache page - setting image 1024x1024 tx=1
+2026-03-18 23:38:32.404 D  onResize 1404x516
+2026-03-18 23:38:32.404 D  resize: measure took 0 ms
+2026-03-18 23:38:32.406 D  resize: layout took 2 ms
+2026-03-18 23:38:32.417 D  onResize 1489x523
+2026-03-18 23:38:32.417 D  resize: measure took 0 ms
+2026-03-18 23:38:32.417 D  resize: layout took 0 ms
+2026-03-18 23:38:32.430 D  onResize 1553x531
+2026-03-18 23:38:32.430 D  resize: measure took 0 ms
+2026-03-18 23:38:32.430 D  resize: layout took 0 ms
+2026-03-18 23:38:32.440 D  onResize 1590x536
+2026-03-18 23:38:32.440 D  resize: measure took 0 ms
+2026-03-18 23:38:32.440 D  resize: layout took 0 ms
+2026-03-18 23:38:32.452 D  onResize 1612x541
+2026-03-18 23:38:32.453 D  resize: measure took 1 ms
+2026-03-18 23:38:32.453 D  resize: layout took 0 ms
+2026-03-18 23:38:32.463 D  onResize 1620x545
+2026-03-18 23:38:32.463 D  resize: measure took 0 ms
+2026-03-18 23:38:32.464 D  resize: layout took 1 ms
+2026-03-18 23:38:32.475 D  onResize 1624x549
+2026-03-18 23:38:32.475 D  resize: measure took 0 ms
+2026-03-18 23:38:32.476 D  resize: layout took 1 ms
+2026-03-18 23:38:32.488 D  onResize 1632x563
+2026-03-18 23:38:32.488 D  resize: measure took 0 ms
+2026-03-18 23:38:32.488 D  resize: layout took 0 ms
+2026-03-18 23:38:32.498 D  onResize 1647x582
+2026-03-18 23:38:32.498 D  resize: measure took 0 ms
+2026-03-18 23:38:32.498 D  resize: layout took 0 ms
+2026-03-18 23:38:32.510 D  onResize 1667x608
+2026-03-18 23:38:32.510 D  resize: measure took 0 ms
+2026-03-18 23:38:32.510 D  resize: layout took 0 ms
+2026-03-18 23:38:32.521 D  onResize 1698x646
+2026-03-18 23:38:32.522 D  resize: measure took 1 ms
+2026-03-18 23:38:32.522 D  resize: layout took 0 ms
+2026-03-18 23:38:32.534 D  onResize 1738x688
+2026-03-18 23:38:32.534 D  resize: measure took 0 ms
+2026-03-18 23:38:32.535 D  resize: layout took 1 ms
+2026-03-18 23:38:32.547 D  onResize 1788x728
+2026-03-18 23:38:32.547 D  resize: measure took 0 ms
+2026-03-18 23:38:32.548 D  resize: layout took 1 ms
+2026-03-18 23:38:32.559 D  onResize 1835x758
+2026-03-18 23:38:32.559 D  resize: measure took 0 ms
+2026-03-18 23:38:32.559 D  resize: layout took 0 ms
+2026-03-18 23:38:32.573 D  onResize 1870x778
+2026-03-18 23:38:32.573 D  resize: measure took 0 ms
+2026-03-18 23:38:32.573 D  resize: layout took 0 ms
+2026-03-18 23:38:32.586 D  onResize 1887x785
+2026-03-18 23:38:32.586 D  resize: measure took 0 ms
+2026-03-18 23:38:32.586 D  resize: layout took 0 ms
+2026-03-18 23:38:32.601 D  onResize 1892x787
+2026-03-18 23:38:32.601 D  resize: measure took 0 ms
+2026-03-18 23:38:32.601 D  resize: layout took 0 ms
+2026-03-18 23:38:32.613 D  onResize 1893x787
+2026-03-18 23:38:32.613 D  resize: measure took 0 ms
+2026-03-18 23:38:32.613 D  resize: layout took 0 ms
+2026-03-18 23:38:32.627 D  onResize 1894x788
+2026-03-18 23:38:32.627 D  resize: measure took 0 ms
+2026-03-18 23:38:32.627 D  resize: layout took 0 ms
+2026-03-18 23:38:32.641 D  onResize 1899x792
+2026-03-18 23:38:32.641 D  resize: measure took 0 ms
+2026-03-18 23:38:32.641 D  resize: layout took 0 ms
+2026-03-18 23:38:32.655 D  onResize 1914x806
+2026-03-18 23:38:32.655 D  resize: measure took 0 ms
+2026-03-18 23:38:32.655 D  resize: layout took 0 ms
+2026-03-18 23:38:32.669 D  onResize 1937x826
+2026-03-18 23:38:32.669 D  resize: measure took 0 ms
+2026-03-18 23:38:32.669 D  resize: layout took 0 ms
+2026-03-18 23:38:32.682 D  onResize 1964x846
+2026-03-18 23:38:32.682 D  resize: measure took 0 ms
+2026-03-18 23:38:32.682 D  resize: layout took 0 ms
+2026-03-18 23:38:32.697 D  onResize 1991x865
+2026-03-18 23:38:32.697 D  resize: measure took 0 ms
+2026-03-18 23:38:32.697 D  resize: layout took 0 ms
+2026-03-18 23:38:32.711 D  onResize 2009x878
+2026-03-18 23:38:32.711 D  resize: measure took 0 ms
+2026-03-18 23:38:32.711 D  resize: layout took 0 ms
+2026-03-18 23:38:32.724 D  onResize 2014x883
+2026-03-18 23:38:32.724 D  resize: measure took 0 ms
+2026-03-18 23:38:32.724 D  resize: layout took 0 ms
+2026-03-18 23:38:32.863 D  onResize 2013x883
+2026-03-18 23:38:32.863 D  resize: measure took 0 ms
+2026-03-18 23:38:32.863 D  resize: layout took 0 ms
+2026-03-18 23:38:32.875 D  onResize 2006x879
+2026-03-18 23:38:32.875 D  resize: measure took 0 ms
+2026-03-18 23:38:32.875 D  resize: layout took 0 ms
+2026-03-18 23:38:32.888 D  onResize 1989x868
+2026-03-18 23:38:32.888 D  resize: measure took 0 ms
+2026-03-18 23:38:32.888 D  resize: layout took 0 ms
+2026-03-18 23:38:32.901 D  onResize 1965x853
+2026-03-18 23:38:32.901 D  resize: measure took 0 ms
+2026-03-18 23:38:32.901 D  resize: layout took 0 ms
+2026-03-18 23:38:32.913 D  onResize 1927x831
+2026-03-18 23:38:32.914 D  resize: measure took 1 ms
+2026-03-18 23:38:32.914 D  resize: layout took 0 ms
+2026-03-18 23:38:32.927 D  onResize 1870x802
+2026-03-18 23:38:32.927 D  resize: measure took 0 ms
+2026-03-18 23:38:32.927 D  resize: layout took 0 ms
+2026-03-18 23:38:32.941 D  onResize 1787x765
+2026-03-18 23:38:32.941 D  resize: measure took 0 ms
+2026-03-18 23:38:32.942 D  resize: layout took 1 ms
+2026-03-18 23:38:32.954 D  onResize 1705x735
+2026-03-18 23:38:32.955 D  resize: measure took 1 ms
+2026-03-18 23:38:32.955 D  resize: layout took 0 ms
+2026-03-18 23:38:32.967 D  onResize 1620x710
+2026-03-18 23:38:32.968 D  resize: measure took 0 ms
+2026-03-18 23:38:32.968 D  resize: layout took 0 ms
+2026-03-18 23:38:32.979 D  onResize 1533x687
+2026-03-18 23:38:32.979 D  resize: measure took 0 ms
+2026-03-18 23:38:32.980 D  resize: layout took 1 ms
+2026-03-18 23:38:32.992 D  onResize 1460x669
+2026-03-18 23:38:32.992 D  resize: measure took 0 ms
+2026-03-18 23:38:32.992 D  resize: layout took 0 ms
+2026-03-18 23:38:33.003 D  onResize 1387x654
+2026-03-18 23:38:33.003 D  resize: measure took 0 ms
+2026-03-18 23:38:33.003 D  resize: layout took 0 ms
+2026-03-18 23:38:33.016 D  onResize 1322x641
+2026-03-18 23:38:33.016 D  resize: measure took 0 ms
+2026-03-18 23:38:33.016 D  resize: layout took 0 ms
+2026-03-18 23:38:33.028 D  onResize 1266x630
+2026-03-18 23:38:33.028 D  resize: measure took 0 ms
+2026-03-18 23:38:33.028 D  resize: layout took 0 ms
+2026-03-18 23:38:33.040 D  onResize 1228x624
+2026-03-18 23:38:33.040 D  resize: measure took 0 ms
+2026-03-18 23:38:33.040 D  resize: layout took 0 ms
+2026-03-18 23:38:33.051 D  onResize 1203x620
+2026-03-18 23:38:33.051 D  resize: measure took 0 ms
+2026-03-18 23:38:33.052 D  resize: layout took 1 ms
+2026-03-18 23:38:33.065 D  onResize 1183x616
+2026-03-18 23:38:33.065 D  resize: measure took 0 ms
+2026-03-18 23:38:33.065 D  resize: layout took 0 ms
+2026-03-18 23:38:33.076 D  onResize 1171x614
+2026-03-18 23:38:33.076 D  resize: measure took 0 ms
+2026-03-18 23:38:33.076 D  resize: layout took 0 ms
+2026-03-18 23:38:33.090 D  onResize 1162x612
+2026-03-18 23:38:33.090 D  resize: measure took 0 ms
+2026-03-18 23:38:33.090 D  resize: layout took 0 ms
+2026-03-18 23:38:33.099 D  onResize 1154x609
+2026-03-18 23:38:33.099 D  resize: measure took 0 ms
+2026-03-18 23:38:33.101 D  resize: layout took 2 ms
+2026-03-18 23:38:33.111 D  onResize 1145x605
+2026-03-18 23:38:33.111 D  resize: measure took 0 ms
+2026-03-18 23:38:33.111 D  resize: layout took 0 ms
+2026-03-18 23:38:33.123 D  onResize 1135x601
+2026-03-18 23:38:33.123 D  resize: measure took 0 ms
+2026-03-18 23:38:33.123 D  resize: layout took 0 ms
+2026-03-18 23:38:33.135 D  onResize 1124x596
+2026-03-18 23:38:33.135 D  resize: measure took 0 ms
+2026-03-18 23:38:33.135 D  resize: layout took 0 ms
+2026-03-18 23:38:33.145 D  onResize 1111x589
+2026-03-18 23:38:33.145 D  resize: measure took 0 ms
+2026-03-18 23:38:33.145 D  resize: layout took 0 ms
+2026-03-18 23:38:33.156 D  onResize 1099x583
+2026-03-18 23:38:33.156 D  resize: measure took 0 ms
+2026-03-18 23:38:33.157 D  resize: layout took 1 ms
+2026-03-18 23:38:33.167 D  onResize 1085x577
+2026-03-18 23:38:33.167 D  resize: measure took 0 ms
+2026-03-18 23:38:33.167 D  resize: layout took 0 ms
+2026-03-18 23:38:33.177 D  onResize 1070x570
+2026-03-18 23:38:33.177 D  resize: measure took 0 ms
+2026-03-18 23:38:33.178 D  resize: layout took 1 ms
+2026-03-18 23:38:33.188 D  onResize 1056x564
+2026-03-18 23:38:33.188 D  resize: measure took 0 ms
+2026-03-18 23:38:33.188 D  resize: layout took 0 ms
+2026-03-18 23:38:33.199 D  onResize 1045x559
+2026-03-18 23:38:33.199 D  resize: measure took 0 ms
+2026-03-18 23:38:33.199 D  resize: layout took 0 ms
+2026-03-18 23:38:33.207 D  onResize 1035x554
+2026-03-18 23:38:33.209 D  resize: measure took 0 ms
+2026-03-18 23:38:33.209 D  resize: layout took 0 ms
+2026-03-18 23:38:33.219 D  onResize 1025x550
+2026-03-18 23:38:33.219 D  resize: measure took 0 ms
+2026-03-18 23:38:33.219 D  resize: layout took 0 ms
+2026-03-18 23:38:33.231 D  onResize 1018x547
+2026-03-18 23:38:33.231 D  resize: measure took 0 ms
+2026-03-18 23:38:33.231 D  resize: layout took 0 ms
+2026-03-18 23:38:33.240 D  onResize 1010x544
+2026-03-18 23:38:33.241 D  resize: measure took 1 ms
+2026-03-18 23:38:33.241 D  resize: layout took 0 ms
+2026-03-18 23:38:33.250 D  onResize 1004x542
+2026-03-18 23:38:33.250 D  resize: measure took 0 ms
+2026-03-18 23:38:33.250 D  resize: layout took 0 ms
+2026-03-18 23:38:33.261 D  onResize 997x540
+2026-03-18 23:38:33.262 D  resize: measure took 1 ms
+2026-03-18 23:38:33.262 D  resize: layout took 0 ms
+2026-03-18 23:38:33.271 D  onResize 990x538
+2026-03-18 23:38:33.271 D  resize: measure took 0 ms
+2026-03-18 23:38:33.271 D  resize: layout took 0 ms
+2026-03-18 23:38:33.282 D  onResize 981x536
+2026-03-18 23:38:33.282 D  resize: measure took 0 ms
+2026-03-18 23:38:33.282 D  resize: layout took 0 ms
+2026-03-18 23:38:33.292 D  onResize 972x534
+2026-03-18 23:38:33.292 D  resize: measure took 0 ms
+2026-03-18 23:38:33.292 D  resize: layout took 0 ms
+2026-03-18 23:38:33.302 D  onResize 960x530
+2026-03-18 23:38:33.303 D  resize: measure took 1 ms
+2026-03-18 23:38:33.303 D  resize: layout took 0 ms
+2026-03-18 23:38:33.313 D  onResize 948x526
+2026-03-18 23:38:33.313 D  resize: measure took 0 ms
+2026-03-18 23:38:33.313 D  resize: layout took 0 ms
+2026-03-18 23:38:33.322 D  onResize 935x520
+2026-03-18 23:38:33.322 D  resize: measure took 0 ms
+2026-03-18 23:38:33.322 D  resize: layout took 0 ms
+2026-03-18 23:38:33.332 D  onResize 920x515
+2026-03-18 23:38:33.332 D  resize: measure took 0 ms
+2026-03-18 23:38:33.332 D  resize: layout took 0 ms
+2026-03-18 23:38:33.344 D  onResize 904x508
+2026-03-18 23:38:33.344 D  resize: measure took 0 ms
+2026-03-18 23:38:33.344 D  resize: layout took 0 ms
+2026-03-18 23:38:33.352 D  onResize 888x502
+2026-03-18 23:38:33.353 D  resize: measure took 0 ms
+2026-03-18 23:38:33.353 D  resize: layout took 0 ms
+2026-03-18 23:38:33.364 D  onResize 871x496
+2026-03-18 23:38:33.365 D  resize: measure took 0 ms
+2026-03-18 23:38:33.365 D  resize: layout took 0 ms
+2026-03-18 23:38:33.373 D  onResize 851x488
+2026-03-18 23:38:33.373 D  resize: measure took 0 ms
+2026-03-18 23:38:33.373 D  resize: layout took 0 ms
+2026-03-18 23:38:33.384 D  onResize 833x482
+2026-03-18 23:38:33.384 D  resize: measure took 0 ms
+2026-03-18 23:38:33.384 D  resize: layout took 0 ms
+2026-03-18 23:38:33.393 D  onResize 817x476
+2026-03-18 23:38:33.393 D  resize: measure took 0 ms
+2026-03-18 23:38:33.393 D  resize: layout took 0 ms
+2026-03-18 23:38:33.402 D  onResize 797x470
+2026-03-18 23:38:33.402 D  resize: measure took 0 ms
+2026-03-18 23:38:33.402 D  resize: layout took 0 ms
+2026-03-18 23:38:33.412 D  onResize 780x465
+2026-03-18 23:38:33.412 D  resize: measure took 0 ms
+2026-03-18 23:38:33.412 D  resize: layout took 0 ms
+2026-03-18 23:38:33.422 D  onResize 761x460
+2026-03-18 23:38:33.422 D  resize: measure took 0 ms
+2026-03-18 23:38:33.422 D  resize: layout took 0 ms
+2026-03-18 23:38:33.432 D  onResize 742x456
+2026-03-18 23:38:33.432 D  resize: measure took 0 ms
+2026-03-18 23:38:33.432 D  resize: layout took 0 ms
+2026-03-18 23:38:33.442 D  onResize 721x452
+2026-03-18 23:38:33.442 D  resize: measure took 0 ms
+2026-03-18 23:38:33.442 D  resize: layout took 0 ms
+2026-03-18 23:38:33.451 D  onResize 699x448
+2026-03-18 23:38:33.451 D  resize: measure took 0 ms
+2026-03-18 23:38:33.452 D  resize: layout took 1 ms
+2026-03-18 23:38:33.460 D  onResize 676x444
+2026-03-18 23:38:33.461 D  resize: measure took 1 ms
+2026-03-18 23:38:33.461 D  resize: layout took 0 ms
+2026-03-18 23:38:33.470 D  onResize 656x440
+2026-03-18 23:38:33.470 D  resize: measure took 0 ms
+2026-03-18 23:38:33.470 D  resize: layout took 0 ms
+2026-03-18 23:38:33.478 D  onResize 634x437
+2026-03-18 23:38:33.478 D  resize: measure took 0 ms
+2026-03-18 23:38:33.478 D  resize: layout took 0 ms
+2026-03-18 23:38:33.487 D  onResize 614x432
+2026-03-18 23:38:33.487 D  resize: measure took 0 ms
+2026-03-18 23:38:33.489 D  resize: layout took 2 ms
+2026-03-18 23:38:33.497 D  onResize 591x428
+2026-03-18 23:38:33.497 D  resize: measure took 0 ms
+2026-03-18 23:38:33.497 D  resize: layout took 0 ms
+2026-03-18 23:38:33.507 D  onResize 573x425
+2026-03-18 23:38:33.507 D  resize: measure took 0 ms
+2026-03-18 23:38:33.507 D  resize: layout took 0 ms
+2026-03-18 23:38:33.515 D  onResize 553x423
+2026-03-18 23:38:33.515 D  resize: measure took 0 ms
+2026-03-18 23:38:33.516 D  resize: layout took 1 ms
+2026-03-18 23:38:33.524 D  onResize 536x420
+2026-03-18 23:38:33.525 D  resize: measure took 1 ms
+2026-03-18 23:38:33.525 D  resize: layout took 0 ms
+2026-03-18 23:38:33.534 D  onResize 520x418
+2026-03-18 23:38:33.534 D  resize: measure took 0 ms
+2026-03-18 23:38:33.534 D  resize: layout took 0 ms
+2026-03-18 23:38:33.544 D  onResize 505x416
+2026-03-18 23:38:33.544 D  resize: measure took 0 ms
+2026-03-18 23:38:33.544 D  resize: layout took 0 ms
+2026-03-18 23:38:33.552 D  onResize 492x414
+2026-03-18 23:38:33.552 D  resize: measure took 0 ms
+2026-03-18 23:38:33.552 D  resize: layout took 0 ms
+2026-03-18 23:38:33.561 D  onResize 484x413
+2026-03-18 23:38:33.561 D  resize: measure took 0 ms
+2026-03-18 23:38:33.561 D  resize: layout took 0 ms
+2026-03-18 23:38:33.570 D  onResize 475x411
+2026-03-18 23:38:33.570 D  resize: measure took 0 ms
+2026-03-18 23:38:33.570 D  resize: layout took 0 ms
+2026-03-18 23:38:33.580 D  onResize 470x411
+2026-03-18 23:38:33.580 D  resize: measure took 0 ms
+2026-03-18 23:38:33.580 D  resize: layout took 0 ms
+2026-03-18 23:38:33.588 D  onResize 468x410
+2026-03-18 23:38:33.589 D  resize: measure took 1 ms
+2026-03-18 23:38:33.589 D  resize: layout took 0 ms
+2026-03-18 23:38:33.634 D  onResize 469x410
+2026-03-18 23:38:33.634 D  resize: measure took 0 ms
+2026-03-18 23:38:33.634 D  resize: layout took 0 ms
+2026-03-18 23:38:33.642 D  onResize 474x410
+2026-03-18 23:38:33.642 D  resize: measure took 0 ms
+2026-03-18 23:38:33.642 D  resize: layout took 0 ms
+2026-03-18 23:38:33.651 D  onResize 484x413
+2026-03-18 23:38:33.651 D  resize: measure took 0 ms
+2026-03-18 23:38:33.651 D  resize: layout took 0 ms
+2026-03-18 23:38:33.660 D  onResize 502x418
+2026-03-18 23:38:33.660 D  resize: measure took 0 ms
+2026-03-18 23:38:33.660 D  resize: layout took 0 ms
+2026-03-18 23:38:33.669 D  onResize 528x426
+2026-03-18 23:38:33.669 D  resize: measure took 0 ms
+2026-03-18 23:38:33.670 D  resize: layout took 1 ms
+2026-03-18 23:38:33.679 D  onResize 570x437
+2026-03-18 23:38:33.679 D  resize: measure took 0 ms
+2026-03-18 23:38:33.679 D  resize: layout took 0 ms
+2026-03-18 23:38:33.689 D  onResize 611x446
+2026-03-18 23:38:33.689 D  resize: measure took 0 ms
+2026-03-18 23:38:33.689 D  resize: layout took 0 ms
+2026-03-18 23:38:33.697 D  onResize 669x458
+2026-03-18 23:38:33.698 D  resize: measure took 1 ms
+2026-03-18 23:38:33.698 D  resize: layout took 0 ms
+2026-03-18 23:38:33.707 D  onResize 732x471
+2026-03-18 23:38:33.707 D  resize: measure took 0 ms
+2026-03-18 23:38:33.708 D  resize: layout took 1 ms
+2026-03-18 23:38:33.716 D  onResize 814x488
+2026-03-18 23:38:33.716 D  resize: measure took 0 ms
+2026-03-18 23:38:33.716 D  resize: layout took 0 ms
+2026-03-18 23:38:33.726 D  onResize 890x502
+2026-03-18 23:38:33.726 D  resize: measure took 0 ms
+2026-03-18 23:38:33.726 D  resize: layout took 0 ms
+2026-03-18 23:38:33.736 D  onResize 967x515
+2026-03-18 23:38:33.736 D  resize: measure took 0 ms
+2026-03-18 23:38:33.736 D  resize: layout took 0 ms
+2026-03-18 23:38:33.746 D  onResize 1057x527
+2026-03-18 23:38:33.746 D  resize: measure took 0 ms
+2026-03-18 23:38:33.746 D  resize: layout took 0 ms
+2026-03-18 23:38:33.757 D  onResize 1142x538
+2026-03-18 23:38:33.757 D  resize: measure took 0 ms
+2026-03-18 23:38:33.757 D  resize: layout took 0 ms
+2026-03-18 23:38:33.767 D  onResize 1221x546
+2026-03-18 23:38:33.768 D  resize: measure took 0 ms
+2026-03-18 23:38:33.768 D  resize: layout took 0 ms
+2026-03-18 23:38:33.780 D  onResize 1299x554
+2026-03-18 23:38:33.780 D  resize: measure took 0 ms
+2026-03-18 23:38:33.780 D  resize: layout took 0 ms
+2026-03-18 23:38:33.791 D  onResize 1384x565
+2026-03-18 23:38:33.791 D  resize: measure took 0 ms
+2026-03-18 23:38:33.791 D  resize: layout took 0 ms
+2026-03-18 23:38:33.802 D  onResize 1463x576
+2026-03-18 23:38:33.802 D  resize: measure took 0 ms
+2026-03-18 23:38:33.802 D  resize: layout took 0 ms
+2026-03-18 23:38:33.815 D  onResize 1551x591
+2026-03-18 23:38:33.815 D  resize: measure took 0 ms
+2026-03-18 23:38:33.816 D  resize: layout took 1 ms
+2026-03-18 23:38:33.829 D  onResize 1647x610
+2026-03-18 23:38:33.829 D  resize: measure took 0 ms
+2026-03-18 23:38:33.829 D  resize: layout took 0 ms
+2026-03-18 23:38:33.841 D  onResize 1725x626
+2026-03-18 23:38:33.841 D  resize: measure took 0 ms
+2026-03-18 23:38:33.841 D  resize: layout took 0 ms
+2026-03-18 23:38:33.853 D  onResize 1779x640
+2026-03-18 23:38:33.854 D  resize: measure took 0 ms
+2026-03-18 23:38:33.854 D  resize: layout took 0 ms
+2026-03-18 23:38:33.864 D  onResize 1817x650
+2026-03-18 23:38:33.864 D  resize: measure took 0 ms
+2026-03-18 23:38:33.864 D  resize: layout took 0 ms
+2026-03-18 23:38:33.878 D  onResize 1841x659
+2026-03-18 23:38:33.878 D  resize: measure took 0 ms
+2026-03-18 23:38:33.879 D  resize: layout took 1 ms
+2026-03-18 23:38:33.891 D  onResize 1861x669
+2026-03-18 23:38:33.891 D  resize: measure took 0 ms
+2026-03-18 23:38:33.891 D  resize: layout took 0 ms
+2026-03-18 23:38:33.902 D  onResize 1872x676
+2026-03-18 23:38:33.902 D  resize: measure took 0 ms
+2026-03-18 23:38:33.903 D  resize: layout took 1 ms
+2026-03-18 23:38:33.914 D  onResize 1882x685
+2026-03-18 23:38:33.915 D  resize: measure took 1 ms
+2026-03-18 23:38:33.915 D  resize: layout took 0 ms
+2026-03-18 23:38:33.926 D  onResize 1891x695
+2026-03-18 23:38:33.926 D  resize: measure took 0 ms
+2026-03-18 23:38:33.928 D  resize: layout took 2 ms
+2026-03-18 23:38:33.940 D  onResize 1898x706
+2026-03-18 23:38:33.940 D  resize: measure took 0 ms
+2026-03-18 23:38:33.941 D  resize: layout took 1 ms
+2026-03-18 23:38:33.951 D  onResize 1904x716
+2026-03-18 23:38:33.951 D  resize: measure took 0 ms
+2026-03-18 23:38:33.952 D  resize: layout took 1 ms
+2026-03-18 23:38:33.963 D  onResize 1909x727
+2026-03-18 23:38:33.963 D  resize: measure took 0 ms
+2026-03-18 23:38:33.963 D  resize: layout took 0 ms
+2026-03-18 23:38:33.975 D  onResize 1913x737
+2026-03-18 23:38:33.975 D  resize: measure took 0 ms
+2026-03-18 23:38:33.975 D  resize: layout took 0 ms
+2026-03-18 23:38:33.989 D  onResize 1917x752
+2026-03-18 23:38:33.989 D  resize: measure took 0 ms
+2026-03-18 23:38:33.989 D  resize: layout took 0 ms
+2026-03-18 23:38:34.003 D  onResize 1920x767
+2026-03-18 23:38:34.003 D  resize: measure took 0 ms
+2026-03-18 23:38:34.003 D  resize: layout took 0 ms
+2026-03-18 23:38:34.014 D  onResize 1924x782
+2026-03-18 23:38:34.014 D  resize: measure took 0 ms
+2026-03-18 23:38:34.014 D  resize: layout took 0 ms
+2026-03-18 23:38:34.029 D  onResize 1928x801
+2026-03-18 23:38:34.029 D  resize: measure took 0 ms
+2026-03-18 23:38:34.029 D  resize: layout took 0 ms
+2026-03-18 23:38:34.043 D  onResize 1930x818
+2026-03-18 23:38:34.044 D  resize: measure took 1 ms
+2026-03-18 23:38:34.044 D  resize: layout took 0 ms
+2026-03-18 23:38:34.058 D  onResize 1932x832
+2026-03-18 23:38:34.058 D  resize: measure took 0 ms
+2026-03-18 23:38:34.058 D  resize: layout took 0 ms
+2026-03-18 23:38:34.072 D  onResize 1933x847
+2026-03-18 23:38:34.072 D  resize: measure took 0 ms
+2026-03-18 23:38:34.072 D  resize: layout took 0 ms
+2026-03-18 23:38:34.084 D  onResize 1936x862
+2026-03-18 23:38:34.084 D  resize: measure took 0 ms
+2026-03-18 23:38:34.084 D  resize: layout took 0 ms
+2026-03-18 23:38:34.099 D  onResize 1942x883
+2026-03-18 23:38:34.099 D  resize: measure took 0 ms
+2026-03-18 23:38:34.099 D  resize: layout took 0 ms
+2026-03-18 23:38:34.110 D  onResize 1947x903
+2026-03-18 23:38:34.112 D  resize: measure took 0 ms
+2026-03-18 23:38:34.112 D  resize: layout took 0 ms
+2026-03-18 23:38:34.128 D  onResize 1954x926
+2026-03-18 23:38:34.128 D  resize: measure took 0 ms
+2026-03-18 23:38:34.128 D  resize: layout took 0 ms
+2026-03-18 23:38:34.142 D  onResize 1959x945
+2026-03-18 23:38:34.142 D  resize: measure took 0 ms
+2026-03-18 23:38:34.142 D  resize: layout took 0 ms
+2026-03-18 23:38:34.156 D  onResize 1962x961
+2026-03-18 23:38:34.156 D  resize: measure took 0 ms
+2026-03-18 23:38:34.156 D  resize: layout took 0 ms
+2026-03-18 23:38:34.170 D  onResize 1964x973
+2026-03-18 23:38:34.170 D  resize: measure took 0 ms
+2026-03-18 23:38:34.170 D  resize: layout took 0 ms
+2026-03-18 23:38:34.183 D  onResize 1964x983
+2026-03-18 23:38:34.184 D  resize: measure took 0 ms
+2026-03-18 23:38:34.184 D  resize: layout took 0 ms
+2026-03-18 23:38:34.198 D  onResize 1963x993
+2026-03-18 23:38:34.198 D  resize: measure took 0 ms
+2026-03-18 23:38:34.198 D  resize: layout took 0 ms
+2026-03-18 23:38:34.211 D  onResize 1963x1003
+2026-03-18 23:38:34.211 D  resize: measure took 0 ms
+2026-03-18 23:38:34.211 D  resize: layout took 0 ms
+2026-03-18 23:38:34.226 D  onResize 1963x1014
+2026-03-18 23:38:34.226 D  resize: measure took 0 ms
+2026-03-18 23:38:34.226 D  resize: layout took 0 ms
+2026-03-18 23:38:34.239 D  onResize 1963x1024
+2026-03-18 23:38:34.239 D  resize: measure took 0 ms
+2026-03-18 23:38:34.239 D  resize: layout took 0 ms
+2026-03-18 23:38:34.254 D  onResize 1963x1033
+2026-03-18 23:38:34.254 D  resize: measure took 0 ms
+2026-03-18 23:38:34.254 D  resize: layout took 0 ms
+2026-03-18 23:38:34.267 D  onResize 1959x1042
+2026-03-18 23:38:34.267 D  resize: measure took 0 ms
+2026-03-18 23:38:34.267 D  resize: layout took 0 ms
+2026-03-18 23:38:34.282 D  onResize 1953x1048
+2026-03-18 23:38:34.282 D  resize: measure took 0 ms
+2026-03-18 23:38:34.282 D  resize: layout took 0 ms
+2026-03-18 23:38:34.296 D  onResize 1945x1055
+2026-03-18 23:38:34.296 D  resize: measure took 0 ms
+2026-03-18 23:38:34.296 D  resize: layout took 0 ms
+2026-03-18 23:38:34.311 D  onResize 1934x1060
+2026-03-18 23:38:34.311 D  resize: measure took 0 ms
+2026-03-18 23:38:34.311 D  resize: layout took 0 ms
+2026-03-18 23:38:34.325 D  onResize 1922x1064
+2026-03-18 23:38:34.325 D  resize: measure took 0 ms
+2026-03-18 23:38:34.325 D  resize: layout took 0 ms
+2026-03-18 23:38:34.339 D  onResize 1913x1066
+2026-03-18 23:38:34.339 D  resize: measure took 0 ms
+2026-03-18 23:38:34.339 D  resize: layout took 0 ms
+2026-03-18 23:38:34.352 D  onResize 1905x1067
+2026-03-18 23:38:34.352 D  resize: measure took 0 ms
+2026-03-18 23:38:34.352 D  resize: layout took 0 ms
+2026-03-18 23:38:34.364 D  onResize 1902x1067
+2026-03-18 23:38:34.364 D  resize: measure took 0 ms
+2026-03-18 23:38:34.364 D  resize: layout took 0 ms
+2026-03-18 23:38:34.378 D  onResize 1899x1064
+2026-03-18 23:38:34.378 D  resize: measure took 0 ms
+2026-03-18 23:38:34.378 D  resize: layout took 0 ms
+2026-03-18 23:38:34.393 D  onResize 1893x1055
+2026-03-18 23:38:34.393 D  resize: measure took 0 ms
+2026-03-18 23:38:34.394 D  resize: layout took 1 ms
+2026-03-18 23:38:34.406 D  onResize 1884x1039
+2026-03-18 23:38:34.406 D  resize: measure took 0 ms
+2026-03-18 23:38:34.406 D  resize: layout took 0 ms
+2026-03-18 23:38:34.419 D  onResize 1875x1018
+2026-03-18 23:38:34.420 D  resize: measure took 0 ms
+2026-03-18 23:38:34.420 D  resize: layout took 0 ms
+2026-03-18 23:38:34.434 D  onResize 1862x990
+2026-03-18 23:38:34.434 D  resize: measure took 0 ms
+2026-03-18 23:38:34.434 D  resize: layout took 0 ms
+2026-03-18 23:38:34.448 D  onResize 1844x960
+2026-03-18 23:38:34.448 D  resize: measure took 0 ms
+2026-03-18 23:38:34.448 D  resize: layout took 0 ms
+2026-03-18 23:38:34.461 D  onResize 1823x929
+2026-03-18 23:38:34.461 D  resize: measure took 0 ms
+2026-03-18 23:38:34.461 D  resize: layout took 0 ms
+2026-03-18 23:38:34.476 D  onResize 1795x896
+2026-03-18 23:38:34.476 D  resize: measure took 0 ms
+2026-03-18 23:38:34.476 D  resize: layout took 0 ms
+2026-03-18 23:38:34.489 D  onResize 1761x865
+2026-03-18 23:38:34.489 D  resize: measure took 0 ms
+2026-03-18 23:38:34.490 D  resize: layout took 1 ms
+2026-03-18 23:38:34.504 D  onResize 1713x830
+2026-03-18 23:38:34.505 D  resize: measure took 0 ms
+2026-03-18 23:38:34.505 D  resize: layout took 0 ms
+2026-03-18 23:38:34.517 D  onResize 1663x797
+2026-03-18 23:38:34.517 D  resize: measure took 0 ms
+2026-03-18 23:38:34.518 D  resize: layout took 1 ms
+2026-03-18 23:38:34.530 D  onResize 1615x769
+2026-03-18 23:38:34.531 D  resize: measure took 1 ms
+2026-03-18 23:38:34.531 D  resize: layout took 0 ms
+2026-03-18 23:38:34.545 D  onResize 1569x744
+2026-03-18 23:38:34.546 D  resize: measure took 1 ms
+2026-03-18 23:38:34.546 D  resize: layout took 0 ms
+2026-03-18 23:38:34.557 D  onResize 1524x720
+2026-03-18 23:38:34.557 D  resize: measure took 0 ms
+2026-03-18 23:38:34.557 D  resize: layout took 0 ms
+2026-03-18 23:38:34.569 D  onResize 1488x699
+2026-03-18 23:38:34.569 D  resize: measure took 0 ms
+2026-03-18 23:38:34.569 D  resize: layout took 0 ms
+2026-03-18 23:38:34.579 D  onResize 1460x682
+2026-03-18 23:38:34.579 D  resize: measure took 0 ms
+2026-03-18 23:38:34.579 D  resize: layout took 0 ms
+2026-03-18 23:38:34.591 D  onResize 1431x663
+2026-03-18 23:38:34.591 D  resize: measure took 0 ms
+2026-03-18 23:38:34.591 D  resize: layout took 0 ms
+2026-03-18 23:38:34.602 D  onResize 1409x647
+2026-03-18 23:38:34.603 D  resize: measure took 1 ms
+2026-03-18 23:38:34.603 D  resize: layout took 0 ms
+2026-03-18 23:38:34.613 D  onResize 1395x637
+2026-03-18 23:38:34.614 D  resize: measure took 1 ms
+2026-03-18 23:38:34.614 D  resize: layout took 0 ms
+2026-03-18 23:38:34.623 D  onResize 1388x633
+2026-03-18 23:38:34.625 D  resize: measure took 0 ms
+2026-03-18 23:38:34.625 D  resize: layout took 0 ms
+2026-03-18 23:38:34.636 D  onResize 1386x630
+2026-03-18 23:38:34.636 D  resize: measure took 0 ms
+2026-03-18 23:38:34.636 D  resize: layout took 0 ms
+2026-03-18 23:38:34.736 D  onResize 1386x629
+2026-03-18 23:38:34.736 D  resize: measure took 0 ms
+2026-03-18 23:38:34.736 D  resize: layout took 0 ms
+2026-03-18 23:38:34.746 D  onResize 1386x627
+2026-03-18 23:38:34.746 D  resize: measure took 0 ms
+2026-03-18 23:38:34.746 D  resize: layout took 0 ms
+2026-03-18 23:38:34.758 D  onResize 1386x625
+2026-03-18 23:38:34.758 D  resize: measure took 0 ms
+2026-03-18 23:38:34.758 D  resize: layout took 0 ms
+2026-03-18 23:38:34.768 D  onResize 1386x624
+2026-03-18 23:38:34.769 D  resize: measure took 0 ms
+2026-03-18 23:38:34.769 D  resize: layout took 0 ms
+2026-03-18 23:38:34.778 D  onResize 1386x623
+2026-03-18 23:38:34.779 D  resize: measure took 0 ms
+2026-03-18 23:38:34.779 D  resize: layout took 0 ms
+2026-03-18 23:38:35.210 D  onResize 1386x624
+2026-03-18 23:38:35.211 D  resize: measure took 1 ms
+2026-03-18 23:38:35.211 D  resize: layout took 0 ms
+2026-03-18 23:38:35.221 D  onResize 1388x624
+2026-03-18 23:38:35.221 D  resize: measure took 0 ms
+2026-03-18 23:38:35.222 D  resize: layout took 1 ms
+2026-03-18 23:38:35.232 D  onResize 1388x625
+2026-03-18 23:38:35.232 D  resize: measure took 0 ms
+2026-03-18 23:38:35.232 D  resize: layout took 0 ms
+2026-03-18 23:38:35.246 D  onResize 1389x626
+2026-03-18 23:38:35.246 D  resize: measure took 0 ms
+2026-03-18 23:38:35.246 D  resize: layout took 0 ms
+2026-03-18 23:38:35.256 D  onResize 1390x628
+2026-03-18 23:38:35.256 D  resize: measure took 0 ms
+2026-03-18 23:38:35.256 D  resize: layout took 0 ms
+2026-03-18 23:38:35.267 D  onResize 1390x631
+2026-03-18 23:38:35.267 D  resize: measure took 0 ms
+2026-03-18 23:38:35.267 D  resize: layout took 0 ms
+2026-03-18 23:38:35.279 D  onResize 1391x634
+2026-03-18 23:38:35.281 D  resize: measure took 0 ms
+2026-03-18 23:38:35.281 D  resize: layout took 0 ms
+2026-03-18 23:38:35.294 D  onResize 1392x636
+2026-03-18 23:38:35.294 D  resize: measure took 0 ms
+2026-03-18 23:38:35.294 D  resize: layout took 0 ms
+2026-03-18 23:38:35.305 D  onResize 1394x637
+2026-03-18 23:38:35.305 D  resize: measure took 0 ms
+2026-03-18 23:38:35.305 D  resize: layout took 0 ms
+2026-03-18 23:38:35.316 D  onResize 1395x638
+2026-03-18 23:38:35.316 D  resize: measure took 0 ms
+2026-03-18 23:38:35.316 D  resize: layout took 0 ms
+2026-03-18 23:38:35.325 D  onResize 1396x638
+2026-03-18 23:38:35.326 D  resize: measure took 0 ms
+2026-03-18 23:38:35.326 D  resize: layout took 0 ms
+2026-03-18 23:38:35.464 D  onResize 1397x638
+2026-03-18 23:38:35.464 D  resize: measure took 0 ms
+2026-03-18 23:38:35.464 D  resize: layout took 0 ms
+2026-03-18 23:38:35.475 D  onResize 1400x640
+2026-03-18 23:38:35.475 D  resize: measure took 0 ms
+2026-03-18 23:38:35.475 D  resize: layout took 0 ms
+2026-03-18 23:38:35.485 D  onResize 1403x641
+2026-03-18 23:38:35.485 D  resize: measure took 0 ms
+2026-03-18 23:38:35.485 D  resize: layout took 0 ms
+2026-03-18 23:38:35.496 D  onResize 1406x643
+2026-03-18 23:38:35.496 D  resize: measure took 0 ms
+2026-03-18 23:38:35.496 D  resize: layout took 0 ms
+2026-03-18 23:38:35.507 D  onResize 1408x644
+2026-03-18 23:38:35.507 D  resize: measure took 0 ms
+2026-03-18 23:38:35.507 D  resize: layout took 0 ms
+2026-03-18 23:38:35.519 D  onResize 1410x645
+2026-03-18 23:38:35.519 D  resize: measure took 0 ms
+2026-03-18 23:38:35.519 D  resize: layout took 0 ms
+2026-03-18 23:38:35.531 D  onResize 1410x646
+2026-03-18 23:38:35.531 D  resize: measure took 0 ms
+2026-03-18 23:38:35.531 D  resize: layout took 0 ms
+2026-03-18 23:38:36.213 D  onResize 1410x647
+2026-03-18 23:38:36.213 D  resize: measure took 0 ms
+2026-03-18 23:38:36.214 D  resize: layout took 1 ms
+2026-03-18 23:38:36.224 D  onResize 1410x648
+2026-03-18 23:38:36.224 D  resize: measure took 0 ms
+2026-03-18 23:38:36.224 D  resize: layout took 0 ms
+2026-03-18 23:38:36.235 D  onResize 1411x650
+2026-03-18 23:38:36.235 D  resize: measure took 0 ms
+2026-03-18 23:38:36.235 D  resize: layout took 0 ms
+2026-03-18 23:38:36.247 D  onResize 1411x651
+2026-03-18 23:38:36.247 D  resize: measure took 0 ms
+2026-03-18 23:38:36.247 D  resize: layout took 0 ms
+2026-03-18 23:38:36.257 D  onResize 1412x654
+2026-03-18 23:38:36.258 D  resize: measure took 0 ms
+2026-03-18 23:38:36.258 D  resize: layout took 0 ms
+2026-03-18 23:38:36.268 D  onResize 1416x659
+2026-03-18 23:38:36.269 D  resize: measure took 0 ms
+2026-03-18 23:38:36.269 D  resize: layout took 0 ms
+2026-03-18 23:38:36.281 D  onResize 1420x665
+2026-03-18 23:38:36.282 D  resize: measure took 1 ms
+2026-03-18 23:38:36.282 D  resize: layout took 0 ms
+2026-03-18 23:38:36.292 D  onResize 1426x672
+2026-03-18 23:38:36.292 D  resize: measure took 0 ms
+2026-03-18 23:38:36.292 D  resize: layout took 0 ms
+2026-03-18 23:38:36.304 D  onResize 1430x677
+2026-03-18 23:38:36.304 D  resize: measure took 0 ms
+2026-03-18 23:38:36.304 D  resize: layout took 0 ms
+2026-03-18 23:38:36.314 D  onResize 1434x682
+2026-03-18 23:38:36.314 D  resize: measure took 0 ms
+2026-03-18 23:38:36.314 D  resize: layout took 0 ms
+2026-03-18 23:38:36.326 D  onResize 1438x685
+2026-03-18 23:38:36.326 D  resize: measure took 0 ms
+2026-03-18 23:38:36.326 D  resize: layout took 0 ms
+2026-03-18 23:38:36.337 D  onResize 1439x686
+2026-03-18 23:38:36.338 D  resize: measure took 0 ms
+2026-03-18 23:38:36.338 D  resize: layout took 0 ms
+2026-03-18 23:38:36.348 D  onResize 1441x686
+2026-03-18 23:38:36.348 D  resize: measure took 0 ms
+2026-03-18 23:38:36.348 D  resize: layout took 0 ms
+2026-03-18 23:38:36.359 D  onResize 1443x689
+2026-03-18 23:38:36.360 D  resize: measure took 1 ms
+2026-03-18 23:38:36.360 D  resize: layout took 0 ms
+2026-03-18 23:38:36.371 D  onResize 1447x692
+2026-03-18 23:38:36.371 D  resize: measure took 0 ms
+2026-03-18 23:38:36.371 D  resize: layout took 0 ms
+2026-03-18 23:38:36.381 D  onResize 1454x700
+2026-03-18 23:38:36.382 D  resize: measure took 1 ms
+2026-03-18 23:38:36.382 D  resize: layout took 0 ms
+2026-03-18 23:38:36.393 D  onResize 1463x710
+2026-03-18 23:38:36.393 D  resize: measure took 0 ms
+2026-03-18 23:38:36.393 D  resize: layout took 0 ms
+2026-03-18 23:38:36.403 D  onResize 1471x720
+2026-03-18 23:38:36.403 D  resize: measure took 0 ms
+2026-03-18 23:38:36.403 D  resize: layout took 0 ms
+2026-03-18 23:38:36.415 D  onResize 1479x729
+2026-03-18 23:38:36.415 D  resize: measure took 0 ms
+2026-03-18 23:38:36.415 D  resize: layout took 0 ms
+2026-03-18 23:38:36.427 D  onResize 1485x735
+2026-03-18 23:38:36.427 D  resize: measure took 0 ms
+2026-03-18 23:38:36.427 D  resize: layout took 0 ms
+2026-03-18 23:38:36.437 D  onResize 1489x740
+2026-03-18 23:38:36.437 D  resize: measure took 0 ms
+2026-03-18 23:38:36.437 D  resize: layout took 0 ms
+2026-03-18 23:38:36.450 D  onResize 1492x744
+2026-03-18 23:38:36.450 D  resize: measure took 0 ms
+2026-03-18 23:38:36.450 D  resize: layout took 0 ms
+2026-03-18 23:38:36.461 D  onResize 1494x746
+2026-03-18 23:38:36.461 D  resize: measure took 0 ms
+2026-03-18 23:38:36.461 D  resize: layout took 0 ms
+2026-03-18 23:38:36.472 D  onResize 1495x748
+2026-03-18 23:38:36.472 D  resize: measure took 0 ms
+2026-03-18 23:38:36.472 D  resize: layout took 0 ms
+2026-03-18 23:38:36.484 D  onResize 1497x751
+2026-03-18 23:38:36.484 D  resize: measure took 0 ms
+2026-03-18 23:38:36.484 D  resize: layout took 0 ms
+2026-03-18 23:38:36.497 D  onResize 1505x762
+2026-03-18 23:38:36.497 D  resize: measure took 0 ms
+2026-03-18 23:38:36.497 D  resize: layout took 0 ms
+2026-03-18 23:38:36.509 D  onResize 1522x779
+2026-03-18 23:38:36.509 D  resize: measure took 0 ms
+2026-03-18 23:38:36.509 D  resize: layout took 0 ms
+2026-03-18 23:38:36.520 D  onResize 1547x805
+2026-03-18 23:38:36.521 D  resize: measure took 0 ms
+2026-03-18 23:38:36.521 D  resize: layout took 0 ms
+2026-03-18 23:38:36.532 D  onResize 1575x831
+2026-03-18 23:38:36.532 D  resize: measure took 0 ms
+2026-03-18 23:38:36.534 D  resize: layout took 2 ms
+2026-03-18 23:38:36.545 D  onResize 1602x856
+2026-03-18 23:38:36.545 D  resize: measure took 0 ms
+2026-03-18 23:38:36.545 D  resize: layout took 0 ms
+2026-03-18 23:38:36.558 D  onResize 1623x873
+2026-03-18 23:38:36.558 D  resize: measure took 0 ms
+2026-03-18 23:38:36.558 D  resize: layout took 0 ms
+2026-03-18 23:38:36.570 D  onResize 1630x880
+2026-03-18 23:38:36.570 D  resize: measure took 0 ms
+2026-03-18 23:38:36.570 D  resize: layout took 0 ms
+2026-03-18 23:38:36.597 D  onResize 1629x880
+2026-03-18 23:38:36.597 D  resize: measure took 0 ms
+2026-03-18 23:38:36.597 D  resize: layout took 0 ms
+2026-03-18 23:38:36.609 D  onResize 1626x880
+2026-03-18 23:38:36.609 D  resize: measure took 0 ms
+2026-03-18 23:38:36.609 D  resize: layout took 0 ms
+2026-03-18 23:38:36.621 D  onResize 1621x877
+2026-03-18 23:38:36.621 D  resize: measure took 0 ms
+2026-03-18 23:38:36.621 D  resize: layout took 0 ms
+2026-03-18 23:38:36.635 D  onResize 1615x872
+2026-03-18 23:38:36.635 D  resize: measure took 0 ms
+2026-03-18 23:38:36.636 D  resize: layout took 1 ms
+2026-03-18 23:38:36.649 D  onResize 1612x869
+2026-03-18 23:38:36.649 D  resize: measure took 0 ms
+2026-03-18 23:38:36.649 D  resize: layout took 0 ms
+2026-03-18 23:38:36.660 D  onResize 1611x869
+2026-03-18 23:38:36.661 D  resize: measure took 1 ms
+2026-03-18 23:38:36.661 D  resize: layout took 0 ms
+2026-03-18 23:38:36.712 D  onResize 1610x869
+2026-03-18 23:38:36.712 D  resize: measure took 0 ms
+2026-03-18 23:38:36.712 D  resize: layout took 0 ms
+2026-03-18 23:38:36.749 D  onResize 1610x870
+2026-03-18 23:38:36.749 D  resize: measure took 0 ms
+2026-03-18 23:38:36.749 D  resize: layout took 0 ms
+2026-03-18 23:38:36.761 D  onResize 1610x875
+2026-03-18 23:38:36.761 D  resize: measure took 0 ms
+2026-03-18 23:38:36.761 D  resize: layout took 0 ms
+2026-03-18 23:38:36.773 D  onResize 1616x884
+2026-03-18 23:38:36.773 D  resize: measure took 0 ms
+2026-03-18 23:38:36.773 D  resize: layout took 0 ms
+2026-03-18 23:38:36.786 D  onResize 1620x893
+2026-03-18 23:38:36.788 D  resize: measure took 0 ms
+2026-03-18 23:38:36.788 D  resize: layout took 0 ms
+2026-03-18 23:38:36.800 D  onResize 1622x900
+2026-03-18 23:38:36.800 D  resize: measure took 0 ms
+2026-03-18 23:38:36.800 D  resize: layout took 0 ms
+2026-03-18 23:38:36.812 D  onResize 1622x906
+2026-03-18 23:38:36.812 D  resize: measure took 0 ms
+2026-03-18 23:38:36.812 D  resize: layout took 0 ms
+2026-03-18 23:38:36.826 D  onResize 1622x911
+2026-03-18 23:38:36.826 D  resize: measure took 0 ms
+2026-03-18 23:38:36.826 D  resize: layout took 0 ms
+2026-03-18 23:38:36.839 D  onResize 1620x915
+2026-03-18 23:38:36.839 D  resize: measure took 0 ms
+2026-03-18 23:38:36.839 D  resize: layout took 0 ms
+2026-03-18 23:38:36.850 D  onResize 1618x918
+2026-03-18 23:38:36.850 D  resize: measure took 0 ms
+2026-03-18 23:38:36.850 D  resize: layout took 0 ms
+2026-03-18 23:38:36.863 D  onResize 1617x922
+2026-03-18 23:38:36.864 D  resize: measure took 1 ms
+2026-03-18 23:38:36.864 D  resize: layout took 0 ms
+2026-03-18 23:38:36.878 D  onResize 1618x931
+2026-03-18 23:38:36.878 D  resize: measure took 0 ms
+2026-03-18 23:38:36.878 D  resize: layout took 0 ms
+2026-03-18 23:38:36.892 D  onResize 1626x946
+2026-03-18 23:38:36.892 D  resize: measure took 0 ms
+2026-03-18 23:38:36.892 D  resize: layout took 0 ms
+2026-03-18 23:38:36.903 D  onResize 1639x963
+2026-03-18 23:38:36.903 D  resize: measure took 0 ms
+2026-03-18 23:38:36.904 D  resize: layout took 1 ms
+2026-03-18 23:38:36.915 D  onResize 1653x981
+2026-03-18 23:38:36.915 D  resize: measure took 0 ms
+2026-03-18 23:38:36.915 D  resize: layout took 0 ms
+2026-03-18 23:38:36.928 D  onResize 1666x996
+2026-03-18 23:38:36.928 D  resize: measure took 0 ms
+2026-03-18 23:38:36.928 D  resize: layout took 0 ms
+2026-03-18 23:38:36.941 D  onResize 1675x1008
+2026-03-18 23:38:36.941 D  resize: measure took 0 ms
+2026-03-18 23:38:36.941 D  resize: layout took 0 ms
+2026-03-18 23:38:36.955 D  onResize 1681x1015
+2026-03-18 23:38:36.955 D  resize: measure took 0 ms
+2026-03-18 23:38:36.955 D  resize: layout took 0 ms
+2026-03-18 23:38:36.969 D  onResize 1682x1019
+2026-03-18 23:38:36.969 D  resize: measure took 0 ms
+2026-03-18 23:38:36.969 D  resize: layout took 0 ms
+2026-03-18 23:38:36.990 D  onResize 1681x1019
+2026-03-18 23:38:36.991 D  resize: measure took 0 ms
+2026-03-18 23:38:36.991 D  resize: layout took 0 ms
+2026-03-18 23:38:37.090 D  onResize 1681x1018
+2026-03-18 23:38:37.090 D  resize: measure took 0 ms
+2026-03-18 23:38:37.090 D  resize: layout took 0 ms
+2026-03-18 23:38:37.104 D  onResize 1678x1013
+2026-03-18 23:38:37.104 D  resize: measure took 0 ms
+2026-03-18 23:38:37.104 D  resize: layout took 0 ms
+2026-03-18 23:38:37.116 D  onResize 1675x1006
+2026-03-18 23:38:37.116 D  resize: measure took 0 ms
+2026-03-18 23:38:37.116 D  resize: layout took 0 ms
+2026-03-18 23:38:37.128 D  onResize 1672x999
+2026-03-18 23:38:37.128 D  resize: measure took 0 ms
+2026-03-18 23:38:37.128 D  resize: layout took 0 ms
+2026-03-18 23:38:37.143 D  onResize 1667x992
+2026-03-18 23:38:37.143 D  resize: measure took 0 ms
+2026-03-18 23:38:37.143 D  resize: layout took 0 ms
+2026-03-18 23:38:37.157 D  onResize 1664x986
+2026-03-18 23:38:37.157 D  resize: measure took 0 ms
+2026-03-18 23:38:37.157 D  resize: layout took 0 ms
+2026-03-18 23:38:37.169 D  onResize 1663x983
+2026-03-18 23:38:37.170 D  resize: measure took 1 ms
+2026-03-18 23:38:37.170 D  resize: layout took 0 ms
+2026-03-18 23:38:37.183 D  onResize 1662x983
+2026-03-18 23:38:37.183 D  resize: measure took 0 ms
+2026-03-18 23:38:37.183 D  resize: layout took 0 ms
+2026-03-18 23:38:37.304 D  onResize 1662x982
+2026-03-18 23:38:37.304 D  resize: measure took 0 ms
+2026-03-18 23:38:37.304 D  resize: layout took 0 ms
+2026-03-18 23:38:37.316 D  onResize 1661x981
+2026-03-18 23:38:37.316 D  resize: measure took 0 ms
+2026-03-18 23:38:37.316 D  resize: layout took 0 ms
+2026-03-18 23:38:37.329 D  onResize 1661x980
+2026-03-18 23:38:37.329 D  resize: measure took 0 ms
+2026-03-18 23:38:37.329 D  resize: layout took 0 ms
+2026-03-18 23:38:37.349 D  onResize 1660x980
+2026-03-18 23:38:37.349 D  resize: measure took 0 ms
+2026-03-18 23:38:37.349 D  resize: layout took 0 ms
+2026-03-18 23:38:37.362 D  onResize 1659x979
+2026-03-18 23:38:37.362 D  resize: measure took 0 ms
+2026-03-18 23:38:37.362 D  resize: layout took 0 ms
+2026-03-18 23:38:37.374 D  onResize 1659x978
+2026-03-18 23:38:37.374 D  resize: measure took 0 ms
+2026-03-18 23:38:37.374 D  resize: layout took 0 ms
+2026-03-18 23:38:37.387 D  onResize 1658x976
+2026-03-18 23:38:37.387 D  resize: measure took 0 ms
+2026-03-18 23:38:37.387 D  resize: layout took 0 ms
+2026-03-18 23:38:37.398 D  onResize 1657x975
+2026-03-18 23:38:37.399 D  resize: measure took 1 ms
+2026-03-18 23:38:37.399 D  resize: layout took 0 ms
+2026-03-18 23:38:37.413 D  onResize 1654x973
+2026-03-18 23:38:37.413 D  resize: measure took 0 ms
+2026-03-18 23:38:37.413 D  resize: layout took 0 ms
+2026-03-18 23:38:37.426 D  onResize 1652x969
+2026-03-18 23:38:37.426 D  resize: measure took 0 ms
+2026-03-18 23:38:37.426 D  resize: layout took 0 ms
+2026-03-18 23:38:37.438 D  onResize 1649x965
+2026-03-18 23:38:37.438 D  resize: measure took 0 ms
+2026-03-18 23:38:37.438 D  resize: layout took 0 ms
+2026-03-18 23:38:37.451 D  onResize 1643x959
+2026-03-18 23:38:37.451 D  resize: measure took 0 ms
+2026-03-18 23:38:37.451 D  resize: layout took 0 ms
+2026-03-18 23:38:37.464 D  onResize 1638x954
+2026-03-18 23:38:37.464 D  resize: measure took 0 ms
+2026-03-18 23:38:37.465 D  resize: layout took 1 ms
+2026-03-18 23:38:37.479 D  onResize 1633x947
+2026-03-18 23:38:37.479 D  resize: measure took 0 ms
+2026-03-18 23:38:37.479 D  resize: layout took 0 ms
+2026-03-18 23:38:37.491 D  onResize 1627x942
+2026-03-18 23:38:37.491 D  resize: measure took 0 ms
+2026-03-18 23:38:37.491 D  resize: layout took 0 ms
+2026-03-18 23:38:37.504 D  onResize 1624x937
+2026-03-18 23:38:37.504 D  resize: measure took 0 ms
+2026-03-18 23:38:37.504 D  resize: layout took 0 ms
+2026-03-18 23:38:37.517 D  onResize 1621x935
+2026-03-18 23:38:37.517 D  resize: measure took 0 ms
+2026-03-18 23:38:37.517 D  resize: layout took 0 ms
+2026-03-19 00:04:25.495 D  updateTexture for cache page - setting image 1024x1024 tx=2
+2026-03-19 00:16:30.419 D  WM_CLOSE: closing window 
+2026-03-19 00:16:30.427 D  Window onDestroy
+2026-03-19 00:16:30.427 V  destroyed window, removing from map
+2026-03-19 00:16:30.454 E  Cannot find window in map by HWND
+2026-03-19 00:16:30.455 D  Window destructor
+2026-03-19 00:16:30.455 D  Destroying window
+2026-03-19 00:16:30.457 I  UIAppMain returned 0
+2026-03-19 00:16:30.458 I  Destroying DrawableCache
+2026-03-19 00:16:30.458 I  Destroying ImageCache
+2026-03-19 00:16:30.458 I  Destroying Win32FontManager
+2026-03-19 00:16:30.458 E  OpenGL error GL_INVALID_OPERATION at dlangui.graphics.glsupport.GLObject!(GLObjectTypes.Texture, 3553u).GLObject.unbind:1133 -- glBindTexture
+2026-03-19 00:16:30.458 E  OpenGL error GL_INVALID_OPERATION at dlangui.graphics.glsupport.GLObject!(GLObjectTypes.Texture, 3553u).GLObject.~this:1120 -- glDeleteTextures
+2026-03-19 00:16:30.458 D  Destroying font manager
+2026-03-19 00:16:30.458 E  OpenGL error GL_INVALID_OPERATION at dlangui.graphics.glsupport.GLObject!(GLObjectTypes.Texture, 3553u).GLObject.unbind:1133 -- glBindTexture
+2026-03-19 00:16:30.458 E  OpenGL error GL_INVALID_OPERATION at dlangui.graphics.glsupport.GLObject!(GLObjectTypes.Texture, 3553u).GLObject.~this:1120 -- glDeleteTextures
+2026-03-19 00:16:30.458 D  Exiting main
+2026-03-19 00:16:30.459 D  Calling GC.collect

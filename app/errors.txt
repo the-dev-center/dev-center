@@ -1,21 +1,6 @@
      Warning Selected package arsd-official@11.5.3 does not match the dependency specification <11.0.0 in package dlangui. Need to "dub upgrade"?
      Warning Selected package arsd-official@11.5.3 does not match the dependency specification <11.0.0 in package dlangui. Need to "dub upgrade"?
-src\modules\repo_tools\git_viewers.d(6,8): Error: module `std.string` import `splitter` not found
-import std.string : splitter;
-       ^
-src\modules\repo_tools\git_viewer_indexer.d(4,8): Error: module `std.string` import `splitter` not found
-import std.string : splitLines, strip, splitter;
-       ^
-src\modules\repo_tools\git_viewer_indexer.d(6,8): Error: module `std.datetime` import `unixTimeToSysTime` not found, did you mean function `std.datetime.systime.unixTimeToStdTime`?
-import std.datetime : SysTime, DateTime, unixTimeToSysTime;
-       ^
-src\modules\repo_tools\git_viewer_widget.d(7,8): Error: module `std.datetime` import `unixTimeToSysTime` not found, did you mean function `std.datetime.systime.unixTimeToStdTime`?
-import std.datetime : SysTime, unixTimeToSysTime;
-       ^
-src\modules\repo_tools\git_viewer_widget.d(24,26): Error: undefined identifier `DrawContext`
-    override void onDraw(DrawContext* dc) {
-                         ^
-src\modules\repo_tools\git_viewer_widget.d(71,19): Error: function `bool modules.repo_tools.git_viewer_widget.TimelineWidget.onMouseEvent(MouseEvent* event)` does not override any function, did you mean to override `bool dlangui.widgets.widget.Widget.onMouseEvent(dlangui.core.events.MouseEvent event)`?
-    override bool onMouseEvent(MouseEvent* event) {
-                  ^
+src\modules\iac\discovery.d(364,1): Error: found `private` instead of statement
+private IacDependency[] extractTerraformDeps(string relPath, const string content)
+^
 Error C:\Program Files\LDC 1.42\bin\ldc2.exe failed with exit code 1.
