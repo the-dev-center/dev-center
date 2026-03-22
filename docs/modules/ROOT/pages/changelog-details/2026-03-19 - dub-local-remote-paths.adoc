@@ -1,0 +1,5 @@
+= 2026-03-19 – DUB Local vs Remote Paths
+
+* Added xref:ROOT:dub-local-remote-paths.adoc[DUB Local vs Remote Paths] to document how developers can manage build specifications in `dub.json` without manually swapping between local and remote dependency paths.
+* Documented four strategies: `dub.selections.json` workflow (local add-local, CI defaults to online), DUB path overrides via `~/.dub/config.json`, environment variable overrides for CI, and git submodules for persistent patches.
+* Emphasized `dub add-local` as the standard solution to decouple the local filesystem from the project's declarative build spec.

@@ -1,0 +1,54 @@
+= DUB Local vs Remote Paths
+:description: Managing build specifications in dub.json without manually swapping between local and remote paths.
+
+To manage build specifications in `dub.json` without manually swapping between local and remote paths, use the *path* and *substitutions* mechanisms within the D build system.
+
+== 1. The dub.selections.json strategy
+
+DUB generates a `dub.selections.json` file when you run a build. This file maps dependencies to specific versions or paths.
+
+* *Local development:* Run `dub add-local ../forked-repo` on your machine. This registers your fork globally on your system.
+* *CI/CD integrity:* Do not check `dub.selections.json` into version control if it contains local paths. By omitting this file, the CI environment will default to the versions specified in `dub.json` (the online references).
+
+== 2. DUB path overrides
+
+You can override a dependency's source temporarily for your local environment without touching `dub.json`.
+
+[source,bash]
+----
+dub add-local /path/to/your/patched-fork 1.2.3
+----
+
+This forces DUB to use your local directory whenever version `1.2.3` of that package is requested. The registration is stored in the local user's DUB configuration (`~/.dub/config.json`). Your CI runner (which lacks this local registration) will continue to fetch the upstream repository from the registry.
+
+== 3. Environment variable overrides
+
+If you must modify `dub.json` to point to a fork during a transition period, use environment variables within your CI YAML to point to the git URL of your fork.
+
+* *CI configuration:* Set `DUB_FLAGS` or use a pre-build script to rewrite the dependency.
+* *Command:* `dub build --override-config=dependencyName/versionOrPath`
+
+== 4. Git submodules with conditional paths
+
+If the CI must also use your patch (until upstream merges it), use a Git submodule and a relative path in `dub.json`.
+
+|===
+| Environment | Strategy
+| *Local* | `dub add-local` to prioritize your fork over the registry.
+| *CI* | Ensure the runner does not have the local override; it will pull from the online URL.
+| *Persistent patch* | Use a `git submodule` and point the `path` attribute in `dub.json` to the submodule folder.
+|===
+
+To avoid tedious swapping between local and remote paths, the `add-local` command is the standard solution. It decouples your machine's filesystem from the project's declarative build spec.
+
+== 5. Dev Center: unit-threaded fork
+
+Dev Center depends on xref:ROOT:index.adoc[dlangui], which transitively pulls in `unit-threaded`. Upstream unit-threaded triggers DUB warnings about sub-package references. A patched fork is maintained at https://github.com/dlang-supplemental/unit-threaded[dlang-supplemental/unit-threaded].
+
+To use the fork locally and silence those warnings:
+
+1. Clone the fork: `gh repo clone dlang-supplemental/unit-threaded` (e.g. into `Z:\code\github.com\dlang-supplemental\unit-threaded` or as a sibling `../unit-threaded`).
+2. Register it with DUB: `dub add-local /path/to/unit-threaded 0.7.55` (use your actual clone path).
+3. Run `dub upgrade` from the `app` directory. DUB will resolve `unit-threaded` from your local path.
+
+CI uses the registry version; no `dub.selections.json` with local paths is committed.

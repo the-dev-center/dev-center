@@ -1,0 +1,8 @@
+= 2026-03-21 – Automatic AI model routing specification
+
+Documentation-only change:
+
+* Added xref:specifications:features/better-automatic-ai-routing.adoc[Automatic AI Model Routing] as a feature-level specification (profiles, task categories, vendor proposal, rationale). Integrated into the Specifications index and nav; removed the separate `designs/` subtree so the topic is a normal spec alongside other features.
+* Corrected Specifications nav link to `xref:templates-schema.adoc` for the templates schema page.
+
+No application code or behavior was changed.

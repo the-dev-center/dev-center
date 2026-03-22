@@ -1,0 +1,40 @@
+= arsd-official extern(C) in Deprecation Fix
+
+== Problem
+
+When building dev-center with DUB, LDC reported deprecation warnings in arsd-official 10.9.10:
+
+----
+extern(C) int nsvg__cmpEdge (in void *p, in void *q) nothrow @trusted @nogc {
+              ^
+    parameter `p` declared as `in` here
+    parameter `q` declared as `in` here
+Deprecation: using `in` parameters with `extern(C)` functions is deprecated
+----
+
+== Root cause
+
+In D, `in` is shorthand for `const scope`. For `extern(C)` functions (which have a C ABI), using `in` parameters is deprecated because C has no equivalent concept. The D compiler warns about this to encourage code that matches the C calling convention.
+
+Upstream arsd (admadruppe/arsd) fixed this in v11.0.1 by changing:
+
+  `in void *p, in void *q` → `scope const void *p, scope const void *q`
+
+But dev-center uses dlangui, which pins arsd-official to `&lt;11.0.0`, so we stay on 10.9.10 which still has the deprecated form.
+
+== Fix
+
+1. Forked arsd to dev-centr/arsd and applied the same fix as upstream on branch `fix-extern-in-deprecation`.
+2. Tagged the fix as `v10.9.11-devcentr1` in the fork.
+3. Added a patch script `scripts/patch-arsd-svg-deprecation.ps1` that applies the fix to the local DUB cache (`$env:LOCALAPPDATA\dub\packages\arsd-official\`).
+4. The script should be run after `dub upgrade` or when the cache is refreshed, so the patch persists until a clean fetch overwrites the package.
+
+The one-line change in `svg.d`:
+
+  `extern(C) int nsvg__cmpEdge (scope const void *p, scope const void *q)`
+
+== Fork location
+
+* https://github.com/dev-centr/arsd[dev-centr/arsd]
+* Branch: `fix-extern-in-deprecation`
+* Tag: `v10.9.11-devcentr1`

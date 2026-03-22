@@ -1,0 +1,16 @@
+= 2026-03-19 – AI Local Library Docs
+
+* Added `scripts/refresh-local-library-docs.ps1` to clone or update local reference repos used by DevCentr AI-assisted development.
+* Added `AI-LOCAL-LIBRARY-DOCS.example.json5` as a committed template and standardized on `AI-LOCAL-LIBRARY-DOCS.local.json5` as the obvious gitignored machine-local manifest.
+* Added `.gitignore` entries for `docs/_local-library-docs/` and `AI-LOCAL-LIBRARY-DOCS.local.json5`.
+* Updated xref:ROOT:ai-local-library-docs.adoc[AI Local Library Docs] to define the layered source priority: MCP-hosted indexed docs such as Context7 first, repo-local cloned docs/source second, web search last.
+* Updated `README.adoc` and `docs/README.adoc` to instruct developers using AI tools to set up local library docs before doing dependency-sensitive work.
+* Added xref:specifications:features/ai-doc-sources-and-mcp-setup.adoc[AI Doc Sources and MCP Setup] to describe the future DevCentr feature for detecting MCP docs providers, guiding setup, and automating the local fallback.
+* Documented cross-platform dedupe guidance: prefer one clone with multiple remotes or Git reference-clone/mirror strategies over hardlinks or symlink-heavy setups.
+* Added `app/src/modules/services/ai_client_profiles.json5` with Context7-capable client profiles, including docs URLs, config section URLs, config file hints, launch commands, easy setup commands where available, and manual setup metadata.
+* Added xref:specifications:components/ai-config-interface.adoc[AI Config Interface] to define the global AI setup dialog with `Providers`, `MCP Setup`, and `Skills` tabs, Context7 docs/source/reporting helpers, and editor-manager ownership.
+* Added xref:specifications:components/repository-browser-terminal.adoc[Repository Browser Terminal] to define the integrated repo-scoped terminal with segmented per-command history blocks and a command index.
+* Added xref:general-knowledge:how-to/context7-mcp-setup.adoc[Context7 MCP and Skills Setup] as a user-facing setup guide.
+* Implemented `app/src/modules/services/ai_config_dialog.d` as the first working global AI configuration dialog, reachable from the top bar, repository preview, and workspace/editor toolbar.
+* Implemented `app/src/modules/repo_tools/repo_terminal_widget.d` and wired it into the repository browser preview as a `Terminal` tab with per-command blocks, a command index, and repo-scoped command execution.
+* Added `app/src/modules/infra/logging.d` as a small `std.logger` wrapper that writes a persistent DevCentr log file under the app data directory and logs startup, page changes, AI dialog launches, and repo-terminal command launches.

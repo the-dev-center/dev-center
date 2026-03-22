@@ -1,0 +1,7 @@
+= 2026-03-19 – unit-threaded Fork, Upstream Bug Report, and PR
+
+* Forked link:https://github.com/atilaneves/unit-threaded[unit-threaded] to link:https://github.com/dlang-supplemental/unit-threaded[dlang-supplemental/unit-threaded] to fix DUB sub-package reference warnings.
+* Fixed sub-package dependencies: changed from `dependency "unit-threaded:subpackage" path="../.."` to `dependency "subpackage" path="../subpackage"` so DUB uses path-to-package instead of package:subpackage form.
+* Wired in locally via `dub add-local` per xref:ROOT:dub-local-remote-paths.adoc#dev-center-unit-threaded-fork[DUB Local vs Remote Paths].
+* Submitted upstream bug report: link:https://github.com/atilaneves/unit-threaded/issues/329[#329].
+* Submitted upstream PR: link:https://github.com/atilaneves/unit-threaded/pull/330[#330].

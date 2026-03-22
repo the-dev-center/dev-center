@@ -1,0 +1,21 @@
+= Automatic AI model routing
+:navtitle: Automatic AI routing
+
+Specification for routing subtasks across models during long-running AI sessions (including proposals suitable for IDE vendors such as Cursor).
+
+== Overview
+
+Long prompts often mix open-ended ideas, interrelated threads, untangling work, and basic lookups. Routing different kinds of work to different models can reduce cost and improve fit: premium models for hard reasoning and edits on existing code, cheaper models for first-pass generation from a plan.
+
+== Requirements
+
+* Users MUST be able to define custom auto-routing profiles so a long-running session can alternate models between subtasks.
+* Users MUST be able to map models to task categories (examples: chores, low-complexity code, bug fix, initial generation, planning, coding, documentation).
+
+== Vendor proposal
+
+IDE and agent hosts SHOULD allow the above profiles and mappings as first-class configuration, so users are not stuck with a single model for an entire thread.
+
+== Rationale
+
+Avoid spending premium models on large amounts of raw code generation when a cheaper model suffices. Prefer strong models for ingesting and revising existing code (targeted edits), which is often cheaper than generating from scratch. Use weaker models for a first pass of implementation after a stronger model has produced the plan.

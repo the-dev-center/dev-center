@@ -1,0 +1,444 @@
+{
+  // Profiles for AI-capable editors, coding agents, and CLIs that can use Context7.
+  // The future DevCentr AI Config interface should read from this file.
+  context7: {
+    docsIndexUrl: "https://context7.com/docs/llms.txt",
+    skillsBrowserUrl: "https://context7.com/skills/",
+    allClientsDocsUrl: "https://context7.com/docs/resources/all-clients",
+    allClientsSourceRawUrl: "https://raw.githubusercontent.com/upstash/context7/refs/heads/master/docs/resources/all-clients.mdx",
+    allClientsSourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+    issueSearchUrl: "https://github.com/upstash/context7/issues?q=is%3Aissue%20state%3Aopen",
+    issueNewChooseUrl: "https://github.com/upstash/context7/issues/new/choose",
+    contributingGuidelinesUrl: "https://opensource.guide/",
+    preferredSourceOrder: ["context7-mcp", "repo-local-docs", "web-search"],
+  },
+
+  clients: {
+    "claude-code": {
+      displayName: "Claude Code",
+      category: "coding-agent-cli",
+      launchCommand: "claude",
+      context7DocsUrl: "https://context7.com/docs/clients/claude-code",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#claude-code",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Claude Code section in all-clients.mdx",
+      configFiles: {
+        user: ["Claude Code MCP user scope"],
+        project: [],
+      },
+      easySetup: {
+        supported: true,
+        command: "npx ctx7 setup --claude",
+        provisionsApiKeyViaLogin: true,
+        installsContext7Skill: true,
+        notes: [
+          "Can choose CLI or MCP mode during setup.",
+          "Context7 plugin can add skills, agents, and commands.",
+        ],
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "command-or-remote-http",
+        configDocsUrl: "https://docs.anthropic.com/en/docs/claude-code/mcp",
+      },
+      skillSupport: {
+        type: "plugin-and-skill",
+        pluginMarketplaceAddCommand: "/plugin marketplace add upstash/context7",
+        pluginInstallCommand: "/plugin install context7-plugin@context7-marketplace",
+      },
+    },
+
+    cursor: {
+      displayName: "Cursor",
+      category: "editor",
+      launchCommand: "cursor",
+      context7DocsUrl: "https://context7.com/docs/clients/cursor",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#cursor",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Cursor section in all-clients.mdx",
+      configFiles: {
+        user: ["~/.cursor/mcp.json"],
+        project: [".cursor/mcp.json"],
+      },
+      easySetup: {
+        supported: true,
+        command: "npx ctx7 setup --cursor",
+        provisionsApiKeyViaLogin: true,
+        installsContext7Skill: true,
+        installButtonRemoteUrl: "https://cursor.com/en/install-mcp?name=context7&config=eyJ1cmwiOiJodHRwczovL21jcC5jb250ZXh0Ny5jb20vbWNwIn0%3D",
+        installButtonLocalUrl: "https://cursor.com/en/install-mcp?name=context7&config=eyJjb21tYW5kIjoibnB4IC15IEB1cHN0YXNoL2NvbnRleHQ3LW1jcCJ9",
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "json-file",
+        configDocsUrl: "https://docs.cursor.com/context/model-context-protocol",
+        rulesHint: "Cursor rule can force Context7 use for library docs requests.",
+      },
+      skillSupport: {
+        type: "setup-command-or-rules",
+        rulesFile: ".cursorrules",
+      },
+    },
+
+    opencode: {
+      displayName: "OpenCode",
+      category: "coding-agent-cli",
+      launchCommand: "opencode",
+      context7DocsUrl: "https://context7.com/docs/clients/opencode",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#opencode",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Opencode section in all-clients.mdx",
+      configFiles: {
+        user: ["opencode configuration file"],
+        project: ["opencode.json"],
+      },
+      easySetup: {
+        supported: true,
+        command: "npx ctx7 setup --opencode",
+        provisionsApiKeyViaLogin: true,
+        installsContext7Skill: true,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "json-file",
+        configDocsUrl: "https://opencode.ai/docs/mcp-servers/",
+      },
+      skillSupport: {
+        type: "setup-command-or-agents-md",
+        rulesFile: "AGENTS.md",
+      },
+    },
+
+    "vs-code": {
+      displayName: "VS Code",
+      category: "editor",
+      launchCommand: "code",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#vs-code",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#vs-code",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "VS Code section in all-clients.mdx",
+      configFiles: {
+        user: ["VS Code MCP config file"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+        installButtonLocalUrl: "https://insiders.vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%7B%22name%22%3A%22context7%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40upstash%2Fcontext7-mcp%40latest%22%5D%7D",
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "json-file",
+        configDocsUrl: "https://code.visualstudio.com/docs/copilot/chat/mcp-servers",
+      },
+      skillSupport: {
+        type: "none-native",
+        notes: ["Show MCP setup and Context7 docs links from the editor manager."],
+      },
+    },
+
+    windsurf: {
+      displayName: "Windsurf",
+      category: "editor",
+      launchCommand: "windsurf",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#windsurf",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#windsurf",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Windsurf section in all-clients.mdx",
+      configFiles: {
+        user: ["Windsurf MCP config file"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "json-file",
+        configDocsUrl: "https://docs.windsurf.com/windsurf/cascade/mcp",
+      },
+      skillSupport: {
+        type: "none-native",
+      },
+    },
+
+    "claude-desktop": {
+      displayName: "Claude Desktop",
+      category: "desktop-ai-client",
+      launchCommand: "claude",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#claude-desktop",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#claude-desktop",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Claude Desktop section in all-clients.mdx",
+      configFiles: {
+        user: ["claude_desktop_config.json"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "ui-or-json-file",
+        configDocsUrl: "https://modelcontextprotocol.io/quickstart/user",
+      },
+      skillSupport: {
+        type: "none-native",
+      },
+    },
+
+    "gemini-cli": {
+      displayName: "Gemini CLI",
+      category: "coding-agent-cli",
+      launchCommand: "gemini",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#gemini-cli",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#gemini-cli",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Gemini CLI section in all-clients.mdx",
+      configFiles: {
+        user: ["~/.gemini/settings.json"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "json-file",
+        configDocsUrl: "https://google-gemini.github.io/gemini-cli/docs/tools/mcp-server.html",
+      },
+      skillSupport: {
+        type: "context7-skills-browser-link-only",
+      },
+    },
+
+    "github-copilot": {
+      displayName: "GitHub Copilot",
+      category: "coding-agent-cli",
+      launchCommand: "copilot",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#github-copilot",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#github-copilot",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "GitHub Copilot section in all-clients.mdx",
+      configFiles: {
+        user: ["~/.copilot/mcp-config.json"],
+        project: ["Repository Settings -> Copilot -> Coding agent -> MCP configuration"],
+      },
+      easySetup: {
+        supported: false,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "json-file-or-repo-settings",
+        configDocsUrl: "https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/agents/copilot-coding-agent/extending-copilot-coding-agent-with-mcp",
+      },
+      skillSupport: {
+        type: "context7-skills-browser-link-only",
+      },
+    },
+
+    zed: {
+      displayName: "Zed",
+      category: "editor",
+      launchCommand: "zed",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#zed",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#zed",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Zed section in all-clients.mdx",
+      configFiles: {
+        user: ["Zed settings.json"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+        extensionUrl: "https://zed.dev/extensions?query=Context7",
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "json-file",
+        configDocsUrl: "https://zed.dev/docs/assistant/context-servers",
+      },
+      skillSupport: {
+        type: "extension-or-mcp",
+      },
+    },
+
+    "qwen-code": {
+      displayName: "Qwen Code",
+      category: "coding-agent-cli",
+      launchCommand: "qwen",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#qwen-code",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#qwen-code",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Qwen Code section in all-clients.mdx",
+      configFiles: {
+        user: ["~/.qwen/settings.json"],
+        project: [".qwen/settings.json"],
+      },
+      easySetup: {
+        supported: false,
+        cliRemoteCommand: "qwen mcp add --transport http context7 https://mcp.context7.com/mcp --header \"CONTEXT7_API_KEY: YOUR_API_KEY\" --header \"Accept: application/json, text/event-stream\"",
+        cliLocalCommand: "qwen mcp add context7 npx -y @upstash/context7-mcp --api-key YOUR_API_KEY",
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "cli-or-json-file",
+        configDocsUrl: "https://qwenlm.github.io/qwen-code-docs/en/users/features/mcp/",
+      },
+      skillSupport: {
+        type: "context7-skills-browser-link-only",
+      },
+    },
+
+    "openai-codex": {
+      displayName: "OpenAI Codex",
+      category: "coding-agent-cli",
+      launchCommand: "codex",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#openai-codex",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#openai-codex",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "OpenAI Codex section in all-clients.mdx",
+      configFiles: {
+        user: ["Codex MCP configuration"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "toml-file",
+        configDocsUrl: "https://github.com/openai/codex",
+      },
+      skillSupport: {
+        type: "context7-skills-browser-link-only",
+      },
+    },
+
+    "google-antigravity": {
+      displayName: "Google Antigravity",
+      category: "editor",
+      launchCommand: "antigravity",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#google-antigravity",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#google-antigravity",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Google Antigravity section in all-clients.mdx",
+      configFiles: {
+        user: ["Antigravity MCP config file"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "json-file",
+        configDocsUrl: "https://antigravity.google/docs/mcp",
+      },
+      skillSupport: {
+        type: "context7-skills-browser-link-only",
+      },
+    },
+
+    kiro: {
+      displayName: "Kiro",
+      category: "editor",
+      launchCommand: "kiro",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#kiro",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#kiro",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Kiro section in all-clients.mdx",
+      configFiles: {
+        user: ["Kiro UI MCP settings"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "ui-json",
+        configDocsUrl: "https://kiro.dev/docs/mcp/configuration/",
+      },
+      skillSupport: {
+        type: "context7-skills-browser-link-only",
+      },
+    },
+
+    "augment-code": {
+      displayName: "Augment Code",
+      category: "editor-extension",
+      launchCommand: "code",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#augment-code",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#augment-code",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Augment Code section in all-clients.mdx",
+      configFiles: {
+        user: ["Augment settings.json"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "ui-or-settings-json",
+        configDocsUrl: "Augment Code settings UI",
+      },
+      skillSupport: {
+        type: "context7-skills-browser-link-only",
+      },
+    },
+
+    warp: {
+      displayName: "Warp",
+      category: "terminal",
+      launchCommand: "warp",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#warp",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#warp",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Warp section in all-clients.mdx",
+      configFiles: {
+        user: ["Warp MCP settings"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+      },
+      manualSetup: {
+        apiKeyRequired: true,
+        configStrategy: "ui-json",
+        configDocsUrl: "https://docs.warp.dev/knowledge-and-collaboration/mcp#adding-an-mcp-server",
+      },
+      skillSupport: {
+        type: "context7-skills-browser-link-only",
+      },
+    },
+
+    amp: {
+      displayName: "Amp",
+      category: "coding-agent-cli",
+      launchCommand: "amp",
+      context7DocsUrl: "https://context7.com/docs/resources/all-clients#amp",
+      context7ConfigUrl: "https://context7.com/docs/resources/all-clients#amp",
+      sourcePlainUrl: "https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1",
+      sourceRangeHint: "Amp section in all-clients.mdx",
+      configFiles: {
+        user: ["Amp MCP settings"],
+        project: [],
+      },
+      easySetup: {
+        supported: false,
+        cliRemoteNoKeyCommand: "amp mcp add context7 https://mcp.context7.com/mcp",
+        cliRemoteWithKeyCommand: "amp mcp add context7 --header \"CONTEXT7_API_KEY=YOUR_API_KEY\" https://mcp.context7.com/mcp",
+      },
+      manualSetup: {
+        apiKeyRequired: false,
+        configStrategy: "cli-command",
+        configDocsUrl: "https://ampcode.com/manual#mcp",
+      },
+      skillSupport: {
+        type: "context7-skills-browser-link-only",
+      },
+    },
+  },
+}

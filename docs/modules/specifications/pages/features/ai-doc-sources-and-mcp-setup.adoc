@@ -1,0 +1,122 @@
+= AI Doc Sources and MCP Setup
+
+DevCentr should help developers and AI tools get accurate dependency documentation without relying on stale model memory.
+
+The design goal is a layered documentation source strategy:
+
+* MCP-hosted indexed docs first
+* Repo-local cloned docs/source second
+* Plain web search last
+
+== Problem
+
+AI tools often answer library questions from stale training data.
+
+For version-sensitive dependencies, that causes:
+
+* Wrong API names
+* Old configuration syntax
+* Missing or renamed properties
+* Confusion between forks and upstream repos
+
+This is especially painful in ecosystems like D where source, examples, and doc comments all matter.
+
+== Goals
+
+* Give AI tools a primary structured docs source when one exists.
+* Keep a strong local fallback when MCP is missing or incomplete.
+* Make setup obvious for new developers.
+* Keep the configuration visible to both humans and AI agents.
+* Allow future DevCentr automation of this setup.
+
+== Source priority
+
+DevCentr should treat documentation sources in this order:
+
+. MCP docs provider, such as Context7, when the dependency has been indexed there
+. Repo-local cloned docs/source in `docs/_local-library-docs/`
+. Direct web search
+
+This means MCP is the preferred primary path, but it is not the only path.
+
+== Required repository structure
+
+Projects that adopt this workflow should include:
+
+* `AI-LOCAL-LIBRARY-DOCS.example.json5` - committed template for local AI docs configuration
+* `AI-LOCAL-LIBRARY-DOCS.local.json5` - gitignored machine-local manifest
+* `docs/_local-library-docs/` - gitignored local clone area for docs/source repos
+* `scripts/refresh-local-library-docs.ps1` - bootstrap/update script for the local fallback
+
+The local manifest filename should stay intentionally obvious so AI agents notice it.
+
+== DevCentr automation goals
+
+DevCentr should eventually offer a setup flow that can:
+
+* Detect whether a supported MCP server is already installed
+* Show setup guidance when it is missing
+* Link to the upstream installation docs for the MCP server
+* Generate or refresh the local fallback docs manifest
+* Run the local docs refresh script
+* Show which docs source strategy is active for a given project
+
+== Scope of automation
+
+The first implementation does not need to install every MCP server fully automatically.
+
+It is acceptable for the initial DevCentr feature to:
+
+* Detect installed MCP servers
+* Open the relevant setup docs
+* Generate config files
+* Run supported bootstrap scripts
+* Explain which steps still require manual approval
+
+That is still much better than expecting each developer to discover and wire this up manually.
+
+== Context7 position
+
+If Context7 indexing is available for a dependency, that is a strong primary solution.
+
+It helps because:
+
+* The docs are queryable through tooling instead of model memory.
+* The setup can be standardized per machine.
+* It reduces repeated web lookups and noisy search results.
+
+But Context7 should not replace the local fallback entirely. A project still needs repo-local docs/source when:
+
+* The MCP server is not installed
+* The indexed corpus is incomplete
+* The wrong upstream was indexed
+* The dependency is a fork or a locally patched variant
+
+== Dedupe strategy
+
+Cross-platform dedupe should avoid hardlinks or symlink-heavy setups as the main plan.
+
+Preferred options:
+
+* One local clone with multiple remotes when a developer wants both an upstream repo and a personal fork
+* Shared Git mirror/reference cache with `git clone --reference` or `--reference-if-able`
+* Repo-local working copies only when local indexing inside that repo is needed
+
+This is the closest practical equivalent to a pnpm-like shared store for Git repos.
+
+== Documentation requirements
+
+When this feature is implemented in DevCentr, the docs should include:
+
+* A user-facing setup guide for new developers
+* A reference page describing the source priority rules
+* A note in the standard machine/project bootstrap process
+* Guidance for AI tools to prefer MCP, then local docs, then web
+
+== Initial target dependencies
+
+For DevCentr itself, the first documented targets are:
+
+* `dlang/phobos`
+* `dlang-supplemental/dlangui`
+* `dlang-community/SDLang-D`

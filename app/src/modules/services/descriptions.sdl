@@ -5,7 +5,7 @@ services {
         shortDescription "Open-source Terraform-compatible IaC tool. Recommended default for infrastructure as code."
         homepage "https://opentofu.org/"
         docs "https://developer.opentofu.org/docs"
-        devcentrDoc "xref:knowledge-base:explanation/infrastructure/iac.adoc[]"
+        devcentrDoc "xref:general-knowledge:explanation/infrastructure/iac.adoc[]"
     }
 
     service {
@@ -14,7 +14,7 @@ services {
         shortDescription "General-purpose cloud platform offering compute, storage, networking, and managed services."
         homepage "https://aws.amazon.com/"
         docs "https://docs.aws.amazon.com/"
-        devcentrDoc "xref:knowledge-base:explanation/infrastructure/aws-overview.adoc[]"
+        devcentrDoc "xref:general-knowledge:explanation/infrastructure/aws-overview.adoc[]"
     }
 
     service {
@@ -23,7 +23,7 @@ services {
         shortDescription "CI/CD and automation platform tightly integrated with GitHub repositories."
         homepage "https://github.com/features/actions"
         docs "https://docs.github.com/actions"
-        devcentrDoc "xref:knowledge-base:reference/github-workflow-ui-hierarchy.adoc[]"
+        devcentrDoc "xref:general-knowledge:reference/github-workflow-ui-hierarchy.adoc[]"
     }
 
     service {
@@ -32,7 +32,7 @@ services {
         shortDescription "Fully managed container runtime for stateless HTTP services and background jobs."
         homepage "https://cloud.google.com/run"
         docs "https://cloud.google.com/run/docs"
-        devcentrDoc "xref:knowledge-base:explanation/infrastructure/index.adoc[]"
+        devcentrDoc "xref:general-knowledge:explanation/infrastructure/index.adoc[]"
     }
 }
 

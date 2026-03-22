@@ -1,0 +1,138 @@
+= Repository Browser Terminal
+
+DevCentr should include an integrated terminal in the repository browser so users can run commands in a repository without depending on VS Code or another editor.
+
+This terminal is not meant to replace full terminal apps. It is a repo-scoped command workspace with better history visibility than a plain black console pane.
+
+== Goals
+
+* Open a terminal directly in the selected repository directory
+* Keep the session independent from external editors
+* Make command history easy to scan and revisit
+* Visually segment output by command
+* Preserve session history while still allowing environment refresh actions
+
+== Placement
+
+The terminal belongs to the repository browser tool area.
+
+It should be available when a repository is selected.
+
+The repository browser remains the owner of repo context, while the terminal component owns command execution and history rendering.
+
+== Main layout
+
+The component uses three zones:
+
+* Left: command index list
+* Center: scrollable terminal viewer zone
+* Bottom: compact toolbar
+
+=== Terminal viewer zone
+
+The viewer zone has:
+
+* Black outer background
+* Dark grey terminal surface by default
+* A stack of command blocks inside the scroll area
+
+Each command execution creates its own block.
+
+== Command blocks
+
+Every command runs in its own visual block, effectively creating "subterminals" within the same session history.
+
+Each block should have:
+
+* Margin on all sides
+* Padding inside
+* Header area for the command line
+* Output area below
+
+The block background color should differ between commands so users can visually separate them.
+
+The output area should retain the normal terminal output background color even when the command block chrome changes state.
+
+=== Command lifecycle colors
+
+Before execution:
+
+* The command block starts as a single line
+* It shows only the editable command line
+
+While running:
+
+* The command block chrome changes color to indicate active execution
+* The output area expands as output arrives
+
+After completion:
+
+* The command block stays in history
+* The running highlight is removed
+* Exit status should be visible
+
+== Command index
+
+The left index zone lets users jump quickly to any command block.
+
+Each row represents one command execution.
+
+Requirements:
+
+* Clicking an index row scrolls to that command block
+* Labels are truncated, not wrapped
+* If many commands share the same prefix, the UI should detect the next differing substring and show `...` for the repeated prefix
+
+Example:
+
+* `pnpm test --filter app-a`
+* `...app-b`
+* `...app-c`
+
+== Toolbar
+
+The bottom toolbar should stay small and unobtrusive.
+
+It should include:
+
+* Run current command
+* Clear current input only
+* Refresh environment
+* Open external terminal
+
+=== Refresh environment behavior
+
+Refreshing the environment must not erase the session history.
+
+Preferred behaviors:
+
+* Native environment refresh if the host platform supports it safely
+* Otherwise inject the refresh command into the terminal input for the user to run manually
+
+On Windows PowerShell, the UI can inject the standard PATH refresh command used by this workspace.
+
+== Process model
+
+The integrated terminal should maintain session continuity per repository tab or per selected repository instance.
+
+Commands within the same terminal session should share:
+
+* Current working directory
+* Environment mutations made in that session
+* Shell type
+
+== Relation to repository tools
+
+The terminal should register itself with the repository tools registry as an attached tool.
+
+This lets the repository browser show terminal presence alongside editors and Git tools.
+
+== Non-goals
+
+The first version does not need:
+
+* Full terminal emulation parity with external terminal apps
+* Tabs inside the integrated terminal
+* Multiplexing remote shells
+
+The core value is command segmentation, repo scoping, and a better visual history than a plain terminal pane.

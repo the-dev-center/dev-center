@@ -1,0 +1,201 @@
+= AI Config Interface
+
+DevCentr should expose a global AI configuration interface as a separate dialog window.
+
+This dialog is the main place to configure:
+
+* AI providers and API keys
+* MCP servers
+* Skills
+
+The primary entry point should live in the editor manager module because many MCP and skills workflows are client-specific to editors and coding agents.
+
+The AI module should also link to the same dialog so users can reach it from either direction.
+
+== Why one interface
+
+MCP servers and skills are both ways of extending what an AI can do.
+
+They are not identical, but they belong in the same general setup area. A single AI config dialog avoids scattering setup across multiple obscure settings locations.
+
+== Window layout
+
+The AI Config interface opens in its own dialog window.
+
+At the top is a rounded bar with rounded button tabs.
+
+The initial tabs are:
+
+* `Providers`
+* `MCP Setup`
+* `Skills`
+
+== Providers tab
+
+This tab extends the existing AI provider key management.
+
+It should show:
+
+* Provider list
+* API key status
+* Open provider website
+* Open docs
+* Test connection
+
+== MCP Setup tab
+
+This tab is for configuring Context7 and other MCP-backed docs/tools for supported clients.
+
+=== Overall layout
+
+The tab uses a three-part workspace plus an overlaid client detail view.
+
+Base layer:
+
+* Left: scrollable grid of supported apps/clients
+* Top-right utility area: search, filters, source strategy status
+* Bottom utility strip: manual CLI display and command-injection actions
+
+Client detail overlay after selecting an app:
+
+* Left column: title, setup summary, config snippet preview
+* Center narrow column: code editor showing the actual config file to edit
+* Right column: embedded webview showing the Context7 docs section for that app
+
+=== Client list
+
+The client list should be a scrollable grid.
+
+Each card should show:
+
+* App name
+* Icon
+* Client type
+* Whether easy setup exists
+* Whether API key prompt is still required
+
+Supported clients come from the client profile registry in `app/src/modules/services/ai_client_profiles.json5`.
+
+=== Client detail overlay
+
+When the user clicks an app, open a detail view within the same screen rather than navigating away.
+
+The title of the selected app is shown at the top.
+
+The right-side webview should load the Context7 section URL for that client, for example:
+
+`https://context7.com/docs/resources/all-clients#gemini-cli`
+
+The left-side snippet area should show:
+
+* Easy setup command when available
+* Generic/manual setup summary
+* Config file path hints
+* Whether the snippet needs an API key placeholder filled in
+
+The center editor should show the contents of the file that would be edited.
+
+If the file does not exist yet, show the future file buffer with the proposed snippet inserted.
+
+=== Manual CLI area
+
+Always show the CLI form of the setup when one exists.
+
+This is important even when a button can automate the action.
+
+The UI should provide:
+
+* A read-only command preview
+* A button to inject the command for the user where applicable
+* A button to copy the command
+
+=== Easy setup handling
+
+For clients with OAuth-backed setup commands such as Cursor, Claude Code, and OpenCode:
+
+* Show the easy setup command prominently
+* Offer a button to inject/run it
+* Do not prompt for an API key before showing the command
+
+For clients that require manual snippet insertion:
+
+* Prompt the user for the Context7 API key before writing config
+* Show exactly where the key will go
+* Keep the manual CLI visible even if DevCentr can also write the snippet
+
+=== Launch app action
+
+Each client detail view should have a button to launch the target app if it is installed.
+
+This lets the user complete any UI-based setup path inside that app.
+
+=== Source and issue actions
+
+The detail view should include:
+
+* `View source` - opens the source page for Context7 docs, for example `https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1`
+* `Report issue` - opens a Context7 reporting helper window
+
+The snippets shown in DevCentr should be treated as extracted from:
+
+`https://raw.githubusercontent.com/upstash/context7/refs/heads/master/docs/resources/all-clients.mdx`
+
+== Report issue helper
+
+The reporting helper opens in a new window.
+
+It should include:
+
+* A button that opens Context7 open issues in the user browser:
+  `https://github.com/upstash/context7/issues?q=is%3Aissue%20state%3Aopen`
+* A note under that button:
+  `If you have a bug or an idea, read the contributing guidelines before opening an issue.`
+* The contributing guidelines link should use text, not a button:
+  `https://opensource.guide/`
+
+Below that, provide two reporting paths:
+
+* Open the issue type chooser:
+  `https://github.com/upstash/context7/issues/new/choose`
+* Open a narrow webview with a source line range URL such as:
+  `https://github.com/upstash/context7/blob/master/docs/resources/all-clients.mdx?plain=1#L10-L20`
+
+Above the narrow source webview, provide a button to open that same URL in the user browser.
+
+== Skills tab
+
+The Skills tab is for browsing, understanding, and installing AI skills.
+
+It should include:
+
+* A webview for the Context7 skills database:
+  `https://context7.com/skills/`
+* A short explanation of what a skill is in DevCentr terminology
+* Links to per-client skills/rules mechanisms when the client supports them
+
+Examples:
+
+* Cursor rules
+* Claude Code plugin/skills
+* OpenCode `AGENTS.md`
+
+The skills tab should coexist with the MCP Setup tab even if the wording overlaps. The UI can explain that MCP controls external tools and docs sources, while skills/rules control how the client chooses to use them.
+
+== Data source
+
+The UI should use `app/src/modules/services/ai_client_profiles.json5` as the source of truth for:
+
+* Supported clients
+* Docs URLs
+* Context7 config URLs
+* Launch commands
+* Config file path hints
+* Easy setup commands
+* Manual setup requirements
+* Source and issue URLs
+
+== Relation to other modules
+
+* The editor manager module is the primary entry point.
+* The AI module links into this dialog.
+* xref:features/ai-doc-sources-and-mcp-setup.adoc[AI Doc Sources and MCP Setup] defines the docs-source priority rules behind this interface.

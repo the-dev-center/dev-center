@@ -1,0 +1,28 @@
+= 2026-03-19 – General Knowledge Extraction
+:navtitle: General Knowledge Extraction
+
+Extracted the shared, product-agnostic documentation from DevCentr's `knowledge-base` module into a new standalone repository: link:https://github.com/dev-centr/general-knowledge[dev-centr/general-knowledge].
+
+== What Changed
+
+* **New repo:** `dev-centr/general-knowledge` — Diátaxis-organized tutorials, how-tos, reference, and explanations (SSH keys, Git management, workspace organization, EOL exceptions, package registries, etc.).
+* **Removed from DevCentr:** The `docs/modules/knowledge-base/` module was deleted. DevCentr docs now focus on product-specific content (specifications, secrets-manager, publishing, upstream-contributions).
+* **Playbooks updated:** DevCentr and docs repo playbooks include `general-knowledge` as a content source. Local playbooks use sibling path `../general-knowledge` (no remote URLs).
+* **App code updated:** Hardcoded docs URLs and paths changed from `knowledge-base/latest/...` to `general-knowledge/latest/...` (IaC, Git GUIs, Winget registration).
+* **Xrefs updated:** All `xref:knowledge-base:...` references in DevCentr docs now point to `general-knowledge`.
+
+== Rationale
+
+General developer knowledge (EOL strategies, template philosophy, gitignore sources, formatter choices, educational resources) does not belong to any single product. Keeping it in a separate repo:
+
+* Reduces cognitive load: DevCentr docs are sharper and more product-focused.
+* Allows reuse: templates, FTN, and other projects can xref the same content.
+* Aligns with the pattern identified in `where-docs-live.adoc`: usage guides in product repos were tangled and hard to maintain.
+
+== Local Development
+
+To build docs locally with `general-knowledge`:
+
+. Clone `general-knowledge` as a sibling: `Z:\code\github.com\dev-centr\general-knowledge`
+. For DevCentr: copy `antora-playbook-local.example.yml` to `antora-playbook-local.yml` (gitignored) and run `pnpm dlx antora antora-playbook-local.yml`
+. For docs repo: copy `antora-playbook-local.example.yml` to `antora-playbook-local.yml` (gitignored) and run the build script

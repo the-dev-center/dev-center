@@ -1,0 +1,36 @@
+{
+  // Copy this file to AI-LOCAL-LIBRARY-DOCS.local.json5.
+  // Keep the .local file out of git. AI agents should prefer it over stale model memory.
+  strategy: {
+    primary: "repo-local-cloned-docs",
+    fallback: "web-search",
+    notes: [
+      "Prefer docs cloned into docs/_local-library-docs/ for version-sensitive work.",
+      "Use web search only when the local docs are missing or obviously outdated.",
+    ],
+  },
+
+  libraries: [
+    {
+      id: "phobos",
+      purpose: "D standard library source and doc comments",
+      localPath: "docs/_local-library-docs/repos/phobos",
+      docsHint: "Search std/*.d for symbols like std.logger.",
+      upstream: "https://github.com/dlang/phobos",
+    },
+    {
+      id: "dlangui",
+      purpose: "UI framework used by DevCentr",
+      localPath: "docs/_local-library-docs/repos/dlangui",
+      docsHint: "Search README, examples, views, and src/ for real APIs.",
+      upstream: "https://github.com/dlang-supplemental/dlangui",
+    },
+    {
+      id: "sdlang-d",
+      purpose: "SDL parser used by DevCentr",
+      localPath: "docs/_local-library-docs/repos/SDLang-D",
+      docsHint: "Search README, docs, and src/sdlang/ for parser behavior.",
+      upstream: "https://github.com/dlang-community/SDLang-D",
+    },
+  ],
+}

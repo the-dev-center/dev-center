@@ -1,0 +1,28 @@
+= Aspect-Oriented Programming (AOP)
+
+Aspect-Oriented Programming (AOP) is a way to keep your main code clean by moving "chores" out of your main algorithm.
+
+Imagine you are writing a recipe to bake a cake. The main steps are:
+
+1. Mix ingredients.
+2. Put in oven.
+3. Take it out.
+
+But you also have "chores" like:
+
+* Washing your hands before starting.
+* Cleaning the bowls after mixing.
+* Checking the oven temperature every 5 minutes.
+* Logging that you did each step.
+
+If you put all these chores inside the recipe, it becomes hard to read. AOP lets you say: "Every time I mix ingredients, automatically clean the bowl after." or "Every time I start a step, wash hands first."
+
+In programming, these chores are things like:
+
+* **Logging**: writing down what the program is doing.
+* **Security**: checking if the user is allowed to do something.
+* **Error handling**: what to do if something breaks.
+
+By using AOP, your main code stays simple and focused on what it is supposed to do, while the "chores" are handled separately. This prevents "pollution" of the core algorithm with infrastructure details.
+
+For more information, see the article on link:https://simple.wikipedia.org/wiki/Aspect-oriented_programming[Simple Wikipedia].

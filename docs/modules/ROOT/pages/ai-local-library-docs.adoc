@@ -1,0 +1,84 @@
+= AI Local Library Docs
+
+When AI agents work on DevCentr, they should not rely on stale model memory for D, Phobos, DlangUI, or SDL parsing details.
+
+The preferred strategy is layered:
+
+* MCP-hosted indexed docs such as Context7 when available
+* Repo-local cloned docs/source inside this repository when MCP is missing or incomplete
+* Direct web search only as the final fallback
+
+DevCentr should eventually help developers bootstrap this stack automatically.
+
+== Preferred order
+
+Use this order when AI-assisted development needs dependency truth:
+
+. Query an MCP docs source such as Context7 if the dependency has been indexed there.
+. Fall back to repo-local cloned docs/source in `docs/_local-library-docs/`.
+. Fall back to web search only when neither of the above is available or trustworthy.
+
+== Why local docs beat web search here
+
+Local docs/source are still preferred over plain web search for this repo because:
+
+* They match the versions you actually have on disk.
+* Repo-local AI indexing can search them quickly.
+* They work offline.
+* They reduce repeated web lookup for the same APIs.
+* They let agents inspect examples, source, and doc comments together.
+
+Web search is still useful, but only as a fallback when MCP and local docs are missing or clearly outdated.
+
+== Why MCP-backed docs are even better when available
+
+MCP-backed indexed docs such as Context7 can be the best primary source because:
+
+* They are easier for AI tools to query directly.
+* They can avoid repeated scraping and search noise.
+* They let the AI stay inside a structured docs workflow.
+* They are easier to standardize in onboarding if the MCP server is installed correctly.
+
+But MCP is not enough on its own. If the MCP server is missing, misconfigured, or the docs corpus is incomplete, DevCentr still needs a local fallback.
+
+== Required files
+
+Keep these files and folders in your local checkout:
+
+* MCP docs source configuration when available (for example Context7)
+* `docs/_local-library-docs/` - gitignored clones of library docs/source
+* `AI-LOCAL-LIBRARY-DOCS.local.json5` - gitignored machine-specific manifest for AI tools
+* `AI-LOCAL-LIBRARY-DOCS.example.json5` - committed template
+
+The local manifest filename is intentionally obvious so AI tools notice it.
+
+== Setup
+
+From the repository root:
+
+[source,powershell]
+----
+pwsh ./scripts/refresh-local-library-docs.ps1
+----
+
+This clones or updates the current default set of local reference repos and rewrites `AI-LOCAL-LIBRARY-DOCS.local.json5`.
+
+If your AI tooling supports MCP, also install and configure the docs MCP server during machine setup.
+
+DevCentr should eventually automate or guide this setup instead of making each developer do it by hand.
+
+== Current default library set
+
+* `dlang/phobos` - D standard library source and doc comments such as `std.logger`
+* `dlang-supplemental/dlangui` - UI framework used by DevCentr
+* `dlang-community/SDLang-D` - SDL parser used by DevCentr
+
+== Guidance for AI-assisted work
+
+If you use Cursor, Copilot, or other AI tooling on this repo:
+
+* Try MCP-indexed docs first when available.
+* Search the local docs/source next.
+* Prefer both of those over generic web summaries.
+* Use web search only when MCP and local docs are missing, stale, or clearly not the version in use.
+* When API behavior smells wrong, verify against local source before making changes.
