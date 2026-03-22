@@ -1,0 +1,72 @@
+= Local Library Mods
+:description: How to use local or forked versions of libraries in your projects across different ecosystems.
+
+When working on a project, you often need to modify a library or fix a bug in a dependency. Instead of waiting for upstream to merge your pull request, you can use a local "mod" (a fork or a copy) of the library.
+
+== Strategy: Decoupling Build Specs from Machine Paths
+
+The goal of a local library mod is to point your project to a local folder temporarily without modifying the standard `dub.json`, `pnpm-workspace.yaml`, or `requirements.txt` in a way that breaks CI/CD.
+
+== 1. Ecosystem Solutions
+
+Different languages and package managers provide built-in tools for this.
+
+=== D (DUB)
+Use the `add-local` command. This registers a local path for a specific package globally (or per-user) on your system.
+
+[source,bash]
+----
+dub add-local /path/to/your/patched-fork 1.2.3
+----
+
+DUB will prioritize this directory over the online registry for version `1.2.3`. Your CI environment will remain unaffected since it doesn't have this local configuration.
+
+See xref:ROOT:dub-local-remote-paths.adoc[DUB Local vs Remote Paths] for detailed examples.
+
+=== Node.js (PNPM/NPM)
+Use `link` or Workspaces.
+
+* *PNPM Link:* `pnpm link /path/to/other/pkg` - This creates a symlink in `node_modules`.
+* *Workspaces:* If you maintain several interrelated packages, putting them in a `pnpm-workspace.yaml` allows them to reference each other by version while resolving to local source files.
+
+=== Python (uv/pip)
+Use "editable" installs.
+
+* *uv:* `uv add --editable /path/to/your/fork`
+* *pip:* `pip install -e /path/to/your/fork`
+
+This creates a `.pth` file or symlink in the `site-packages` of your venv, pointing to your local source.
+
+=== Go
+Use the `replace` directive in `go.mod`.
+
+[source,bash]
+----
+go mod edit -replace example.com/original/pkg=../local/pkg
+----
+
+This is explicit in the `go.mod` file, so be careful not to commit it unless the replacement is persistent (e.g., within a monorepo).
+
+== 2. Languages Without Native Support
+
+Some ecosystems lack a clean "global override" similar to DUB.
+
+* *C/C++:* Often relies on manual `include_directories` and `target_link_libraries` in CMake. Package managers like vcpkg and Conan have "overlay" mechanisms, but they are often more complex to set up than a simple command-line link.
+* *Rust (Cargo):* Relies on `[patch]` or `[replace]` in `Cargo.toml`. Like Go, this is explicit in the file and may require care when committing.
+
+== 3. Comparison of Modding Capabilities
+
+|===
+| Ecosystem | Tool | Persistence | CI Safe?
+
+| *DUB* | `dub add-local` | User-global | Yes (out-of-band)
+| *PNPM* | `pnpm link` | node_modules | Yes (local link)
+| *Python* | `pip install -e` | Venv-local | Yes
+| *Go* | `replace` directive | go.mod | Manual care needed
+| *Cargo* | `[patch]` | Cargo.toml | Manual care needed
+|===
+
+[NOTE]
+====
+A robust local modding setup allows developers to flip between "production" and "dev" modes without manual file edits.
+====

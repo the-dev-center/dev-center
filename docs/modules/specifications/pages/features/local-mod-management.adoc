@@ -1,0 +1,53 @@
+= Local Mod Management Feature
+:description: Plans for managing and visualizing local library mods (e.g. `dub add-local`) in the Dev-Centr interface.
+
+Dev-Centr is an all-in-one developer dashboard. Since many developers use forked libraries to fix bugs or add experimental features, we need a way to manage these "local mods" within the UI.
+
+== Overview
+
+Instead of running CLI commands for every dependency, a developer should be able to scan for available forked repositories on their machine and link them to their current project.
+
+== Feature Scope
+
+This feature adds a central place in Dev-Centr to:
+
+1.  **"Install" Mods Locally:** provide a UI for tools like `dub add-local` to register a repository as a local override for its corresponding library name.
+2.  **View Globally-Registered Mods:** a list of all libraries registered on the system (e.g., from `~/.dub/config.json`) and their associated paths.
+3.  **View Per-Repo Overrides:** identify which libraries a project currently uses as local mods versus their remote versions.
+4.  **UI Feedback (Project Browser):** clearly mark projects that are currently using local overrides.
+
+== Proposed Implementation
+
+=== 1. Mod Manager View
+
+A dedicated module in the sidebar should list every package manager found on the system (DUB, NPM, Python, etc.).
+
+* *Global View:* List all registered mods for that package manager.
+* *Detail View:* Show the local path, health (is the path valid?), and any version constraints (e.g., "for version 2.1.0 only").
+* *Link Action:* A button to register a new mod by selecting a folder.
+
+=== 2. Project List Integration
+
+When browsing projects in the main screen, the application will check for local mod configurations.
+
+* If a project uses a local mod, its name in the list should be appended with a **Mod Badge**.
+* *Design:* A subtle sticker or badge (e.g., a "wrench" icon or a text label like `[MOD]`) next to the project name.
+  * Example: `evolution-rules-qt [MOD]`
+
+=== 3. Per-Repository "Dependency Map"
+
+Within the project detail screen, a "Dependencies" tab would list all vendor libraries.
+
+* **Green Circle/Icon:** Library resolved normally from the registry.
+* **Wrench/Mod Icon:** Library resolved from a local path.
+* **Toggle Action:** Allow the user to "link" or "unlink" a library on-the-fly from the Dev-Centr UI.
+
+== Technical Challenges
+
+* **Cross-Language Consistency:** Each tool has a different way of storing "linked" repositories. The abstraction layer must know how to parse `dub.selections.json`, `~/.dub/config.json`, `node_modules` symlinks, and `.pth` files in Python venvs.
+* **Detection:** Finding modded repos isn't always as simple as checking a single file. Some systems (like Go) bury this in the project's own build file.
+
+== Success Metrics
+
+* *Speed:* Reducing the manual CLI effort to register a fork for local development.
+* *Transparency:* Developers always know when their local builds depend on "unofficial" code.

@@ -1,0 +1,18 @@
+= Local Library Mods and Specification
+:date: 2026-03-21
+
+Added documentation for using local library mods (forks/overrides) across different ecosystems and drafted specifications for a new Mod Management feature in Dev-Centr.
+
+== Changes
+
+* Created xref:ROOT:local-library-mods.adoc[Local Library Mods] guide explaining techniques for DUB, PNPM, Python, and Go.
+* Drafted xref:specifications:features/local-mod-management.adoc[Local Mod Management Feature] specification.
+* Updated navigation menus for both the main documentation and the specifications module.
+
+== Local Mod Management Specs
+
+The new specification outlines a UI-based approach to managing local repository overrides:
+* **Global Mod List:** View all registered overrides across various package managers.
+* **Link/Unlink Actions:** Perform operations like `dub add-local` directly from the dashboard.
+* **Project Badges:** Appending `[MOD]` to project names in the repository browser when an override is active.
+* **Dependency Health:** Visualizing which dependencies are local vs. registry-originated.

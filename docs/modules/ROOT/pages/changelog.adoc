@@ -2,6 +2,50 @@
 
 This changelog records notable changes to the DevCentr application and its documentation. Entries are organized in reverse chronological order and kept brief. Each entry links to a more detailed changelog article where needed.
 
+== 2026-03-21 – Local library mods and specification
+
+* Added xref:ROOT:local-library-mods.adoc[Local Library Mods] guide explaining how to use forked libraries (DUB, PNPM, Python, Go) without breaking CI/CD.
+* Drafted xref:specifications:features/local-mod-management.adoc[Local Mod Management] specification for UI-based mod registration and project badges.
+* See xref:ROOT:changelog-details/2026-03-21 - local-library-mods-specs.adoc[Detailed changelog].
+
+== 2026-03-21 – Automatic AI model routing specification
+
+* Added xref:specifications:features/better-automatic-ai-routing.adoc[Automatic AI Model Routing] under Specifications (features): routing profiles, task categories, and vendor-facing proposal for long-running sessions.
+* Fixed Specifications nav xref to xref:specifications:templates-schema.adoc[Templates Repository Schema] (was `pages/templates-schema.adoc`).
+* See xref:ROOT:changelog-details/2026-03-21 - better-automatic-ai-routing-design.adoc[Detailed changelog].
+
+== 2026-03-19 – DUB local vs remote path management
+
+* Added xref:ROOT:dub-local-remote-paths.adoc[DUB Local vs Remote Paths] documenting how to manage build specifications in `dub.json` without manually swapping between local and remote paths.
+* Covers `dub.selections.json`, `dub add-local`, environment variable overrides, and git submodules for persistent patches.
+* Forked unit-threaded to dlang-supplemental; fixed sub-package DUB warnings; wired in via `dub add-local`; submitted upstream issue #329 and PR #330.
+* See xref:ROOT:changelog-details/2026-03-19 - dub-local-remote-paths.adoc[Detailed changelog].
+* See xref:ROOT:changelog-details/2026-03-19 - unit-threaded-fork-upstream-contrib.adoc[unit-threaded fork and upstream contrib].
+
+== 2026-03-19 – arsd-official extern(C) deprecation fix
+
+* Forked arsd into dev-centr, fixed the `in` parameter deprecation in `nsvg__cmpEdge` for arsd-official 10.9.10 (svg.d).
+* Added `scripts/patch-arsd-svg-deprecation.ps1` to re-apply the patch to the dub cache when needed.
+* See xref:ROOT:changelog-details/2026-03-19 - arsd-extern-in-deprecation-fix.adoc[Detailed changelog].
+* See xref:ROOT:changelog-details/2026-03-19 - arsd-extern-in-deprecation.adoc[Detailed changelog].
+
+== 2026-03-19 – General Knowledge Extraction
+
+* Extracted all general-reference content from devcentr into a new **general-knowledge** repository (link:https://github.com/dev-centr/general-knowledge[dev-centr/general-knowledge]).
+* Removed the `knowledge-base` module from devcentr. DevCentr docs are now product-focused: ROOT, specifications, secrets-manager, publishing, upstream-contributions.
+* General Knowledge holds Diátaxis-organized tutorials, how-tos, reference, and explanations (SSH keys, Git management, Windows EOL, workspace organization, package registries, etc.).
+* Updated all xrefs and app code to use `general-knowledge` component. Local playbooks use sibling path `../general-knowledge` (no remote URLs); CI playbooks use the GitHub URL.
+* See xref:ROOT:changelog-details/2026-03-19 - general-knowledge-extraction.adoc[Detailed changelog].
+
+== 2026-03-19 – AI Local Library Docs
+
+* Added a repo-local workflow for cloning library docs/source into a gitignored folder, plus an obvious local AI manifest file so agents can search exact local references instead of stale model memory.
+* Added setup docs and a refresh script for `phobos`, `dlangui`, and `SDLang-D`.
+* Documented the preferred layered strategy for AI dependency docs: MCP-hosted indexed docs such as Context7 first, repo-local cloned docs second, and web search last. Added a DevCentr feature spec for MCP setup and local fallback automation.
+* Added a Context7 client profile registry and new specs for the global AI Config interface, Context7/skills setup flows, and the integrated repository-browser terminal.
+* Implemented a first working `AI Config` dialog, a repo-browser `Terminal` tab, and a small `std.logger` file logger wrapper to make runtime debugging less blind.
+* See xref:ROOT:changelog-details/2026-03-19 - ai-local-library-docs.adoc[Detailed changelog].
+
 == 2026-03-18 – Organization Profile and Gitignore
 
 * Organization profile feature in repository browser: when selecting an owner/org in the project tree, the side-panel shows buttons to open public/private profile pages on GitHub/GitLab/Gitea, open profile repos in the browser, and highlight local profile repos in the tree.
@@ -11,10 +55,10 @@ This changelog records notable changes to the DevCentr application and its docum
 == 2026-03-18 – Gitignore Templates, EOL, and Templates Schema
 
 * Added GitHub gitignore (link:https://github.com/github/gitignore[github/gitignore]) as a template source alongside DevCentr in the Init Repo flow. Users can select source (DevCentr or GitHub) and merge templates from either.
-* Documented GitHub's base vs Global vs community layout in xref:knowledge-base:reference/gitignore-template-sources.adoc[Gitignore Template Sources]. Root = languages/core tech; Global = editors/tools/OS.
+* Documented GitHub's base vs Global vs community layout in xref:general-knowledge:reference/gitignore-template-sources.adoc[Gitignore Template Sources]. Root = languages/core tech; Global = editors/tools/OS.
 * Added `.editorconfig` tab and default template to Init Repo (LF with CRLF overrides for `.bat`, `.cmd`, `.reg`). Repo init now writes `.gitattributes`, `.gitignore`, and `.editorconfig`.
-* Updated xref:knowledge-base:reference/git-management.adoc[Git Management]: clarified `core.autocrlf input` vs `false`, when each applies, and EditorConfig step.
-* Added xref:knowledge-base:reference/windows-eol-exceptions.adoc[Windows EOL Exceptions] for batch, registry, PowerShell, Visual Studio.
+* Updated xref:general-knowledge:reference/git-management.adoc[Git Management]: clarified `core.autocrlf input` vs `false`, when each applies, and EditorConfig step.
+* Added xref:general-knowledge:reference/windows-eol-exceptions.adoc[Windows EOL Exceptions] for batch, registry, PowerShell, Visual Studio.
 * Defined xref:specifications:templates-schema.adoc[Templates Schema]: version folders per ecosystem, `_base` (preference-agnostic), `_preferences` (team/tool-specific).
 * Per-repo settings: documented `gitignore.suppressMissing` for suppressing template comparison warnings.
 * Gitignore Viewer implemented: reusable minimap, technology tree, template comparison with DevCentr/GitHub/Local tabs, missing-item strikethrough (red), Suppress button storing in `.devcentr.sdl`, side-panel integration via hallmark toolbar.
