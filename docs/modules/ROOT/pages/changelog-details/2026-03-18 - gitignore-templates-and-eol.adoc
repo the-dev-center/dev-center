@@ -13,7 +13,7 @@ This update adds support for multiple gitignore template sources (DevCentr, GitH
 
 == GitHub Base vs Global Structure
 
-Documented in xref:knowledge-base:reference/gitignore-template-sources.adoc[Gitignore Template Sources]:
+Documented in xref:general-knowledge:reference/gitignore-template-sources.adoc[Gitignore Template Sources]:
 
 * **Root:** Programming languages and core technologies (e.g. VisualStudio, Node, Python).
 * **Global:** Editors, tools, and operating systems (e.g. VisualStudioCode, Windows). GitHub recommends these for global gitignore or permanent project merges.

@@ -1,7 +1,0 @@
-[source,bash]
-----
-git config --global core.autocrlf false
-git config --global core.eol lf
-----
-
-See xref:reference/git-management.adoc#line-endings-configuration[Line Endings Configuration] for when to use `autocrlf true` or `input` instead.
