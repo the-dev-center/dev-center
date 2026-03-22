@@ -114,7 +114,7 @@ void showGitGuiSelectorDialog(Window parentWindow, string repoRoot, RepoToolsReg
 
     auto linkBtn = new Button(null, UIString.fromRaw("Browse more Git GUIs →"d));
     linkBtn.click = delegate(Widget w) {
-        openUrlInBrowser("https://docs.devcentr.org/knowledge-base/latest/reference/git-guis.html");
+        openUrlInBrowser("https://docs.devcentr.org/general-knowledge/latest/reference/git-guis.html");
         return true;
     };
     linkRow.addChild(linkBtn);

@@ -222,7 +222,7 @@ class VersionControlWidget : HorizontalLayout
         
         Button btnDocs = new Button(null, "Open Winget Guide"d);
         btnDocs.click = delegate(Widget w) {
-            openUrlInBrowser("https://docs.devcentr.org/knowledge-base/latest/how-to/winget-registration.html");
+            openUrlInBrowser("https://docs.devcentr.org/general-knowledge/latest/how-to/winget-registration.html");
             return true;
         };
         btnRow.addChild(btnDocs);

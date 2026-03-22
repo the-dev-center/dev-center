@@ -14,6 +14,7 @@ import modules.repo_tools.repo_init;
 import modules.repo_tools.gitignore_viewer_widget;
 import modules.template_installer.installer;
 import modules.repo_tools.registry;
+import modules.services.ai_config_dialog : showAIConfigDialog;
 
 /// Creates a "Compound Button" layout that splits behavior into multiple discrete click areas.
 /// Primary text acts as the label, secondary icon buttons handle targeted actions.
@@ -291,6 +292,14 @@ Widget createRepoToolbar(Window parentWindow, string repoPath, TemplateInstaller
         return true;
     };
     btnsArea.addChild(btnSync);
+
+    Button btnAI = new Button("btnAI", UIString.fromRaw("AI Setup"d));
+    btnAI.styleId = "BUTTON_TRANSPARENT";
+    btnAI.click = delegate(Widget w) {
+        showAIConfigDialog(parentWindow, repoPath);
+        return true;
+    };
+    btnsArea.addChild(btnAI);
     
     workspaceBlock.addChild(wkspNote);
     workspaceBlock.addChild(btnsArea);

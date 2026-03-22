@@ -10,7 +10,7 @@ import std.path : buildPath;
 import std.file : exists, mkdirRecurse, write;
 
 /// DevCentr docs base URL; IaC section path appended for "Open DevCentr docs".
-enum devcentrDocsIacPath = "knowledge-base/latest/explanation/infrastructure/iac.html";
+enum devcentrDocsIacPath = "general-knowledge/latest/explanation/infrastructure/iac.html";
 enum devcentrDocsBase = "https://docs.devcentr.org/";
 
 /// Opens a URL in the default browser. Returns true if spawn succeeded.
@@ -213,7 +213,7 @@ class InfraDetailPanel : ScrollWidget
             {
                 auto sub = svc.devcentrDoc[start .. $];
                 if (sub.canFind(".adoc"))
-                    url = devcentrDocsBase ~ "knowledge-base/latest/explanation/" ~ replace(replace(sub, ".adoc[]", ".html"), "[]", "");
+                    url = devcentrDocsBase ~ "general-knowledge/latest/explanation/" ~ replace(replace(sub, ".adoc[]", ".html"), "[]", "");
             }
         }
         btnDevcentr.click = delegate(Widget w) { openUrlInBrowser(url); return true; };
