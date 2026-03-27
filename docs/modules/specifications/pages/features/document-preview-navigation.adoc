@@ -1,0 +1,92 @@
+= Document Preview Navigation
+
+This feature enhances the AsciiDoc and Markdown previewers in DevCentr by providing browser-like navigation capabilities. It addresses a common limitation in IDE document previews (like VS Code) where clicking a link that opens another document in the same preview tab prevents the user from navigating back to the previous document.
+
+== Overview
+
+DevCentr provides real-time previews for technical documentation. When these documents contain links to other local documentation files, clicking them should update the current previewer instance. To ensure a seamless "browsing" experience, the previewer must maintain a navigation history.
+
+== Requirements
+
+* **Navigation History:** Maintain a stack of visited documents within each previewer session.
+* **Navigation Controls:**
+** Back button: Navigate to the previous document in history.
+** Forward button: Navigate forward if the user has moved back.
+** Refresh button: Force a re-render of the current document.
+* **Keyboard Shortcuts:** Support standard browser shortcuts:
+** `Alt + Left Arrow` / `Backspace` (if not in input): Back
+** `Alt + Right Arrow`: Forward
+** `Ctrl + R` / `F5`: Refresh
+* **Link Handling:** Intercept document links within the preview and route them through the navigation manager instead of opening a new tab by default (unless specified).
+* **State Persistence:** (Optional/Future) Remember the scroll position when navigating back/forward.
+
+== Design
+
+=== Navigation Manager
+
+The previewer component will incorporate a simple `NavigationManager` that handles the `History` stack.
+
+[source,d]
+----
+struct NavigationStep {
+    string filePath;
+    int scrollPosition;
+}
+
+class NavigationManager {
+    private NavigationStep[] history;
+    private int currentIndex = -1;
+
+    void navigateTo(string path) {
+        // Handle new navigation, clearing forward history if necessary
+        if (currentIndex < cast(int)history.length - 1) {
+            history = history[0 .. currentIndex + 1];
+        }
+        history ~= NavigationStep(path, 0);
+        currentIndex++;
+    }
+
+    void back() {
+        if (canGoBack()) {
+            currentIndex--;
+            applyStep(history[currentIndex]);
+        }
+    }
+
+    void forward() {
+        if (canGoForward()) {
+            currentIndex++;
+            applyStep(history[currentIndex]);
+        }
+    }
+
+    bool canGoBack() => currentIndex > 0;
+    bool canGoForward() => currentIndex < history.length - 1;
+
+    private void applyStep(NavigationStep step) {
+        // Logic to load the file and restore scroll position
+    }
+}
+----
+
+=== UI Integration
+
+The previewer window or tab will include a slim navigation bar at the top (or integrated into the title bar) containing the navigation buttons.
+
+* **Visual Feedback:** Disable back/forward buttons when the respective action is not possible.
+* **URL/Path Bar:** (Optional) Show the relative path of the currently previewed file.
+
+== Implementation Notes
+
+* **WebView Interception:** If using a WebView (e.g., via `WebView2` on Windows), link clicks must be intercepted to prevent the default browser behavior and instead trigger a local document load within the same WebView instance.
+* **Real-time Synchronization:** The navigation history should be distinct from the file's "open" state in the editor, although they can be linked if the user prefers "Navigate Editor on Preview Link Click".
+
+== Comparison with VS Code
+
+|===
+| Feature | VS Code | DevCentr
+
+| Link Navigation | Opens in new tab or replaces current without history | Replaces current with history support
+| Back/Forward Buttons | None for preview | Included in preview UI
+| Shortcuts | Standard editor shortcuts only | Browser-standard navigation shortcuts
+|===

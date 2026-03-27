@@ -21,6 +21,7 @@
 * xref:features/better-automatic-ai-routing.adoc[Automatic AI Model Routing]
 * xref:features/text-editor-separate-process.adoc[Text Editor Separate Process]
 * xref:features/local-mod-management.adoc[Local Mod Management]
+* xref:features/document-preview-navigation.adoc[Document Preview Navigation]
 * xref:reference/definition-files.adoc[Definition Files (Services and Languages)]
 * xref:templates-schema.adoc[Templates Repository Schema]
 

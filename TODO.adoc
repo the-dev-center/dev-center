@@ -25,6 +25,9 @@ The published version of this list is in the documentation: `docs/modules/ROOT/p
 * [ ] Implement real tool detection in `tool_manager.d` (currently mostly mock data).
 * [ ] Add support for `pnpm` workspace analysis.
 * [ ] Add support to DevCentr to connect to GraphRAG D-lang indexer service. Investigate incorporating concepts from Unison-lang (immutable, content-addressable AST hashes rather than text files) to drastically alter build requirements.
+* [ ] **Document Preview Navigation**
+** [ ] Implement browser-like navigation (Back, Forward, Refresh) for AsciiDoc and Markdown previewers.
+** [ ] Maintain navigation history and support standard keyboard shortcuts.
 
 == 🌐 Ecosystem (Planned)
 * [ ] **Extension Streaming**: Design web service to generate scripts that build extensions locally from guest repos, bypassing standard CI/CD and registries.

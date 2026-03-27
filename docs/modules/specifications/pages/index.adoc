@@ -26,6 +26,7 @@ This section contains technical specifications for Dev Center components and fea
 * xref:features/ai-doc-sources-and-mcp-setup.adoc[AI Doc Sources and MCP Setup] - Preferred docs-source order for AI work: MCP first, repo-local docs second, web search last
 * xref:features/better-automatic-ai-routing.adoc[Automatic AI Model Routing] - Route subtasks to different models by category during long sessions; cost-aware vendor proposal (e.g. Cursor-class hosts)
 * xref:features/text-editor-separate-process.adoc[Text Editor Separate Process] - Separate process text editor design philosophy
+* xref:features/document-preview-navigation.adoc[Document Preview Navigation] - Browser-like navigation (Back, Forward, Refresh) for AsciiDoc and Markdown previewers
 
 == Specification Format
 
