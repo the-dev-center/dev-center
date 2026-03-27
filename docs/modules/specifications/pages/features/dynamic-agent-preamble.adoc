@@ -1,0 +1,77 @@
+= Agent Preamble Orchestration and Modular RAG
+
+DevCentr should dynamically select and inject only contextually relevant agent instructions from an orchestrated set of instruction modules stored in an `agents/` directory. By shifting from a single monolithic file (like `AGENTS.md`) to a structured filesystem-based approach, DevCentr can dramatically reduce input token usage and improve model behavioral focus.
+
+This architecture implements **Agent-Preamble RAG**, a methodology for retrieving precise system-level instruction modules to guide agent behavior without context saturation.
+
+== Problem
+
+Industry standard practice has converged on the a monolithic `AGENTS.md` (or similar) file as a global set of rules. However, as projects grow, this approach hits a performance ceiling:
+
+* **Token bloat**: Sending a complete, large instruction set with every turn uses a high percentage of the context window.
+* **Instruction confusion**: Irrelevant rules (e.g., deployment patterns while writing local tests) dilute the model's focus and increase error rates.
+* **Maintainability collapse**: A single giant Markdown file is difficult to organize, refactor, and version-control.
+* **Loss of metadata**: By flattening instructions into one file, we lose the implicit domain labeling that a structured filesystem naturally provides.
+
+== Goals
+
+* Implement an **Agent-Preamble RAG pipeline** that uses a structured filesystem as the primary source of truth.
+* Move from a monolithic file to an **`agents/` directory** with modular instruction sets.
+* Support a **`_MAIN.md`** entry point (auto-sorted to the top alphabetically) to define core orchestration rules.
+* Provide a **semantic intent classifier** that maps tasks to specific sub-modules via path metadata.
+
+== Proposed Architecture
+
+=== The `agents/` Directory Structure
+
+Explicit file organization allows for modularity and automatic domain labeling. The directory structure is treated as an allow-list of instruction domains.
+
+[source,text]
+----
+agents/
+  _MAIN.md          # Entry point and global orchestration
+  filesystem/
+    operations.md   # Rules for read/write/list
+    permissions.md  # Rules for managing access
+  deployment/
+    vercel.md       # Vercel-specific deployment patterns
+    netlify.md      # Netlify-specific rules
+  security/
+    secrets.md      # How to handle keys and env vars
+----
+
+The folder hierarchy itself serves as a **domain index** for the RAG preprocessor, allowing for high-accuracy filtering without relying solely on embedding similarity.
+
+=== The `_MAIN.md` Orchestrator
+
+The `_MAIN.md` file (or equivalent entry point) defines which modules are universally relevant and which should be dynamically retrieved.
+
+[source,markdown]
+----
+# Global Agent Orchestration
+
+@include security/secrets.md  # Universally required for safety
+
+# The remainder is dynamically loaded via Domain Classifier for the active task
+----
+
+=== Dynamic Instruction Preprocessor
+
+1. **Scanning**: DevCentr scans the `agents/` directory, treating each file as a discrete instruction module.
+2. **Indexing**: Modules are embedded and stored with their **path-based domain tags**.
+3. **Intent Detection**: The system determines the current domain(s) from the prompt and tool context.
+4. **Filtered Retrieval**: The RAG engine fetches blocks from both the `@include`-specified global rules and the contextually selected domain modules.
+5. **Prompt Assembly**: The preprocessor assembles the final preamble, prioritizing global rules and then task-specific blocks.
+
+== Benefits of Filesystem-First Organization
+
+* **Implicit Metadata**: Subfolders naturally define domains (e.g., `agents/cicd/`) which significantly improves retrieval accuracy over flat-file RAG.
+* **Developer Ergonomics**: Modern IDEs provide better navigation, refactoring, and searching across multiple files than within a single giant Markdown file.
+* **Scalable Knowledge**: Teams can add specialized instruction sets for new domains (e.g., `agents/aws/`) just by adding a folder, without bloating the main preamble.
+* **Granular Versioning**: Changes to specific sub-modules can be tracked and reviewed independently in version control.
+
+== Implementation Strategy
+
+* **Storage**: Local vector database using path attributes for filtering.
+* **Inclusion Syntax**: Support `@include` to link modules within `_MAIN.md` or across sub-modules.
+* **Transition Logic**: Detect domain shifts and re-orchestrate the preamble chunks at the start of each prompt.

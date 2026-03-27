@@ -2,6 +2,12 @@
 
 This changelog records notable changes to the DevCentr application and its documentation. Entries are organized in reverse chronological order and kept brief. Each entry links to a more detailed changelog article where needed.
 
+== 2026-03-27 – Dynamic Agent Preamble specification
+
+* Added xref:specifications:features/dynamic-agent-preamble.adoc[Dynamic Agent Preamble] specification.
+* Defines a preprocessor for RAG-based instruction injection and modular `AGENTS.md` support to reduce model context overhead and improve relevancy.
+* See xref:ROOT:changelog-details/2026-03-27 - dynamic-agent-preamble.adoc[Detailed changelog].
+
 == 2026-03-21 – Local library mods and specification
 
 * Added xref:ROOT:local-library-mods.adoc[Local Library Mods] guide explaining how to use forked libraries (DUB, PNPM, Python, Go) without breaking CI/CD.

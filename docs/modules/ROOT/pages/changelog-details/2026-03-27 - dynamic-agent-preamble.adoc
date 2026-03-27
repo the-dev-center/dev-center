@@ -1,0 +1,21 @@
+= 2026-03-27 – Dynamic Agent Preamble
+
+Added specification for dynamic agent preamble management and modular instruction sets.
+
+== Summary
+
+As agent instruction files (the "preamble") grow in complexity and size, they begin to occupy too much of the model's context window. This update introduces a flavor of RAG called **Agent-Preamble RAG**, which uses a structured **`agents/` directory** and a **`_MAIN.md`** entry point to orchestrate instructions instead of a monolithic `AGENTS.md`.
+
+This update introduces a specification for a context-aware preprocessor that uses an **intent/domain classifier** to determine the user's current task and select/inject only the relevant instruction fragments.
+
+== Key Features in Spec
+
+* **Filesystem-First Organization**: Moving from a monolithic `AGENTS.md` to an orchestrated **`agents/` directory**.
+* **`_MAIN.md` Entry Point**: An auto-sorting entry point (`_MAIN.md`) to define core rules and `@include` references.
+* **Instruction-level RAG**: Automatic selection of relevant *instruction-level* chunks using semantic search and domain filtering.
+* **Implicit Metadata**: Leveraging folder structure (e.g., `agents/cicd/`) as metadata for higher retrieval accuracy.
+* **Domain Switching**: Logic for detecting focus shifts and swapping injected instructions as the agent moves between tasks.
+
+== References
+
+* xref:specifications:features/dynamic-agent-preamble.adoc[Dynamic Agent Preamble Specification]
