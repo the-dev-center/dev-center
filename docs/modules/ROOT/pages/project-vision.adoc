@@ -11,8 +11,12 @@ While traditional IDEs focus on the editor, DevCentr focuses on the **Orchestrat
 *   **Ecosystem Management:** Author and version your entire environment—shells, toolchains, and infrastructure—as first-class citizens.
 *   **Visual DevEx:** A "Live Blueprint" approach that visually models project architecture, moving beyond simple file trees into system design.
 *   **AI Vibe-Coding Synergy:** A hub that provides the deep contextual metadata necessary for human-in-the-loop AI coding to be truly effective.
+*   **Literate Programming First:** Promoting an architecture where documentation is the primary source, and code is an extracted artifact. We endorse **Synchronous Literate Programming (SLP)** to eliminate the gap between narrative and execution.
 
 It should help new developers and experienced developers set up a new machine for development purposes and provide in depth information about any actions it performs, the environmental changes it makes, and the purposes of the tools it installs.
+
+=== Literate Systems Strategy
+In Dev-Centr, any doc about a language—such as C or D—mentions literate programming immediately after its introduction. This ensures that devs instill the habit of using literate systems from the start of their engagement with a technology. We favor **CentrMark** for native SLP support but provide guidance for Quarto and Entangled for CommonMark users.
 
 === Management Tool Hierarchy (Abstract)
 
