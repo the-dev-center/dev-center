@@ -1,0 +1,50 @@
+= Proposal: Synchronous Literate Programming (SLP)
+:description: Document-first application architecture using CentrMark as the native markup language for Dev-Centr.
+
+== Objective
+
+To promote Literate Programming (LP) as the primary development paradigm within the Dev-Centr ecosystem, using **CentrMark** as the native markup language for document-first application architecture.
+
+== 1. The Syntax Advantage: Why CentrMark?
+
+CentrMark is uniquely suited for LP compared to Markdown or AsciiDoc:
+
+* **Block Directives (`:::`)**: Allow for clear definition of "Tangle-aware" code blocks. `::: tangle [file="app.c"]` is cleaner than `#| file: app.c` and more expressive than raw Markdown.
+* **Virtual Indentation**: By visually nesting content without physical tabs, LP documents remain readable even at extreme complexity.
+* **Meta-Narrative (`(( ))`)**: Allows the writer to keep "implementation notes" or "developer commentary" as a distinct layer from the primary instructional text.
+* **Definition Lists (`~ Term`)**: Perfect for documenting API schemas or project structures.
+
+== 2. Bridging the Architectural Gap: Synchronous Literate Programming (SLP)
+
+Traditional LP systems (Tangle-and-Weave) are batch-processed and opaque. We propose an **SLP Architecture** powered by a **Unified AST Database**.
+
+=== Unified AST Database
+
+Instead of treating narrative and code as separate entities, they are sibling nodes in a single tree.
+
+* **Bi-directional Editing**: Modifying code in an IDE updates the AST, which serializes back to the `.cmk` source.
+* **Context Awareness**: The LSP (Language Server Protocol) knows exactly which narrative paragraph describes a specific line of code.
+
+=== The Evolution Scrubber (Timeline)
+
+We propose implementing a **Replay Index** for repository-based LP documents.
+
+* The document doesn't just show the "final" code state.
+* Versions of code blocks are tracked (via `evolution` properties).
+* Users can use a "Scrubber UI" to watch the construction of a module, seeing exactly how a simple idea transformed into a robust implementation.
+
+== 3. Implementation Plan for Dev-Centr
+
+1. **Core Parser Integration**: Update the Dev-Centr core to support `.cmk` parsing via a unified AST.
+2. **Tangle/Weave as a Live Service**: The "Tangle" process should happen on-save or on-change, essentially making the document-source synchronization instantaneous.
+3. **Timeline Visualizer**: Build a GUI component that renders the evolution of a `::: code-evolution` block across Git commits.
+
+== 4. Recommendations for Non-Native LP (Markdown)
+
+For developers wishing to remain in pure CommonMark:
+
+* **Quarto**: For complex, multi-output documentation.
+* **Entangled**: For file-system-level bi-directional syncing of Markdown and Source.
+
+---
+**Status**: Proposal Drafted | **Owner**: amdphreak / Antigravity

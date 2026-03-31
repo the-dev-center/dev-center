@@ -13,6 +13,10 @@ This page is the **task-level** TODO and roadmap for the DevCentr app and its do
 ** [ ] Integrate QEMU Guest Agent command runner.
 * [ ] **Installer Maker Integration**
 ** [ ] Research open-source installer makers (Inno Setup, NSIS) and provide a wrapper module.
+* [ ] **Cloud-Deployment Management Hub (Thematic UI)**
+** [ ] Design and implement the "Castle on a Cloud" theme for the management hub.
+** [ ] Incorporate castle-inspired metaphors into the UI layout and features.
+
 
 == Documentation
 
@@ -29,7 +33,17 @@ This page is the **task-level** TODO and roadmap for the DevCentr app and its do
 * [ ] Add support for `pnpm` workspace analysis.
 * [ ] Integrate Secrets Manager (standalone client + repo-filtered UI).
 * [ ] Integrate SSH Manager (coordinator for agent providers, WSL bridge).
+* [ ] **Memories Manager (AI Rules & Workspace Facts)**
+** [ ] Implement a file browser targeting the user's `agent-rules` repository.
+** [ ] Support viewing and editing rule/memory text files in a tabbed interface.
+** [ ] Enable movement of specific rule blocks between files (e.g., from `MEMORIES.md` to `RULES.md`).
+** [ ] Provide direct access to the central `Z:\code\MEMORIES.md` workstation log.
+* [ ] **Synchronous Literate Programming (SLP) Implementation**
+** [ ] Update core parser to support `.cmk` (CentrMark) with unified AST database.
+** [ ] Implement live Tangle/Weave as a background service for sub-second synchronization.
+** [ ] Build Timeline Visualizer GUI for module evolution.
 * [ ] **GraphRAG Client Support**: Add support to DevCentr to connect to a standalone persistent GraphRAG D-lang indexer service. Explore Unison-lang architectural models (content-addressable immutable ASTs instead of traditional text files) to potentially augment or replace standard compilation flows.
+
 
 == Extensibility Ecosystem (Planned)
 
@@ -43,3 +57,5 @@ This page is the **task-level** TODO and roadmap for the DevCentr app and its do
 * **UI:** DPI-aware / logical pixel support for consistent sizing across high-density displays (see project vision UI Specification & Roadmap).
 * **Ecosystem Streaming:** Empowering devs to publish extensions directly from their repos by streaming and local-building through DevCentr's build systems.
 * **Intelligent App Interop**: Providing integrations with GraphRAG background services (D-lang) to allow semantic understanding of codebases. Long-term goals include bridging into Unison-lang style paradigms (AST hashing vs pure text logic) to radically drop build times.
+* **Visual Identity:** Implement the "Castle on a Cloud" theme for cloud-deployment sub-hubs, including custom iconography and a "castle keep" management metaphor.
+

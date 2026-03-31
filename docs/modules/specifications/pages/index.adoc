@@ -27,6 +27,7 @@ This section contains technical specifications for Dev Center components and fea
 * xref:features/better-automatic-ai-routing.adoc[Automatic AI Model Routing] - Route subtasks to different models by category during long sessions; cost-aware vendor proposal (e.g. Cursor-class hosts)
 * xref:features/text-editor-separate-process.adoc[Text Editor Separate Process] - Separate process text editor design philosophy
 * xref:features/document-preview-navigation.adoc[Document Preview Navigation] - Browser-like navigation (Back, Forward, Refresh) for AsciiDoc and Markdown previewers
+* xref:features/synchronous-literate-programming.adoc[Synchronous Literate Programming] - Synchronous bi-directional Literate Programming for document-first architecture
 
 == Specification Format
 
