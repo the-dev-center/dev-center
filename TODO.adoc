@@ -12,6 +12,9 @@ The published version of this list is in the documentation: `docs/modules/ROOT/p
 ** [ ] Integrate QEMU Guest Agent command runner.
 * [ ] **Installer Maker Integration**
 ** [ ] Research open-source installer makers (Inno Setup, NSIS) and provide a wrapper module.
+* [ ] **Cloud-Deployment Management Hub (Thematic UI)**
+** [ ] Design and implement "Castle on a Cloud" theme and metaphors.
+
 
 == 📚 Documentation
 
