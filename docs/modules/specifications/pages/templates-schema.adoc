@@ -57,7 +57,7 @@ Example for D:
 ----
 workspaces/d/
 ├── .gitignore      # Current D ecosystem
-├── .code-workspace
+├── .vscode/
 ├── v1/             # D 1.x specific
 │   └── .gitignore
 └── v2/             # D 2.x specific (if needed later)

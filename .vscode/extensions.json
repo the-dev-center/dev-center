@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dprint.dprint",
+    "biomejs.biome",
+    "asciidoctor.asciidoctor-vscode",
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    "rust-lang.rust-analyzer",
+    "tamasfe.even-better-toml",
+    "bradlc.vscode-tailwindcss"
+  ]
+}
