@@ -9,6 +9,8 @@ import std.string;
 import std.algorithm;
 import modules.template_installer.installer;
 import modules.repo_tools.gitignore_template_sources;
+import modules.vcs.git_performance_dialog : showGitPerformanceDialog;
+import std.process : execute;
 
 /// Flow to initialize a repository with .gitattributes and .gitignore
 void showRepoInitDialog(Window parentWindow, string repoRoot, TemplateInstaller installer)
@@ -44,6 +46,32 @@ void showRepoInitDialog(Window parentWindow, string repoRoot, TemplateInstaller 
         "  by ignoring everything by default and only allowing what is explicitly whitelisted."d));
     explanation.fontSize(9).textColor(0xAAAAAA).margins(Rect(0, 10, 0, 10));
     content.addChild(explanation);
+
+    // 2.5 Performance Check
+    auto perfRow = new HorizontalLayout();
+    perfRow.layoutWidth(FILL_PARENT).padding(10).backgroundColor(0x1B1B1B).margins(Rect(0, 5, 0, 5));
+    
+    auto res = execute(["git", "config", "--global", "core.fsmonitor"]);
+    bool fsMonitorEnabled = (res.status == 0 && res.output.strip() == "true");
+    
+    auto perfIcon = new TextWidget(null, UIString.fromRaw(fsMonitorEnabled ? "🚀"d : "⚠️"d));
+    perfIcon.fontSize(16).margins(Rect(0, 0, 10, 0));
+    perfRow.addChild(perfIcon);
+    
+    auto perfText = new TextWidget(null, UIString.fromRaw(fsMonitorEnabled ? 
+        "Git performance optimization (FSMonitor) is active on this machine."d : 
+        "Recommended: Git performance optimization is not enabled globally."d));
+    perfText.layoutWidth(FILL_PARENT).fontSize(9).textColor(fsMonitorEnabled ? 0x88CC88 : 0xCCAA66);
+    perfRow.addChild(perfText);
+    
+    auto btnPerf = new Button(null, UIString.fromRaw("Git Global Settings"d));
+    btnPerf.click = delegate(Widget w) {
+        showGitPerformanceDialog(parentWindow);
+        return true;
+    };
+    perfRow.addChild(btnPerf);
+    
+    content.addChild(perfRow);
 
     // 3. Template Source and Selection
     auto sourceLabel = new TextWidget(null, UIString.fromRaw("Template Source"d));
