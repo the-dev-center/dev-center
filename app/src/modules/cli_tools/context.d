@@ -1,17 +1,53 @@
 module modules.cli_tools.context;
 
 import modules.cli_tools.model;
-import std.process : execute;
+import std.process : spawnProcess, tryWait, kill, wait;
+import std.stdio : File;
 import std.algorithm : canFind;
+import core.thread : Thread;
+import core.time : msecs, Duration;
+import std.datetime.stopwatch : StopWatch, AutoStart;
+
+version (Windows)
+    private enum nullDevice = "NUL";
+else
+    private enum nullDevice = "/dev/null";
+
+/// Time budget for a single host-context probe. Probes run on the UI thread at
+/// startup, so a command that never returns (e.g. `npx <pkg>` fetching an
+/// uninstalled package) must not be allowed to block the app indefinitely.
+private enum Duration detectTimeout = 4000.msecs;
 
 private bool detectCommandWorks(string detectCmd) {
     if (detectCmd.length == 0) return false;
-    version (Windows) {
-        auto r = execute(["cmd", "/c", detectCmd ~ " >nul 2>&1"]);
-        return r.status == 0;
-    } else {
-        auto r = execute(["sh", "-c", detectCmd ~ " >/dev/null 2>&1"]);
-        return r.status == 0;
+
+    string[] args;
+    version (Windows)
+        args = ["cmd", "/c", detectCmd];
+    else
+        args = ["sh", "-c", detectCmd];
+
+    try {
+        // Null stdin keeps interactive prompts (e.g. npx's install confirmation)
+        // from stalling the probe; null stdout/stderr discards probe output.
+        auto devNullIn = File(nullDevice, "r");
+        auto devNullOut = File(nullDevice, "w");
+        auto pid = spawnProcess(args, devNullIn, devNullOut, devNullOut);
+
+        auto sw = StopWatch(AutoStart.yes);
+        while (true) {
+            auto res = tryWait(pid);
+            if (res.terminated)
+                return res.status == 0;
+            if (sw.peek() > detectTimeout) {
+                kill(pid);
+                wait(pid);
+                return false;
+            }
+            Thread.sleep(50.msecs);
+        }
+    } catch (Exception) {
+        return false;
     }
 }
 

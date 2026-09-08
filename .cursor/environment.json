@@ -1,0 +1,4 @@
+{
+  "name": "DevCentr",
+  "install": "bash .cursor/install.sh"
+}

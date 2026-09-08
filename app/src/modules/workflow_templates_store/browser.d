@@ -46,9 +46,9 @@ bool openWorkflowTemplatesStore()
     else version (Posix)
     {
         version (OSX)
-            return spawnProcess("open", [url]).wait() == 0;
+            return spawnProcess(["open", url]).wait() == 0;
         else
-            return spawnProcess("xdg-open", [url]).wait() == 0;
+            return spawnProcess(["xdg-open", url]).wait() == 0;
     }
     else
         return false;

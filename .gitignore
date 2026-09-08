@@ -22,6 +22,7 @@ app/build_output.txt
 app/*.exe
 app/*.pdb
 app/*.dll
+app/DevCentr
 app/dub.selections.json
 
 # Dev Center cache and temporary files

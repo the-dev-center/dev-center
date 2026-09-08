@@ -397,6 +397,12 @@ class ToolchainAdvisorPanel : VerticalLayout
 
     private void refreshContext()
     {
+        // DecisionStepBox fires its change callback while it is being
+        // constructed (selectByIndex in its ctor), which reaches here before
+        // _contextPanel is created. Skip until the panel exists; the explicit
+        // refreshContext() after construction performs the real initial update.
+        if (_contextPanel is null)
+            return;
         _contextPanel.update(_focusStepId, _selections);
     }
 }
