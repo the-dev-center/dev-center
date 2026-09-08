@@ -12,9 +12,8 @@ content:
     - url: https://github.com/dev-centr/general-knowledge.git
       branches: HEAD
       start_path: docs
-    - url: https://github.com/dev-centr/toolchain-framework.git
-      branches: HEAD
-      start_path: docs
+    # Re-add toolchain-framework only after its docs/antora.yml component
+    # descriptor is published on the referenced branch.
 ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable

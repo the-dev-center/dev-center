@@ -1,5 +1,10 @@
 = Changelog
 
+== 2026-09-08 -- Aggregate docs source guard
+
+* Removed the unpublished `toolchain-framework` Antora source from the production and local-example playbooks so aggregate builds use only published components.
+* The source should be restored after `toolchain-framework` publishes its `docs/antora.yml` component descriptor.
+
 == 2026-09-08 -- Adaptive PlayTime diagrams
 
 * Synchronized standalone-adaptive, host-themed, and fixed-color variants for ten canonical PlayTime diagrams while retaining their public image paths.

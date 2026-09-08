@@ -9,6 +9,5 @@ content:
     - url: ../general-knowledge
       branches: HEAD
       start_path: docs
-    - url: ../toolchain-framework
-      branches: HEAD
-      start_path: docs
+    # Keep this source set aligned with production. Re-add toolchain-framework
+    # only after its docs/antora.yml component descriptor is published.
