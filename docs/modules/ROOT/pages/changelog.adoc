@@ -7,8 +7,8 @@
 
 == 2026-09-08 -- Adaptive PlayTime diagrams
 
-* Synchronized standalone-adaptive, host-themed, and fixed-color variants for ten canonical PlayTime diagrams while retaining their public image paths.
-* Recorded the pinned `general-knowledge` provenance and added a deterministic freshness check without duplicating Mermaid sources or theme manifests.
+* Synchronized Scriptbook `9753437` standalone-adaptive and host variants for all twelve PlayTime diagrams while retaining their public image paths and former hand-authored fixed assets.
+* Recorded pinned provenance and added a deterministic freshness check that does not require a sibling clone or duplicate Mermaid sources and theme manifests.
 * See xref:changelog-details/2026-09-08 - adaptive-playtime-diagrams.adoc[Detailed changelog].
 
 == 2026-09-02 -- Provider data access vision

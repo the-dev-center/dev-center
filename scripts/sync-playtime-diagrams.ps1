@@ -39,38 +39,42 @@ $destinationRoot = Read-ProvenanceValue $provenanceLines "destinationRoot"
 
 $artifacts = @(
     foreach ($line in $provenanceLines) {
-        if ($line -match '^\s*artifact\s+"([^"]+)"\s+gitBlob\s+"([0-9a-f]{40})"\s*$') {
+        if ($line -match '^\s*artifact\s+"([^"]+)"(?:\s+source\s+"([^"]+)")?\s+gitBlob\s+"([0-9a-f]{40})"\s*$') {
             [pscustomobject]@{
                 File = $Matches[1]
-                GitBlob = $Matches[2]
+                Source = $Matches[2]
+                GitBlob = $Matches[3]
             }
         }
     }
 )
 
-if ($artifacts.Count -ne 30) {
-    throw "Expected 30 adaptive, host, and fixed artifacts; found $($artifacts.Count)."
+if ($artifacts.Count -ne 36) {
+    throw "Expected 36 adaptive, host, and fixed artifacts; found $($artifacts.Count)."
 }
 
 if (-not $SourceRepository) {
-    if ($env:GENERAL_KNOWLEDGE_REPO) {
-        $SourceRepository = $env:GENERAL_KNOWLEDGE_REPO
+    if ($env:SCRIPTBOOK_REPO) {
+        $SourceRepository = $env:SCRIPTBOOK_REPO
     }
     elseif ($env:code) {
-        $SourceRepository = Join-Path $env:code "github.com/dev-centr/general-knowledge"
+        $SourceRepository = Join-Path $env:code "github.com/dev-centr/scriptbook"
     }
     else {
-        $SourceRepository = Join-Path (Split-Path $repoRoot -Parent) "general-knowledge"
+        $SourceRepository = Join-Path (Split-Path $repoRoot -Parent) "scriptbook"
     }
 }
 
-if (-not (Test-Path -LiteralPath (Join-Path $SourceRepository ".git"))) {
+if ($Mode -eq "Sync" -and -not (Test-Path -LiteralPath (Join-Path $SourceRepository ".git"))) {
     throw "Canonical repository is unavailable at '$SourceRepository'. Clone $canonicalRepository or pass -SourceRepository."
 }
 
-& git -C $SourceRepository cat-file -e "$canonicalCommit^{commit}"
-if ($LASTEXITCODE -ne 0) {
-    throw "Canonical commit $canonicalCommit is unavailable in '$SourceRepository'."
+$hasSource = Test-Path -LiteralPath (Join-Path $SourceRepository ".git")
+if ($hasSource) {
+    & git -C $SourceRepository cat-file -e "$canonicalCommit^{commit}"
+    if ($LASTEXITCODE -ne 0) {
+        throw "Canonical commit $canonicalCommit is unavailable in '$SourceRepository'."
+    }
 }
 
 $destinationDirectory = Join-Path $repoRoot $destinationRoot
@@ -84,26 +88,27 @@ $extractPath = Join-Path $temporaryDirectory "canonical"
 
 try {
     New-Item -ItemType Directory -Path $temporaryDirectory, $extractPath | Out-Null
-    $sourcePaths = @($artifacts | ForEach-Object { "$sourceRoot/$($_.File)" })
-
-    & git -C $SourceRepository archive --format=zip "--output=$archivePath" $canonicalCommit -- $sourcePaths
-    if ($LASTEXITCODE -ne 0) {
-        throw "Could not archive canonical artifacts from $canonicalCommit."
+    if ($hasSource) {
+        $sourcePaths = @($artifacts | Where-Object Source | ForEach-Object { "$sourceRoot/$($_.Source)" })
+        & git -C $SourceRepository archive --format=zip "--output=$archivePath" $canonicalCommit -- $sourcePaths
+        if ($LASTEXITCODE -ne 0) {
+            throw "Could not archive canonical artifacts from $canonicalCommit."
+        }
+        Expand-Archive -LiteralPath $archivePath -DestinationPath $extractPath
     }
-    Expand-Archive -LiteralPath $archivePath -DestinationPath $extractPath
 
     foreach ($artifact in $artifacts) {
-        $sourcePath = "$sourceRoot/$($artifact.File)"
-        $sourceBlob = (& git -C $SourceRepository rev-parse "$canonicalCommit`:$sourcePath").Trim()
-        if ($LASTEXITCODE -ne 0 -or $sourceBlob -ne $artifact.GitBlob) {
-            throw "Provenance mismatch for $sourcePath (expected $($artifact.GitBlob), got $sourceBlob)."
-        }
-
-        $archivedFile = Join-Path $extractPath ($sourcePath -replace "/", [System.IO.Path]::DirectorySeparatorChar)
         $destinationFile = Join-Path $destinationDirectory $artifact.File
-
-        if ($Mode -eq "Sync") {
-            Copy-Item -LiteralPath $archivedFile -Destination $destinationFile -Force
+        if ($artifact.Source -and $hasSource) {
+            $sourcePath = "$sourceRoot/$($artifact.Source)"
+            $sourceBlob = (& git -C $SourceRepository rev-parse "$canonicalCommit`:$sourcePath").Trim()
+            if ($LASTEXITCODE -ne 0 -or $sourceBlob -ne $artifact.GitBlob) {
+                throw "Provenance mismatch for $sourcePath (expected $($artifact.GitBlob), got $sourceBlob)."
+            }
+            if ($Mode -eq "Sync") {
+                $archivedFile = Join-Path $extractPath ($sourcePath -replace "/", [System.IO.Path]::DirectorySeparatorChar)
+                Copy-Item -LiteralPath $archivedFile -Destination $destinationFile -Force
+            }
         }
 
         if (-not (Test-Path -LiteralPath $destinationFile -PathType Leaf)) {
@@ -126,7 +131,7 @@ try {
         }
     }
 
-    Write-Output "$Mode passed: 30 PlayTime artifacts match $canonicalRepository@$canonicalCommit."
+    Write-Output "$Mode passed: 36 PlayTime artifacts match pinned provenance for $canonicalRepository@$canonicalCommit."
 }
 finally {
     if (Test-Path -LiteralPath $temporaryDirectory) {

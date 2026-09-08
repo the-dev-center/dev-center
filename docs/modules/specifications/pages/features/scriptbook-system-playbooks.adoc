@@ -41,6 +41,7 @@ This is **not** Synchronous Literate Programming (that is `::: tangle` / source 
 This is **not** a bash-to-PowerShell rewriter. Author an intent (`cli.install` + tool id). PlayTime asks the Equivalence Engine for a command that fits this computer. Portable glue may stay as a Nushell cell.
 
 .Do not put a bash script through a blender
+[.themed-svg]
 image::playtime-wrong-translator.svg[alt="A Linux apt script enters a hot-replace grinder and comes out as broken Windows commands"]
 
 Details: xref:scriptbook::playtime.adoc[PlayTime] · xref:scriptbook::host-awareness.adoc[Host Awareness] · GitHub `spec/` until the hub deploy lands.
