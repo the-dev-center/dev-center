@@ -2,6 +2,7 @@
   "name": "devcentr",
   "private": true,
   "devDependencies": {
+    "@antora/lunr-extension": "1.0.0-alpha.13",
     "antora": "^3.1.14"
   },
   "packageManager": "pnpm@9.15.0"

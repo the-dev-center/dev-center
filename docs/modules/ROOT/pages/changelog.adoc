@@ -1,5 +1,11 @@
 = Changelog
 
+== 2026-09-08 -- Adaptive PlayTime diagrams
+
+* Synchronized standalone-adaptive, host-themed, and fixed-color variants for ten canonical PlayTime diagrams while retaining their public image paths.
+* Recorded the pinned `general-knowledge` provenance and added a deterministic freshness check without duplicating Mermaid sources or theme manifests.
+* See xref:changelog-details/2026-09-08 - adaptive-playtime-diagrams.adoc[Detailed changelog].
+
 == 2026-09-02 -- Provider data access vision
 
 * xref:project-vision.adoc[Project vision] — Provider search + API-compatible mirror backups; near-term `.issues` / Issues Browser / `gh --attach` wedge.

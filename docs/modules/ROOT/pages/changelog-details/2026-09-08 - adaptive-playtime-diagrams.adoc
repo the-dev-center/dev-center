@@ -1,0 +1,11 @@
+= Adaptive PlayTime diagrams
+
+The DevCentr specifications component now consumes generated PlayTime diagram copies from the canonical `dev-centr/general-knowledge` sources at commit `137492ea980910d1286663654948bd82d2d5ac4b`.
+
+Each of the ten diagrams has three synchronized deliverables under `docs/modules/specifications/images`: a standalone-adaptive SVG at its existing public image path, a host-themed SVG for runtime insertion, and a fixed-color SVG. Mermaid sources and theme manifests remain only in `general-knowledge`.
+
+`scripts/sync-playtime-diagrams.ps1` reads the pinned commit and blob identifiers from `playtime-diagrams.provenance.sdl`. Its `Sync` mode copies exact Git blobs from a local canonical clone; its default `Check` mode fails when a copy is missing or stale, provenance no longer matches the pinned source, or a Mermaid source or theme manifest has been duplicated.
+
+The Antora image block that embeds a synchronized diagram carries the `themed-svg` role for the shared docs-hub runtime. The two retained PlayTime illustrations, `playtime-two-doors.svg` and `playtime-wrong-translator.svg`, remain unchanged.
+
+The repository also declares the Lunr extension already required by its Antora playbook, allowing a frozen dependency install to run the documented site build.

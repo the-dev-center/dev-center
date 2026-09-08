@@ -19,6 +19,7 @@ link:https://devcentr.org/news/2026-08-13-intents-not-shell-translation[Intents,
 == Three layers (not SLP, not shell translation)
 
 .Cookbook, kitchen, waiter
+[.themed-svg]
 image::playtime-layers.svg[alt="Three layers: CentrMark the book, PlayTime the stage, Scriptbook the app"]
 
 [cols="1,2", options="header"]
